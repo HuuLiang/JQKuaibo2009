@@ -21,7 +21,7 @@
 #define JQK_UMENG_APP_ID         @"567d010667e58e2c8200223a"
 #define JQK_PAYNOW_SCHEME        @"com.jiqingkuaibo.app.paynow.scheme"
 
-#define JQK_BASE_URL             @"http://120.24.252.114:8093"
+#define JQK_BASE_URL             @"http://iv.ihuiyx.com"//@"http://120.24.252.114:8093"
 
 #define JQK_HOME_CHANNEL_URL            @"/iosvideo/channelRanking.htm"
 #define JQK_HOME_CHANNEL_PROGRAM_URL    @"/iosvideo/program.htm"
