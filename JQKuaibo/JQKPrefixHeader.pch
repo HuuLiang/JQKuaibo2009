@@ -1,0 +1,29 @@
+//
+//  JQKPrefixHeader.pch
+//  JQKuaibo
+//
+//  Created by Sean Yue on 15/12/25.
+//  Copyright © 2015年 iqu8. All rights reserved.
+//
+
+#ifndef JQKPrefixHeader_pch
+#define JQKPrefixHeader_pch
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <Aspects.h>
+#import <BlocksKit+UIKit.h>
+#import <Masonry.h>
+#import <UIImageView+WebCache.h>
+#import "JQKCommonDef.h"
+#import "JQKConfig.h"
+#import "RACEXTScope.h"
+#import "JQKExtensions.h"
+#import "JQKUtil.h"
+#import "JQKErrorHandler.h"
+#import "JQKHudManager.h"
+
+#endif /* JQKPrefixHeader_pch */
