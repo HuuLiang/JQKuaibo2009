@@ -29,7 +29,7 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     JQKHomeCollectionViewLayout *layout = [[JQKHomeCollectionViewLayout alloc] init];
-    layout.interItemSpacing = 5;
+    layout.interItemSpacing = 8;
     
     _layoutCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     _layoutCollectionView.backgroundColor = [UIColor whiteColor];

@@ -9,9 +9,9 @@
 #import "JQKHomeCollectionViewLayout.h"
 
 typedef NSMutableDictionary<NSIndexPath *, UICollectionViewLayoutAttributes *> LayoutAttributesDictionary;
-static const CGFloat kTopImageScale = 2;
-static const CGFloat kBigImageScale = 0.7;
-static const CGFloat kSmallImageScale = 1.43;
+static const CGFloat kTopImageScale = 1184./595.;
+static const CGFloat kBigImageScale = 568./807.;
+static const CGFloat kSmallImageScale = 563./382.;
 
 @interface JQKHomeCollectionViewLayout ()
 @property (nonatomic,retain) LayoutAttributesDictionary *layoutAttributes;
@@ -38,6 +38,17 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
     return CGSizeMake(smallW, smallH);
 }
 
+- (CGSize)halfSize {
+    const CGFloat cvW = CGRectGetWidth(self.collectionView.bounds);
+    const CGSize smallSize = [self smallSize];
+    const CGFloat width = (cvW-_interItemSpacing)/2;
+    
+    if (smallSize.width == 0) {
+        return CGSizeZero;
+    }
+    return CGSizeMake(width, width * smallSize.height / smallSize.width);
+}
+
 - (CGSize)topSize {
     const CGFloat cvW = CGRectGetWidth(self.collectionView.bounds);
     return CGSizeMake(cvW, cvW/kTopImageScale);
@@ -51,10 +62,11 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
     if (numberOfItems == 0) {
         return ;
     }
-
+    
     const CGSize bigSize = self.bigSize;
     const CGSize smallSize = self.smallSize;
     const CGSize topSize = self.topSize;
+    const CGSize halfSize = self.halfSize;
     
     const CGFloat bigH = bigSize.height;
     const CGFloat bigW = bigSize.width;
@@ -62,6 +74,8 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
     const CGFloat smallW = smallSize.width;
     const CGFloat topWidth = topSize.width;
     const CGFloat topHeight = topSize.height;
+    const CGFloat halfH = halfSize.height;
+    const CGFloat halfW = halfSize.width;
     
     for (NSUInteger i = 0; i < numberOfItems; ++i) {
         UICollectionViewLayoutAttributes *layoutAttribs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
@@ -74,7 +88,7 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
             CGFloat x = 0, y = 0;
             if (index % 7 < 3) {
                 x = index % 7 == 0 ? 0 : bigW + _interItemSpacing;
-                y = (index / 7) * (smallH + _interItemSpacing) * 4;//(bigH + smallH * 2 + _interItemSpacing * 3);
+                y = (index / 7) * (smallH*2+halfH*2 + _interItemSpacing * 4);//(bigH + smallH * 2 + _interItemSpacing * 3);
                 
                 if (index % 7 == 2) {
                     y += (smallH + _interItemSpacing);
@@ -82,17 +96,19 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
                 
             } else {
                 NSUInteger sIndex = index % 7 - 3;
-                x = sIndex%2==0? 0 : smallW+_interItemSpacing;
-                y = (index / 7) * (smallH + _interItemSpacing) * 4 + (sIndex/2+2) *(smallH + _interItemSpacing);
+                x = sIndex%2==0? 0 : halfW+_interItemSpacing;
+                y = (index / 7) * (smallH*2+halfH*2 + _interItemSpacing * 4) + (sIndex/2) *(halfH + _interItemSpacing)+2*(smallH + _interItemSpacing);
             }
             
             y += (topHeight+_interItemSpacing);
+            
             if (index % 7 == 0) {
                 layoutAttribs.frame = CGRectMake(x, y, bigW, bigH);
-            } else {
+            } else if (index % 7 < 3) {
                 layoutAttribs.frame = CGRectMake(x, y, smallW, smallH);
+            } else {
+                layoutAttribs.frame = CGRectMake(x, y, halfW, halfH);
             }
-            
         }
         [self.layoutAttributes setObject:layoutAttribs forKey:layoutAttribs.indexPath];
     }
