@@ -25,7 +25,7 @@
 
 #define JQK_HOME_CHANNEL_URL            @"/iosvideo/channelRanking.htm"
 #define JQK_HOME_CHANNEL_PROGRAM_URL    @"/iosvideo/program.htm"
-#define JQK_HOT_VIDEO_URL               @"iosvideo/hotVideo.htm"
+#define JQK_HOT_VIDEO_URL               @"/iosvideo/hotVideo.htm"
 
 #define JQK_ACTIVATE_URL                @"/iosvideo/activat.htm"
 #define JQK_SYSTEM_CONFIG_URL           @"/iosvideo/systemConfig.htm"
