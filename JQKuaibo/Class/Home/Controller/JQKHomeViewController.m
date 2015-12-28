@@ -79,8 +79,8 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
     
     JQKChannel *channel = self.channelModel.fetchedChannels[indexPath.item];
     cell.imageURL = [NSURL URLWithString:channel.columnImg];
-    cell.title = channel.name;
-    cell.subtitle = channel.columnDesc;
+//    cell.title = channel.name;
+//    cell.subtitle = channel.columnDesc;
     return cell;
 }
 
