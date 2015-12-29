@@ -6,6 +6,8 @@
 //  Copyright © 2015年 kuaibov. All rights reserved.
 //
 
+#ifdef __KB_PAYMENT_SIGN__
+
 #import "JQKEncryptedURLRequest.h"
 
 @class IPNPreSignMessageUtil;
@@ -23,3 +25,5 @@ typedef void (^JQKPaymentSignCompletionHandler)(BOOL success, NSString *signedDa
 - (BOOL)signWithPreSignMessage:(IPNPreSignMessageUtil *)preSign completionHandler:(JQKPaymentSignCompletionHandler)handler;
 
 @end
+
+#endif

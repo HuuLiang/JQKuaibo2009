@@ -17,7 +17,6 @@
 #import "JQKUserAccessModel.h"
 #import "JQKPaymentModel.h"
 #import "JQKSystemConfigModel.h"
-#import "IpaynowPluginApi.h"
 #import "JQKWeChatPayQueryOrderRequest.h"
 #import "JQKPaymentViewController.h"
 
@@ -198,7 +197,6 @@ DefineLazyPropertyInitialization(JQKWeChatPayQueryOrderRequest, wechatPayOrderQu
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    [IpaynowPluginApi willEnterForeground];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -211,8 +209,7 @@ DefineLazyPropertyInitialization(JQKWeChatPayQueryOrderRequest, wechatPayOrderQu
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    [IpaynowPluginApi application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
-    //[WXApi handleOpenURL:url delegate:self];
+    [WXApi handleOpenURL:url delegate:self];
     return YES;
 }
 

@@ -9,17 +9,14 @@
 #import "JQKPaymentViewController.h"
 #import "JQKPaymentPopView.h"
 #import "JQKSystemConfigModel.h"
-#import "IPNPreSignMessageUtil.h"
 #import "JQKPaymentModel.h"
 #import <objc/runtime.h>
 #import "JQKProgram.h"
 #import "WeChatPayManager.h"
 #import "JQKPaymentInfo.h"
-#import "IpaynowPluginApi.h"
 #import "JQKPaymentSignModel.h"
-#import "PayNowDef.h"
 
-@interface JQKPaymentViewController () <IpaynowPluginDelegate>
+@interface JQKPaymentViewController ()
 @property (nonatomic,retain) JQKPaymentPopView *popView;
 @property (nonatomic) NSNumber *payAmount;
 
@@ -151,93 +148,94 @@
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
     NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
     
-    // Payment info
-    JQKPaymentInfo *paymentInfo = [[JQKPaymentInfo alloc] init];
-    paymentInfo.orderId = orderNo;
-    paymentInfo.orderPrice = @((NSUInteger)(price * 100));
-    paymentInfo.contentId = program.programId;
-    paymentInfo.contentType = program.type;
-    paymentInfo.paymentType = @(paymentType);
-    paymentInfo.paymentResult = @(PAYRESULT_UNKNOWN);
-    paymentInfo.paymentStatus = @(JQKPaymentStatusPaying);
-    [paymentInfo save];
-    self.paymentInfo = paymentInfo;
-    
     if (paymentType==JQKPaymentTypeWeChatPay) {
+        // Payment info
+        JQKPaymentInfo *paymentInfo = [[JQKPaymentInfo alloc] init];
+        paymentInfo.orderId = orderNo;
+        paymentInfo.orderPrice = @((NSUInteger)(price * 100));
+        paymentInfo.contentId = program.programId;
+        paymentInfo.contentType = program.type;
+        paymentInfo.paymentType = @(paymentType);
+        paymentInfo.paymentResult = @(PAYRESULT_UNKNOWN);
+        paymentInfo.paymentStatus = @(JQKPaymentStatusPaying);
+        [paymentInfo save];
+        self.paymentInfo = paymentInfo;
+        
         [[WeChatPayManager sharedInstance] startWeChatPayWithOrderNo:orderNo price:price completionHandler:^(PAYRESULT payResult) {
             @strongify(self);
             [self notifyPaymentResult:payResult withPaymentInfo:self.paymentInfo];
         }];
     } else {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:kDefaultDateFormat];
-        
-        IPNPreSignMessageUtil *preSign =[[IPNPreSignMessageUtil alloc] init];
-        preSign.consumerId = JQK_CHANNEL_NO;
-        preSign.mhtOrderNo = orderNo;
-        preSign.mhtOrderName = [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"] ?: @"家庭影院";
-        preSign.mhtOrderType = kPayNowNormalOrderType;
-        preSign.mhtCurrencyType = kPayNowRMBCurrencyType;
-        preSign.mhtOrderAmt = [NSString stringWithFormat:@"%ld", @(price*100).unsignedIntegerValue];
-        preSign.mhtOrderDetail = [preSign.mhtOrderName stringByAppendingString:@"终身会员"];
-        preSign.mhtOrderStartTime = [dateFormatter stringFromDate:[NSDate date]];
-        preSign.mhtCharset = kPayNowDefaultCharset;
-        preSign.payChannelType = ((NSNumber *)self.paymentTypeMap[@(paymentType)]).stringValue;
-        preSign.mhtReserved = [JQKUtil paymentReservedData];
-        
-        [[JQKPaymentSignModel sharedModel] signWithPreSignMessage:preSign completionHandler:^(BOOL success, NSString *signedData) {
-            @strongify(self);
-            if (success && [JQKPaymentSignModel sharedModel].appId.length > 0) {
-                [IpaynowPluginApi pay:signedData AndScheme:JQK_PAYNOW_SCHEME viewController:self delegate:self];
-            } else {
-                [[JQKHudManager manager] showHudWithText:@"无法获取支付信息"];
-            }
-        }];
+        [[JQKHudManager manager] showHudWithText:@"无法获取支付信息"];
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat:kDefaultDateFormat];
+//        
+//        IPNPreSignMessageUtil *preSign =[[IPNPreSignMessageUtil alloc] init];
+//        preSign.consumerId = JQK_CHANNEL_NO;
+//        preSign.mhtOrderNo = orderNo;
+//        preSign.mhtOrderName = [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"] ?: @"家庭影院";
+//        preSign.mhtOrderType = kPayNowNormalOrderType;
+//        preSign.mhtCurrencyType = kPayNowRMBCurrencyType;
+//        preSign.mhtOrderAmt = [NSString stringWithFormat:@"%ld", @(price*100).unsignedIntegerValue];
+//        preSign.mhtOrderDetail = [preSign.mhtOrderName stringByAppendingString:@"终身会员"];
+//        preSign.mhtOrderStartTime = [dateFormatter stringFromDate:[NSDate date]];
+//        preSign.mhtCharset = kPayNowDefaultCharset;
+//        preSign.payChannelType = ((NSNumber *)self.paymentTypeMap[@(paymentType)]).stringValue;
+//        preSign.mhtReserved = [JQKUtil paymentReservedData];
+//        
+//        [[JQKPaymentSignModel sharedModel] signWithPreSignMessage:preSign completionHandler:^(BOOL success, NSString *signedData) {
+//            @strongify(self);
+//            if (success && [JQKPaymentSignModel sharedModel].appId.length > 0) {
+//                [IpaynowPluginApi pay:signedData AndScheme:JQK_PAYNOW_SCHEME viewController:self delegate:self];
+//            } else {
+//                [[JQKHudManager manager] showHudWithText:@"无法获取支付信息"];
+//            }
+//        }];
     }
 }
 
-- (NSDictionary *)paymentTypeMap {
-    if (_paymentTypeMap) {
-        return _paymentTypeMap;
-    }
-    
-    _paymentTypeMap = @{@(JQKPaymentTypeAlipay):@(PayNowChannelTypeAlipay),
-                          @(JQKPaymentTypeWeChatPay):@(PayNowChannelTypeWeChatPay),
-                          @(JQKPaymentTypeUPPay):@(PayNowChannelTypeUPPay)};
-    return _paymentTypeMap;
-}
-
-- (JQKPaymentType)paymentTypeFromPayNowType:(PayNowChannelType)type {
-    __block JQKPaymentType retType = JQKPaymentTypeNone;
-    [self.paymentTypeMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        if ([(NSNumber *)obj isEqualToNumber:@(type)]) {
-            retType = ((NSNumber *)key).unsignedIntegerValue;
-            *stop = YES;
-            return ;
-        }
-    }];
-    return retType;
-}
-
-- (PayNowChannelType)payNowTypeFromPaymentType:(JQKPaymentType)type {
-    return ((NSNumber *)self.paymentTypeMap[@(type)]).unsignedIntegerValue;
-}
-
-- (PAYRESULT)paymentResultFromPayNowResult:(IPNPayResult)result {
-    NSDictionary *resultMap = @{@(IPNPayResultSuccess):@(PAYRESULT_SUCCESS),
-                                @(IPNPayResultFail):@(PAYRESULT_FAIL),
-                                @(IPNPayResultCancel):@(PAYRESULT_ABANDON),
-                                @(IPNPayResultUnknown):@(PAYRESULT_UNKNOWN)};
-    return ((NSNumber *)resultMap[@(result)]).unsignedIntegerValue;
-}
-
--(IPNPayResult)paymentResultFromPayresult:(PAYRESULT)result{
-    NSDictionary *resultMap = @{@(PAYRESULT_SUCCESS):@(IPNPayResultSuccess),
-                                @(PAYRESULT_FAIL):@(IPNPayResultFail),
-                                @(PAYRESULT_ABANDON):@(IPNPayResultCancel),
-                                @(PAYRESULT_UNKNOWN):@(IPNPayResultUnknown)};
-    return ((NSNumber *)resultMap[@(result)]).unsignedIntegerValue;
-}
+//- (NSDictionary *)paymentTypeMap {
+//    if (_paymentTypeMap) {
+//        return _paymentTypeMap;
+//    }
+//    
+//    _paymentTypeMap = @{@(JQKPaymentTypeAlipay):@(PayNowChannelTypeAlipay),
+//                          @(JQKPaymentTypeWeChatPay):@(PayNowChannelTypeWeChatPay),
+//                          @(JQKPaymentTypeUPPay):@(PayNowChannelTypeUPPay)};
+//    return _paymentTypeMap;
+//}
+//
+//- (JQKPaymentType)paymentTypeFromPayNowType:(PayNowChannelType)type {
+//    __block JQKPaymentType retType = JQKPaymentTypeNone;
+//    [self.paymentTypeMap enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+//        if ([(NSNumber *)obj isEqualToNumber:@(type)]) {
+//            retType = ((NSNumber *)key).unsignedIntegerValue;
+//            *stop = YES;
+//            return ;
+//        }
+//    }];
+//    return retType;
+//}
+//
+//- (PayNowChannelType)payNowTypeFromPaymentType:(JQKPaymentType)type {
+//    return ((NSNumber *)self.paymentTypeMap[@(type)]).unsignedIntegerValue;
+//}
+//
+//- (PAYRESULT)paymentResultFromPayNowResult:(IPNPayResult)result {
+//    NSDictionary *resultMap = @{@(IPNPayResultSuccess):@(PAYRESULT_SUCCESS),
+//                                @(IPNPayResultFail):@(PAYRESULT_FAIL),
+//                                @(IPNPayResultCancel):@(PAYRESULT_ABANDON),
+//                                @(IPNPayResultUnknown):@(PAYRESULT_UNKNOWN)};
+//    return ((NSNumber *)resultMap[@(result)]).unsignedIntegerValue;
+//}
+//
+//-(IPNPayResult)paymentResultFromPayresult:(PAYRESULT)result{
+//    NSDictionary *resultMap = @{@(PAYRESULT_SUCCESS):@(IPNPayResultSuccess),
+//                                @(PAYRESULT_FAIL):@(IPNPayResultFail),
+//                                @(PAYRESULT_ABANDON):@(IPNPayResultCancel),
+//                                @(PAYRESULT_UNKNOWN):@(IPNPayResultUnknown)};
+//    return ((NSNumber *)resultMap[@(result)]).unsignedIntegerValue;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -266,10 +264,10 @@
     [[JQKPaymentModel sharedModel] commitPaymentInfo:paymentInfo];
 }
 
-- (void)IpaynowPluginResult:(IPNPayResult)result errCode:(NSString *)errCode errInfo:(NSString *)errInfo {
-    DLog(@"PayNow Result:%ld\nerrorCode:%@\nerrorInfo:%@", result,errCode,errInfo);
-    PAYRESULT payResult = [self paymentResultFromPayNowResult:result];
-    [self notifyPaymentResult:payResult withPaymentInfo:self.paymentInfo];
-}
+//- (void)IpaynowPluginResult:(IPNPayResult)result errCode:(NSString *)errCode errInfo:(NSString *)errInfo {
+//    DLog(@"PayNow Result:%ld\nerrorCode:%@\nerrorInfo:%@", result,errCode,errInfo);
+//    PAYRESULT payResult = [self paymentResultFromPayNowResult:result];
+//    [self notifyPaymentResult:payResult withPaymentInfo:self.paymentInfo];
+//}
 
 @end

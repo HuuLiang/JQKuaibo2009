@@ -38,12 +38,6 @@
 		BC3872C51C2D2E3E00CBE88A /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872B51C2D2E3E00CBE88A /* UIViewExt.m */; };
 		BC3872CD1C2D2ECA00CBE88A /* RACEXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872CA1C2D2ECA00CBE88A /* RACEXTRuntimeExtensions.m */; };
 		BC3872D21C2D307400CBE88A /* JQKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872D11C2D307400CBE88A /* JQKUtil.m */; };
-		BC3872ED1C2D338B00CBE88A /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BC3872DF1C2D338B00CBE88A /* AlipaySDK.bundle */; };
-		BC3872EE1C2D338B00CBE88A /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3872E01C2D338B00CBE88A /* AlipaySDK.framework */; };
-		BC3872EF1C2D338B00CBE88A /* ipaynow.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BC3872E21C2D338B00CBE88A /* ipaynow.bundle */; };
-		BC3872F01C2D338B00CBE88A /* libIpaynowPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3872E61C2D338B00CBE88A /* libIpaynowPlugin.a */; };
-		BC3872F11C2D338C00CBE88A /* 说明.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BC3872E71C2D338B00CBE88A /* 说明.rtf */; };
-		BC3872F21C2D338C00CBE88A /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3872EA1C2D338B00CBE88A /* libWeChatSDK.a */; };
 		BC3872F71C2D33B200CBE88A /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3872F41C2D33B200CBE88A /* libMobClickLibrary.a */; };
 		BC3873011C2D33C200CBE88A /* ApiXml.mm in Sources */ = {isa = PBXBuildFile; fileRef = BC3872FA1C2D33C200CBE88A /* ApiXml.mm */; };
 		BC3873021C2D33C200CBE88A /* payRequsestHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = BC3872FC1C2D33C200CBE88A /* payRequsestHandler.mm */; };
@@ -77,6 +71,8 @@
 		BC38736C1C2D56A300CBE88A /* JQKChannelProgramModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873681C2D56A300CBE88A /* JQKChannelProgramModel.m */; };
 		BC3873721C2D7D8000CBE88A /* JQKProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873711C2D7D8000CBE88A /* JQKProgramViewController.m */; };
 		BC3873751C2D80D500CBE88A /* JQKProgramCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873741C2D80D500CBE88A /* JQKProgramCell.m */; };
+		BC4C09CB1C328B4F002C4709 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4C09C71C328B4F002C4709 /* libWeChatSDK.a */; };
+		BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4C09CC1C328C1D002C4709 /* CoreTelephony.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,18 +165,6 @@
 		BC3872D01C2D307400CBE88A /* JQKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKUtil.h; sourceTree = "<group>"; };
 		BC3872D11C2D307400CBE88A /* JQKUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKUtil.m; sourceTree = "<group>"; };
 		BC3872DC1C2D323100CBE88A /* JQKCommonDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JQKCommonDef.h; sourceTree = "<group>"; };
-		BC3872DF1C2D338B00CBE88A /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		BC3872E01C2D338B00CBE88A /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
-		BC3872E21C2D338B00CBE88A /* ipaynow.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ipaynow.bundle; sourceTree = "<group>"; };
-		BC3872E31C2D338B00CBE88A /* IpaynowPluginApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpaynowPluginApi.h; sourceTree = "<group>"; };
-		BC3872E41C2D338B00CBE88A /* IpaynowPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IpaynowPluginDelegate.h; sourceTree = "<group>"; };
-		BC3872E51C2D338B00CBE88A /* IPNPreSignMessageUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPNPreSignMessageUtil.h; sourceTree = "<group>"; };
-		BC3872E61C2D338B00CBE88A /* libIpaynowPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIpaynowPlugin.a; sourceTree = "<group>"; };
-		BC3872E71C2D338B00CBE88A /* 说明.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "说明.rtf"; sourceTree = "<group>"; };
-		BC3872E81C2D338B00CBE88A /* PayNowDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayNowDef.h; sourceTree = "<group>"; };
-		BC3872EA1C2D338B00CBE88A /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		BC3872EB1C2D338B00CBE88A /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		BC3872EC1C2D338B00CBE88A /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		BC3872F41C2D33B200CBE88A /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		BC3872F51C2D33B200CBE88A /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		BC3872F61C2D33B200CBE88A /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
@@ -246,6 +230,11 @@
 		BC3873711C2D7D8000CBE88A /* JQKProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKProgramViewController.m; sourceTree = "<group>"; };
 		BC3873731C2D80D500CBE88A /* JQKProgramCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKProgramCell.h; sourceTree = "<group>"; };
 		BC3873741C2D80D500CBE88A /* JQKProgramCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKProgramCell.m; sourceTree = "<group>"; };
+		BC4C09C71C328B4F002C4709 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		BC4C09C81C328B4F002C4709 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		BC4C09C91C328B4F002C4709 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		BC4C09CA1C328B4F002C4709 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		BC4C09CC1C328C1D002C4709 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,13 +242,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */,
 				BC38730E1C2D3B7100CBE88A /* libz.tbd in Frameworks */,
 				BC38730C1C2D3B4F00CBE88A /* libsqlite3.tbd in Frameworks */,
 				10E473000B295B14FB89B2AE /* libPods.a in Frameworks */,
-				BC3872EE1C2D338B00CBE88A /* AlipaySDK.framework in Frameworks */,
-				BC3872F21C2D338C00CBE88A /* libWeChatSDK.a in Frameworks */,
-				BC3872F01C2D338B00CBE88A /* libIpaynowPlugin.a in Frameworks */,
 				BC3872F71C2D33B200CBE88A /* libMobClickLibrary.a in Frameworks */,
+				BC4C09CB1C328B4F002C4709 /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +271,7 @@
 		2D4F10B2777952E5E8A63A83 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BC4C09CC1C328C1D002C4709 /* CoreTelephony.framework */,
 				BC38730D1C2D3B7100CBE88A /* libz.tbd */,
 				BC38730B1C2D3B4F00CBE88A /* libsqlite3.tbd */,
 				A8BD9636ED759BEEB9A13D09 /* libPods.a */,
@@ -605,45 +594,10 @@
 		BC3872DD1C2D336300CBE88A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				BC4C09C61C328B4F002C4709 /* WeChatSDK */,
 				BC3872F31C2D33B200CBE88A /* Umeng */,
-				BC3872DE1C2D338B00CBE88A /* AliPayPlugin */,
-				BC3872E11C2D338B00CBE88A /* IpaynowPlugin */,
-				BC3872E81C2D338B00CBE88A /* PayNowDef.h */,
-				BC3872E91C2D338B00CBE88A /* WechatPlugin */,
 			);
 			path = Vendor;
-			sourceTree = "<group>";
-		};
-		BC3872DE1C2D338B00CBE88A /* AliPayPlugin */ = {
-			isa = PBXGroup;
-			children = (
-				BC3872DF1C2D338B00CBE88A /* AlipaySDK.bundle */,
-				BC3872E01C2D338B00CBE88A /* AlipaySDK.framework */,
-			);
-			path = AliPayPlugin;
-			sourceTree = "<group>";
-		};
-		BC3872E11C2D338B00CBE88A /* IpaynowPlugin */ = {
-			isa = PBXGroup;
-			children = (
-				BC3872E21C2D338B00CBE88A /* ipaynow.bundle */,
-				BC3872E31C2D338B00CBE88A /* IpaynowPluginApi.h */,
-				BC3872E41C2D338B00CBE88A /* IpaynowPluginDelegate.h */,
-				BC3872E51C2D338B00CBE88A /* IPNPreSignMessageUtil.h */,
-				BC3872E61C2D338B00CBE88A /* libIpaynowPlugin.a */,
-				BC3872E71C2D338B00CBE88A /* 说明.rtf */,
-			);
-			path = IpaynowPlugin;
-			sourceTree = "<group>";
-		};
-		BC3872E91C2D338B00CBE88A /* WechatPlugin */ = {
-			isa = PBXGroup;
-			children = (
-				BC3872EA1C2D338B00CBE88A /* libWeChatSDK.a */,
-				BC3872EB1C2D338B00CBE88A /* WXApi.h */,
-				BC3872EC1C2D338B00CBE88A /* WXApiObject.h */,
-			);
-			path = WechatPlugin;
 			sourceTree = "<group>";
 		};
 		BC3872F31C2D33B200CBE88A /* Umeng */ = {
@@ -713,6 +667,17 @@
 				BC3873741C2D80D500CBE88A /* JQKProgramCell.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		BC4C09C61C328B4F002C4709 /* WeChatSDK */ = {
+			isa = PBXGroup;
+			children = (
+				BC4C09C71C328B4F002C4709 /* libWeChatSDK.a */,
+				BC4C09C81C328B4F002C4709 /* WechatAuthSDK.h */,
+				BC4C09C91C328B4F002C4709 /* WXApi.h */,
+				BC4C09CA1C328B4F002C4709 /* WXApiObject.h */,
+			);
+			path = WeChatSDK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -821,10 +786,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC3872ED1C2D338B00CBE88A /* AlipaySDK.bundle in Resources */,
 				BC3872131C2D273100CBE88A /* Assets.xcassets in Resources */,
-				BC3872F11C2D338C00CBE88A /* 说明.rtf in Resources */,
-				BC3872EF1C2D338B00CBE88A /* ipaynow.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1084,17 +1046,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiangxi Electronic Group Corporation Ltd.";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/AliPayPlugin",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = JQKuaibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/IpaynowPlugin",
-					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/WechatPlugin",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/Umeng",
+					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/WeChatSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1109,17 +1067,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiangxi Electronic Group Corporation Ltd.";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/AliPayPlugin",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = JQKuaibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/IpaynowPlugin",
-					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/WechatPlugin",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/Umeng",
+					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/WeChatSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";

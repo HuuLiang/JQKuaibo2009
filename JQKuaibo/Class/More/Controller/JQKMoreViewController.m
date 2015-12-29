@@ -8,8 +8,6 @@
 
 #import "JQKMoreViewController.h"
 
-static const NSUInteger kUIWebViewRetryTimes = 30;
-
 @interface JQKMoreViewController () <UIWebViewDelegate>
 {
     UIWebView *_webView;
