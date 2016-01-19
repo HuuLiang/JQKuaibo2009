@@ -46,4 +46,5 @@ return _##propertyName; \
 #define kPaidNotificationName @"jqkuaibo_paid_notification"
 #define kDefaultDateFormat    @"yyyyMMddHHmmss"
 
+typedef void (^JQKAction)(id obj);
 #endif /* JQKCommonDef_h */

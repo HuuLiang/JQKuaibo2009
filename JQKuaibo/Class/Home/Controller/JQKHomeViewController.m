@@ -11,14 +11,18 @@
 #import "JQKHomeCell.h"
 #import "JQKChannelModel.h"
 #import "JQKProgramViewController.h"
+#import "JQKAdView.h"
+#import "JQKSystemConfigModel.h"
 
 static NSString *const kHomeCellReusableIdentifier = @"HomeCellReusableIdentifier";
 
-@interface JQKHomeViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
+@interface JQKHomeViewController () <UICollectionViewDataSource,UICollectionViewDelegate,JQKHomeCollectionViewLayoutDelegate>
 {
     UICollectionView *_layoutCollectionView;
 }
 @property (nonatomic,retain) JQKChannelModel *channelModel;
+@property (nonatomic,retain) JQKAdView *leftAdView;
+@property (nonatomic,retain) JQKAdView *rightAdView;
 @end
 
 @implementation JQKHomeViewController
@@ -30,6 +34,7 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
     // Do any additional setup after loading the view.
     JQKHomeCollectionViewLayout *layout = [[JQKHomeCollectionViewLayout alloc] init];
     layout.interItemSpacing = 8;
+    layout.delegate = self;
     
     _layoutCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     _layoutCollectionView.backgroundColor = [UIColor whiteColor];
@@ -49,6 +54,8 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
         [self loadChannels];
     }];
     [_layoutCollectionView JQK_triggerPullToRefresh];
+    
+    [self loadAds];
 }
 
 - (void)loadChannels {
@@ -67,6 +74,72 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
     }];
 }
 
+- (void)loadAds {
+    void (^AdBlock)(void) = ^{
+        [self.view addSubview:self.leftAdView];
+        {
+            [self.leftAdView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.centerY.equalTo(self.view);
+                make.width.equalTo(self.view).dividedBy(4);
+                make.height.equalTo(self.leftAdView.mas_width).multipliedBy(3);
+            }];
+        }
+        
+        [self.view addSubview:self.rightAdView];
+        {
+            [self.rightAdView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.centerY.equalTo(self.view);
+                make.width.equalTo(self.view).dividedBy(4);
+                make.height.equalTo(self.rightAdView.mas_width).multipliedBy(3);
+            }];
+        }
+    };
+    
+    if ([JQKSystemConfigModel sharedModel].loaded) {
+        AdBlock();
+    } else {
+        [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+            if (success) {
+                AdBlock();
+            }
+        }];
+    }
+}
+
+- (JQKAdView *)leftAdView {
+    if (_leftAdView) {
+        return _leftAdView;
+    }
+    
+    _leftAdView = [[JQKAdView alloc] initWithImageURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadLeftImage]
+                                                adURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadLeftUrl]];
+    @weakify(self);
+    _leftAdView.closeAction = ^(id obj) {
+        @strongify(self);
+        
+        [self.leftAdView removeFromSuperview];
+        self.leftAdView = nil;
+    };
+    return _leftAdView;
+}
+
+- (JQKAdView *)rightAdView {
+    if (_rightAdView) {
+        return _rightAdView;
+    }
+    
+    _rightAdView = [[JQKAdView alloc] initWithImageURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadRightImage]
+                                                adURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadRightUrl]];
+    @weakify(self);
+    _rightAdView.closeAction = ^(id obj) {
+        @strongify(self);
+        
+        [self.rightAdView removeFromSuperview];
+        self.rightAdView = nil;
+    };
+    return _rightAdView;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -77,10 +150,13 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JQKHomeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellReusableIdentifier forIndexPath:indexPath];
     
-    JQKChannel *channel = self.channelModel.fetchedChannels[indexPath.item];
-    cell.imageURL = [NSURL URLWithString:channel.columnImg];
+    if (indexPath.item < self.channelModel.fetchedChannels.count) {
+        JQKChannel *channel = self.channelModel.fetchedChannels[indexPath.item];
+        cell.imageURL = [NSURL URLWithString:channel.columnImg];
 //    cell.title = channel.name;
 //    cell.subtitle = channel.columnDesc;
+    }
+
     return cell;
 }
 
@@ -89,10 +165,24 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    JQKChannel *selectedChannel = self.channelModel.fetchedChannels[indexPath.item];
-    
-    JQKProgramViewController *programVC = [[JQKProgramViewController alloc] initWithChannel:selectedChannel];
-    UINavigationController *programNav = [[UINavigationController alloc] initWithRootViewController:programVC];
-    [self presentViewController:programNav animated:NO completion:nil];
+    if (indexPath.item < self.channelModel.fetchedChannels.count) {
+        JQKChannel *selectedChannel = self.channelModel.fetchedChannels[indexPath.item];
+        
+        if (selectedChannel.type.unsignedIntegerValue == JQKChannelTypeBanner) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:selectedChannel.spreadUrl]];
+        } else {
+            JQKProgramViewController *programVC = [[JQKProgramViewController alloc] initWithChannel:selectedChannel];
+            UINavigationController *programNav = [[UINavigationController alloc] initWithRootViewController:programVC];
+            [self presentViewController:programNav animated:NO completion:nil];
+        }
+    }
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout hasAdBannerForItem:(NSUInteger)item {
+    if (item < self.channelModel.fetchedChannels.count) {
+        JQKChannel *channel = self.channelModel.fetchedChannels[item];
+        return channel.type.unsignedIntegerValue == JQKChannelTypeBanner && channel.spreadUrl.length > 0;
+    }
+    return NO;
 }
 @end

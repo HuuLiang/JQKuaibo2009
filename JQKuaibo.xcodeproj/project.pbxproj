@@ -73,6 +73,7 @@
 		BC3873751C2D80D500CBE88A /* JQKProgramCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873741C2D80D500CBE88A /* JQKProgramCell.m */; };
 		BC4C09CB1C328B4F002C4709 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4C09C71C328B4F002C4709 /* libWeChatSDK.a */; };
 		BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4C09CC1C328C1D002C4709 /* CoreTelephony.framework */; };
+		BC64E2571C4E171200450C1B /* JQKAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC64E2561C4E171200450C1B /* JQKAdView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -235,6 +236,8 @@
 		BC4C09C91C328B4F002C4709 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		BC4C09CA1C328B4F002C4709 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		BC4C09CC1C328C1D002C4709 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		BC64E2551C4E171200450C1B /* JQKAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKAdView.h; sourceTree = "<group>"; };
+		BC64E2561C4E171200450C1B /* JQKAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKAdView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -630,6 +633,8 @@
 			children = (
 				BC2C027C1C2E744700D10677 /* JQKPaymentPopView.h */,
 				BC2C027D1C2E744700D10677 /* JQKPaymentPopView.m */,
+				BC64E2551C4E171200450C1B /* JQKAdView.h */,
+				BC64E2561C4E171200450C1B /* JQKAdView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -899,6 +904,7 @@
 				BC2C02821C2EA07600D10677 /* JQKMineTopBanner.m in Sources */,
 				BC3873091C2D38D000CBE88A /* JQKErrorHandler.m in Sources */,
 				BC3873391C2D402B00CBE88A /* JQKActivateModel.m in Sources */,
+				BC64E2571C4E171200450C1B /* JQKAdView.m in Sources */,
 				BC38733B1C2D402B00CBE88A /* JQKPaymentInfo.m in Sources */,
 				BC38723C1C2D27D600CBE88A /* JQKAppDelegate.m in Sources */,
 				BC3872D21C2D307400CBE88A /* JQKUtil.m in Sources */,

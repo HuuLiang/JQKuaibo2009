@@ -19,6 +19,9 @@ static const CGFloat kSmallImageScale = 563./382.;
 @property (nonatomic,readonly) CGSize topSize;
 @property (nonatomic,readonly) CGSize bigSize;
 @property (nonatomic,readonly) CGSize smallSize;
+@property (nonatomic,readonly) CGSize adBannerSize;
+
+@property (nonatomic) CGSize collectionViewContentSize;
 @end
 
 @implementation JQKHomeCollectionViewLayout
@@ -54,6 +57,18 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
     return CGSizeMake(cvW, cvW/kTopImageScale);
 }
 
+- (CGSize)adBannerSize {
+    const CGFloat cvW = CGRectGetWidth(self.collectionView.bounds);
+    return CGSizeMake(cvW, cvW/5);
+}
+
+- (BOOL)hasAdBannerForItem:(NSUInteger)item {
+    if ([self.delegate respondsToSelector:@selector(collectionView:layout:hasAdBannerForItem:)]) {
+        return [self.delegate collectionView:self.collectionView layout:self hasAdBannerForItem:item];
+    }
+    return NO;
+}
+
 - (void)prepareLayout {
     [super prepareLayout];
     
@@ -67,6 +82,7 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
     const CGSize smallSize = self.smallSize;
     const CGSize topSize = self.topSize;
     const CGSize halfSize = self.halfSize;
+    const CGSize adBannerSize = self.adBannerSize;
     
     const CGFloat bigH = bigSize.height;
     const CGFloat bigW = bigSize.width;
@@ -77,63 +93,62 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
     const CGFloat halfH = halfSize.height;
     const CGFloat halfW = halfSize.width;
     
-    for (NSUInteger i = 0; i < numberOfItems; ++i) {
+    CGRect lastLayerFrame;
+    NSUInteger picIndex = 0;
+    for (NSUInteger i = 0;  i < numberOfItems; ++i) {
         UICollectionViewLayoutAttributes *layoutAttribs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         
-        if (i == 0) {
+        if ([self hasAdBannerForItem:i]) {
+            layoutAttribs.frame = CGRectMake(0, CGRectGetMaxY(lastLayerFrame)+_interItemSpacing, adBannerSize.width, adBannerSize.height);
+        } else if (picIndex == 0) {
             layoutAttribs.frame = CGRectMake(0, 0, topWidth, topHeight);
+            ++picIndex;
         } else {
-            NSUInteger index = i-1;
+            NSUInteger subIndex = (picIndex-1)%7;
             
             CGFloat x = 0, y = 0;
-            if (index % 7 < 3) {
-                x = index % 7 == 0 ? 0 : bigW + _interItemSpacing;
-                y = (index / 7) * (smallH*2+halfH*2 + _interItemSpacing * 4);//(bigH + smallH * 2 + _interItemSpacing * 3);
-                
-                if (index % 7 == 2) {
-                    y += (smallH + _interItemSpacing);
-                }
-                
-            } else {
-                NSUInteger sIndex = index % 7 - 3;
-                x = sIndex%2==0? 0 : halfW+_interItemSpacing;
-                y = (index / 7) * (smallH*2+halfH*2 + _interItemSpacing * 4) + (sIndex/2) *(halfH + _interItemSpacing)+2*(smallH + _interItemSpacing);
+            switch (subIndex) {
+                case 1:
+                case 4:
+                case 6:
+                    x = CGRectGetMaxX(lastLayerFrame)+_interItemSpacing;
+                    break;
+                case 2:
+                    x = lastLayerFrame.origin.x;
+                default:
+                    break;
+            }
+            switch (subIndex) {
+                case 0:
+                case 2:
+                case 3:
+                case 5:
+                    y = CGRectGetMaxY(lastLayerFrame)+_interItemSpacing;
+                    break;
+                    
+                default:
+                    y = lastLayerFrame.origin.y;
+                    break;
             }
             
-            y += (topHeight+_interItemSpacing);
-            
-            if (index % 7 == 0) {
+            if (subIndex == 0) {
                 layoutAttribs.frame = CGRectMake(x, y, bigW, bigH);
-            } else if (index % 7 < 3) {
+            } else if (subIndex < 3) {
                 layoutAttribs.frame = CGRectMake(x, y, smallW, smallH);
             } else {
                 layoutAttribs.frame = CGRectMake(x, y, halfW, halfH);
             }
+            
+            ++picIndex;
         }
-        [self.layoutAttributes setObject:layoutAttribs forKey:layoutAttribs.indexPath];
-    }
-}
-
-- (CGSize)collectionViewContentSize {
-    const NSUInteger itemCount = [self.collectionView numberOfItemsInSection:0];
-    if (itemCount == 0) {
-        return CGSizeZero;
-    }
-    
-    const CGSize smallSize = self.smallSize;
-    const NSUInteger repeatedItemCount = itemCount - 1;
-    CGSize contentSize = CGSizeMake(CGRectGetWidth(self.collectionView.bounds), self.topSize.height + repeatedItemCount/7*(smallSize.height+_interItemSpacing)*4);
-    
-    const NSUInteger remainItems = repeatedItemCount % 7;
-    if (remainItems == 0) {
-        //contentSize = CGSizeMake(contentSize.width, contentSize.height-_interItemSpacing);
-    } else {
-        contentSize = CGSizeMake(contentSize.width, contentSize.height+(smallSize.height+_interItemSpacing)*2);
-        if (remainItems > 3) {
-            contentSize = CGSizeMake(contentSize.width, contentSize.height+(remainItems/2-1)*(smallSize.height+_interItemSpacing));
+        
+        if (!CGRectEqualToRect(layoutAttribs.frame, CGRectZero)) {
+            lastLayerFrame = layoutAttribs.frame;
+            [self.layoutAttributes setObject:layoutAttribs forKey:layoutAttribs.indexPath];
         }
     }
-    return contentSize;
+    
+    self.collectionViewContentSize = CGSizeMake(self.collectionView.bounds.size.width, CGRectGetMaxY(lastLayerFrame));
 }
 
 - (NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {

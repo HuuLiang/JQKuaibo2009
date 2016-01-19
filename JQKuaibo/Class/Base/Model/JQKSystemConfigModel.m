@@ -60,8 +60,18 @@
                     self.spreadTopImage = config.value;
                 } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_SPREAD_URL]) {
                     self.spreadURL = config.value;
+                } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_SPREAD_LEFT_IMAGE]) {
+                    self.spreadLeftImage = config.value;
+                } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_SPREAD_LEFT_URL]) {
+                    self.spreadLeftUrl = config.value;
+                } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_SPREAD_RIGHT_IMAGE]) {
+                    self.spreadRightImage = config.value;
+                } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_SPREAD_RIGHT_URL]) {
+                    self.spreadRightUrl = config.value;
                 }
             }];
+            
+            _loaded = YES;
         }
         
         if (handler) {

@@ -25,6 +25,13 @@ typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic) NSString *startupInstall;
 @property (nonatomic) NSString *startupPrompt;
 
+@property (nonatomic) NSString *spreadLeftImage;
+@property (nonatomic) NSString *spreadLeftUrl;
+@property (nonatomic) NSString *spreadRightImage;
+@property (nonatomic) NSString *spreadRightUrl;
+
+@property (nonatomic,readonly) BOOL loaded;
+
 + (instancetype)sharedModel;
 
 - (BOOL)fetchSystemConfigWithCompletionHandler:(JQKFetchSystemConfigCompletionHandler)handler;
