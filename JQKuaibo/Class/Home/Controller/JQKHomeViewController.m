@@ -76,22 +76,32 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
 
 - (void)loadAds {
     void (^AdBlock)(void) = ^{
-        [self.view addSubview:self.leftAdView];
-        {
-            [self.leftAdView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.centerY.equalTo(self.view);
-                make.width.equalTo(self.view).dividedBy(4);
-                make.height.equalTo(self.leftAdView.mas_width).multipliedBy(3);
-            }];
+        if ([JQKSystemConfigModel sharedModel].spreadLeftImage.length > 0) {
+            [self.view addSubview:self.leftAdView];
+            {
+                [self.leftAdView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.centerY.equalTo(self.view);
+                    make.width.equalTo(self.view).dividedBy(4);
+                    make.height.equalTo(self.leftAdView.mas_width).multipliedBy(3);
+                }];
+            }
+        } else if (_leftAdView) {
+            [self.leftAdView removeFromSuperview];
+            self.leftAdView = nil;
         }
         
-        [self.view addSubview:self.rightAdView];
-        {
-            [self.rightAdView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.right.centerY.equalTo(self.view);
-                make.width.equalTo(self.view).dividedBy(4);
-                make.height.equalTo(self.rightAdView.mas_width).multipliedBy(3);
-            }];
+        if ([JQKSystemConfigModel sharedModel].spreadRightImage.length > 0) {
+            [self.view addSubview:self.rightAdView];
+            {
+                [self.rightAdView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.right.centerY.equalTo(self.view);
+                    make.width.equalTo(self.view).dividedBy(4);
+                    make.height.equalTo(self.rightAdView.mas_width).multipliedBy(3);
+                }];
+            }
+        } else if (_rightAdView) {
+            [self.rightAdView removeFromSuperview];
+            self.rightAdView = nil;
         }
     };
     
