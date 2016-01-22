@@ -1061,7 +1061,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiangxi Electronic Group Corporation Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mianzhu Zhongkai Auto Sales Co.,Ltd.";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = JQKuaibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1070,9 +1070,9 @@
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/Umeng",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yykuaibo2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2d85b5d2-bdae-4860-b5d0-f7f529eda1ea";
+				PROVISIONING_PROFILE = "c2251fd2-c350-469f-b509-3710aa69db25";
 			};
 			name = Debug;
 		};
@@ -1082,7 +1082,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiangxi Electronic Group Corporation Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mianzhu Zhongkai Auto Sales Co.,Ltd.";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = JQKuaibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1091,9 +1091,9 @@
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/Umeng",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yykuaibo2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2d85b5d2-bdae-4860-b5d0-f7f529eda1ea";
+				PROVISIONING_PROFILE = "c2251fd2-c350-469f-b509-3710aa69db25";
 			};
 			name = Release;
 		};
