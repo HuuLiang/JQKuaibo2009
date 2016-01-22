@@ -73,6 +73,8 @@
 		BC3873751C2D80D500CBE88A /* JQKProgramCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873741C2D80D500CBE88A /* JQKProgramCell.m */; };
 		BC4C09CB1C328B4F002C4709 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4C09C71C328B4F002C4709 /* libWeChatSDK.a */; };
 		BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4C09CC1C328C1D002C4709 /* CoreTelephony.framework */; };
+		BC5BCE961C51EE460034F532 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC5BCE951C51EE460034F532 /* config.plist */; };
+		BC5BCE991C51EF8C0034F532 /* JQKConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BCE981C51EF8C0034F532 /* JQKConfiguration.m */; };
 		BC64E2571C4E171200450C1B /* JQKAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC64E2561C4E171200450C1B /* JQKAdView.m */; };
 /* End PBXBuildFile section */
 
@@ -236,6 +238,9 @@
 		BC4C09C91C328B4F002C4709 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		BC4C09CA1C328B4F002C4709 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		BC4C09CC1C328C1D002C4709 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		BC5BCE951C51EE460034F532 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		BC5BCE971C51EF8C0034F532 /* JQKConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKConfiguration.h; sourceTree = "<group>"; };
+		BC5BCE981C51EF8C0034F532 /* JQKConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKConfiguration.m; sourceTree = "<group>"; };
 		BC64E2551C4E171200450C1B /* JQKAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKAdView.h; sourceTree = "<group>"; };
 		BC64E2561C4E171200450C1B /* JQKAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKAdView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -358,6 +363,7 @@
 			isa = PBXGroup;
 			children = (
 				BC3872171C2D273100CBE88A /* Info.plist */,
+				BC5BCE951C51EE460034F532 /* config.plist */,
 				BC3872071C2D273100CBE88A /* main.m */,
 				BC3872931C2D2D7C00CBE88A /* JQKPrefixHeader.pch */,
 				BC3872CF1C2D2F1500CBE88A /* JQKConfig.h */,
@@ -536,6 +542,8 @@
 				BC3872951C2D2E0C00CBE88A /* Extensions */,
 				BC3872D01C2D307400CBE88A /* JQKUtil.h */,
 				BC3872D11C2D307400CBE88A /* JQKUtil.m */,
+				BC5BCE971C51EF8C0034F532 /* JQKConfiguration.h */,
+				BC5BCE981C51EF8C0034F532 /* JQKConfiguration.m */,
 				BC3873051C2D38D000CBE88A /* JQKErrorHandler.h */,
 				BC3873061C2D38D000CBE88A /* JQKErrorHandler.m */,
 				BC3873071C2D38D000CBE88A /* JQKHudManager.h */,
@@ -791,6 +799,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC5BCE961C51EE460034F532 /* config.plist in Resources */,
 				BC3872131C2D273100CBE88A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -869,6 +878,7 @@
 				BC3873721C2D7D8000CBE88A /* JQKProgramViewController.m in Sources */,
 				BC3872831C2D29F000CBE88A /* JQKHomeViewController.m in Sources */,
 				BC38736B1C2D56A300CBE88A /* JQKChannelProgram.m in Sources */,
+				BC5BCE991C51EF8C0034F532 /* JQKConfiguration.m in Sources */,
 				BC3873411C2D402B00CBE88A /* JQKURLRequest.m in Sources */,
 				BC38727E1C2D299D00CBE88A /* JQKBaseViewController.m in Sources */,
 				BC2C027B1C2E5F5A00D10677 /* JQKHotVideoCell.m in Sources */,
