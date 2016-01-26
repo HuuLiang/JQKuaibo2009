@@ -32,7 +32,8 @@
 #define JQK_ACTIVATE_URL                @"/iosvideo/activat.htm"
 #define JQK_SYSTEM_CONFIG_URL           @"/iosvideo/systemConfig.htm"
 #define JQK_USER_ACCESS_URL             @"/iosvideo/userAccess.htm"
-#define JQK_AGREEMENT_URL                    @"/iosvideo/agreement.html"
+#define JQK_AGREEMENT_NOTPAID_URL       @"/iosvideo/agreement.html"
+#define JQK_AGREEMENT_PAID_URL          @"/iosvideo/agreement-paid.html"
 
 #define JQK_PAYMENT_COMMIT_URL   @"http://pay.iqu8.net/paycenter/qubaPr.json"
 #define JQK_PAYMENT_SIGN_URL     @"http://phas.ihuiyx.com/pd-has/signtureNowdata.json"

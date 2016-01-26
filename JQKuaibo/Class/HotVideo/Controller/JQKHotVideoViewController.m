@@ -195,4 +195,11 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.videos.count;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < self.videos.count) {
+        JQKProgram *video = self.videos[indexPath.row];
+        [self switchToPlayProgram:video];
+    }
+}
 @end

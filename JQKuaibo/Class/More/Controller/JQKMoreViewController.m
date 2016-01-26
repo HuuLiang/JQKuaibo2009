@@ -12,21 +12,9 @@
 {
     UIWebView *_webView;
 }
-@property (nonatomic,retain,readonly) NSURLRequest *urlRequest;
 @end
 
 @implementation JQKMoreViewController
-@synthesize urlRequest = _urlRequest;
-
-- (NSURLRequest *)urlRequest {
-    if (_urlRequest) {
-        return _urlRequest;
-    }
-    
-    NSString *urlString = [JQK_BASE_URL stringByAppendingString:JQK_AGREEMENT_URL];
-    _urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30];
-    return _urlRequest;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,7 +37,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [_webView loadRequest:self.urlRequest];
+    NSString *urlString = [JQK_BASE_URL stringByAppendingString:[JQKUtil isPaid]?JQK_AGREEMENT_PAID_URL:JQK_AGREEMENT_NOTPAID_URL];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30];
+    [_webView loadRequest:urlRequest];
 }
 
 - (void)didReceiveMemoryWarning {
