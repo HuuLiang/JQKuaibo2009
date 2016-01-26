@@ -45,12 +45,12 @@ DefineLazyPropertyInitialization(JQKWeChatPayQueryOrderRequest, wechatPayOrderQu
                                                                  selectedImage:[[UIImage imageNamed:@"home_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     JQKHotVideoViewController *videoVC   = [[JQKHotVideoViewController alloc] init];
-    videoVC.title                        = @"热门电影";
+    videoVC.title                        = @"主播秀";
     
     UINavigationController *videoNav     = [[UINavigationController alloc] initWithRootViewController:videoVC];
     videoNav.tabBarItem                = [[UITabBarItem alloc] initWithTitle:videoVC.title
-                                                                       image:[[UIImage imageNamed:@"hot_video_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                               selectedImage:[[UIImage imageNamed:@"hot_video_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+                                                                       image:[[UIImage imageNamed:@"show_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                               selectedImage:[[UIImage imageNamed:@"show_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
 
     JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
     mineVC.title                         = @"我的";

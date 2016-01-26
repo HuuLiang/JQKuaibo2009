@@ -70,7 +70,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     _layoutTableView = [[UITableView alloc] init];
     _layoutTableView.delegate = self;
     _layoutTableView.dataSource = self;
-    _layoutTableView.rowHeight = 100;
+    _layoutTableView.rowHeight = kScreenWidth*0.8;
     _layoutTableView.tableFooterView = [[UIView alloc] init];
     _layoutTableView.separatorColor = [UIColor blackColor];
     [_layoutTableView registerClass:[JQKHotVideoCell class] forCellReuseIdentifier:kHotVideoCellReusableIdentifier];
@@ -181,13 +181,13 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
         JQKProgram *video = self.videos[indexPath.row];
         cell.imageURL = [NSURL URLWithString:video.coverImg];
         cell.title = video.title;
-        cell.subtitle = video.specialDesc;
+        //cell.subtitle = video.specialDesc;
         
-        @weakify(self);
-        cell.playAction = ^{
-            @strongify(self);
-            [self switchToPlayProgram:video];
-        };
+//        @weakify(self);
+//        cell.playAction = ^{
+//            @strongify(self);
+//            [self switchToPlayProgram:video];
+//        };
     }
     return cell;
 }

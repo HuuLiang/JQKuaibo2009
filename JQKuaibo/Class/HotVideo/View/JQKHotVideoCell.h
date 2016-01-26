@@ -14,7 +14,7 @@ typedef void (^JQKHotVideoPlayAction)(void);
 
 @property (nonatomic) NSURL *imageURL;
 @property (nonatomic) NSString *title;
-@property (nonatomic) NSString *subtitle;
-@property (nonatomic,copy) JQKHotVideoPlayAction playAction;
+//@property (nonatomic) NSString *subtitle;
+//@property (nonatomic,copy) JQKHotVideoPlayAction playAction;
 
 @end
