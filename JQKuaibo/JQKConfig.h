@@ -30,7 +30,7 @@
 
 #define JQK_UMENG_APP_ID         @"567d010667e58e2c8200223a"
 
-#define JQK_BASE_URL             @"http://120.24.252.114:8093" //@"http://iv.ihuiyx.com"//
+#define JQK_BASE_URL             @"http://iv.ihuiyx.com"//@"http://120.24.252.114:8093" //
 
 #define JQK_HOME_CHANNEL_URL            @"/iosvideo/channelRanking.htm"
 #define JQK_HOME_CHANNEL_PROGRAM_URL    @"/iosvideo/program.htm"
@@ -42,7 +42,7 @@
 #define JQK_AGREEMENT_NOTPAID_URL       @"/iosvideo/agreement.html"
 #define JQK_AGREEMENT_PAID_URL          @"/iosvideo/agreement-paid.html"
 
-#define JQK_PAYMENT_COMMIT_URL   @"http://120.24.252.114:8084/paycenter/qubaPr.json"//@"http://pay.iqu8.net/paycenter/qubaPr.json"
+#define JQK_PAYMENT_COMMIT_URL          @"http://pay.iqu8.net/paycenter/qubaPr.json" //@"http://120.24.252.114:8084/paycenter/qubaPr.json"//
 #define JQK_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JQK_REST_APP_ID, JQK_CHANNEL_NO]
 
 //#define JQK_SYSTEM_CONFIG_PAY_AMOUNT            @"PAY_AMOUNT"
