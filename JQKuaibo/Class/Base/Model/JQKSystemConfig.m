@@ -76,6 +76,16 @@ static JQKSystemConfig *_sharedConfig;
                 return ;
             }
             
+            if ([key isEqualToString:@"alipayEnabled"]) {
+                self.alipayEnabled = obj.value.boolValue;
+                return ;
+            }
+            
+            if ([key isEqualToString:@"wechatEnabled"]) {
+                self.wechatEnabled = obj.value.boolValue;
+                return ;
+            }
+            
             if (key.length > 0) {
                 [self setValue:obj.value forKey:key];
             }

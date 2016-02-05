@@ -23,7 +23,7 @@ typedef void (^AlipayResultBlock)(PAYRESULT result, Order *order);
  *  @param price    商品价格
  *  @result
  */
-- (void)startAlipay:(NSString *)_orderId price:(double)_price withResult:(AlipayResultBlock)resultBlock;
+- (void)startAlipay:(NSString *)orderId price:(NSUInteger)price withResult:(AlipayResultBlock)resultBlock;
 
 - (void)handleOpenURL:(NSURL *)url;
 @end

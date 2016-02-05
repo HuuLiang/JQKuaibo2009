@@ -14,7 +14,7 @@ typedef void (^WeChatPayCompletionHandler)(PAYRESULT payResult);
 
 + (instancetype)sharedInstance;
 
-- (void)startWeChatPayWithOrderNo:(NSString *)orderNo price:(double)price completionHandler:(WeChatPayCompletionHandler)handler;
+- (void)startWeChatPayWithOrderNo:(NSString *)orderNo price:(NSUInteger)price completionHandler:(WeChatPayCompletionHandler)handler;
 - (void)handleOpenURL:(NSURL *)url;
 
 @end

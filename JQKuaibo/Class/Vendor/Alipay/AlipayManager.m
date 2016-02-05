@@ -44,7 +44,7 @@ static AlipayManager *alipayManager;
  *  @param price    商品价格
  *  @result
  */
-- (void)startAlipay:(NSString *)_orderId price:(double)_price withResult:(AlipayResultBlock)resultBlock
+- (void)startAlipay:(NSString *)orderId price:(NSUInteger)price withResult:(AlipayResultBlock)resultBlock
 {
     self.resultBlock = resultBlock;
     
@@ -52,10 +52,10 @@ static AlipayManager *alipayManager;
     order.partner       = [JQKSystemConfig sharedConfig].alipayPartner;
     order.seller        = [JQKSystemConfig sharedConfig].alipaySeller;
     
-    order.tradeNO       = _orderId;         //订单ID（由商家自行制定）
+    order.tradeNO       = orderId;         //订单ID（由商家自行制定）
     order.productName   = [JQKSystemConfig sharedConfig].alipayProductInfo ?: @"家庭影院"; //商品标题
     order.productDescription = JQK_PAYMENT_RESERVE_DATA; //商品描述
-    order.amount        = [NSString stringWithFormat:@"%.2f", _price];           //商品价格
+    order.amount        = [NSString stringWithFormat:@"%.2f", price/100.];           //商品价格
     order.notifyURL     =  [JQKSystemConfig sharedConfig].alipayNotifyUrl; //回调URL
     
     order.service       = @"mobile.securitypay.pay";
