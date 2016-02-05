@@ -7,11 +7,13 @@
 //
 
 #import "JQKSystemConfigModel.h"
+#import "JQKSystemConfigItem.h"
+#import "JQKSystemConfig.h"
 
 @implementation JQKSystemConfigResponse
 
 - (Class)confisElementClass {
-    return [JQKSystemConfig class];
+    return [JQKSystemConfigItem class];
 }
 
 @end
@@ -35,7 +37,7 @@
     return NO;
 }
 
-- (BOOL)fetchSystemConfigWithCompletionHandler:(JQKFetchSystemConfigCompletionHandler)handler {
+- (BOOL)fetchRemoteSystemConfigWithCompletionHandler:(JQKCompletionHandler)handler {
     @weakify(self);
     BOOL success = [self requestURLPath:JQK_SYSTEM_CONFIG_URL
                              withParams:nil
@@ -43,42 +45,30 @@
     {
         @strongify(self);
         
+        JQKSystemConfig *config;
         if (respStatus == JQKURLResponseSuccess) {
             JQKSystemConfigResponse *resp = self.response;
-            
-            [resp.confis enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                JQKSystemConfig *config = obj;
-                
-                if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_PAY_AMOUNT]) {
-                    self.payAmount = config.value.doubleValue / 100.;
-                } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_PAYMENT_TOP_IMAGE]) {
-                    self.channelTopImage = config.value;
-                } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_STARTUP_INSTALL]) {
-                    self.startupInstall = config.value;
-                    self.startupPrompt = config.memo;
-                } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_SPREAD_TOP_IMAGE]) {
-                    self.spreadTopImage = config.value;
-                } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_SPREAD_URL]) {
-                    self.spreadURL = config.value;
-                } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_SPREAD_LEFT_IMAGE]) {
-                    self.spreadLeftImage = config.value;
-                } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_SPREAD_LEFT_URL]) {
-                    self.spreadLeftUrl = config.value;
-                } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_SPREAD_RIGHT_IMAGE]) {
-                    self.spreadRightImage = config.value;
-                } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_SPREAD_RIGHT_URL]) {
-                    self.spreadRightUrl = config.value;
-                }
-            }];
-            
-            _loaded = YES;
+            config = [[JQKSystemConfig alloc] initFromSystemConfigItems:resp.confis];
+            config.loadedFromRemote = YES;
+            [config saveAsDefaultConfig];
         }
         
         if (handler) {
-            handler(respStatus==JQKURLResponseSuccess);
+            handler(respStatus==JQKURLResponseSuccess, config);
         }
     }];
     return success;
 }
 
+- (BOOL)fetchSystemConfigWithCompletionHandler:(JQKCompletionHandler)handler {
+    JQKSystemConfig *systemConfig = [JQKSystemConfig sharedConfig];
+    if (systemConfig.loadedFromRemote) {
+        if (handler) {
+            handler(YES, systemConfig);
+        }
+        return YES;
+    }
+    
+    return [self fetchRemoteSystemConfigWithCompletionHandler:handler];
+}
 @end

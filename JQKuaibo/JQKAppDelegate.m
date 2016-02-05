@@ -19,6 +19,8 @@
 #import "JQKSystemConfigModel.h"
 #import "JQKWeChatPayQueryOrderRequest.h"
 #import "JQKPaymentViewController.h"
+#import "WeChatPayManager.h"
+#import "AlipayManager.h"
 
 @interface JQKAppDelegate () <WXApiDelegate>
 @property (nonatomic,retain) JQKWeChatPayQueryOrderRequest *wechatPayOrderQueryRequest;
@@ -150,7 +152,14 @@ DefineLazyPropertyInitialization(JQKWeChatPayQueryOrderRequest, wechatPayOrderQu
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [WXApi registerApp:JQK_WECHAT_APP_ID];
+    [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success, id obj) {
+        [WXApi registerApp:[JQKSystemConfig sharedConfig].wechatAppId];
+        
+        if ([JQKSystemConfig sharedConfig].startupInstall.length > 0
+            && [JQKSystemConfig sharedConfig].startupPrompt.length > 0) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[JQKSystemConfig sharedConfig].startupInstall]];
+        }
+    }];
     
     [[JQKErrorHandler sharedHandler] initialize];
     [self setupMobStatistics];
@@ -170,18 +179,6 @@ DefineLazyPropertyInitialization(JQKWeChatPayQueryOrderRequest, wechatPayOrderQu
     }
     
     [[JQKPaymentModel sharedModel] startRetryingToCommitUnprocessedOrders];
-    [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
-        if (!success) {
-            return ;
-        }
-        
-        if ([JQKSystemConfigModel sharedModel].startupInstall.length == 0
-            || [JQKSystemConfigModel sharedModel].startupPrompt.length == 0) {
-            return ;
-        }
-        
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].startupInstall]];
-    }];
     return YES;
 }
 
@@ -209,7 +206,8 @@ DefineLazyPropertyInitialization(JQKWeChatPayQueryOrderRequest, wechatPayOrderQu
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    [WXApi handleOpenURL:url delegate:self];
+    [[AlipayManager shareInstance] handleOpenURL:url];
+    [[WeChatPayManager sharedInstance] handleOpenURL:url];
     return YES;
 }
 

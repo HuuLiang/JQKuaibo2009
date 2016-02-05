@@ -11,5 +11,6 @@
 @interface NSObject (Properties)
 
 + (NSArray *)propertiesOfClass:(Class)cls;
+- (void)mappingWithDictionary:(NSDictionary *)dic;
 
 @end

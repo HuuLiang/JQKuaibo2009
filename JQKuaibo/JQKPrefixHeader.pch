@@ -20,6 +20,7 @@
 #import <UIImageView+WebCache.h>
 #import "JQKCommonDef.h"
 #import "JQKConfig.h"
+#import "JQKSystemConfig.h"
 #import "RACEXTScope.h"
 #import "JQKExtensions.h"
 #import "JQKUtil.h"

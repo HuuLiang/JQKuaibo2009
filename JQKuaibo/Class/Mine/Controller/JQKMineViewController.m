@@ -74,22 +74,11 @@ static NSString *const kMineCellReusableIdentifier = @"MineCellReusableIdentifie
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    JQKSystemConfigModel *sysConfigModel = [JQKSystemConfigModel sharedModel];
-    if (sysConfigModel.payAmount) {
-        _topCell.price = sysConfigModel.payAmount;
-    } else {
-        @weakify(self);
-        [sysConfigModel fetchSystemConfigWithCompletionHandler:^(BOOL success) {
-            @strongify(self);
-            if (!self) {
-                return ;
-            }
-            
-            if (success) {
-                self->_topCell.price = sysConfigModel.payAmount;
-            }
-        }];
-    }
+    [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success, id obj) {
+        JQKSystemConfig *systemConfig = [JQKSystemConfig sharedConfig];
+        _topCell.price = systemConfig.payAmount.unsignedIntegerValue / 100.;
+    }];
+    
 }
 
 - (void)onPaidNotification:(NSNotification *)notification {

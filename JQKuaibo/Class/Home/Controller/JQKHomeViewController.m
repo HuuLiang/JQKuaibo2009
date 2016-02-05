@@ -75,45 +75,39 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
 }
 
 - (void)loadAds {
-    void (^AdBlock)(void) = ^{
-        if ([JQKSystemConfigModel sharedModel].spreadLeftImage.length > 0) {
-            [self.view addSubview:self.leftAdView];
-            {
-                [self.leftAdView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.centerY.equalTo(self.view);
-                    make.width.equalTo(self.view).dividedBy(4);
-                    make.height.equalTo(self.leftAdView.mas_width).multipliedBy(3);
-                }];
+    @weakify(self);
+    [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success, id obj) {
+        @strongify(self);
+        if (success) {
+            if ([JQKSystemConfig sharedConfig].spreadLeftImage.length > 0) {
+                [self.view addSubview:self.leftAdView];
+                {
+                    [self.leftAdView mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.left.centerY.equalTo(self.view);
+                        make.width.equalTo(self.view).dividedBy(4);
+                        make.height.equalTo(self.leftAdView.mas_width).multipliedBy(3);
+                    }];
+                }
+            } else if (_leftAdView) {
+                [self.leftAdView removeFromSuperview];
+                self.leftAdView = nil;
             }
-        } else if (_leftAdView) {
-            [self.leftAdView removeFromSuperview];
-            self.leftAdView = nil;
+            
+            if ([JQKSystemConfig sharedConfig].spreadRightImage.length > 0) {
+                [self.view addSubview:self.rightAdView];
+                {
+                    [self.rightAdView mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.right.centerY.equalTo(self.view);
+                        make.width.equalTo(self.view).dividedBy(4);
+                        make.height.equalTo(self.rightAdView.mas_width).multipliedBy(3);
+                    }];
+                }
+            } else if (_rightAdView) {
+                [self.rightAdView removeFromSuperview];
+                self.rightAdView = nil;
+            }
         }
-        
-        if ([JQKSystemConfigModel sharedModel].spreadRightImage.length > 0) {
-            [self.view addSubview:self.rightAdView];
-            {
-                [self.rightAdView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.right.centerY.equalTo(self.view);
-                    make.width.equalTo(self.view).dividedBy(4);
-                    make.height.equalTo(self.rightAdView.mas_width).multipliedBy(3);
-                }];
-            }
-        } else if (_rightAdView) {
-            [self.rightAdView removeFromSuperview];
-            self.rightAdView = nil;
-        }
-    };
-    
-    if ([JQKSystemConfigModel sharedModel].loaded) {
-        AdBlock();
-    } else {
-        [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
-            if (success) {
-                AdBlock();
-            }
-        }];
-    }
+    }];
 }
 
 - (JQKAdView *)leftAdView {
@@ -121,8 +115,8 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
         return _leftAdView;
     }
     
-    _leftAdView = [[JQKAdView alloc] initWithImageURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadLeftImage]
-                                                adURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadLeftUrl]];
+    _leftAdView = [[JQKAdView alloc] initWithImageURL:[NSURL URLWithString:[JQKSystemConfig sharedConfig].spreadLeftImage]
+                                                adURL:[NSURL URLWithString:[JQKSystemConfig sharedConfig].spreadLeftUrl]];
     @weakify(self);
     _leftAdView.closeAction = ^(id obj) {
         @strongify(self);
@@ -138,8 +132,8 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
         return _rightAdView;
     }
     
-    _rightAdView = [[JQKAdView alloc] initWithImageURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadRightImage]
-                                                adURL:[NSURL URLWithString:[JQKSystemConfigModel sharedModel].spreadRightUrl]];
+    _rightAdView = [[JQKAdView alloc] initWithImageURL:[NSURL URLWithString:[JQKSystemConfig sharedConfig].spreadRightImage]
+                                                adURL:[NSURL URLWithString:[JQKSystemConfig sharedConfig].spreadRightUrl]];
     @weakify(self);
     _rightAdView.closeAction = ^(id obj) {
         @strongify(self);

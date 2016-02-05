@@ -13,7 +13,6 @@
 @property (nonatomic) NSNumber *success;
 @property (nonatomic) NSString *resultCode;
 
-
 - (void)parseResponseWithDictionary:(NSDictionary *)dic;
 
 @end

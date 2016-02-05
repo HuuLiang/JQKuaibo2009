@@ -7,33 +7,18 @@
 //
 
 #import "JQKEncryptedURLRequest.h"
-#import "JQKSystemConfig.h"
+
+@class JQKSystemConfigItem;
 
 @interface JQKSystemConfigResponse : JQKURLResponse
-@property (nonatomic,retain) NSArray<JQKSystemConfig> *confis;
+@property (nonatomic,retain) NSArray<JQKSystemConfigItem *> *confis;
 @end
-
-typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 
 @interface JQKSystemConfigModel : JQKEncryptedURLRequest
 
-@property (nonatomic) double payAmount;
-@property (nonatomic) NSString *channelTopImage;
-@property (nonatomic) NSString *spreadTopImage;
-@property (nonatomic) NSString *spreadURL;
-
-@property (nonatomic) NSString *startupInstall;
-@property (nonatomic) NSString *startupPrompt;
-
-@property (nonatomic) NSString *spreadLeftImage;
-@property (nonatomic) NSString *spreadLeftUrl;
-@property (nonatomic) NSString *spreadRightImage;
-@property (nonatomic) NSString *spreadRightUrl;
-
-@property (nonatomic,readonly) BOOL loaded;
-
 + (instancetype)sharedModel;
 
-- (BOOL)fetchSystemConfigWithCompletionHandler:(JQKFetchSystemConfigCompletionHandler)handler;
+//- (BOOL)fetchRemoteSystemConfigWithCompletionHandler:(JQKCompletionHandler)handler;
+- (BOOL)fetchSystemConfigWithCompletionHandler:(JQKCompletionHandler)handler;
 
 @end

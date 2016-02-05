@@ -47,4 +47,5 @@ return _##propertyName; \
 #define kDefaultDateFormat    @"yyyyMMddHHmmss"
 
 typedef void (^JQKAction)(id obj);
+typedef void (^JQKCompletionHandler)(BOOL success, id obj);
 #endif /* JQKCommonDef_h */

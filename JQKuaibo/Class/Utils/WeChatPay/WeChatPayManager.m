@@ -10,7 +10,7 @@
 #import "WXApi.h"
 #import "payRequsestHandler.h"
 
-@interface WeChatPayManager ()
+@interface WeChatPayManager () <WXApiDelegate>
 @property (nonatomic,copy) WeChatPayCompletionHandler handler;
 @end
 
@@ -31,11 +31,11 @@
     //创建支付签名对象
     payRequsestHandler *req = [[payRequsestHandler alloc] init];
     //初始化支付签名对象
-    [req init:JQK_WECHAT_APP_ID mch_id:JQK_WECHAT_MCH_ID];
+    [req init:[JQKSystemConfig sharedConfig].wechatAppId mch_id:[JQKSystemConfig sharedConfig].wechatMchId];
     //设置密钥
-    [req setKey:JQK_WECHAT_PRIVATE_KEY];
+    [req setKey:[JQKSystemConfig sharedConfig].wechatPrivateKey];
     //设置回调URL
-    [req setNotifyUrl:JQK_WECHAT_NOTIFY_URL];
+    [req setNotifyUrl:[JQKSystemConfig sharedConfig].wechatNotifyUrl];
     //设置附加数据
     [req setAttach:[JQKUtil paymentReservedData]];
     
@@ -67,9 +67,30 @@
     }
 }
 
-- (void)sendNotificationByResult:(PAYRESULT)result {
-    if (_handler) {
-        _handler(result);
+- (void)handleOpenURL:(NSURL *)url {
+    [WXApi handleOpenURL:url delegate:self];
+}
+
+#pragma mark - WeChat delegate
+
+- (void)onReq:(BaseReq *)req {
+    
+}
+
+- (void)onResp:(BaseResp *)resp {
+    if([resp isKindOfClass:[PayResp class]]){
+        PAYRESULT payResult;
+        if (resp.errCode == WXErrCodeUserCancel) {
+            payResult = PAYRESULT_ABANDON;
+        } else if (resp.errCode == WXSuccess) {
+            payResult = PAYRESULT_SUCCESS;
+        } else {
+            payResult = PAYRESULT_FAIL;
+        }
+        
+        if (_handler) {
+            _handler(payResult);
+        }
     }
 }
 @end

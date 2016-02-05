@@ -104,32 +104,28 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     }
     
     @weakify(self);
-    JQKSystemConfigModel *systemConfigModel = [JQKSystemConfigModel sharedModel];
-    [systemConfigModel fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+    [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success, id obj) {
         @strongify(self);
         if (!self) {
             return ;
         }
         
-        if (success) {
-            @weakify(self);
-            [self->_headerImageView sd_setImageWithURL:[NSURL URLWithString:systemConfigModel.channelTopImage]
-                                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
-            {
-                @strongify(self);
-                if (!self) {
-                    return ;
-                }
-                
-                if (image) {
-                    double showPrice = systemConfigModel.payAmount;
-                    BOOL showInteger = (NSUInteger)(showPrice * 100) % 100 == 0;
-                    self->_priceLabel.text = showInteger ? [NSString stringWithFormat:@"%ld", (NSUInteger)showPrice] : [NSString stringWithFormat:@"%.2f", showPrice];
-                } else {
-                    self->_priceLabel.text = nil;
-                }
-            }];
-        }
+        [self->_headerImageView sd_setImageWithURL:[NSURL URLWithString:[JQKSystemConfig sharedConfig].channelTopImage]
+                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+         {
+             @strongify(self);
+             if (!self) {
+                 return ;
+             }
+             
+             if (image) {
+                 NSUInteger payAmount = [JQKSystemConfig sharedConfig].payAmount.unsignedIntegerValue;
+                 BOOL showInteger = payAmount % 100 == 0;
+                 self->_priceLabel.text = showInteger ? [NSString stringWithFormat:@"%ld", payAmount / 100] : [NSString stringWithFormat:@"%.2f", payAmount / 100.];
+             } else {
+                 self->_priceLabel.text = nil;
+             }
+         }];
     }];
     
 }

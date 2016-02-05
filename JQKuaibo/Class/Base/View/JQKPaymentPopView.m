@@ -58,6 +58,7 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
 {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.cells.count inSection:1];
     UITableViewCell *cell = [[UITableViewCell alloc] init];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [cell addSubview:imageView];
@@ -116,9 +117,10 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
 }
 
 - (void)setShowPrice:(NSNumber *)showPrice {
-    double price = showPrice.doubleValue;
-    BOOL showInteger = (NSUInteger)(price * 100) % 100 == 0;
-    _priceLabel.text = showInteger ? [NSString stringWithFormat:@"%ld元", (NSUInteger)price] : [NSString stringWithFormat:@"%.2f元", price];
+    _showPrice = showPrice;
+    NSUInteger price = showPrice.unsignedIntegerValue;
+    BOOL showInteger = price % 100 == 0;
+    _priceLabel.text = showInteger ? [NSString stringWithFormat:@"%ld元", price/100] : [NSString stringWithFormat:@"%.2f元", price/100.];
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
@@ -131,6 +133,7 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
     if (indexPath.section == 0) {
         if (!_headerCell) {
             _headerCell = [[UITableViewCell alloc] init];
+            _headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             _headerImageView = [[UIImageView alloc] initWithImage:_headerImage];
             [_headerCell addSubview:_headerImageView];
@@ -143,6 +146,7 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
             _priceLabel = [[UILabel alloc] init];
             _priceLabel.textColor = [UIColor redColor];
             _priceLabel.font = [UIFont systemFontOfSize:18.];
+            [self setShowPrice:self.showPrice];
             [_headerImageView addSubview:_priceLabel];
             {
                 [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -175,6 +179,7 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
     } else if (indexPath.section == 2) {
         if (!_footerCell) {
             _footerCell = [[UITableViewCell alloc] init];
+            _footerCell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             _footerImageView = [[UIImageView alloc] initWithImage:_footerImage];
             [_footerCell addSubview:_footerImageView];
