@@ -9,7 +9,7 @@
 #import "JQKAppDelegate.h"
 #import "JQKHomeViewController.h"
 #import "JQKHotVideoViewController.h"
-#import "JQKMineViewController.h"
+//#import "JQKMineViewController.h"
 #import "JQKMoreViewController.h"
 #import "MobClick.h"
 #import "WXApi.h"
@@ -43,68 +43,82 @@ DefineLazyPropertyInitialization(JQKWeChatPayQueryOrderRequest, wechatPayOrderQu
     
     UINavigationController *homeNav      = [[UINavigationController alloc] initWithRootViewController:homeVC];
     homeNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:@"资源"
-                                                                         image:[[UIImage imageNamed:@"home_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                                 selectedImage:[[UIImage imageNamed:@"home_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+                                                                         image:nil
+                                                                 selectedImage:nil];
     
     JQKHotVideoViewController *videoVC   = [[JQKHotVideoViewController alloc] init];
     videoVC.title                        = @"主播秀";
     
     UINavigationController *videoNav     = [[UINavigationController alloc] initWithRootViewController:videoVC];
     videoNav.tabBarItem                = [[UITabBarItem alloc] initWithTitle:videoVC.title
-                                                                       image:[[UIImage imageNamed:@"show_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                               selectedImage:[[UIImage imageNamed:@"show_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-
-    JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
-    mineVC.title                         = @"我的";
+                                                                       image:nil
+                                                               selectedImage:nil];
+//
+//    JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
+//    mineVC.title                         = @"我的";
     
-    UINavigationController *mineNav      = [[UINavigationController alloc] initWithRootViewController:mineVC];
-    mineNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:mineVC.title
-                                                                          image:[[UIImage imageNamed:@"mine_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                                 selectedImage:[[UIImage imageNamed:@"mine_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+//    UINavigationController *mineNav      = [[UINavigationController alloc] initWithRootViewController:mineVC];
+//    mineNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:mineVC.title
+//                                                                          image:[[UIImage imageNamed:@"mine_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+//                                                                 selectedImage:[[UIImage imageNamed:@"mine_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     JQKMoreViewController *moreVC        = [[JQKMoreViewController alloc] init];
     moreVC.title                         = @"更多";
     
     UINavigationController *moreNav      = [[UINavigationController alloc] initWithRootViewController:moreVC];
     moreNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:moreVC.title
-                                                                         image:[[UIImage imageNamed:@"more_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                                 selectedImage:[[UIImage imageNamed:@"more_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+                                                                         image:nil
+                                                                 selectedImage:nil];
     
     UITabBarController *tabBarController    = [[UITabBarController alloc] init];
-    tabBarController.viewControllers        = @[homeNav,videoNav,mineNav,moreNav];
+    tabBarController.viewControllers        = @[homeNav,videoNav,moreNav];
     tabBarController.tabBar.translucent     = NO;
-    tabBarController.tabBar.backgroundImage = [UIImage imageWithColor:[UIColor colorWithWhite:0.95 alpha:1]];
-    
+    tabBarController.tabBar.backgroundImage = [UIImage imageNamed:@"tabbar_background"];
+    tabBarController.tabBar.barStyle        = UIBarStyleBlack;
+
     _window.rootViewController              = tabBarController;
     return _window;
 }
 
 - (void)setupCommonStyles {
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navigation_background"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:20.], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18.],
+                                                        NSForegroundColorAttributeName:[UIColor whiteColor]}
+                                             forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitlePositionAdjustment:UIOffsetMake(0, -12)];
+    
+    UIImage *selectionIndicatorImage = [[UIImage imageNamed:@"tabbaritem_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    selectionIndicatorImage = [selectionIndicatorImage crop:CGRectMake(0, 3, kScreenWidth/3, selectionIndicatorImage.size.height-3)];
+    [[UITabBar appearance] setSelectionIndicatorImage:selectionIndicatorImage];
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor blackColor]];
+    
     [UIViewController aspect_hookSelector:@selector(viewDidLoad)
                               withOptions:AspectPositionAfter
                                usingBlock:^(id<AspectInfo> aspectInfo){
                                    UIViewController *thisVC = [aspectInfo instance];
                                    thisVC.navigationController.navigationBar.translucent = NO;
-                                   thisVC.navigationController.navigationBar.barTintColor = [UIColor colorWithWhite:0.95 alpha:1];
-                                   thisVC.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:20.]};
+                                   //thisVC.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+                                   //thisVC.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:20.]};
                                    
                                    thisVC.navigationController.navigationBar.tintColor = [UIColor whiteColor];
                                    thisVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回" style:UIBarButtonItemStylePlain handler:nil];
                                } error:nil];
     
-//    [UINavigationController aspect_hookSelector:@selector(preferredStatusBarStyle)
-//                                    withOptions:AspectPositionInstead
-//                                     usingBlock:^(id<AspectInfo> aspectInfo){
-//                                         UIStatusBarStyle statusBarStyle = UIStatusBarStyleLightContent;
-//                                         [[aspectInfo originalInvocation] setReturnValue:&statusBarStyle];
-//                                     } error:nil];
-//    
-//    [UIViewController aspect_hookSelector:@selector(preferredStatusBarStyle)
-//                              withOptions:AspectPositionInstead
-//                               usingBlock:^(id<AspectInfo> aspectInfo){
-//                                   UIStatusBarStyle statusBarStyle = UIStatusBarStyleLightContent;
-//                                   [[aspectInfo originalInvocation] setReturnValue:&statusBarStyle];
-//                               } error:nil];
+    [UINavigationController aspect_hookSelector:@selector(preferredStatusBarStyle)
+                                    withOptions:AspectPositionInstead
+                                     usingBlock:^(id<AspectInfo> aspectInfo){
+                                         UIStatusBarStyle statusBarStyle = UIStatusBarStyleLightContent;
+                                         [[aspectInfo originalInvocation] setReturnValue:&statusBarStyle];
+                                     } error:nil];
+    
+    [UIViewController aspect_hookSelector:@selector(preferredStatusBarStyle)
+                              withOptions:AspectPositionInstead
+                               usingBlock:^(id<AspectInfo> aspectInfo){
+                                   UIStatusBarStyle statusBarStyle = UIStatusBarStyleLightContent;
+                                   [[aspectInfo originalInvocation] setReturnValue:&statusBarStyle];
+                               } error:nil];
     
     [UITabBarController aspect_hookSelector:@selector(shouldAutorotate)
                                 withOptions:AspectPositionInstead

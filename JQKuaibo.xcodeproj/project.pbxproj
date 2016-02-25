@@ -12,8 +12,6 @@
 		BC2C02771C2E5C1A00D10677 /* JQKHotVideoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2C02761C2E5C1A00D10677 /* JQKHotVideoModel.m */; };
 		BC2C027B1C2E5F5A00D10677 /* JQKHotVideoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2C027A1C2E5F5A00D10677 /* JQKHotVideoCell.m */; };
 		BC2C027E1C2E744700D10677 /* JQKPaymentPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2C027D1C2E744700D10677 /* JQKPaymentPopView.m */; };
-		BC2C02821C2EA07600D10677 /* JQKMineTopBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2C02811C2EA07600D10677 /* JQKMineTopBanner.m */; };
-		BC2C028B1C2ECBF100D10677 /* JQKMineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2C028A1C2ECBF100D10677 /* JQKMineCell.m */; };
 		BC2E11B41C61B02800D5E705 /* AlipayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC2E119C1C61B02800D5E705 /* AlipayManager.m */; };
 		BC2E11B51C61B02800D5E705 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BC2E119D1C61B02800D5E705 /* AlipaySDK.bundle */; };
 		BC2E11B61C61B02800D5E705 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2E119E1C61B02800D5E705 /* AlipaySDK.framework */; };
@@ -34,7 +32,6 @@
 		BC38727E1C2D299D00CBE88A /* JQKBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC38727D1C2D299D00CBE88A /* JQKBaseViewController.m */; };
 		BC3872831C2D29F000CBE88A /* JQKHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872821C2D29F000CBE88A /* JQKHomeViewController.m */; };
 		BC3872881C2D2BC100CBE88A /* JQKHotVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872871C2D2BC100CBE88A /* JQKHotVideoViewController.m */; };
-		BC38728D1C2D2C2500CBE88A /* JQKMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC38728C1C2D2C2500CBE88A /* JQKMineViewController.m */; };
 		BC3872921C2D2CD500CBE88A /* JQKMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872911C2D2CD500CBE88A /* JQKMoreViewController.m */; };
 		BC3872B61C2D2E3E00CBE88A /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872971C2D2E3E00CBE88A /* NSDate+Utilities.m */; };
 		BC3872B81C2D2E3E00CBE88A /* NSMutableDictionary+SafeCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = BC38729B1C2D2E3E00CBE88A /* NSMutableDictionary+SafeCoding.m */; };
@@ -123,10 +120,6 @@
 		BC2C027A1C2E5F5A00D10677 /* JQKHotVideoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKHotVideoCell.m; sourceTree = "<group>"; };
 		BC2C027C1C2E744700D10677 /* JQKPaymentPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPaymentPopView.h; sourceTree = "<group>"; };
 		BC2C027D1C2E744700D10677 /* JQKPaymentPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentPopView.m; sourceTree = "<group>"; };
-		BC2C02801C2EA07600D10677 /* JQKMineTopBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKMineTopBanner.h; sourceTree = "<group>"; };
-		BC2C02811C2EA07600D10677 /* JQKMineTopBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKMineTopBanner.m; sourceTree = "<group>"; };
-		BC2C02891C2ECBF100D10677 /* JQKMineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKMineCell.h; sourceTree = "<group>"; };
-		BC2C028A1C2ECBF100D10677 /* JQKMineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKMineCell.m; sourceTree = "<group>"; };
 		BC2E119B1C61B02800D5E705 /* AlipayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlipayManager.h; sourceTree = "<group>"; };
 		BC2E119C1C61B02800D5E705 /* AlipayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlipayManager.m; sourceTree = "<group>"; };
 		BC2E119D1C61B02800D5E705 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
@@ -169,8 +162,6 @@
 		BC3872821C2D29F000CBE88A /* JQKHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKHomeViewController.m; sourceTree = "<group>"; };
 		BC3872861C2D2BC100CBE88A /* JQKHotVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKHotVideoViewController.h; sourceTree = "<group>"; };
 		BC3872871C2D2BC100CBE88A /* JQKHotVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKHotVideoViewController.m; sourceTree = "<group>"; };
-		BC38728B1C2D2C2500CBE88A /* JQKMineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKMineViewController.h; sourceTree = "<group>"; };
-		BC38728C1C2D2C2500CBE88A /* JQKMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKMineViewController.m; sourceTree = "<group>"; };
 		BC3872901C2D2CD500CBE88A /* JQKMoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKMoreViewController.h; sourceTree = "<group>"; };
 		BC3872911C2D2CD500CBE88A /* JQKMoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKMoreViewController.m; sourceTree = "<group>"; };
 		BC3872931C2D2D7C00CBE88A /* JQKPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JQKPrefixHeader.pch; sourceTree = "<group>"; };
@@ -361,17 +352,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		BC2C027F1C2E9E6200D10677 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				BC2C02801C2EA07600D10677 /* JQKMineTopBanner.h */,
-				BC2C02811C2EA07600D10677 /* JQKMineTopBanner.m */,
-				BC2C02891C2ECBF100D10677 /* JQKMineCell.h */,
-				BC2C028A1C2ECBF100D10677 /* JQKMineCell.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		BC2E119A1C61B02800D5E705 /* Alipay */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,7 +466,6 @@
 				BC38723D1C2D28BF00CBE88A /* Base */,
 				BC38727F1C2D29B400CBE88A /* Home */,
 				BC3872841C2D2B8B00CBE88A /* HotVideo */,
-				BC3872891C2D2BFE00CBE88A /* Mine */,
 				BC38728E1C2D2CA500CBE88A /* More */,
 			);
 			path = Class;
@@ -583,24 +562,6 @@
 			children = (
 				BC3872861C2D2BC100CBE88A /* JQKHotVideoViewController.h */,
 				BC3872871C2D2BC100CBE88A /* JQKHotVideoViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		BC3872891C2D2BFE00CBE88A /* Mine */ = {
-			isa = PBXGroup;
-			children = (
-				BC2C027F1C2E9E6200D10677 /* View */,
-				BC38728A1C2D2C0F00CBE88A /* Controller */,
-			);
-			path = Mine;
-			sourceTree = "<group>";
-		};
-		BC38728A1C2D2C0F00CBE88A /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				BC38728B1C2D2C2500CBE88A /* JQKMineViewController.h */,
-				BC38728C1C2D2C2500CBE88A /* JQKMineViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -975,7 +936,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC38728D1C2D2C2500CBE88A /* JQKMineViewController.m in Sources */,
 				BC3872881C2D2BC100CBE88A /* JQKHotVideoViewController.m in Sources */,
 				BC2E11BE1C61B02800D5E705 /* RSADataSigner.m in Sources */,
 				BC3873721C2D7D8000CBE88A /* JQKProgramViewController.m in Sources */,
@@ -1017,7 +977,6 @@
 				BC3873441C2D402B00CBE88A /* JQKVideo.m in Sources */,
 				BC3872B81C2D2E3E00CBE88A /* NSMutableDictionary+SafeCoding.m in Sources */,
 				BC3872C21C2D2E3E00CBE88A /* UIScrollView+Refresh.m in Sources */,
-				BC2C02821C2EA07600D10677 /* JQKMineTopBanner.m in Sources */,
 				BC3873091C2D38D000CBE88A /* JQKErrorHandler.m in Sources */,
 				BC3873391C2D402B00CBE88A /* JQKActivateModel.m in Sources */,
 				BC64E2571C4E171200450C1B /* JQKAdView.m in Sources */,
@@ -1036,7 +995,6 @@
 				BC3872C01C2D2E3E00CBE88A /* UIImage+crop.m in Sources */,
 				BC2E11BD1C61B02800D5E705 /* openssl_wrapper.m in Sources */,
 				BC3872921C2D2CD500CBE88A /* JQKMoreViewController.m in Sources */,
-				BC2C028B1C2ECBF100D10677 /* JQKMineCell.m in Sources */,
 				BC2E11BC1C61B02800D5E705 /* NSDataEx.m in Sources */,
 				BC3873401C2D402B00CBE88A /* JQKSystemConfigModel.m in Sources */,
 				BC3872CD1C2D2ECA00CBE88A /* RACEXTRuntimeExtensions.m in Sources */,
