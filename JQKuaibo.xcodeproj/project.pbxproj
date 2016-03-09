@@ -81,6 +81,8 @@
 		BC8A2ABB1C8FF85900DF2AE2 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC8A2ABA1C8FF85900DF2AE2 /* Launch Screen.storyboard */; };
 		BC8A2ABE1C8FF90500DF2AE2 /* launch_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BC8A2ABD1C8FF90500DF2AE2 /* launch_image.jpg */; };
 		BC8A2AC01C900D9100DF2AE2 /* payment_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BC8A2ABF1C900D9100DF2AE2 /* payment_background.jpg */; };
+		BC8A2AC61C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8A2AC51C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m */; };
+		BC8A2AC91C902E6300DF2AE2 /* JQKVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8A2AC81C902E6300DF2AE2 /* JQKVideoPlayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -255,6 +257,10 @@
 		BC8A2ABA1C8FF85900DF2AE2 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		BC8A2ABD1C8FF90500DF2AE2 /* launch_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch_image.jpg; sourceTree = "<group>"; };
 		BC8A2ABF1C900D9100DF2AE2 /* payment_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = payment_background.jpg; sourceTree = "<group>"; };
+		BC8A2AC41C902DFB00DF2AE2 /* JQKVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKVideoPlayerViewController.h; sourceTree = "<group>"; };
+		BC8A2AC51C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKVideoPlayerViewController.m; sourceTree = "<group>"; };
+		BC8A2AC71C902E6300DF2AE2 /* JQKVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKVideoPlayer.h; sourceTree = "<group>"; };
+		BC8A2AC81C902E6300DF2AE2 /* JQKVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKVideoPlayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -459,6 +465,8 @@
 				BC38727D1C2D299D00CBE88A /* JQKBaseViewController.m */,
 				BC3873151C2D3E5300CBE88A /* JQKPaymentViewController.h */,
 				BC3873161C2D3E5300CBE88A /* JQKPaymentViewController.m */,
+				BC8A2AC41C902DFB00DF2AE2 /* JQKVideoPlayerViewController.h */,
+				BC8A2AC51C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -630,6 +638,8 @@
 				BC2C027D1C2E744700D10677 /* JQKPaymentPopView.m */,
 				BC64E2551C4E171200450C1B /* JQKAdView.h */,
 				BC64E2561C4E171200450C1B /* JQKAdView.m */,
+				BC8A2AC71C902E6300DF2AE2 /* JQKVideoPlayer.h */,
+				BC8A2AC81C902E6300DF2AE2 /* JQKVideoPlayer.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -916,6 +926,7 @@
 				BC8A2AB91C8FD06100DF2AE2 /* JQKHomeVideoProgramModel.m in Sources */,
 				BC3872831C2D29F000CBE88A /* JQKHomeViewController.m in Sources */,
 				BC6116DA1C8EF3A800A66155 /* JQKMovieModel.m in Sources */,
+				BC8A2AC61C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m in Sources */,
 				BC38736B1C2D56A300CBE88A /* JQKChannelProgram.m in Sources */,
 				BC5BCE991C51EF8C0034F532 /* JQKConfiguration.m in Sources */,
 				BC3873411C2D402B00CBE88A /* JQKURLRequest.m in Sources */,
@@ -946,6 +957,7 @@
 				BC38733F1C2D402B00CBE88A /* JQKSystemConfig.m in Sources */,
 				BC3873011C2D33C200CBE88A /* ApiXml.mm in Sources */,
 				BC38733C1C2D402B00CBE88A /* JQKPaymentModel.m in Sources */,
+				BC8A2AC91C902E6300DF2AE2 /* JQKVideoPlayer.m in Sources */,
 				BC3873421C2D402B00CBE88A /* JQKURLResponse.m in Sources */,
 				BC3873451C2D402B00CBE88A /* JQKWeChatPayQueryOrderRequest.m in Sources */,
 				BC3873041C2D33C200CBE88A /* WXUtil.mm in Sources */,
@@ -1102,7 +1114,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shandong Lisheng Food Group Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tianjin Institute of Surveying and Mapping";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = JQKuaibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1111,9 +1123,9 @@
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/Umeng",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yykuaibo20160130.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "606386e2-9d93-4368-8623-458908f48cee";
+				PROVISIONING_PROFILE = "5440a7bc-3ca0-40db-81da-139ccabb600b";
 			};
 			name = Debug;
 		};
@@ -1123,7 +1135,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shandong Lisheng Food Group Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tianjin Institute of Surveying and Mapping";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = JQKuaibo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1132,9 +1144,9 @@
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/Umeng",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yykuaibo20160130.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "606386e2-9d93-4368-8623-458908f48cee";
+				PROVISIONING_PROFILE = "5440a7bc-3ca0-40db-81da-139ccabb600b";
 			};
 			name = Release;
 		};

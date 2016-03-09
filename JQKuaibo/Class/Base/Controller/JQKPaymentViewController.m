@@ -24,6 +24,7 @@
 @property (nonatomic,retain) JQKPaymentInfo *paymentInfo;
 
 @property (nonatomic,readonly,retain) NSDictionary *paymentTypeMap;
+@property (nonatomic,copy) dispatch_block_t completionHandler;
 @end
 
 @implementation JQKPaymentViewController
@@ -90,7 +91,9 @@
     }
 }
 
-- (void)popupPaymentInView:(UIView *)view forProgram:(JQKProgram *)program {
+- (void)popupPaymentInView:(UIView *)view forProgram:(JQKProgram *)program withCompletionHandler:(void (^)(void))completionHandler {
+    self.completionHandler = completionHandler;
+    
     if (self.view.superview) {
         [self.view removeFromSuperview];
     }
@@ -125,9 +128,9 @@
 }
 
 - (void)setPayAmount:(NSNumber *)payAmount {
-//#ifdef DEBUG
-//    payAmount = @(0.1);
-//#endif
+#ifdef DEBUG
+    payAmount = @(0.01);
+#endif
     _payAmount = payAmount;
     self.popView.showPrice = payAmount;
 }
@@ -137,6 +140,10 @@
         self.view.alpha = 0;
     } completion:^(BOOL finished) {
         [self.view removeFromSuperview];
+        if (self.completionHandler) {
+            self.completionHandler();
+            self.completionHandler = nil;
+        }
     }];
 }
 

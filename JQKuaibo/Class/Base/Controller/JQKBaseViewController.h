@@ -15,6 +15,7 @@
 
 - (void)switchToPlayProgram:(JQKProgram *)program;
 - (void)playVideo:(JQKVideo *)video;
+- (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment;
 - (void)payForProgram:(JQKProgram *)program;
 - (void)onPaidNotification:(NSNotification *)notification;
 

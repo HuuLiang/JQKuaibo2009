@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, JQKVideoSpec) {
 @property (nonatomic) NSDate *playedDate; // for history 
 
 + (NSArray<JQKVideo *> *)allPlayedVideos;
-- (void)didPlay;
+//- (void)didPlay;
 
 
 @end

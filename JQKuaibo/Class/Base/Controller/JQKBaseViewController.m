@@ -9,6 +9,7 @@
 #import "JQKBaseViewController.h"
 #import "JQKProgram.h"
 #import "JQKPaymentViewController.h"
+#import "JQKVideoPlayerViewController.h"
 
 @import MediaPlayer;
 @import AVKit;
@@ -42,15 +43,27 @@
 }
 
 - (void)playVideo:(JQKVideo *)video {
-    UIViewController *videoPlayVC = [self playerVCWithVideo:video];
-    videoPlayVC.hidesBottomBarWhenPushed = YES;
-    [self presentViewController:videoPlayVC animated:YES completion:nil];
-    
-    [video didPlay];
+    [self playVideo:video withTimeControl:YES shouldPopPayment:NO];
+}
+
+- (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment {
+    if (hasTimeControl) {
+        UIViewController *videoPlayVC = [self playerVCWithVideo:video];
+        videoPlayVC.hidesBottomBarWhenPushed = YES;
+        [self presentViewController:videoPlayVC animated:YES completion:nil];
+    } else {
+        JQKVideoPlayerViewController *playerVC = [[JQKVideoPlayerViewController alloc] initWithVideo:video];
+        playerVC.hidesBottomBarWhenPushed = YES;
+        [self presentViewController:playerVC animated:YES completion:nil];
+    }
 }
 
 - (void)payForProgram:(JQKProgram *)program {
-    [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view.window forProgram:program];
+    [self payForProgram:program inView:self.view.window];
+}
+
+- (void)payForProgram:(JQKProgram *)program inView:(UIView *)view {
+    [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:view forProgram:program withCompletionHandler:nil];
 }
 
 - (void)onPaidNotification:(NSNotification *)notification {}
