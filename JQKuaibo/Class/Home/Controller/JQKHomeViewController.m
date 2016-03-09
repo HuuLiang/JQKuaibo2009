@@ -258,8 +258,10 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
     }
     
     if (indexPath.item >= kFreeVideoItemOffset && indexPath.item < kChannelItemOffset) {
-        JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item - kFreeVideoItemOffset];
-        [self playVideo:program];
+        if (indexPath.item - kFreeVideoItemOffset < self.videoModel.fetchedVideoPrograms.count) {
+            JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item - kFreeVideoItemOffset];
+            [self playVideo:program];
+        }
     } else if (indexPath.item - kChannelItemOffset < self.channelModel.fetchedChannels.count) {
         JQKChannel *selectedChannel = self.channelModel.fetchedChannels[indexPath.item - kChannelItemOffset];
         
