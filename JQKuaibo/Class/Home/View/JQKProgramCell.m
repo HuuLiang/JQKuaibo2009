@@ -8,10 +8,9 @@
 
 #import "JQKProgramCell.h"
 
-static const CGFloat kTagImageScale = 93./43.;
-
 @interface JQKProgramCell ()
 {
+    UIImageView *_thumbImageView;
     UIImageView *_tagImageView;
     UILabel *_titleLabel;
     UILabel *_subtitleLabel;
@@ -23,39 +22,50 @@ static const CGFloat kTagImageScale = 93./43.;
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        _thumbImageView = [[UIImageView alloc] init];
+        [self addSubview:_thumbImageView];
+        {
+            [_thumbImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self).offset(15);
+                make.centerY.equalTo(self);
+                make.height.equalTo(self).multipliedBy(0.8);
+                make.width.equalTo(_thumbImageView.mas_height).multipliedBy(0.75);
+            }];
+        }
+        
+        const CGFloat imageScale = 140./64.;
         _tagImageView = [[UIImageView alloc] init];
         [self addSubview:_tagImageView];
         {
             [_tagImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.equalTo(self);
-                make.left.equalTo(self).offset(15);
-                make.height.equalTo(self).multipliedBy(0.4);
-                make.width.equalTo(_tagImageView.mas_height).multipliedBy(kTagImageScale);
-            }];
-        }
-        
-        _subtitleLabel = [[UILabel alloc] init];
-        _subtitleLabel.font = [UIFont systemFontOfSize:14.];
-        _subtitleLabel.textColor = [UIColor redColor];
-        _subtitleLabel.textAlignment = NSTextAlignmentRight;
-        [self addSubview:_subtitleLabel];
-        {
-            [_subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.equalTo(self);
-                make.right.equalTo(self).offset(-15);
-                //make.width.mas_equalTo(50);
+                make.left.equalTo(_thumbImageView.mas_right).offset(15);
+                make.top.equalTo(_thumbImageView).offset(15);
+                make.height.mas_equalTo(18);
+                make.width.width.equalTo(_tagImageView.mas_height).multipliedBy(imageScale);
             }];
         }
         
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = [UIColor whiteColor];
-        _titleLabel.font = [UIFont systemFontOfSize:16.];
+        _titleLabel.font = [UIFont systemFontOfSize:18.];
         [self addSubview:_titleLabel];
         {
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerY.equalTo(self);
-                make.left.equalTo(_tagImageView.mas_right).offset(10);
-                make.right.equalTo(_subtitleLabel.mas_left).offset(-5);
+                make.centerY.equalTo(_tagImageView);
+                make.left.equalTo(_tagImageView.mas_right).offset(5);
+                make.right.equalTo(self).offset(-5);
+            }];
+        }
+        
+        _subtitleLabel = [[UILabel alloc] init];
+        _subtitleLabel.font = [UIFont systemFontOfSize:16];
+        _subtitleLabel.textColor = [UIColor redColor];
+        [self addSubview:_subtitleLabel];
+        {
+            [_subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(_tagImageView);
+                make.right.equalTo(_titleLabel);
+                make.top.equalTo(_titleLabel.mas_bottom).offset(15);
             }];
         }
     }
@@ -75,5 +85,10 @@ static const CGFloat kTagImageScale = 93./43.;
 - (void)setSubtitle:(NSString *)subtitle {
     _subtitle = subtitle;
     _subtitleLabel.text = subtitle;
+}
+
+- (void)setThumbImageURL:(NSURL *)thumbImageURL {
+    _thumbImageURL = thumbImageURL;
+    [_thumbImageView sd_setImageWithURL:thumbImageURL];
 }
 @end

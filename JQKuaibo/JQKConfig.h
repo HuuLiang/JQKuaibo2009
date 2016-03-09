@@ -25,9 +25,11 @@
 
 #define JQK_BASE_URL             @"http://iv.ihuiyx.com"//@"http://120.24.252.114:8093"
 
+#define JQK_HOME_VIDEO_URL              @"/iosvideo/homePage.htm"
 #define JQK_HOME_CHANNEL_URL            @"/iosvideo/channelRanking.htm"
 #define JQK_HOME_CHANNEL_PROGRAM_URL    @"/iosvideo/program.htm"
 #define JQK_HOT_VIDEO_URL               @"/iosvideo/hotVideo.htm"
+#define JQK_MOVIE_URL                   @"/iosvideo/hotFilm.htm"
 
 #define JQK_ACTIVATE_URL                @"/iosvideo/activat.htm"
 #define JQK_SYSTEM_CONFIG_URL           @"/iosvideo/systemConfig.htm"

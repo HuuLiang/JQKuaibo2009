@@ -8,10 +8,6 @@
 
 #import "JQKHotVideoModel.h"
 
-@implementation JQKVideos
-
-@end
-
 @implementation JQKHotVideoModel
 
 + (Class)responseClass {

@@ -12,6 +12,7 @@
 {
     UIImageView *_thumbImageView;
 }
+//@property (nonatomic,retain) UIImageView *thumbImageView;
 @property (nonatomic,retain) UILabel *titleLabel;
 @property (nonatomic,retain) UILabel *subtitleLabel;
 @property (nonatomic,retain) UIView *footerView;
@@ -32,6 +33,21 @@
     }
     return self;
 }
+//
+//- (UIImageView *)thumbImageView {
+//    if (_thumbImageView) {
+//        return _thumbImageView;
+//    }
+//    
+//    _thumbImageView = [[UIImageView alloc] init];
+//    [self addSubview:_thumbImageView];
+//    {
+//        [_thumbImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.equalTo(self);
+//        }];
+//    }
+//    return _thumbImageView;
+//}
 
 - (UIView *)footerView {
     if (_footerView) {

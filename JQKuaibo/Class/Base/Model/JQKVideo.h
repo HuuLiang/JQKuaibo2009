@@ -31,3 +31,4 @@ typedef NS_ENUM(NSUInteger, JQKVideoSpec) {
 
 
 @end
+

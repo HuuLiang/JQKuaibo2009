@@ -103,8 +103,11 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
         } else if (picIndex == 0) {
             layoutAttribs.frame = CGRectMake(0, 0, topWidth, topHeight);
             ++picIndex;
+        } else if (picIndex == 1 || picIndex == 2) {
+            layoutAttribs.frame = CGRectMake(picIndex==1?0:halfW+_interItemSpacing, topHeight+_interItemSpacing, halfW, halfH);
+            ++picIndex;
         } else {
-            NSUInteger subIndex = (picIndex-1)%7;
+            NSUInteger subIndex = (picIndex-3)%7;
             
             CGFloat x = 0, y = 0;
             switch (subIndex) {

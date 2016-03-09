@@ -10,6 +10,7 @@
 
 @interface JQKProgramCell : UITableViewCell
 
+@property (nonatomic) NSURL *thumbImageURL;
 @property (nonatomic,retain) UIImage *tagImage;
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *subtitle;

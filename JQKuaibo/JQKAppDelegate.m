@@ -9,7 +9,6 @@
 #import "JQKAppDelegate.h"
 #import "JQKHomeViewController.h"
 #import "JQKHotVideoViewController.h"
-#import "JQKMineViewController.h"
 #import "JQKMoreViewController.h"
 #import "MobClick.h"
 #import "WXApi.h"
@@ -19,6 +18,7 @@
 #import "JQKSystemConfigModel.h"
 #import "JQKWeChatPayQueryOrderRequest.h"
 #import "JQKPaymentViewController.h"
+#import "JQKMovieViewController.h"
 
 @interface JQKAppDelegate () <WXApiDelegate>
 @property (nonatomic,retain) JQKWeChatPayQueryOrderRequest *wechatPayOrderQueryRequest;
@@ -51,14 +51,23 @@ DefineLazyPropertyInitialization(JQKWeChatPayQueryOrderRequest, wechatPayOrderQu
     videoNav.tabBarItem                = [[UITabBarItem alloc] initWithTitle:videoVC.title
                                                                        image:[[UIImage imageNamed:@"show_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                                                selectedImage:[[UIImage imageNamed:@"show_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-
-    JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
-    mineVC.title                         = @"我的";
     
-    UINavigationController *mineNav      = [[UINavigationController alloc] initWithRootViewController:mineVC];
-    mineNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:mineVC.title
-                                                                          image:[[UIImage imageNamed:@"mine_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                                 selectedImage:[[UIImage imageNamed:@"mine_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    JQKMovieViewController *movieVC        = [[JQKMovieViewController alloc] init];
+    movieVC.title                          = @"电影";
+    
+    UINavigationController *movieNav       = [[UINavigationController alloc] initWithRootViewController:movieVC];
+    movieNav.tabBarItem                    = [[UITabBarItem alloc] initWithTitle:movieVC.title
+                                                                           image:[[UIImage imageNamed:@"hot_video_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                                                   selectedImage:[[UIImage imageNamed:@"hot_video_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    
+    
+//    JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
+//    mineVC.title                         = @"我的";
+//    
+//    UINavigationController *mineNav      = [[UINavigationController alloc] initWithRootViewController:mineVC];
+//    mineNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:mineVC.title
+//                                                                          image:[[UIImage imageNamed:@"mine_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+//                                                                 selectedImage:[[UIImage imageNamed:@"mine_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     JQKMoreViewController *moreVC        = [[JQKMoreViewController alloc] init];
     moreVC.title                         = @"更多";
@@ -69,7 +78,7 @@ DefineLazyPropertyInitialization(JQKWeChatPayQueryOrderRequest, wechatPayOrderQu
                                                                  selectedImage:[[UIImage imageNamed:@"more_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     UITabBarController *tabBarController    = [[UITabBarController alloc] init];
-    tabBarController.viewControllers        = @[homeNav,videoNav,mineNav,moreNav];
+    tabBarController.viewControllers        = @[homeNav,videoNav,movieNav,moreNav];
     tabBarController.tabBar.translucent     = NO;
     tabBarController.tabBar.backgroundImage = [UIImage imageWithColor:[UIColor colorWithWhite:0.95 alpha:1]];
     

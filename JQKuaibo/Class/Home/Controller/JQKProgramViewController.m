@@ -47,7 +47,7 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
     _layoutTableView.dataSource = self;
     _layoutTableView.backgroundColor = [UIColor colorWithWhite:0.05 alpha:1];
     _layoutTableView.separatorColor = [UIColor colorWithWhite:0.5 alpha:1];
-    _layoutTableView.rowHeight = 50;
+    _layoutTableView.rowHeight = kScreenHeight * 0.18;
     _layoutTableView.tableFooterView = [[UIView alloc] init];
     [_layoutTableView registerClass:[JQKProgramCell class] forCellReuseIdentifier:kProgramCellReusableIdentifier];
     [self.view addSubview:_layoutTableView];
@@ -133,6 +133,7 @@ DefineLazyPropertyInitialization(NSMutableArray, programs)
         JQKProgram *program = self.programs[indexPath.row];
         cell.title = program.title;
         cell.subtitle = program.specialDesc;
+        cell.thumbImageURL = [NSURL URLWithString:program.coverImg];
         
         NSDictionary *tags = @{@(JQKVideoSpecHot):@"hot_tag",
                                @(JQKVideoSpecNew):@"new_tag",

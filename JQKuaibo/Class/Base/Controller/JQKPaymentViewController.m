@@ -57,11 +57,12 @@
     };
     
     _popView = [[JQKPaymentPopView alloc] init];
-    _popView.headerImage = [UIImage imageNamed:@"payment_background"];
+    
+    _popView.headerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"payment_background" ofType:@"jpg"]];
     _popView.footerImage = [UIImage imageNamed:@"payment_footer"];
-    [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-        Pay(JQKPaymentTypeAlipay);
-    }];
+//    [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
+//        Pay(JQKPaymentTypeAlipay);
+//    }];
     
     [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信支付" available:YES action:^(id sender) {
         Pay(JQKPaymentTypeWeChatPay);

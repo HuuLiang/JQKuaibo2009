@@ -13,25 +13,52 @@
 #import "JQKProgramViewController.h"
 #import "JQKAdView.h"
 #import "JQKSystemConfigModel.h"
+#import <SDCycleScrollView.h>
+#import "JQKHomeVideoProgramModel.h"
 
 static NSString *const kHomeCellReusableIdentifier = @"HomeCellReusableIdentifier";
+static NSString *const kBannerCellReusableIdentifier = @"BannerCellReusableIdentifier";
 
-@interface JQKHomeViewController () <UICollectionViewDataSource,UICollectionViewDelegate,JQKHomeCollectionViewLayoutDelegate>
+static const NSUInteger kFreeVideoItemOffset = 1;
+static const NSUInteger kChannelItemOffset = 3;
+
+@interface JQKHomeViewController () <UICollectionViewDataSource,UICollectionViewDelegate,JQKHomeCollectionViewLayoutDelegate,SDCycleScrollViewDelegate>
 {
     UICollectionView *_layoutCollectionView;
+    
+    UICollectionViewCell *_bannerCell;
+    SDCycleScrollView *_bannerView;
 }
 @property (nonatomic,retain) JQKChannelModel *channelModel;
+@property (nonatomic,retain) JQKHomeVideoProgramModel *videoModel;
 @property (nonatomic,retain) JQKAdView *leftAdView;
 @property (nonatomic,retain) JQKAdView *rightAdView;
+@property (nonatomic,retain) dispatch_group_t dataDispatchGroup;
 @end
 
 @implementation JQKHomeViewController
 
 DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
+DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
+
+- (dispatch_group_t)dataDispatchGroup {
+    if (_dataDispatchGroup) {
+        return _dataDispatchGroup;
+    }
+    
+    _dataDispatchGroup = dispatch_group_create();
+    return _dataDispatchGroup;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _bannerView = [[SDCycleScrollView alloc] init];
+    _bannerView.autoScrollTimeInterval = 3;
+    _bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
+    _bannerView.delegate = self;
+    _bannerView.backgroundColor = [UIColor whiteColor];
+    
     JQKHomeCollectionViewLayout *layout = [[JQKHomeCollectionViewLayout alloc] init];
     layout.interItemSpacing = 8;
     layout.delegate = self;
@@ -41,6 +68,7 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
     _layoutCollectionView.delegate = self;
     _layoutCollectionView.dataSource = self;
     [_layoutCollectionView registerClass:[JQKHomeCell class] forCellWithReuseIdentifier:kHomeCellReusableIdentifier];
+    [_layoutCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kBannerCellReusableIdentifier];
     [self.view addSubview:_layoutCollectionView];
     {
         [_layoutCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -60,18 +88,35 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
 
 - (void)loadChannels {
     @weakify(self);
+    dispatch_group_enter(self.dataDispatchGroup);
     [self.channelModel fetchChannelsWithCompletionHandler:^(BOOL success, NSArray<JQKChannel *> *channels) {
         @strongify(self);
         if (!self) {
             return ;
         }
         
-        [self->_layoutCollectionView JQK_endPullToRefresh];
-        
-        if (success) {
-            [self->_layoutCollectionView reloadData];
-        }
+        dispatch_group_leave(self.dataDispatchGroup);
     }];
+    
+    dispatch_group_enter(self.dataDispatchGroup);
+    [self.videoModel fetchProgramsWithCompletionHandler:^(BOOL success, id obj) {
+        @strongify(self);
+        if (!self) {
+            return ;
+        }
+        
+        dispatch_group_leave(self.dataDispatchGroup);
+    }];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        dispatch_group_wait(self.dataDispatchGroup, DISPATCH_TIME_FOREVER);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_layoutCollectionView JQK_endPullToRefresh];
+            
+            [self refreshBannerView];
+            [_layoutCollectionView reloadData];
+        });
+    });
 }
 
 - (void)loadAds {
@@ -116,6 +161,17 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
     }
 }
 
+- (void)refreshBannerView {
+    NSMutableArray *imageUrlGroup = [NSMutableArray array];
+    NSMutableArray *titlesGroup = [NSMutableArray array];
+    for (JQKProgram *bannerProgram in self.videoModel.fetchedBannerPrograms) {
+        [imageUrlGroup addObject:bannerProgram.coverImg];
+        [titlesGroup addObject:bannerProgram.title];
+    }
+    _bannerView.imageURLStringsGroup = imageUrlGroup;
+    _bannerView.titlesGroup = titlesGroup;
+}
+
 - (JQKAdView *)leftAdView {
     if (_leftAdView) {
         return _leftAdView;
@@ -158,27 +214,56 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
 #pragma mark - UICollectionViewDataSource,UICollectionViewDelegate
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.item == 0) {
+        if (!_bannerCell) {
+            _bannerCell = [collectionView dequeueReusableCellWithReuseIdentifier:kBannerCellReusableIdentifier forIndexPath:indexPath];
+            [_bannerCell.contentView addSubview:_bannerView];
+            {
+                [_bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.edges.equalTo(_bannerCell.contentView);
+                }];
+            }
+        }
+        return _bannerCell;
+    }
+    
     JQKHomeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellReusableIdentifier forIndexPath:indexPath];
     
-    if (indexPath.item < self.channelModel.fetchedChannels.count) {
-        JQKChannel *channel = self.channelModel.fetchedChannels[indexPath.item];
-        cell.imageURL = [NSURL URLWithString:channel.columnImg];
-//    cell.title = channel.name;
-//    cell.subtitle = channel.columnDesc;
+    if (indexPath.item < kChannelItemOffset) {
+        NSUInteger item = indexPath.item - 1;
+        if (item < self.videoModel.fetchedVideoPrograms.count) {
+            JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item-1];
+            cell.imageURL = [NSURL URLWithString:program.coverImg];
+        }
+    } else {
+        NSUInteger item = indexPath.item - kChannelItemOffset;
+        if (item < self.channelModel.fetchedChannels.count) {
+            JQKChannel *channel = self.channelModel.fetchedChannels[item];
+            cell.imageURL = [NSURL URLWithString:channel.columnImg];
+            //    cell.title = channel.name;
+            //    cell.subtitle = channel.columnDesc;
+        }
     }
-
+    
     return cell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.channelModel.fetchedChannels.count;
+    return self.channelModel.fetchedChannels.count + kChannelItemOffset;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.item < self.channelModel.fetchedChannels.count) {
-        JQKChannel *selectedChannel = self.channelModel.fetchedChannels[indexPath.item];
+    if (indexPath.item < kFreeVideoItemOffset) {
+        return ;
+    }
+    
+    if (indexPath.item >= kFreeVideoItemOffset && indexPath.item < kChannelItemOffset) {
+        JQKProgram *program = self.videoModel.fetchedVideoPrograms[indexPath.item - kFreeVideoItemOffset];
+        [self playVideo:program];
+    } else if (indexPath.item - kChannelItemOffset < self.channelModel.fetchedChannels.count) {
+        JQKChannel *selectedChannel = self.channelModel.fetchedChannels[indexPath.item - kChannelItemOffset];
         
-        if (selectedChannel.type.unsignedIntegerValue == JQKChannelTypeBanner) {
+        if (selectedChannel.type.unsignedIntegerValue == JQKChannelTypeSpread) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:selectedChannel.spreadUrl]];
         } else {
             JQKProgramViewController *programVC = [[JQKProgramViewController alloc] initWithChannel:selectedChannel];
@@ -189,10 +274,19 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
 }
 
 - (BOOL)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout hasAdBannerForItem:(NSUInteger)item {
-    if (item < self.channelModel.fetchedChannels.count) {
-        JQKChannel *channel = self.channelModel.fetchedChannels[item];
-        return channel.type.unsignedIntegerValue == JQKChannelTypeBanner && channel.spreadUrl.length > 0;
+    if (item >= kChannelItemOffset && item-kChannelItemOffset < self.channelModel.fetchedChannels.count) {
+        JQKChannel *channel = self.channelModel.fetchedChannels[item-kChannelItemOffset];
+        return channel.type.unsignedIntegerValue == JQKChannelTypeSpread && channel.spreadUrl.length > 0;
     }
     return NO;
+}
+
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
+    JQKProgram *bannerProgram = self.videoModel.fetchedBannerPrograms[index];
+    if (bannerProgram.type.unsignedIntegerValue == JQKProgramTypeVideo) {
+        [self switchToPlayProgram:bannerProgram];
+    } else if (bannerProgram.type.unsignedIntegerValue == JQKProgramTypeSpread) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:bannerProgram.videoUrl]];
+    }
 }
 @end

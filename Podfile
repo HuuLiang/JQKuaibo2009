@@ -9,3 +9,5 @@ pod 'OpenSSL', '~> 1.0.204'
 pod 'BlocksKit', '~> 2.2.5'
 pod 'Aspects','~>1.4.1'
 pod 'SFHFKeychainUtils', '~> 0.0.1'
+
+pod 'SDCycleScrollView', '~> 1.3'

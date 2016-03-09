@@ -7,14 +7,7 @@
 //
 
 #import "JQKEncryptedURLRequest.h"
-#import "JQKProgram.h"
-
-@interface JQKVideos : JQKPrograms
-@property (nonatomic) NSNumber *items;
-@property (nonatomic) NSNumber *page;
-@property (nonatomic) NSNumber *pageSize;
-
-@end
+#import "JQKVideos.h"
 
 typedef void (^JQKFetchVideosCompletionHandler)(BOOL success, JQKVideos *videos);
 

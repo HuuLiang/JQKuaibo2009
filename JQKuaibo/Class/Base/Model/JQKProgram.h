@@ -14,7 +14,8 @@ typedef NS_ENUM(NSUInteger, JQKProgramType) {
     JQKProgramTypeNone = 0,
     JQKProgramTypeVideo = 1,
     JQKProgramTypePicture = 2,
-    JQKProgramTypeBanner = 3
+    JQKProgramTypeSpread = 3,
+    JQKProgramTypeBanner = 4
 };
 
 @protocol JQKProgramUrl <NSObject>

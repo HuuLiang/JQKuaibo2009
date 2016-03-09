@@ -7,10 +7,12 @@
 //
 
 #import "JQKPaymentPopView.h"
+#import <objc/runtime.h>
 
 static const CGFloat kHeaderImageScale = 1.5;
 static const CGFloat kFooterImageScale = 1065./108.;
 static const CGFloat kCellHeight = 60;
+static const void* kPaymentButtonAssociatedKey = &kPaymentButtonAssociatedKey;
 
 @interface JQKPaymentPopView () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -58,6 +60,7 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
 {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.cells.count inSection:1];
     UITableViewCell *cell = [[UITableViewCell alloc] init];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [cell addSubview:imageView];
@@ -72,19 +75,18 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
     UIButton *button;
     if (available) {
         button = [[UIButton alloc] init];
-        button.layer.cornerRadius = 5;
-        button.layer.masksToBounds = YES;
-        button.titleLabel.font = [UIFont systemFontOfSize:18.];
-        [button setTitle:@"点击确认" forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"#1a6ee8"]] forState:UIControlStateNormal];
+        objc_setAssociatedObject(cell, kPaymentButtonAssociatedKey, button, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        
+        UIImage *buttonImage = [UIImage imageNamed:@"payment_normal_button"];
+        [button setImage:buttonImage forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"payment_highlight_button"] forState:UIControlStateHighlighted];
         [cell addSubview:button];
         {
             [button mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerY.equalTo(cell);
                 make.right.equalTo(cell).offset(-15);
-                make.height.equalTo(cell).multipliedBy(0.7);
-                make.width.equalTo(button.mas_height).multipliedBy(2.5);
+                make.height.equalTo(cell).multipliedBy(0.9);
+                make.width.equalTo(button.mas_height).multipliedBy(buttonImage.size.width/buttonImage.size.height);
             }];
         }
         [button bk_addEventHandler:^(id sender) {
@@ -131,6 +133,7 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
     if (indexPath.section == 0) {
         if (!_headerCell) {
             _headerCell = [[UITableViewCell alloc] init];
+            _headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             _headerImageView = [[UIImageView alloc] initWithImage:_headerImage];
             [_headerCell addSubview:_headerImageView];
@@ -175,6 +178,7 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
     } else if (indexPath.section == 2) {
         if (!_footerCell) {
             _footerCell = [[UITableViewCell alloc] init];
+            _footerCell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             _footerImageView = [[UIImageView alloc] initWithImage:_footerImage];
             [_footerCell addSubview:_footerImageView];
@@ -221,5 +225,18 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
         return 30;
     }
     return 0;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    UIButton *paymentButton = objc_getAssociatedObject(cell, kPaymentButtonAssociatedKey);
+    paymentButton.highlighted = NO;
+    [paymentButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    UIButton *paymentButton = objc_getAssociatedObject(cell, kPaymentButtonAssociatedKey);
+    paymentButton.highlighted = YES;
 }
 @end

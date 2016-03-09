@@ -12,7 +12,7 @@ typedef NS_ENUM(NSUInteger, JQKChannelType) {
     JQKChannelTypeNone = 0,
     JQKChannelTypeVideo = 1,
     JQKChannelTypePicture = 2,
-    JQKChannelTypeBanner = 3
+    JQKChannelTypeSpread = 3
 };
 
 @protocol JQKChannel <NSObject>
