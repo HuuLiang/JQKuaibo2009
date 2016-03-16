@@ -59,7 +59,7 @@
                                                   completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo)
             {
                 @strongify(self);
-                [self notifyPaymentResult:payResult withPaymentInfo:self.paymentInfo];
+                [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
             }];
         } else {
             [self payForProgram:self.programToPayFor
