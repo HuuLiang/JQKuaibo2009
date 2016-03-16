@@ -52,18 +52,29 @@
             return ;
         }
         
-        [self payForProgram:self.programToPayFor
-                      price:self.payAmount.doubleValue
-                paymentType:type];
+        if (type == JQKPaymentTypeAlipay) {
+            [[JQKPaymentManager sharedManager] startPaymentWithType:type
+                                                              price:self.payAmount.unsignedIntegerValue * 100
+                                                         forProgram:self.programToPayFor
+                                                  completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo)
+            {
+                @strongify(self);
+                [self notifyPaymentResult:payResult withPaymentInfo:self.paymentInfo];
+            }];
+        } else {
+            [self payForProgram:self.programToPayFor
+                          price:self.payAmount.doubleValue
+                    paymentType:type];
+        }
     };
     
     _popView = [[JQKPaymentPopView alloc] init];
     
     _popView.headerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"payment_background" ofType:@"jpg"]];
     _popView.footerImage = [UIImage imageNamed:@"payment_footer"];
-//    [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-//        Pay(JQKPaymentTypeAlipay);
-//    }];
+    [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
+        Pay(JQKPaymentTypeAlipay);
+    }];
     
     [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信支付" available:YES action:^(id sender) {
         Pay(JQKPaymentTypeWeChatPay);

@@ -21,9 +21,8 @@
 #define JQK_WECHAT_PRIVATE_KEY   @"hangzhouquba20151112qwertyuiopas"
 #define JQK_WECHAT_NOTIFY_URL    @"http://phas.ihuiyx.com/pd-has/notifyWx.json"
 #define JQK_UMENG_APP_ID         @"567d010667e58e2c8200223a"
-#define JQK_PAYNOW_SCHEME        @"com.jiqingkuaibo.app.paynow.scheme"
 
-#define JQK_BASE_URL             @"http://iv.ihuiyx.com"//@"http://120.24.252.114:8093"
+#define JQK_BASE_URL             @"http://iv.ihuiyx.com"//@"http://120.24.252.114:8093" //
 
 #define JQK_HOME_VIDEO_URL              @"/iosvideo/homePage.htm"
 #define JQK_HOME_CHANNEL_URL            @"/iosvideo/channelRanking.htm"
@@ -38,7 +37,6 @@
 #define JQK_AGREEMENT_PAID_URL          @"/iosvideo/agreement-paid.html"
 
 #define JQK_PAYMENT_COMMIT_URL   @"http://pay.iqu8.net/paycenter/qubaPr.json"
-#define JQK_PAYMENT_SIGN_URL     @"http://phas.ihuiyx.com/pd-has/signtureNowdata.json"
 
 #define JQK_SYSTEM_CONFIG_PAY_AMOUNT            @"PAY_AMOUNT"
 #define JQK_SYSTEM_CONFIG_PAYMENT_TOP_IMAGE     @"CHANNEL_TOP_IMG"
