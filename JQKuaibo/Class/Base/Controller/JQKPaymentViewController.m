@@ -54,7 +54,7 @@
         
         if (type == JQKPaymentTypeAlipay) {
             [[JQKPaymentManager sharedManager] startPaymentWithType:type
-                                                              price:self.payAmount.unsignedIntegerValue * 100
+                                                              price:self.payAmount.floatValue * 100
                                                          forProgram:self.programToPayFor
                                                   completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo)
             {
