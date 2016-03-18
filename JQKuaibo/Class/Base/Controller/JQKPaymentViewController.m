@@ -262,6 +262,10 @@
 }
 
 - (void)notifyPaymentResult:(PAYRESULT)result withPaymentInfo:(JQKPaymentInfo *)paymentInfo {
+    if (result == PAYRESULT_SUCCESS && [JQKUtil successfulPaymentInfo]) {
+        return ;
+    }
+    
     NSDateFormatter *dateFormmater = [[NSDateFormatter alloc] init];
     [dateFormmater setDateFormat:kDefaultDateFormat];
     
