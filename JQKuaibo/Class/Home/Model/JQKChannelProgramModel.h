@@ -13,8 +13,6 @@
 
 @end
 
-typedef void (^JQKFetchChannelProgramCompletionHandler)(BOOL success, JQKChannelPrograms *programs);
-
 @interface JQKChannelProgramModel : JQKEncryptedURLRequest
 
 @property (nonatomic,retain) JQKChannelPrograms *fetchedPrograms;
@@ -22,6 +20,6 @@ typedef void (^JQKFetchChannelProgramCompletionHandler)(BOOL success, JQKChannel
 - (BOOL)fetchProgramsWithColumnId:(NSNumber *)columnId
                            pageNo:(NSUInteger)pageNo
                          pageSize:(NSUInteger)pageSize
-                completionHandler:(JQKFetchChannelProgramCompletionHandler)handler;
+                completionHandler:(JQKCompletionHandler)handler;
 
 @end

@@ -35,9 +35,11 @@
     return self;
 }
 
-- (BOOL)fetchChannelsWithCompletionHandler:(JQKFetchChannelsCompletionHandler)handler {
+- (BOOL)fetchChannelsInNamespace:(JQKChannelNamespace)channelNS
+           withCompletionHandler:(JQKFetchChannelsCompletionHandler)handler
+{
     @weakify(self);
-    BOOL success = [self requestURLPath:JQK_HOME_CHANNEL_URL
+    BOOL success = [self requestURLPath:channelNS == JQKChannelNamespaceHome ? JQK_HOME_CHANNEL_URL : JQK_CHANNEL_LIST_URL
                              withParams:nil
                         responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
     {

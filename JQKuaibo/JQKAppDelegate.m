@@ -8,7 +8,7 @@
 
 #import "JQKAppDelegate.h"
 #import "JQKHomeViewController.h"
-#import "JQKHotVideoViewController.h"
+#import "JQKLiveShowViewController.h"
 #import "JQKMoreViewController.h"
 #import "MobClick.h"
 #import "JQKActivateModel.h"
@@ -16,7 +16,8 @@
 #import "JQKPaymentModel.h"
 #import "JQKSystemConfigModel.h"
 #import "JQKPaymentViewController.h"
-#import "JQKMovieViewController.h"
+#import "JQKChannelViewController.h"
+#import "JQKMineViewController.h"
 
 @interface JQKAppDelegate ()
 
@@ -33,28 +34,33 @@
     _window.backgroundColor              = [UIColor whiteColor];
     
     JQKHomeViewController *homeVC        = [[JQKHomeViewController alloc] init];
-    homeVC.title                         = [NSBundle mainBundle].infoDictionary[@"CFBundleDisplayName"];
+    homeVC.title                         = @"乐播";
     
     UINavigationController *homeNav      = [[UINavigationController alloc] initWithRootViewController:homeVC];
-    homeNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:@"资源"
-                                                                         image:[[UIImage imageNamed:@"home_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                                 selectedImage:[[UIImage imageNamed:@"home_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    JQKHotVideoViewController *videoVC   = [[JQKHotVideoViewController alloc] init];
-    videoVC.title                        = @"主播秀";
+    UIImage *homeImage                   = [UIImage imageNamed:@"home_tabbar"];
+    homeNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:homeVC.title
+                                                                         image:homeImage
+                                                                 selectedImage:[homeImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    UINavigationController *videoNav     = [[UINavigationController alloc] initWithRootViewController:videoVC];
-    videoNav.tabBarItem                = [[UITabBarItem alloc] initWithTitle:videoVC.title
-                                                                       image:[[UIImage imageNamed:@"show_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                               selectedImage:[[UIImage imageNamed:@"show_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    JQKLiveShowViewController *liveShowVC = [[JQKLiveShowViewController alloc] init];
+    liveShowVC.title                      = @"主播";
+
+    UINavigationController *liveShowNav   = [[UINavigationController alloc] initWithRootViewController:liveShowVC];
+
+    UIImage *liveShowImage                = [UIImage imageNamed:@"show_tabbar"];
+    liveShowNav.tabBarItem                = [[UITabBarItem alloc] initWithTitle:liveShowVC.title
+                                                                          image:liveShowImage
+                                                                  selectedImage:[liveShowImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    JQKMovieViewController *movieVC        = [[JQKMovieViewController alloc] init];
-    movieVC.title                          = @"电影";
-    
-    UINavigationController *movieNav       = [[UINavigationController alloc] initWithRootViewController:movieVC];
-    movieNav.tabBarItem                    = [[UITabBarItem alloc] initWithTitle:movieVC.title
-                                                                           image:[[UIImage imageNamed:@"hot_video_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                                   selectedImage:[[UIImage imageNamed:@"hot_video_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    JQKChannelViewController *channelVC = [[JQKChannelViewController alloc] init];
+    channelVC.title                     = @"频道";
+
+    UINavigationController *channelNav  = [[UINavigationController alloc] initWithRootViewController:channelVC];
+    UIImage *channelImage               = [UIImage imageNamed:@"channel_tabbar"];
+    channelNav.tabBarItem               = [[UITabBarItem alloc] initWithTitle:channelVC.title
+                                                                           image:channelImage
+                                                                   selectedImage:[channelImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     
 //    JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
@@ -69,29 +75,38 @@
     moreVC.title                         = @"更多";
     
     UINavigationController *moreNav      = [[UINavigationController alloc] initWithRootViewController:moreVC];
+    UIImage *moreImage                   = [UIImage imageNamed:@"more_tabbar"];
     moreNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:moreVC.title
-                                                                         image:[[UIImage imageNamed:@"more_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-                                                                 selectedImage:[[UIImage imageNamed:@"more_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+                                                                         image:moreImage
+                                                                 selectedImage:[moreImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
+    JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
+    mineVC.title                         = @"会员";
+    
+    UINavigationController *mineNav      = [[UINavigationController alloc] initWithRootViewController:mineVC];
+    UIImage *mineImage                   = [UIImage imageNamed:@"mine_tabbar"];
+    mineNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:mineVC.title
+                                                                         image:mineImage
+                                                                 selectedImage:[mineImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+
     UITabBarController *tabBarController    = [[UITabBarController alloc] init];
-    tabBarController.viewControllers        = @[homeNav,videoNav,movieNav,moreNav];
-    tabBarController.tabBar.translucent     = NO;
-    tabBarController.tabBar.backgroundImage = [UIImage imageWithColor:[UIColor colorWithWhite:0.95 alpha:1]];
-    
+    tabBarController.viewControllers        = @[homeNav,liveShowNav,channelNav,moreNav,mineNav];
     _window.rootViewController              = tabBarController;
     return _window;
 }
 
 - (void)setupCommonStyles {
+    //[[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithWhite:0.95 alpha:1]]];
+    [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"#ff59a1"]];
+    [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:20.]}];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
     [UIViewController aspect_hookSelector:@selector(viewDidLoad)
                               withOptions:AspectPositionAfter
                                usingBlock:^(id<AspectInfo> aspectInfo){
                                    UIViewController *thisVC = [aspectInfo instance];
-                                   thisVC.navigationController.navigationBar.translucent = NO;
-                                   thisVC.navigationController.navigationBar.barTintColor = [UIColor colorWithWhite:0.95 alpha:1];
-                                   thisVC.navigationController.navigationBar.titleTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:20.]};
-                                   
-                                   thisVC.navigationController.navigationBar.tintColor = [UIColor whiteColor];
                                    thisVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"返回" style:UIBarButtonItemStylePlain handler:nil];
                                } error:nil];
     

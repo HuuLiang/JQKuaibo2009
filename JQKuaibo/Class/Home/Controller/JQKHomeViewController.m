@@ -89,7 +89,9 @@ DefineLazyPropertyInitialization(JQKHomeVideoProgramModel, videoModel)
 - (void)loadChannels {
     @weakify(self);
     dispatch_group_enter(self.dataDispatchGroup);
-    [self.channelModel fetchChannelsWithCompletionHandler:^(BOOL success, NSArray<JQKChannel *> *channels) {
+    [self.channelModel fetchChannelsInNamespace:JQKChannelNamespaceHome
+                          withCompletionHandler:^(BOOL success, NSArray<JQKChannel *> *channels)
+    {
         @strongify(self);
         if (!self) {
             return ;

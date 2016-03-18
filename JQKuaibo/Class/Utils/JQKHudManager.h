@@ -15,5 +15,6 @@
 +(instancetype)manager;
 -(void)showHudWithText:(NSString *)text;
 -(void)showHudWithTitle:(NSString *)title message:(NSString *)msg;
+-(void)showProgressInDuration:(NSTimeInterval)duration;
 
 @end

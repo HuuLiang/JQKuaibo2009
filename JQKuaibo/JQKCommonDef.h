@@ -45,6 +45,7 @@ return _##propertyName; \
 
 #define kPaidNotificationName @"jqkuaibo_paid_notification"
 #define kDefaultDateFormat    @"yyyyMMddHHmmss"
+#define kDefaultPageSize      (20)
 
 typedef void (^JQKAction)(id obj);
 typedef void (^JQKCompletionHandler)(BOOL success, id obj);

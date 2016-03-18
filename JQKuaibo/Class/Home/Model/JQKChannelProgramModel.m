@@ -21,7 +21,7 @@
 - (BOOL)fetchProgramsWithColumnId:(NSNumber *)columnId
                            pageNo:(NSUInteger)pageNo
                          pageSize:(NSUInteger)pageSize
-                completionHandler:(JQKFetchChannelProgramCompletionHandler)handler {
+                completionHandler:(JQKCompletionHandler)handler {
     @weakify(self);
     NSDictionary *params = @{@"columnId":columnId, @"page":@(pageNo), @"pageSize":@(pageSize),@"scale":[JQKUtil isPaid]?@1:@2};
     BOOL success = [self requestURLPath:JQK_HOME_CHANNEL_PROGRAM_URL

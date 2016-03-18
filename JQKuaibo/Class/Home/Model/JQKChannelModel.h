@@ -9,6 +9,11 @@
 #import "JQKEncryptedURLRequest.h"
 #import "JQKChannel.h"
 
+typedef NS_ENUM(NSUInteger, JQKChannelNamespace) {
+    JQKChannelNamespaceHome,
+    JQKChannelNamespaceList
+};
+
 @interface JQKChannelResponse : JQKURLResponse
 @property (nonatomic,retain) NSMutableArray<JQKChannel> *columnList;
 
@@ -20,6 +25,6 @@ typedef void (^JQKFetchChannelsCompletionHandler)(BOOL success, NSArray<JQKChann
 
 @property (nonatomic,retain,readonly) NSArray *fetchedChannels;
 
-- (BOOL)fetchChannelsWithCompletionHandler:(JQKFetchChannelsCompletionHandler)handler;
+- (BOOL)fetchChannelsInNamespace:(JQKChannelNamespace)channelNS withCompletionHandler:(JQKFetchChannelsCompletionHandler)handler;
 
 @end

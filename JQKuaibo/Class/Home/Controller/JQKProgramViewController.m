@@ -12,7 +12,6 @@
 #import "JQKChannelProgram.h"
 #import "JQKProgramCell.h"
 
-static const NSUInteger kDefaultPageSize = 20;
 static NSString *const kProgramCellReusableIdentifier = @"ProgramCellReusableIdentifier";
 
 @interface JQKProgramViewController () <UITableViewDataSource,UITableViewDelegate>

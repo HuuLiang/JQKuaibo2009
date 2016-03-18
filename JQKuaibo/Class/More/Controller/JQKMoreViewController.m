@@ -7,39 +7,62 @@
 //
 
 #import "JQKMoreViewController.h"
+#import "JQKAppSpreadModel.h"
+#import "JQKMoreCell.h"
 
-@interface JQKMoreViewController () <UIWebViewDelegate>
+static NSString *const kMoreCellReusableIdentifier = @"MoreCellReusableIdentifier";
+
+@interface JQKMoreViewController () <UITableViewDataSource,UITableViewDelegate>
 {
-    UIWebView *_webView;
+    UITableView *_layoutTableView;
 }
+@property (nonatomic,retain) JQKAppSpreadModel *spreadModel;
 @end
 
 @implementation JQKMoreViewController
 
+DefineLazyPropertyInitialization(JQKAppSpreadModel, spreadModel)
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _webView = [[UIWebView alloc] init];
-    _webView.delegate = self;
-    [self.view addSubview:_webView];
+    _layoutTableView = [[UITableView alloc] init];
+    _layoutTableView.backgroundColor = self.view.backgroundColor;
+    _layoutTableView.delegate = self;
+    _layoutTableView.dataSource = self;
+    _layoutTableView.rowHeight = lround(kScreenHeight * 0.15);
+    _layoutTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [_layoutTableView registerClass:[JQKMoreCell class]
+             forCellReuseIdentifier:kMoreCellReusableIdentifier];
+    [self.view addSubview:_layoutTableView];
     {
-        [_webView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_layoutTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.view);
         }];
     }
     
-    [self.navigationController.navigationBar bk_whenTouches:1 tapped:5 handler:^{
-        NSString *baseURLString = [JQK_BASE_URL stringByReplacingCharactersInRange:NSMakeRange(0, JQK_BASE_URL.length-6) withString:@"******"];
-        [[JQKHudManager manager] showHudWithText:[NSString stringWithFormat:@"Server:%@\nChannelNo:%@\nPackageCertificate:%@", baseURLString, JQK_CHANNEL_NO, JQK_PACKAGE_CERTIFICATE]];
+    @weakify(self);
+    [_layoutTableView JQK_addPullToRefreshWithHandler:^{
+        @strongify(self);
+        [self loadAppSpreads];
     }];
+    [_layoutTableView JQK_triggerPullToRefresh];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    NSString *urlString = [JQK_BASE_URL stringByAppendingString:[JQKUtil isPaid]?JQK_AGREEMENT_PAID_URL:JQK_AGREEMENT_NOTPAID_URL];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:30];
-    [_webView loadRequest:urlRequest];
+- (void)loadAppSpreads {
+    @weakify(self);
+    [self.spreadModel fetchAppSpreadWithCompletionHandler:^(BOOL success, id obj) {
+        @strongify(self);
+        if (!self) {
+            return ;
+        }
+        
+        [self->_layoutTableView JQK_endPullToRefresh];
+        
+        if (success) {
+            [self->_layoutTableView reloadData];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,4 +70,32 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UITableViewDataSource,UITableViewDelegate
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    JQKMoreCell *cell = [tableView dequeueReusableCellWithIdentifier:kMoreCellReusableIdentifier forIndexPath:indexPath];
+    cell.backgroundColor = tableView.backgroundColor;
+    
+    if (indexPath.row < self.spreadModel.fetchedSpreads.count) {
+        JQKProgram *appSpread = self.spreadModel.fetchedSpreads[indexPath.row];
+        cell.imageURL = [NSURL URLWithString:appSpread.coverImg];
+        cell.title = appSpread.title;
+        cell.subtitle = appSpread.specialDesc;
+    }
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.spreadModel.fetchedSpreads.count;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    JQKProgram *appSpread = self.spreadModel.fetchedSpreads[indexPath.row];
+    
+    if (appSpread.videoUrl.length > 0) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appSpread.videoUrl]];
+    }
+}
 @end
