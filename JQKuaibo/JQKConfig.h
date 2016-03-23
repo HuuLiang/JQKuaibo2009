@@ -14,7 +14,7 @@
 #define JQK_CHANNEL_NO           [JQKConfiguration sharedConfig].channelNo
 #define JQK_REST_APP_ID          @"QUBA_2004"
 #define JQK_REST_PV              @100
-#define JQK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Tianjin Institute of Surveying and Mapping"
+#define JQK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd."
 
 #define JQK_WECHAT_APP_ID        @"wx4af04eb5b3dbfb56"
 #define JQK_WECHAT_MCH_ID        @"1281148901"
