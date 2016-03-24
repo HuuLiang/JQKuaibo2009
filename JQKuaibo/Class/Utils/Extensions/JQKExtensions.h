@@ -15,5 +15,6 @@
 #import "UIScrollView+Refresh.h"
 #import "UIColor+hexColor.h"
 #import "NSMutableDictionary+SafeCoding.h"
+#import "NSDictionary+JQKSign.h"
 
 #endif /* JQKExtensions_h */

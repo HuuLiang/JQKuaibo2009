@@ -9,6 +9,7 @@
 #import "WeChatPayManager.h"
 #import "WXApi.h"
 #import "payRequsestHandler.h"
+#import "JQKPaymentConfig.h"
 
 @interface WeChatPayManager ()
 @property (nonatomic,copy) WeChatPayCompletionHandler handler;
@@ -25,22 +26,22 @@
     return _theInstance;
 }
 
-- (void)startWeChatPayWithOrderNo:(NSString *)orderNo price:(double)price completionHandler:(WeChatPayCompletionHandler)handler {
+- (void)startWeChatPayWithOrderNo:(NSString *)orderNo price:(NSUInteger)price completionHandler:(WeChatPayCompletionHandler)handler {
     _handler = handler;
     
     //创建支付签名对象
     payRequsestHandler *req = [[payRequsestHandler alloc] init];
     //初始化支付签名对象
-    [req init:JQK_WECHAT_APP_ID mch_id:JQK_WECHAT_MCH_ID];
+    [req init:[JQKPaymentConfig sharedConfig].weixinInfo.appId mch_id:[JQKPaymentConfig sharedConfig].weixinInfo.mchId];
     //设置密钥
-    [req setKey:JQK_WECHAT_PRIVATE_KEY];
+    [req setKey:[JQKPaymentConfig sharedConfig].weixinInfo.signKey];
     //设置回调URL
-    [req setNotifyUrl:JQK_WECHAT_NOTIFY_URL];
+    [req setNotifyUrl:[JQKPaymentConfig sharedConfig].weixinInfo.notifyUrl];
     //设置附加数据
-    [req setAttach:[JQKUtil paymentReservedData]];
+    [req setAttach:JQK_PAYMENT_RESERVE_DATA];
     
     //获取到实际调起微信支付的参数后，在app端调起支付
-    NSMutableDictionary *dict = [req sendPayWithOrderNo:orderNo price:@(price*100).unsignedIntegerValue];
+    NSMutableDictionary *dict = [req sendPayWithOrderNo:orderNo price:price];
     
     if(dict == nil){
         //错误提示

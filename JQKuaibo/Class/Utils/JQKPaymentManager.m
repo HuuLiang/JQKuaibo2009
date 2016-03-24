@@ -10,27 +10,26 @@
 #import "JQKPaymentInfo.h"
 #import "JQKPaymentViewController.h"
 #import "JQKProgram.h"
+#import "JQKPaymentConfigModel.h"
+
 #import "WXApi.h"
-#import "JQKWeChatPayQueryOrderRequest.h"
+#import "WeChatPayQueryOrderRequest.h"
 #import "WeChatPayManager.h"
 
 #import <IapppayAlphaKit/IapppayAlphaOrderUtils.h>
 #import <IapppayAlphaKit/IapppayAlphaKit.h>
 
 static NSString *const kAlipaySchemeUrl = @"comjqkuaibo2016appalipayurlscheme";
-static NSString *const kIAppPayAppId = @"300434672";
-static NSString *const kIAppPayPrivateKey = @"MIICWwIBAAKBgQCYt4+DTfw/3A6Os/MgxBz6JrJWBN8+HQjAPVGYgfdYtXVb5L6meD+lvoOx2vXfCdME4/Frdm29+ZvH/QmTpWAFEVsFLJuZqTPfTtgnvG8xcyBdpxt1faGrt0/nQrKOqU1BB1ad/sVhFJzhvNtBR0imzZHjaxxsQQWVUCGS1eBaDQIDAQABAoGAMCW/M1CE9MU2Obt2LaBm2l8U3pXOpFCXD7TFYuWmy+r5wy0NBoLm3iSAdLRpzBXW17XdyVmfI8PsX1LhkBEVgkVkBG41FnXFTjP0eJ2zgaW2cmhsaQlwvcgJHXZy8fcp6g0bKLMZt+iW/D9jqK50Qjn0jMMpvCVPSwe+Bf+OlqkCQQDmRMZ7GMx9FMosCKEOlCDXrLr3SfhuSoxspWxF1LJaIKAEO68jnMs1hLmQz3/Zubb4B9RTOhm1838/hgc1MjPrAkEAqchKNpWZ3he/gZXB4DtEoTMO0KQyn4+6mgydVoPOQf4zjBKos4fNOcb+JBFnjN5MT0XU0JYiFffjxhtDf7dD5wJBAL7JZRpA5c0NGKV7UNZfbQbFmvOhWjEnm0m5lggVvuBl/68CNI5xLv1cxtNw2SFwemTvN8DtdrgG0/ux9O7idZkCPxSPLG1vsDI0rfwDJncAtk7O3/xj5b1sqiv9WxAe5dsX7SYJHGShDTjx39R+RwvH33W5/wtDIt2GJw7WPlY42wJAGe7+KDIxtzZw8w2gOfxlfjs4XI4BC4rY9fxvQ49Cpz+TStrjk9gM6EmGQCbw+l8Ve4OMfFdDNns+E+dwTWDEAQ==";
-static NSString *const kIAppPayPublicKey = @"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCsdhSHabm96S08uxkNCYb6yDLj+3drEi7BwxUyieytKpZ3JXOu1Jgmid0WkRvUmTUZHr8zs59EcW7a7d3Tx8PdzKE5ytCCEr56gxA/N70H/hoEAjA4G9i6sGNE5qEVZ9kqVoXrAfsO4/Pa8rDVDBSmibHTawNnJsBknd2YI3H5tQIDAQAB";
 
 @interface JQKPaymentManager () <IapppayAlphaKitPayRetDelegate,WXApiDelegate>
 @property (nonatomic,retain) JQKPaymentInfo *paymentInfo;
 @property (nonatomic,copy) JQKPaymentCompletionHandler completionHandler;
-@property (nonatomic,retain) JQKWeChatPayQueryOrderRequest *wechatPayOrderQueryRequest;
+@property (nonatomic,retain) WeChatPayQueryOrderRequest *wechatPayOrderQueryRequest;
 @end
 
 @implementation JQKPaymentManager
 
-DefineLazyPropertyInitialization(JQKWeChatPayQueryOrderRequest, wechatPayOrderQueryRequest)
+DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQueryRequest)
 
 + (instancetype)sharedManager {
     static JQKPaymentManager *_sharedManager;
@@ -42,10 +41,11 @@ DefineLazyPropertyInitialization(JQKWeChatPayQueryOrderRequest, wechatPayOrderQu
 }
 
 - (void)setup {
-    [[IapppayAlphaKit sharedInstance] setAppAlipayScheme:kAlipaySchemeUrl];
-    [[IapppayAlphaKit sharedInstance] setAppId:kIAppPayAppId mACID:JQK_CHANNEL_NO];
-    
-    [WXApi registerApp:JQK_WECHAT_APP_ID];
+    [[JQKPaymentConfigModel sharedModel] fetchConfigWithCompletionHandler:^(BOOL success, id obj) {
+        [[IapppayAlphaKit sharedInstance] setAppAlipayScheme:kAlipaySchemeUrl];
+        [[IapppayAlphaKit sharedInstance] setAppId:[JQKPaymentConfig sharedConfig].iappPayInfo.appid mACID:JQK_CHANNEL_NO];
+        [WXApi registerApp:[JQKPaymentConfig sharedConfig].weixinInfo.appId];
+    }];
 }
 
 - (void)handleOpenURL:(NSURL *)url {
@@ -83,23 +83,35 @@ DefineLazyPropertyInitialization(JQKWeChatPayQueryOrderRequest, wechatPayOrderQu
     self.paymentInfo = paymentInfo;
     self.completionHandler = handler;
     
-    IapppayAlphaOrderUtils *order = [[IapppayAlphaOrderUtils alloc] init];
-    order.appId = kIAppPayAppId;
-    order.cpPrivateKey = kIAppPayPrivateKey;
-    order.cpOrderId = orderNo;
+    BOOL success = YES;
+    if (type == JQKPaymentTypeWeChatPay) {
+        @weakify(self);
+        [[WeChatPayManager sharedInstance] startWeChatPayWithOrderNo:orderNo price:price completionHandler:^(PAYRESULT payResult) {
+            @strongify(self);
+            if (self.completionHandler) {
+                self.completionHandler(payResult, self.paymentInfo);
+            }
+        }];
+    } else {
+        IapppayAlphaOrderUtils *order = [[IapppayAlphaOrderUtils alloc] init];
+        order.appId = [JQKPaymentConfig sharedConfig].iappPayInfo.appid;
+        order.cpPrivateKey = [JQKPaymentConfig sharedConfig].iappPayInfo.privateKey;
+        order.cpOrderId = orderNo;
 #ifdef DEBUG
-    order.waresId = @"2";
+        order.waresId = @"2";
 #else
-    order.waresId = @"1";
+        order.waresId = [JQKPaymentConfig sharedConfig].iappPayInfo.waresid;
 #endif
-    order.price = [NSString stringWithFormat:@"%.2f", price/100.];
-    order.appUserId = [JQKUtil userId] ?: @"UnregisterUser";
-    order.cpPrivateInfo = [JQKUtil paymentReservedData];
+        order.price = [NSString stringWithFormat:@"%.2f", price/100.];
+        order.appUserId = [JQKUtil userId] ?: @"UnregisterUser";
+        order.cpPrivateInfo = JQK_PAYMENT_RESERVE_DATA;
+        
+        NSString *trandData = [order getTrandData];
+        success = [[IapppayAlphaKit sharedInstance] makePayForTrandInfo:trandData
+                                                          payMethodType:payType.unsignedIntegerValue
+                                                            payDelegate:self];
+    }
     
-    NSString *trandData = [order getTrandData];
-    BOOL success = [[IapppayAlphaKit sharedInstance] makePayForTrandInfo:trandData
-                                                           payMethodType:payType.unsignedIntegerValue
-                                                             payDelegate:self];
     return success;
 }
 

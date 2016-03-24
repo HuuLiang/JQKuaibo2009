@@ -99,7 +99,4 @@ static NSString *const kUserAccessServicename = @"jqkuaibov_user_access_service"
     return [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
 }
 
-+ (NSString *)paymentReservedData {
-    return [NSString stringWithFormat:@"%@$%@", JQK_REST_APP_ID, JQK_CHANNEL_NO];
-}
 @end
