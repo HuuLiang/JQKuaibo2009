@@ -1,40 +1,41 @@
 //
-//  JQKWeChatPayQueryOrderRequest.m
+//  WeChatPayQueryOrderRequest.m
 //  kuaibov
 //
 //  Created by Sean Yue on 15/11/23.
 //  Copyright © 2015年 kuaibov. All rights reserved.
 //
 
-#import "JQKWeChatPayQueryOrderRequest.h"
+#import "WeChatPayQueryOrderRequest.h"
 #import "payRequsestHandler.h"
 #import "WXUtil.h"
+#import "JQKPaymentConfig.h"
 
 static NSString *const kWeChatPayQueryOrderUrlString = @"https://api.mch.weixin.qq.com/pay/orderquery";
 static NSString *const kSuccessString = @"SUCCESS";
 
-@implementation JQKWeChatPayQueryOrderRequest
+@implementation WeChatPayQueryOrderRequest
 
-- (BOOL)queryOrderWithNo:(NSString *)orderNo completionHandler:(JQKWeChatPayQueryOrderCompletionHandler)handler {
+- (BOOL)queryOrderWithNo:(NSString *)orderNo completionHandler:(WeChatPayQueryOrderCompletionHandler)handler {
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         srand( (unsigned)time(0) );
         NSString *noncestr  = [NSString stringWithFormat:@"%d", rand()];
         
-        NSMutableDictionary *params = @{@"appid":JQK_WECHAT_APP_ID,
-                                        @"mch_id":JQK_WECHAT_MCH_ID,
+        NSMutableDictionary *params = @{@"appid":[JQKPaymentConfig sharedConfig].weixinInfo.appId,
+                                        @"mch_id":[JQKPaymentConfig sharedConfig].weixinInfo.mchId,
                                         @"out_trade_no":orderNo,
                                         @"nonce_str":noncestr}.mutableCopy;
         //创建支付签名对象
         payRequsestHandler *req = [[payRequsestHandler alloc] init];
         //初始化支付签名对象
-        [req init:JQK_WECHAT_APP_ID mch_id:JQK_WECHAT_MCH_ID];
+        [req init:[JQKPaymentConfig sharedConfig].weixinInfo.appId mch_id:[JQKPaymentConfig sharedConfig].weixinInfo.mchId];
         //设置密钥
-        [req setKey:JQK_WECHAT_PRIVATE_KEY];
+        [req setKey:[JQKPaymentConfig sharedConfig].weixinInfo.signKey];
         //设置回调URL
-        [req setNotifyUrl:JQK_WECHAT_NOTIFY_URL];
+        [req setNotifyUrl:[JQKPaymentConfig sharedConfig].weixinInfo.notifyUrl];
         //设置附加数据
-        [req setAttach:[JQKUtil paymentReservedData]];
+        [req setAttach:JQK_PAYMENT_RESERVE_DATA];
         
         NSString *package = [req genPackage:params];
         NSData *data =[WXUtil httpSend:kWeChatPayQueryOrderUrlString method:@"POST" data:package];

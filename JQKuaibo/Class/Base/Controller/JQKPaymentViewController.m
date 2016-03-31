@@ -14,7 +14,7 @@
 #import "JQKProgram.h"
 #import "WeChatPayManager.h"
 #import "JQKPaymentInfo.h"
-#import "JQKPaymentSignModel.h"
+#import "JQKPaymentConfig.h"
 
 @interface JQKPaymentViewController ()
 @property (nonatomic,retain) JQKPaymentPopView *popView;
@@ -52,33 +52,25 @@
             return ;
         }
         
-        if (type == JQKPaymentTypeAlipay) {
-            [[JQKPaymentManager sharedManager] startPaymentWithType:type
-                                                              price:self.payAmount.floatValue * 100
-                                                         forProgram:self.programToPayFor
-                                                  completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo)
-            {
-                @strongify(self);
-                [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
-            }];
-        } else {
-            [self payForProgram:self.programToPayFor
-                          price:self.payAmount.doubleValue
-                    paymentType:type];
-        }
+        [self payForProgram:self.programToPayFor
+                      price:self.payAmount.doubleValue
+                paymentType:type];
     };
     
     _popView = [[JQKPaymentPopView alloc] init];
     
     _popView.headerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"payment_background" ofType:@"jpg"]];
     _popView.footerImage = [UIImage imageNamed:@"payment_footer"];
-    [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-        Pay(JQKPaymentTypeAlipay);
-    }];
     
     [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信支付" available:YES action:^(id sender) {
         Pay(JQKPaymentTypeWeChatPay);
     }];
+    
+    if ([JQKPaymentConfig sharedConfig].iappPayInfo) {
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
+            Pay(JQKPaymentTypeAlipay);
+        }];
+    }
     
     _popView.closeAction = ^(id sender){
         @strongify(self);
@@ -162,31 +154,13 @@
                 price:(double)price
           paymentType:(JQKPaymentType)paymentType {
     @weakify(self);
-    NSString *channelNo = JQK_CHANNEL_NO;
-    channelNo = [channelNo substringFromIndex:channelNo.length-14];
-    NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
-    NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
-    
-    if (paymentType==JQKPaymentTypeWeChatPay) {
-        // Payment info
-        JQKPaymentInfo *paymentInfo = [[JQKPaymentInfo alloc] init];
-        paymentInfo.orderId = orderNo;
-        paymentInfo.orderPrice = @((NSUInteger)(price * 100));
-        paymentInfo.contentId = program.programId;
-        paymentInfo.contentType = program.type;
-        paymentInfo.paymentType = @(paymentType);
-        paymentInfo.paymentResult = @(PAYRESULT_UNKNOWN);
-        paymentInfo.paymentStatus = @(JQKPaymentStatusPaying);
-        [paymentInfo save];
-        self.paymentInfo = paymentInfo;
-        
-        [[WeChatPayManager sharedInstance] startWeChatPayWithOrderNo:orderNo price:price completionHandler:^(PAYRESULT payResult) {
-            @strongify(self);
-            [self notifyPaymentResult:payResult withPaymentInfo:self.paymentInfo];
-        }];
-    } else {
-        [[JQKHudManager manager] showHudWithText:@"无法获取支付信息"];
-    }
+    [[JQKPaymentManager sharedManager] startPaymentWithType:paymentType
+                                                      price:price*100
+                                                 forProgram:program
+                                          completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
+                                              @strongify(self);
+                                              [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
+                                          }];
 }
 
 - (void)didReceiveMemoryWarning {
