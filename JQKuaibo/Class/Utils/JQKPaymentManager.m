@@ -19,7 +19,7 @@
 #import <IapppayAlphaKit/IapppayAlphaOrderUtils.h>
 #import <IapppayAlphaKit/IapppayAlphaKit.h>
 
-static NSString *const kAlipaySchemeUrl = @"comjqkuaibo2016appalipayurlscheme";
+static NSString *const kAlipaySchemeUrl = @"comjpyingyuan2016appalipayurlscheme";
 
 @interface JQKPaymentManager () <IapppayAlphaKitPayRetDelegate,WXApiDelegate>
 @property (nonatomic,retain) JQKPaymentInfo *paymentInfo;

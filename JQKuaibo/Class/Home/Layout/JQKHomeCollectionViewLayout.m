@@ -93,7 +93,7 @@ DefineLazyPropertyInitialization(LayoutAttributesDictionary, layoutAttributes)
     const CGFloat halfH = halfSize.height;
     const CGFloat halfW = halfSize.width;
     
-    CGRect lastLayerFrame;
+    CGRect lastLayerFrame = CGRectZero;
     NSUInteger picIndex = 0;
     for (NSUInteger i = 0;  i < numberOfItems; ++i) {
         UICollectionViewLayoutAttributes *layoutAttribs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
