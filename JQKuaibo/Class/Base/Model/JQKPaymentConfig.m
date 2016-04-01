@@ -94,7 +94,7 @@ static JQKPaymentConfig *_shardConfig;
 
 - (void)setAsCurrentConfig {
     JQKPaymentConfig *currentConfig = [[self class] sharedConfig];
-    currentConfig.weixinInfo = self.weixinInfo ?: [JQKWeChatPaymentConfig defaultConfig];
+    currentConfig.weixinInfo = self.weixinInfo;
     currentConfig.iappPayInfo = self.iappPayInfo;
     currentConfig.alipayInfo = self.alipayInfo;
 }

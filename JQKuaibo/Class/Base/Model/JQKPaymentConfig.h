@@ -8,6 +8,12 @@
 
 #import "JQKURLResponse.h"
 
+typedef NS_ENUM(NSUInteger, JQKIAppPayType) {
+    JQKIAppPayTypeUnknown = 0,
+    JQKIAppPayTypeWeChat = 1 << 0,
+    JQKIAppPayTypeAlipay = 1 << 1
+};
+
 @interface JQKWeChatPaymentConfig : NSObject
 @property (nonatomic) NSString *appId;
 @property (nonatomic) NSString *mchId;
@@ -31,6 +37,7 @@
 @property (nonatomic) NSString *publicKey;
 @property (nonatomic) NSString *notifyUrl;
 @property (nonatomic) NSNumber *waresid;
+@property (nonatomic) NSNumber *supportPayTypes;
 
 + (instancetype)defaultConfig;
 @end
