@@ -18,27 +18,28 @@ static NSString *const kMovieCellReusableIdentifier = @"MovieCellReusableIdentif
 {
     UICollectionView *_layoutCollectionView;
 }
-@property (nonatomic,retain) JQKChannelProgramModel *programModel;
+//@property (nonatomic,retain) JQKChannelProgramModel *programModel;
+@property (nonatomic,retain) JQKMovieModel *movieModel;
 @property (nonatomic,retain) NSMutableArray<JQKVideo *> *videos;
 @end
 
 @implementation JQKMovieViewController
 
-DefineLazyPropertyInitialization(JQKChannelProgramModel, programModel)
+DefineLazyPropertyInitialization(JQKMovieModel, movieModel)
 DefineLazyPropertyInitialization(NSMutableArray, videos)
 
-- (instancetype)initWithChannel:(JQKChannel *)channel {
-    self = [self init];
-    if (self) {
-        _channel = channel;
-    }
-    return self;
-}
+//- (instancetype)initWithChannel:(JQKChannel *)channel {
+//    self = [self init];
+//    if (self) {
+//        _channel = channel;
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = _channel.name;
+//    self.title = _channel.name;
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 3;
@@ -71,10 +72,8 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
 
 - (void)loadMoviesWithRefreshFlag:(BOOL)isRefresh {
     @weakify(self);
-    [self.programModel fetchProgramsWithColumnId:_channel.columnId
-                                          pageNo:isRefresh?1:self.programModel.fetchedPrograms.page.unsignedIntegerValue+1
-                                        pageSize:kDefaultPageSize
-                               completionHandler:^(BOOL success, id obj)
+    [self.movieModel fetchMoviesInPage:isRefresh?1:self.movieModel.fetchedVideos.page.unsignedIntegerValue+1
+                 withCompletionHandler:^(BOOL success, id obj)
     {
         @strongify(self);
         if (!self) {

@@ -16,7 +16,8 @@
 #import "JQKPaymentModel.h"
 #import "JQKSystemConfigModel.h"
 #import "JQKPaymentViewController.h"
-#import "JQKChannelViewController.h"
+//#import "JQKChannelViewController.h"
+#import "JQKMovieViewController.h"
 #import "JQKMineViewController.h"
 
 @interface JQKAppDelegate ()
@@ -53,12 +54,12 @@
                                                                           image:liveShowImage
                                                                   selectedImage:[liveShowImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    JQKChannelViewController *channelVC = [[JQKChannelViewController alloc] init];
-    channelVC.title                     = @"频道";
+    JQKMovieViewController *movieVC      = [[JQKMovieViewController alloc] init];
+    movieVC.title                        = @"电影";
 
-    UINavigationController *channelNav  = [[UINavigationController alloc] initWithRootViewController:channelVC];
+    UINavigationController *channelNav  = [[UINavigationController alloc] initWithRootViewController:movieVC];
     UIImage *channelImage               = [UIImage imageNamed:@"channel_tabbar"];
-    channelNav.tabBarItem               = [[UITabBarItem alloc] initWithTitle:channelVC.title
+    channelNav.tabBarItem               = [[UITabBarItem alloc] initWithTitle:movieVC.title
                                                                            image:channelImage
                                                                    selectedImage:[channelImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     

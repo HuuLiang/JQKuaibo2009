@@ -87,7 +87,6 @@
 		BC9A9F8A1C9A9DE3002510AB /* JQKMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9A9F831C9A9DE3002510AB /* JQKMovieViewController.m */; };
 		BC9A9F8B1C9A9DE3002510AB /* JQKMovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9A9F861C9A9DE3002510AB /* JQKMovieModel.m */; };
 		BC9A9F8C1C9A9DE3002510AB /* JQKMovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9A9F891C9A9DE3002510AB /* JQKMovieCell.m */; };
-		BC9A9F8F1C9A9DFF002510AB /* JQKChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9A9F8E1C9A9DFF002510AB /* JQKChannelViewController.m */; };
 		BC9A9F961C9AA03A002510AB /* JQKMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9A9F951C9AA03A002510AB /* JQKMineViewController.m */; };
 		BC9A9F9C1C9AA73C002510AB /* UITableView+Separator.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9A9F9B1C9AA73C002510AB /* UITableView+Separator.m */; };
 		BC9A9FA11C9AAAE5002510AB /* JQKInputTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9A9F9E1C9AAAE5002510AB /* JQKInputTextViewController.m */; };
@@ -1098,7 +1097,6 @@
 				BC69A4831C9988D30010FA89 /* JQKPaymentManager.m in Sources */,
 				BC64E2571C4E171200450C1B /* JQKAdView.m in Sources */,
 				BC9A9FA21C9AAAE5002510AB /* JQKWebViewController.m in Sources */,
-				BC9A9F8F1C9A9DFF002510AB /* JQKChannelViewController.m in Sources */,
 				BC38733B1C2D402B00CBE88A /* JQKPaymentInfo.m in Sources */,
 				BC38723C1C2D27D600CBE88A /* JQKAppDelegate.m in Sources */,
 				BC3872D21C2D307400CBE88A /* JQKUtil.m in Sources */,

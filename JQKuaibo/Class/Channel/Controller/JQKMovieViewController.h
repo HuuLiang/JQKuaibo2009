@@ -11,9 +11,9 @@
 @class JQKChannel;
 
 @interface JQKMovieViewController : JQKBaseViewController
-
-@property (nonatomic,retain,readonly) JQKChannel *channel;
-
-- (instancetype)initWithChannel:(JQKChannel *)channel;
+//
+//@property (nonatomic,retain,readonly) JQKChannel *channel;
+//
+//- (instancetype)initWithChannel:(JQKChannel *)channel;
 
 @end
