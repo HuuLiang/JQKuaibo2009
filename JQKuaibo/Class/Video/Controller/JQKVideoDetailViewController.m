@@ -11,14 +11,17 @@
 #import "JQKVideoCell.h"
 #import "JQKVideoCommentCell.h"
 #import "JQKVideoDetailHeaderView.h"
+#import "JQKVideoCommentInputView.h"
 
 #import "JQKVideo.h"
 #import "JQKVideoListModel.h"
+#import <TPKeyboardAvoidingCollectionView.h>
 
 static NSString *const kVideoPlayerCellReusableIdentifier = @"VideoPlayerCellReusableIdentifier";
 static NSString *const kRecommendVideoCellReusableIdentifier = @"RecommendVideoCellReusableIdentifier";
 static NSString *const kCommentCellReusableIdentifier = @"CommentCellReusableIdentifier";
 static NSString *const kHeaderViewReusableIdentifier = @"HeaderViewReusableIdentifier";
+static NSString *const kCommentInputViewReusableIdentifier = @"CommentInputViewReusableIdentifier";
 
 typedef NS_ENUM(NSUInteger, JQKVideoSection) {
     JQKVideoPlayerSection,
@@ -56,7 +59,7 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 5;
 
-    _layoutCV = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    _layoutCV = [[TPKeyboardAvoidingCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     _layoutCV.backgroundColor = self.view.backgroundColor;
     _layoutCV.delegate = self;
     _layoutCV.dataSource = self;
@@ -64,6 +67,7 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
     [_layoutCV registerClass:[JQKVideoCell class] forCellWithReuseIdentifier:kRecommendVideoCellReusableIdentifier];
     [_layoutCV registerClass:[JQKVideoCommentCell class] forCellWithReuseIdentifier:kCommentCellReusableIdentifier];
     [_layoutCV registerClass:[JQKVideoDetailHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:kHeaderViewReusableIdentifier];
+    [_layoutCV registerClass:[JQKVideoCommentInputView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:kCommentInputViewReusableIdentifier];
     [self.view addSubview:_layoutCV];
     {
         [_layoutCV mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -163,15 +167,35 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    JQKVideoDetailHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kHeaderViewReusableIdentifier forIndexPath:indexPath];
-    if (indexPath.section == JQKRecommendVideoSection) {
-        headerView.title = @"会员独享";
-        headerView.subtitle = [NSString stringWithFormat:@"播放：%ld万", self.popularity];
-    } else if (indexPath.section == JQKCommentSection) {
-        headerView.title = @"热门评论";
-        headerView.subtitle = nil;
+    
+    if (kind == UICollectionElementKindSectionHeader) {
+        JQKVideoDetailHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kHeaderViewReusableIdentifier forIndexPath:indexPath];
+        if (indexPath.section == JQKRecommendVideoSection) {
+            headerView.title = @"会员独享";
+            headerView.subtitle = [NSString stringWithFormat:@"播放：%ld万", self.popularity];
+        } else if (indexPath.section == JQKCommentSection) {
+            headerView.title = @"热门评论";
+            headerView.subtitle = nil;
+        }
+        return headerView;
+    } else {
+        if (indexPath.section == JQKCommentSection) {
+            JQKVideoCommentInputView *inputView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kCommentInputViewReusableIdentifier forIndexPath:indexPath];
+            inputView.sendAction = ^(id sender) {
+                [[JQKHudManager manager] showProgressInDuration:1];
+                
+                [sender resignInput];
+                [sender bk_performBlock:^(id obj) {
+                    JQKVideoCommentInputView *thisInputView = obj;
+                    [thisInputView clearInput];
+                    
+                    [[JQKHudManager manager] showHudWithText:@"评论发送成功"];
+                } afterDelay:1];
+            };
+            return inputView;
+        }
     }
-    return headerView;
+    return nil;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -211,6 +235,15 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
     } else {
         UIEdgeInsets insets = [self collectionView:collectionView layout:collectionViewLayout insetForSectionAtIndex:section];
         return CGSizeMake(CGRectGetWidth(collectionView.bounds)-insets.left-insets.right, 30);
+    }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
+    if (section == JQKCommentSection) {
+        UIEdgeInsets insets = [self collectionView:collectionView layout:collectionViewLayout insetForSectionAtIndex:section];
+        return CGSizeMake(CGRectGetWidth(collectionView.bounds)-insets.left-insets.right, 60);
+    } else {
+        return CGSizeZero;
     }
 }
 

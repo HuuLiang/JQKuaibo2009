@@ -7,16 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JQKPayable.h"
 
-@class JQKProgram;
 @class JQKVideo;
+@class JQKPhoto;
 
 @interface JQKBaseViewController : UIViewController
 
 - (void)switchToPlayVideo:(JQKVideo *)video;
+- (void)switchToViewPhoto:(JQKPhoto *)photo;
 - (void)playVideo:(JQKVideo *)video;
 - (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment;
-- (void)payForProgram:(JQKProgram *)program;
+- (void)payForPayable:(id<JQKPayable>)payable;
 //- (void)onPaidNotification:(NSNotification *)notification;
 
 @end

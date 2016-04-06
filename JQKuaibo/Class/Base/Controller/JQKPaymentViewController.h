@@ -7,15 +7,15 @@
 //
 
 #import "JQKBaseViewController.h"
+#import "JQKPayable.h"
 
-@class JQKProgram;
 @class JQKPaymentInfo;
 
 @interface JQKPaymentViewController : JQKBaseViewController
 
 + (instancetype)sharedPaymentVC;
 
-- (void)popupPaymentInView:(UIView *)view forProgram:(JQKProgram *)program withCompletionHandler:(void (^)(void))completionHandler;
+- (void)popupPaymentInView:(UIView *)view forPayable:(id<JQKPayable>)payable withCompletionHandler:(void (^)(void))completionHandler;
 - (void)hidePayment;
 
 - (void)notifyPaymentResult:(PAYRESULT)result withPaymentInfo:(JQKPaymentInfo *)paymentInfo;

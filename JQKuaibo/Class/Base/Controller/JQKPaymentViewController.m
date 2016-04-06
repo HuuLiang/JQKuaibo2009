@@ -19,7 +19,7 @@
 @property (nonatomic,retain) JQKPaymentPopView *popView;
 @property (nonatomic) NSNumber *payAmount;
 
-@property (nonatomic,retain) JQKProgram *programToPayFor;
+@property (nonatomic,retain) id<JQKPayable> payableToPayFor;
 @property (nonatomic,retain) JQKPaymentInfo *paymentInfo;
 
 @property (nonatomic,readonly,retain) NSDictionary *paymentTypeMap;
@@ -52,7 +52,7 @@
             return ;
         }
         
-        [self payForProgram:self.programToPayFor
+        [self payForPayable:self.payableToPayFor
                       price:self.payAmount.doubleValue
                 paymentType:type
              paymentSubType:subType];
@@ -111,7 +111,7 @@
     }
 }
 
-- (void)popupPaymentInView:(UIView *)view forProgram:(JQKProgram *)program withCompletionHandler:(void (^)(void))completionHandler {
+- (void)popupPaymentInView:(UIView *)view forPayable:(id<JQKPayable>)payable withCompletionHandler:(void (^)(void))completionHandler {
     self.completionHandler = completionHandler;
     
     if (self.view.superview) {
@@ -119,7 +119,7 @@
     }
     
     self.payAmount = nil;
-    self.programToPayFor = program;
+    self.payableToPayFor = payable;
     self.view.frame = view.bounds;
     self.view.alpha = 0;
     
@@ -164,10 +164,11 @@
             self.completionHandler();
             self.completionHandler = nil;
         }
+        self.payableToPayFor = nil;
     }];
 }
 
-- (void)payForProgram:(JQKProgram *)program
+- (void)payForPayable:(id<JQKPayable>)payable
                 price:(double)price
           paymentType:(JQKPaymentType)paymentType
        paymentSubType:(JQKPaymentType)paymentSubType
@@ -176,6 +177,7 @@
     [[JQKPaymentManager sharedManager] startPaymentWithType:paymentType
                                                     subType:paymentSubType
                                                       price:price*100
+                                                 forPayable:payable
                                           completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
                                               @strongify(self);
                                               [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];

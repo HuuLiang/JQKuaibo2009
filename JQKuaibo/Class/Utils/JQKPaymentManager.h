@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JQKPayable.h"
 
 typedef void (^JQKPaymentCompletionHandler)(PAYRESULT payResult, JQKPaymentInfo *paymentInfo);
 
@@ -18,6 +19,7 @@ typedef void (^JQKPaymentCompletionHandler)(PAYRESULT payResult, JQKPaymentInfo 
 - (BOOL)startPaymentWithType:(JQKPaymentType)type
                      subType:(JQKPaymentType)subType
                        price:(NSUInteger)price
+                  forPayable:(id<JQKPayable>)payable
            completionHandler:(JQKPaymentCompletionHandler)handler;
 
 

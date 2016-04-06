@@ -19,12 +19,27 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DACircularProgress.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MWPhotoBrowser-MWPhotoBrowser.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MWPhotoBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -54,6 +69,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>TPKeyboardAvoiding.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ZYCornerRadius.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,17 +82,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0FEFD03FE75CAEF387B9CDF6034BBC69</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>410B25DF16EA5C5B3E2698F74F9625FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4D5797CAC0CBD933FED60BE9DD7A6B03</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>50128FE1B17D7DD8EDBBA85747B7ADAD</key>
+		<key>4900FF870BF4C6766C519323A2AEEB00</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +102,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>80735C855518B96B3146419945AECA78</key>
+		<key>5813251FEA21E4AEE97385709F1912DE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>65E3EAF19015C118B6F74EC20B0D6EDC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,7 +117,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BCFF319364AF96E06B613E794454D6BD</key>
+		<key>9775596B3CA16905FC8F66DA8E2A3C67</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9FCE02F47FFDDD9999F9BE51FA41F11C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,7 +137,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F1230A5ADFC0B165CADABF3288E28101</key>
+		<key>DE3B07ED7FF04F506B0C5E00F4973589</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E2FE87384A67337831E53490EEA8BF11</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F4D8C2EFFEE13528A6A523FB65507215</key>
 		<dict>
 			<key>primary</key>
 			<true/>

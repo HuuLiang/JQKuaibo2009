@@ -74,10 +74,14 @@
             NSMutableArray *arr = [[NSMutableArray alloc] init];
             [instance setValue:arr forKey:propertyName];
             
-            for (NSDictionary *subDic in (NSArray *)value) {
-                id subinstance = [[subclass alloc] init];
-                [arr addObject:subinstance];
-                [self parseDataWithDictionary:subDic inInstance:subinstance];
+            for (id obj in (NSArray *)value) {
+                if ([obj isKindOfClass:[NSDictionary class]]) {
+                    id subinstance = [[subclass alloc] init];
+                    [arr addObject:subinstance];
+                    [self parseDataWithDictionary:obj inInstance:subinstance];
+                } else if ([obj isKindOfClass:[NSString class]] || [obj isKindOfClass:[NSNumber class]]) {
+                    [arr addObject:obj];
+                }
             }
         }
     }];

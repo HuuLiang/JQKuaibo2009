@@ -55,6 +55,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 - (BOOL)startPaymentWithType:(JQKPaymentType)type
                      subType:(JQKPaymentType)subType
                        price:(NSUInteger)price
+                  forPayable:(id<JQKPayable>)payable
            completionHandler:(JQKPaymentCompletionHandler)handler
 {
     if (type == JQKPaymentTypeNone || (type == JQKPaymentTypeIAppPay && subType == JQKPaymentTypeNone)) {
@@ -72,6 +73,9 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     JQKPaymentInfo *paymentInfo = [[JQKPaymentInfo alloc] init];
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);
+    paymentInfo.contentId = payable.contentId;
+    paymentInfo.contentType = payable.contentType;
+    paymentInfo.payPointType = payable.payPointType;
     paymentInfo.paymentType = @(type);
     paymentInfo.paymentResult = @(PAYRESULT_UNKNOWN);
     paymentInfo.paymentStatus = @(JQKPaymentStatusPaying);

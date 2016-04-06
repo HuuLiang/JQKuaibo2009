@@ -10,6 +10,9 @@
 #import "JQKPaymentViewController.h"
 #import "JQKVideoPlayerViewController.h"
 #import "JQKVideo.h"
+#import "JQKPhoto.h"
+#import <MWPhotoBrowser.h>
+#import <objc/runtime.h>
 
 @import MediaPlayer;
 @import AVKit;
@@ -17,7 +20,9 @@
 @import AVFoundation.AVAsset;
 @import AVFoundation.AVAssetImageGenerator;
 
-@interface JQKBaseViewController ()
+static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
+
+@interface JQKBaseViewController () <MWPhotoBrowserDelegate>
 {
     UIButton *_rightNavButton;
 }
@@ -34,7 +39,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithWhite:0.96 alpha:1];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPaidNotification:) name:kPaidNotificationName object:nil];
     
     if (self.navigationController.viewControllers.firstObject == self) {
         @weakify(self);
@@ -47,10 +51,12 @@
             @strongify(self);
             UIButton *thisButton = sender;
             if (!thisButton.selected) {
-                [self payForProgram:nil];
+                [self payForPayable:nil];
             }
         } forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightNavButton];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPaidNotification:) name:kPaidNotificationName object:nil];
     }
 }
 
@@ -62,7 +68,7 @@
 
 - (void)switchToPlayVideo:(JQKVideo *)video {
     if (![JQKUtil isPaid]) {
-        [self payForProgram:nil];
+        [self payForPayable:video];
     } else {
         [self playVideo:video];
     }
@@ -84,15 +90,30 @@
     }
 }
 
-- (void)payForProgram:(JQKProgram *)program {
-    [self payForProgram:program inView:self.view.window];
+- (void)switchToViewPhoto:(JQKPhoto *)photo {
+    if (![JQKUtil isPaid]) {
+        [self payForPayable:photo];
+    } else {
+        NSMutableArray<MWPhoto *> *photos = [[NSMutableArray alloc] initWithCapacity:photo.Urls.count];
+        [photo.Urls enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:obj]]];
+        }];
+        
+        MWPhotoBrowser *photoBrowser = [[MWPhotoBrowser alloc] initWithPhotos:photos];
+        photoBrowser.displayActionButton = NO;
+        photoBrowser.delegate = self;
+        objc_setAssociatedObject(photoBrowser, kPhotoNumberAssociatedKey, @(photos.count), OBJC_ASSOCIATION_COPY_NONATOMIC);
+        [self.navigationController pushViewController:photoBrowser animated:YES];
+    }
 }
 
-- (void)payForProgram:(JQKProgram *)program inView:(UIView *)view {
-    [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:view forProgram:program withCompletionHandler:nil];
+- (void)payForPayable:(id<JQKPayable>)payable; {
+    [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view.window forPayable:payable withCompletionHandler:nil];
 }
 
-//- (void)onPaidNotification:(NSNotification *)notification {}
+- (void)onPaidNotification:(NSNotification *)notification {
+    _rightNavButton.selected = YES;
+}
 
 - (BOOL)shouldAutorotate {
     return NO;
@@ -136,14 +157,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - MWPhotoBrowserDelegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSString *)photoBrowser:(MWPhotoBrowser *)photoBrowser titleForPhotoAtIndex:(NSUInteger)index {
+    NSNumber *photoCount = objc_getAssociatedObject(photoBrowser, kPhotoNumberAssociatedKey);
+    return [NSString stringWithFormat:@"第%ld张(共%ld张)", (unsigned long)index+1, (unsigned long)photoCount.unsignedIntegerValue];
 }
-*/
 
 @end

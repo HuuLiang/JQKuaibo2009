@@ -16,7 +16,7 @@
 - (BOOL)fetchVideosWithField:(JQKVideoListField)field
                       pageNo:(NSUInteger)pageNo
                     pageSize:(NSUInteger)pageSize
-                    columnId:(NSNumber *)columnId // Only for channel field, nil otherwise.
+                    columnId:(NSString *)columnId // Only for channel field, nil otherwise.
            completionHandler:(JQKCompletionHandler)handler;
 
 @end

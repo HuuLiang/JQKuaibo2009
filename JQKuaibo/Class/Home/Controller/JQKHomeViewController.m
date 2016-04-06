@@ -14,6 +14,7 @@
 #import <SDCycleScrollView.h>
 #import "JQKVideoListModel.h"
 #import "JQKPhotoAlbumModel.h"
+#import "JQKPhotoListViewController.h"
 
 static NSString *const kHomeCellReusableIdentifier = @"HomeCellReusableIdentifier";
 static NSString *const kBannerCellReusableIdentifier = @"BannerCellReusableIdentifier";
@@ -120,7 +121,7 @@ DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
     }];
     
     [self.videoModels[@(JQKHomeSectionTrial)] fetchVideosWithField:JQKVideoListFieldChannel
-                                                            pageNo:1 pageSize:10 columnId:@(13)
+                                                            pageNo:1 pageSize:10 columnId:@"13"
                                                  completionHandler:^(BOOL success, id obj)
     {
         @strongify(self);
@@ -140,7 +141,7 @@ DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
     }];
     
     [self.videoModels[@(JQKHomeSectionMeitui)] fetchVideosWithField:JQKVideoListFieldChannel
-                                                             pageNo:1 pageSize:6 columnId:@(17)
+                                                             pageNo:1 pageSize:6 columnId:@"17"
                                                   completionHandler:^(BOOL success, id obj)
     {
         @strongify(self);
@@ -150,7 +151,7 @@ DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
     }];
     
     [self.videoModels[@(JQKHomeSectionNvyou)] fetchVideosWithField:JQKVideoListFieldChannel
-                                                            pageNo:1 pageSize:6 columnId:@(10)
+                                                            pageNo:1 pageSize:6 columnId:@"10"
                                                  completionHandler:^(BOOL success, id obj)
     {
         @strongify(self);
@@ -291,6 +292,12 @@ DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
                 JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video];
                 [self.navigationController pushViewController:videoVC animated:YES];
             }
+        }
+    } else if (indexPath.section == JQKHomeSectionPhotos) {
+        if (indexPath.item < self.albumModel.fetchedAlbums.count) {
+            JQKChannel *album = self.albumModel.fetchedAlbums[indexPath.item];
+            JQKPhotoListViewController *photoVC = [[JQKPhotoListViewController alloc] initWithPhotoAlbum:album];
+            [self.navigationController pushViewController:photoVC animated:YES];
         }
     }
 }

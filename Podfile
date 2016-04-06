@@ -12,3 +12,5 @@ pod 'SFHFKeychainUtils', '~> 0.0.1'
 pod 'ZYCornerRadius', '~> 0.6.1'
 
 pod 'SDCycleScrollView', '~> 1.3'
+pod 'MWPhotoBrowser', '~> 2.1.1'
+pod 'TPKeyboardAvoiding', '~> 1.2.11'

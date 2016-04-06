@@ -58,7 +58,7 @@
         [self->_videoPlayer pause];
         
         if (_shouldPopupPaymentIfNotPaid && ![JQKUtil isPaid]) {
-            [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view forProgram:(JQKProgram *)self.video withCompletionHandler:^{
+            [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view forPayable:self.video withCompletionHandler:^{
                 @strongify(self);
                 [self dismissViewControllerAnimated:YES completion:nil];
             }];

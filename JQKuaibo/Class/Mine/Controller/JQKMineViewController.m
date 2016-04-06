@@ -67,7 +67,7 @@ typedef NS_ENUM(NSUInteger, JQKMineCellRow) {
         cell.textLabel.text = @"意见投诉";
     } else if (indexPath.row == JQKMineCellRowAgreement) {
         cell.imageView.image = [UIImage imageNamed:@"agreement"];
-        cell.textLabel.text = @"会员协议";
+        cell.textLabel.text = @"用户协议";
     }
     return cell;
 }

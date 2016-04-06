@@ -17,7 +17,7 @@
 - (BOOL)fetchVideosWithField:(JQKVideoListField)field
                       pageNo:(NSUInteger)pageNo
                     pageSize:(NSUInteger)pageSize
-                    columnId:(NSNumber *)columnId
+                    columnId:(NSString *)columnId
            completionHandler:(JQKCompletionHandler)handler
 {
     @weakify(self);

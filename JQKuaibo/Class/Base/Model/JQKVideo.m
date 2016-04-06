@@ -15,6 +15,18 @@
 - (Class)CommentElementClass {
     return [JQKComment class];
 }
+
+- (NSNumber *)contentId {
+    return @(self.Id.integerValue);
+}
+
+- (NSNumber *)contentType {
+    return @(JQKContentTypeVideo);
+}
+
+- (NSNumber *)payPointType {
+    return @1;
+}
 //+ (NSArray<JQKVideo *> *)allPlayedVideos {
 //    NSMutableArray *playedVideos = [NSMutableArray array];
 //    NSArray<NSDictionary *> *history = [[NSUserDefaults standardUserDefaults] objectForKey:kVideoHistoryKeyName];

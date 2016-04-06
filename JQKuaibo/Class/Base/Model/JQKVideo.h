@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "JQKComment.h"
+#import "JQKPayable.h"
 //typedef NS_ENUM(NSUInteger, JQKVideoSpec) {
 //    JQKVideoSpecNone,
 //    JQKVideoSpecHot,
@@ -15,7 +16,7 @@
 //    JQKVideoSpecHD
 //};
 
-@interface JQKVideo : NSObject
+@interface JQKVideo : NSObject <JQKPayable>
 
 @property (nonatomic,retain) NSArray<JQKComment *> *Comment;
 @property (nonatomic) NSString *Id;

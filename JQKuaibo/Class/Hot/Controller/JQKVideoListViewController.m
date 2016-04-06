@@ -83,8 +83,15 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
 
 - (void)loadMoviesWithRefreshFlag:(BOOL)isRefresh {
     @weakify(self);
+    NSUInteger page = isRefresh?1:self.videoModel.fetchedVideos.Pinfo.Page.unsignedIntegerValue+1;
+    if (page > 1 && ![JQKUtil isPaid]) {
+        [_layoutCollectionView JQK_endPullToRefresh];
+        [[JQKHudManager manager] showHudWithText:@"成为VIP后可以查看更多"];
+        return;
+    }
+    
     [self.videoModel fetchVideosWithField:_field
-                                   pageNo:isRefresh?1:self.videoModel.fetchedVideos.Pinfo.Page.unsignedIntegerValue+1
+                                   pageNo:page
                                  pageSize:kDefaultPageSize
                                  columnId:_channel.Id
                         completionHandler:^(BOOL success, id obj)
