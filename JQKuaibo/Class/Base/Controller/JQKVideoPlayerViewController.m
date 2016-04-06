@@ -34,7 +34,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blackColor];
     
-    _videoPlayer = [[JQKVideoPlayer alloc] initWithVideoURL:[NSURL URLWithString:self.video.videoUrl]];
+    _videoPlayer = [[JQKVideoPlayer alloc] initWithVideoURL:[NSURL URLWithString:self.video.Url]];
     [self.view addSubview:_videoPlayer];
     {
         [_videoPlayer mas_makeConstraints:^(MASConstraintMaker *make) {

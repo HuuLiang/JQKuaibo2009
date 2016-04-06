@@ -7,26 +7,29 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef NS_ENUM(NSUInteger, JQKVideoSpec) {
-    JQKVideoSpecNone,
-    JQKVideoSpecHot,
-    JQKVideoSpecNew,
-    JQKVideoSpecHD
-};
+#import "JQKComment.h"
+//typedef NS_ENUM(NSUInteger, JQKVideoSpec) {
+//    JQKVideoSpecNone,
+//    JQKVideoSpecHot,
+//    JQKVideoSpecNew,
+//    JQKVideoSpecHD
+//};
 
 @interface JQKVideo : NSObject
 
-@property (nonatomic) NSNumber *programId;
-@property (nonatomic) NSString *title;
-@property (nonatomic) NSString *specialDesc;
-@property (nonatomic) NSString *videoUrl;
-@property (nonatomic) NSString *coverImg;
-@property (nonatomic) NSNumber *spec;
+@property (nonatomic,retain) NSArray<JQKComment *> *Comment;
+@property (nonatomic) NSString *Id;
+@property (nonatomic) NSString *coverUrl;
+@property (nonatomic) NSString *Describe;
+@property (nonatomic) NSString *Name;
+@property (nonatomic) NSString *Time;
+@property (nonatomic) NSString *Url;
+@property (nonatomic) NSNumber *Vip;
 
-@property (nonatomic) NSDate *playedDate; // for history 
 
-+ (NSArray<JQKVideo *> *)allPlayedVideos;
+//@property (nonatomic) NSDate *playedDate; // for history 
+//
+//+ (NSArray<JQKVideo *> *)allPlayedVideos;
 //- (void)didPlay;
 
 

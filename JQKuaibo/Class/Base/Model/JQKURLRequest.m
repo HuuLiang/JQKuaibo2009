@@ -179,8 +179,8 @@
             JQKURLResponse *urlResp = self.response;
             [urlResp parseResponseWithDictionary:responseObject];
             
-            status = urlResp.success.boolValue ? JQKURLResponseSuccess : JQKURLResponseFailedByInterface;
-            errorMessage = (status == JQKURLResponseSuccess) ? nil : [NSString stringWithFormat:@"ResultCode: %@", urlResp.resultCode];
+            status = urlResp.Result.boolValue ? JQKURLResponseSuccess : JQKURLResponseFailedByInterface;
+            errorMessage = (status == JQKURLResponseSuccess) ? nil : [NSString stringWithFormat:@"ResultCode: %@", urlResp.Result];
         } else {
             status = JQKURLResponseFailedByParsing;
             errorMessage = @"Parsing error: incorrect response class for JSON dictionary.\n";

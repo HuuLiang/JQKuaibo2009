@@ -8,10 +8,14 @@
 
 #import "JQKAppSpreadModel.h"
 
+@implementation JQKAppSpread
+
+@end
+
 @implementation JQKAppSpreadResponse
 
 - (Class)programListElementClass {
-    return [JQKProgram class];
+    return [JQKAppSpread class];
 }
 @end
 

@@ -11,7 +11,6 @@
 #import "JQKSystemConfigModel.h"
 #import "JQKPaymentModel.h"
 #import <objc/runtime.h>
-#import "JQKProgram.h"
 #import "WeChatPayManager.h"
 #import "JQKPaymentInfo.h"
 #import "JQKPaymentConfig.h"
@@ -177,7 +176,6 @@
     [[JQKPaymentManager sharedManager] startPaymentWithType:paymentType
                                                     subType:paymentSubType
                                                       price:price*100
-                                                 forProgram:program
                                           completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
                                               @strongify(self);
                                               [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];

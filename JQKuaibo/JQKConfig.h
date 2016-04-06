@@ -17,15 +17,17 @@
 #define JQK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd."
 #define JQK_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JQK_REST_APP_ID, JQK_CHANNEL_NO]
 
-#define JQK_BASE_URL             @"http://iv.ihuiyx.com"//@"http://120.24.252.114:8093" //
+#define JQK_BASE_URL             @"http://sx.ifanhao.cc:81"//@"http://120.24.252.114:8093" //
 
-#define JQK_HOME_VIDEO_URL              @"/iosvideo/homePage.htm"
-#define JQK_HOME_CHANNEL_URL            @"/iosvideo/channelRanking.htm"
-#define JQK_CHANNEL_LIST_URL            @"/iosvideo/channel.htm"
+#define JQK_CHANNEL_LIST_URL            @"/v1.php?qt=QueryCategoryReq"
+#define JQK_CHANNEL_PROGRAM_URL         @"/v1.php?qt=QueryVideosReq"
+#define JQK_RECOMMEND_VIDEO_URL         @"/v1.php?qt=QueryRecommendReq"
+#define JQK_VIP_VIDEO_URL               @"/v1.php?qt=QueryVipReq"
+#define JQK_HOT_VIDEO_URL               @"/v1.php?qt=QueryLivesReq"
+#define JQK_PHOTO_ALBUM_URL             @"/v1.php?qt=QueryAtlasReq"
+#define JQK_PHOTO_LIST_URL              @"/v1.php?qt=QueryPictureReq"
 
-#define JQK_HOME_CHANNEL_PROGRAM_URL    @"/iosvideo/program.htm"
-#define JQK_HOT_VIDEO_URL               @"/iosvideo/hotVideo.htm"
-#define JQK_MOVIE_URL                   @"/iosvideo/hotFilm.htm"
+#define JQK_SYSTEM_BASE_URL             @"http://iv.ihuiyx.com"
 #define JQK_APP_SPREAD_LIST_URL         @"/iosvideo/appSpreadList.htm"
 
 #define JQK_ACTIVATE_URL                @"/iosvideo/activat.htm"

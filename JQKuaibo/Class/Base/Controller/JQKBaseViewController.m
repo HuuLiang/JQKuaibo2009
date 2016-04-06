@@ -7,9 +7,9 @@
 //
 
 #import "JQKBaseViewController.h"
-#import "JQKProgram.h"
 #import "JQKPaymentViewController.h"
 #import "JQKVideoPlayerViewController.h"
+#import "JQKVideo.h"
 
 @import MediaPlayer;
 @import AVKit;
@@ -18,16 +18,40 @@
 @import AVFoundation.AVAssetImageGenerator;
 
 @interface JQKBaseViewController ()
+{
+    UIButton *_rightNavButton;
+}
 - (UIViewController *)playerVCWithVideo:(JQKVideo *)video;
 @end
 
 @implementation JQKBaseViewController
+
+- (BOOL)hidesBottomBarWhenPushed {
+    return self.navigationController.viewControllers.firstObject != self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor colorWithWhite:0.96 alpha:1];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPaidNotification:) name:kPaidNotificationName object:nil];
+    
+    if (self.navigationController.viewControllers.firstObject == self) {
+        @weakify(self);
+        _rightNavButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        _rightNavButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [_rightNavButton setImage:[UIImage imageNamed:@"VIP_navitem_normal"] forState:UIControlStateNormal];
+        [_rightNavButton setImage:[UIImage imageNamed:@"VIP_navitem_selected"] forState:UIControlStateSelected];
+        _rightNavButton.selected = [JQKUtil isPaid];
+        [_rightNavButton bk_addEventHandler:^(id sender) {
+            @strongify(self);
+            UIButton *thisButton = sender;
+            if (!thisButton.selected) {
+                [self payForProgram:nil];
+            }
+        } forControlEvents:UIControlEventTouchUpInside];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightNavButton];
+    }
 }
 
 - (void)dealloc {
@@ -36,11 +60,11 @@
     DLog(@"%@ dealloc", [self class]);
 }
 
-- (void)switchToPlayProgram:(JQKProgram *)program {
+- (void)switchToPlayVideo:(JQKVideo *)video {
     if (![JQKUtil isPaid]) {
-        [self payForProgram:program];
-    } else if (program.type.unsignedIntegerValue == JQKProgramTypeVideo) {
-        [self playVideo:program];
+        [self payForProgram:nil];
+    } else {
+        [self playVideo:video];
     }
 }
 
@@ -82,7 +106,7 @@
     UIViewController *retVC;
     if (NSClassFromString(@"AVPlayerViewController")) {
         AVPlayerViewController *playerVC = [[AVPlayerViewController alloc] init];
-        playerVC.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:video.videoUrl]];
+        playerVC.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:video.Url]];
         [playerVC aspect_hookSelector:@selector(viewDidAppear:)
                           withOptions:AspectPositionAfter
                            usingBlock:^(id<AspectInfo> aspectInfo){
@@ -92,7 +116,7 @@
         
         retVC = playerVC;
     } else {
-        retVC = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:video.videoUrl]];
+        retVC = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:video.Url]];
     }
     
     [retVC aspect_hookSelector:@selector(supportedInterfaceOrientations) withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){

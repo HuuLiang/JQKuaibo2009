@@ -10,6 +10,10 @@
 
 @implementation JQKUserAccessModel
 
+- (BOOL)shouldPostErrorNotification {
+    return NO;
+}
+
 + (Class)responseClass {
     return [NSString class];
 }

@@ -18,6 +18,7 @@
 #import <BlocksKit+UIKit.h>
 #import <Masonry.h>
 #import <UIImageView+WebCache.h>
+#import <UIImageView+CornerRadius.h>
 #import "JQKCommonDef.h"
 #import "JQKConfig.h"
 #import "RACEXTScope.h"

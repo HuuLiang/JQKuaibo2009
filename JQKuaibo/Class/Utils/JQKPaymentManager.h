@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class JQKProgram;
-
 typedef void (^JQKPaymentCompletionHandler)(PAYRESULT payResult, JQKPaymentInfo *paymentInfo);
 
 @interface JQKPaymentManager : NSObject
@@ -20,7 +18,6 @@ typedef void (^JQKPaymentCompletionHandler)(PAYRESULT payResult, JQKPaymentInfo 
 - (BOOL)startPaymentWithType:(JQKPaymentType)type
                      subType:(JQKPaymentType)subType
                        price:(NSUInteger)price
-                  forProgram:(JQKProgram *)program
            completionHandler:(JQKPaymentCompletionHandler)handler;
 
 

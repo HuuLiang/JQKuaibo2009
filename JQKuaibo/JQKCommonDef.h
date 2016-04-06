@@ -24,6 +24,14 @@ typedef NS_ENUM(NSInteger, PAYRESULT)
     PAYRESULT_UNKNOWN   = 3
 };
 
+typedef NS_ENUM(NSUInteger, JQKVideoListField) {
+    JQKVideoListFieldUnknown,
+    JQKVideoListFieldVIP,
+    JQKVideoListFieldRecommend,
+    JQKVideoListFieldHot,
+    JQKVideoListFieldChannel
+};
+
 // DLog
 #ifdef  DEBUG
 #define DLog(fmt,...) {NSLog((@"%s [Line:%d]" fmt),__PRETTY_FUNCTION__,__LINE__,##__VA_ARGS__);}
@@ -45,7 +53,7 @@ return _##propertyName; \
 
 #define kPaidNotificationName @"jqkuaibo_paid_notification"
 #define kDefaultDateFormat    @"yyyyMMddHHmmss"
-#define kDefaultPageSize      (20)
+#define kDefaultPageSize      (16)
 
 typedef void (^JQKAction)(id obj);
 typedef void (^JQKCompletionHandler)(BOOL success, id obj);

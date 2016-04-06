@@ -2,16 +2,15 @@
 //  JQKVideos.h
 //  JQKuaibo
 //
-//  Created by Sean Yue on 16/3/8.
+//  Created by Sean Yue on 16/4/5.
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKProgram.h"
+#import "JQKURLResponse.h"
+#import "JQKVideo.h"
 
-@interface JQKVideos : JQKPrograms
+@interface JQKVideos : JQKURLResponse
 
-@property (nonatomic) NSNumber *items;
-@property (nonatomic) NSNumber *page;
-@property (nonatomic) NSNumber *pageSize;
+@property (nonatomic,retain) NSArray<JQKVideo *> *Videos;
 
 @end

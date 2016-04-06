@@ -8,7 +8,7 @@
 
 #import "JQKAppDelegate.h"
 #import "JQKHomeViewController.h"
-#import "JQKLiveShowViewController.h"
+#import "JQKVideoListViewController.h"
 #import "JQKMoreViewController.h"
 #import "MobClick.h"
 #import "JQKActivateModel.h"
@@ -16,8 +16,7 @@
 #import "JQKPaymentModel.h"
 #import "JQKSystemConfigModel.h"
 #import "JQKPaymentViewController.h"
-//#import "JQKChannelViewController.h"
-#import "JQKMovieViewController.h"
+#import "JQKChannelViewController.h"
 #import "JQKMineViewController.h"
 
 @interface JQKAppDelegate ()
@@ -38,57 +37,41 @@
     homeVC.title                         = @"乐播";
     
     UINavigationController *homeNav      = [[UINavigationController alloc] initWithRootViewController:homeVC];
-    
-    UIImage *homeImage                   = [UIImage imageNamed:@"home_tabbar"];
     homeNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:homeVC.title
-                                                                         image:homeImage
-                                                                 selectedImage:[homeImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+                                                                         image:[UIImage imageNamed:@"home_normal"]
+                                                                 selectedImage:[UIImage imageNamed:@"home_selected"]];
     
-    JQKLiveShowViewController *liveShowVC = [[JQKLiveShowViewController alloc] init];
-    liveShowVC.title                      = @"主播";
+    JQKVideoListViewController *hotVideoVC = [[JQKVideoListViewController alloc] initWithField:JQKVideoListFieldHot];
+    hotVideoVC.title                       = @"无码";
 
-    UINavigationController *liveShowNav   = [[UINavigationController alloc] initWithRootViewController:liveShowVC];
+    UINavigationController *liveShowNav   = [[UINavigationController alloc] initWithRootViewController:hotVideoVC];
+    liveShowNav.tabBarItem                = [[UITabBarItem alloc] initWithTitle:hotVideoVC.title
+                                                                          image:[UIImage imageNamed:@"show_normal"]
+                                                                  selectedImage:[UIImage imageNamed:@"show_selected"]];
+    
+    JQKChannelViewController *channelVC = [[JQKChannelViewController alloc] init];
+    channelVC.title                     = @"频道";
 
-    UIImage *liveShowImage                = [UIImage imageNamed:@"show_tabbar"];
-    liveShowNav.tabBarItem                = [[UITabBarItem alloc] initWithTitle:liveShowVC.title
-                                                                          image:liveShowImage
-                                                                  selectedImage:[liveShowImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    
-    JQKMovieViewController *movieVC      = [[JQKMovieViewController alloc] init];
-    movieVC.title                        = @"电影";
-
-    UINavigationController *channelNav  = [[UINavigationController alloc] initWithRootViewController:movieVC];
-    UIImage *channelImage               = [UIImage imageNamed:@"channel_tabbar"];
-    channelNav.tabBarItem               = [[UITabBarItem alloc] initWithTitle:movieVC.title
-                                                                           image:channelImage
-                                                                   selectedImage:[channelImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    
-    
-//    JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
-//    mineVC.title                         = @"我的";
-//    
-//    UINavigationController *mineNav      = [[UINavigationController alloc] initWithRootViewController:mineVC];
-//    mineNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:mineVC.title
-//                                                                          image:[[UIImage imageNamed:@"mine_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-//                                                                 selectedImage:[[UIImage imageNamed:@"mine_highlight"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    UINavigationController *channelNav  = [[UINavigationController alloc] initWithRootViewController:channelVC];
+    channelNav.tabBarItem               = [[UITabBarItem alloc] initWithTitle:channelVC.title
+                                                                           image:[UIImage imageNamed:@"channel_normal"]
+                                                                   selectedImage:[UIImage imageNamed:@"channel_selected"]];
     
     JQKMoreViewController *moreVC        = [[JQKMoreViewController alloc] init];
-    moreVC.title                         = @"更多";
+    moreVC.title                         = @"约吧";
     
     UINavigationController *moreNav      = [[UINavigationController alloc] initWithRootViewController:moreVC];
-    UIImage *moreImage                   = [UIImage imageNamed:@"more_tabbar"];
     moreNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:moreVC.title
-                                                                         image:moreImage
-                                                                 selectedImage:[moreImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+                                                                         image:[UIImage imageNamed:@"more_normal"]
+                                                                 selectedImage:[UIImage imageNamed:@"more_selected"]];
     
     JQKMineViewController *mineVC        = [[JQKMineViewController alloc] init];
     mineVC.title                         = @"会员";
     
     UINavigationController *mineNav      = [[UINavigationController alloc] initWithRootViewController:mineVC];
-    UIImage *mineImage                   = [UIImage imageNamed:@"mine_tabbar"];
     mineNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:mineVC.title
-                                                                         image:mineImage
-                                                                 selectedImage:[mineImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+                                                                         image:[UIImage imageNamed:@"mine_normal"]
+                                                                 selectedImage:[UIImage imageNamed:@"mine_selected"]];
 
     UITabBarController *tabBarController    = [[UITabBarController alloc] init];
     tabBarController.viewControllers        = @[homeNav,liveShowNav,channelNav,moreNav,mineNav];
@@ -98,7 +81,7 @@
 
 - (void)setupCommonStyles {
     //[[UITabBar appearance] setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithWhite:0.95 alpha:1]]];
-    [[UITabBar appearance] setTintColor:[UIColor colorWithHexString:@"#ff59a1"]];
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
     [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:20.]}];

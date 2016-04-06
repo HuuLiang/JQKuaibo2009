@@ -13,7 +13,7 @@
 
 @interface JQKBaseViewController : UIViewController
 
-- (void)switchToPlayProgram:(JQKProgram *)program;
+- (void)switchToPlayVideo:(JQKVideo *)video;
 - (void)playVideo:(JQKVideo *)video;
 - (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment;
 - (void)payForProgram:(JQKProgram *)program;

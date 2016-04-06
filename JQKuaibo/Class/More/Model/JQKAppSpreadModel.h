@@ -7,15 +7,21 @@
 //
 
 #import "JQKEncryptedURLRequest.h"
-#import "JQKProgram.h"
+
+@interface JQKAppSpread : NSObject
+@property (nonatomic) NSString *title;
+@property (nonatomic) NSString *specialDesc;
+@property (nonatomic) NSString *videoUrl;
+@property (nonatomic) NSString *coverImg;
+@end
 
 @interface JQKAppSpreadResponse : JQKURLResponse
-@property (nonatomic,retain) NSArray<JQKProgram *> *programList;
+@property (nonatomic,retain) NSArray<JQKAppSpread *> *programList;
 @end
 
 @interface JQKAppSpreadModel : JQKEncryptedURLRequest
 
-@property (nonatomic,retain,readonly) NSArray<JQKProgram *> *fetchedSpreads;
+@property (nonatomic,retain,readonly) NSArray<JQKAppSpread *> *fetchedSpreads;
 
 - (BOOL)fetchAppSpreadWithCompletionHandler:(JQKCompletionHandler)handler;
 
