@@ -64,11 +64,11 @@ static JQKPaymentConfig *_shardConfig;
     return _shardConfig;
 }
 
-- (NSNumber *)success {
+- (NSNumber *)Result {
     return self.code.value.unsignedIntegerValue == 100 ? @(1) : (0);
 }
 
-- (NSString *)resultCode {
+- (NSString *)Msg {
     return self.code.value.stringValue;
 }
 
