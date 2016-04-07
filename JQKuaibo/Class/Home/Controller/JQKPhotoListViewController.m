@@ -17,14 +17,14 @@ static NSString *const kPhotoCellReusableIdentifier = @"PhotoCellReusableIdentif
 {
     UICollectionView *_layoutCollectionView;
 }
-@property (nonatomic,retain) NSMutableArray<JQKPhoto *> *photos;
+@property (nonatomic,retain) NSArray<JQKPhoto *> *photos;
 @property (nonatomic,retain) JQKPhotoListModel *photoModel;
 @end
 
 @implementation JQKPhotoListViewController
 
 DefineLazyPropertyInitialization(JQKPhotoListModel, photoModel)
-DefineLazyPropertyInitialization(NSMutableArray, photos)
+DefineLazyPropertyInitialization(NSArray, photos)
 
 - (instancetype)initWithPhotoAlbum:(JQKChannel *)album {
     self = [super init];
@@ -59,18 +59,16 @@ DefineLazyPropertyInitialization(NSMutableArray, photos)
     @weakify(self);
     [_layoutCollectionView JQK_addPullToRefreshWithHandler:^{
         @strongify(self);
-        [self loadPhotosWithRefreshFlag:YES];
-    }];
-    [_layoutCollectionView JQK_addPagingRefreshWithHandler:^{
-        @strongify(self);
-        [self loadPhotosWithRefreshFlag:NO];
+        [self loadPhotos];
     }];
     [_layoutCollectionView JQK_triggerPullToRefresh];
 }
 
-- (void)loadPhotosWithRefreshFlag:(BOOL)isRefresh {
+- (void)loadPhotos {
     @weakify(self);
-    [self.photoModel fetchPhotosWithAlbumId:_album.Id page:isRefresh?1:self.photoModel.fetchedPhotos.Pinfo.Page.unsignedIntegerValue+1 pageSize:kDefaultPageSize completionHandler:^(BOOL success, id obj) {
+    [self.photoModel fetchPhotosWithAlbumId:_album.Id page:0//isRefresh?1:self.photoModel.fetchedPhotos.Pinfo.Page.unsignedIntegerValue+1
+                                   pageSize:50
+                          completionHandler:^(BOOL success, id obj) {
         @strongify(self);
         if (!self) {
             return ;
@@ -79,19 +77,9 @@ DefineLazyPropertyInitialization(NSMutableArray, photos)
         [self->_layoutCollectionView JQK_endPullToRefresh];
         
         if (success) {
-            if (isRefresh) {
-                [self.photos removeAllObjects];
-            }
-            
             JQKPhotos *photos = obj;
-            if (photos.Pictures) {
-                [self.photos addObjectsFromArray:photos.Pictures];
-                [self->_layoutCollectionView reloadData];
-            }
-            
-            if (photos.Pinfo.Page.unsignedIntegerValue == photos.Pinfo.PageCount.unsignedIntegerValue) {
-                [self->_layoutCollectionView JQK_pagingRefreshNoMoreData];
-            }
+            self.photos = photos.Pictures;
+            [self->_layoutCollectionView reloadData];
         }
     }];
 }

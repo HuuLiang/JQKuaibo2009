@@ -23,8 +23,9 @@
     }
     
     @weakify(self);
-    BOOL success = [self requestURLPath:JQK_PHOTO_LIST_URL
-                             withParams:@{@"AtlasId":albumId, @"Page":@(page), @"PageSize":@(pageSize)}
+    NSString *urlPath = [NSString stringWithFormat:JQK_PHOTO_LIST_URL, albumId.integerValue, pageSize, page];
+    BOOL success = [self requestURLPath:urlPath
+                             withParams:nil
                         responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
     {
         @strongify(self);

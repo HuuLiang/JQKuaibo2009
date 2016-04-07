@@ -35,13 +35,27 @@
         params = modifiedParams;
     }
     
-    NSDictionary *urlPathMapping = @{@(JQKVideoListFieldVIP):JQK_VIP_VIDEO_URL,
-                                     @(JQKVideoListFieldRecommend):JQK_RECOMMEND_VIDEO_URL,
-                                     @(JQKVideoListFieldHot):JQK_HOT_VIDEO_URL,
-                                     @(JQKVideoListFieldChannel):JQK_CHANNEL_PROGRAM_URL};
     
-    BOOL success = [self requestURLPath:urlPathMapping[@(field)]
-                             withParams:params
+    
+    NSString *urlPath;
+    if (field == JQKVideoListFieldChannel) {
+        if (columnId == nil) {
+            if (handler) {
+                handler(NO, nil);
+            }
+            return NO;
+        }
+        
+        urlPath = [NSString stringWithFormat:JQK_CHANNEL_PROGRAM_URL, columnId.integerValue, pageSize, pageNo];
+    } else {
+        NSDictionary *urlPathMapping = @{@(JQKVideoListFieldVIP):JQK_VIP_VIDEO_URL,
+                                         @(JQKVideoListFieldRecommend):JQK_RECOMMEND_VIDEO_URL,
+                                         @(JQKVideoListFieldHot):JQK_HOT_VIDEO_URL};
+        urlPath = [NSString stringWithFormat:urlPathMapping[@(field)], pageSize, pageNo];
+    }
+    
+    BOOL success = [self requestURLPath:urlPath
+                             withParams:nil
                         responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);

@@ -24,8 +24,9 @@
 
 - (BOOL)fetchAlbumsWithPage:(NSUInteger)page pageSize:(NSUInteger)pageSize completionHandler:(JQKCompletionHandler)handler {
     @weakify(self);
-    BOOL ret = [self requestURLPath:JQK_PHOTO_ALBUM_URL
-                         withParams:@{@"Page":@(page), @"PageSize":@(pageSize)}
+    NSString *urlPath = [NSString stringWithFormat:JQK_PHOTO_ALBUM_URL, pageSize, page];
+    BOOL ret = [self requestURLPath:urlPath
+                         withParams:nil
                     responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
     {
         @strongify(self);
