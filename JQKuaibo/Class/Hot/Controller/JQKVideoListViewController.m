@@ -178,8 +178,13 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.videos.count) {
         JQKVideo *video = self.videos[indexPath.item];
-        JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video];
-        [self.navigationController pushViewController:videoVC animated:YES];
+        if (video.Vip.boolValue) {
+            JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video];
+            [self.navigationController pushViewController:videoVC animated:YES];
+        } else {
+            [self playVideo:video withTimeControl:NO shouldPopPayment:YES];
+        }
+        
     }
 }
 @end

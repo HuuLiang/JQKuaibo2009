@@ -86,6 +86,7 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
     } else {
         JQKVideoPlayerViewController *playerVC = [[JQKVideoPlayerViewController alloc] initWithVideo:video];
         playerVC.hidesBottomBarWhenPushed = YES;
+        playerVC.shouldPopupPaymentIfNotPaid = shouldPopPayment;
         [self presentViewController:playerVC animated:YES completion:nil];
     }
 }
