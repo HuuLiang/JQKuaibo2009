@@ -102,9 +102,9 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
     [cell addSubview:titleLabel];
     {
         [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(imageView.mas_right).offset(15);
+            make.left.equalTo(imageView.mas_right).offset(10);
             make.centerY.equalTo(cell);
-            make.right.equalTo(button?button.mas_left:cell).offset(-15);
+            make.right.equalTo(button?button.mas_left:cell).offset(-5);
         }];
     }
     
@@ -118,9 +118,14 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
 }
 
 - (void)setShowPrice:(NSNumber *)showPrice {
-    double price = showPrice.doubleValue;
+    _showPrice = showPrice;
+    [self priceLabelSetPrice:showPrice];
+}
+
+- (void)priceLabelSetPrice:(NSNumber *)priceNumber {
+    double price = priceNumber.doubleValue;
     BOOL showInteger = (NSUInteger)(price * 100) % 100 == 0;
-    _priceLabel.text = showInteger ? [NSString stringWithFormat:@"%ld元", (NSUInteger)price] : [NSString stringWithFormat:@"%.2f元", price];
+    _priceLabel.text = showInteger ? [NSString stringWithFormat:@"%ld", (NSUInteger)price] : [NSString stringWithFormat:@"%.2f", price];
 }
 
 #pragma mark - UITableViewDataSource,UITableViewDelegate
@@ -145,13 +150,15 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
             
             _priceLabel = [[UILabel alloc] init];
             _priceLabel.textColor = [UIColor redColor];
-            _priceLabel.font = [UIFont systemFontOfSize:18.];
+            _priceLabel.font = [UIFont systemFontOfSize:24];
+            _priceLabel.textAlignment = NSTextAlignmentCenter;
+            [self priceLabelSetPrice:_showPrice];
             [_headerImageView addSubview:_priceLabel];
             {
                 [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(_headerImageView.mas_centerY).multipliedBy(1.15);
-                    make.right.equalTo(_headerImageView).offset(-10);
-                    make.width.equalTo(_headerImageView).multipliedBy(0.25);
+                    make.centerY.equalTo(_headerImageView).multipliedBy(1.55);
+                    make.centerX.equalTo(_headerImageView).multipliedBy(1.57);
+                    make.width.equalTo(_headerImageView).multipliedBy(0.2);
                 }];
             }
             
