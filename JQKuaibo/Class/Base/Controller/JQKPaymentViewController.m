@@ -61,7 +61,7 @@
     
     _popView = [[JQKPaymentPopView alloc] init];
     
-    _popView.headerImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"payment_background" ofType:@"jpg"]];
+    _popView.headerImageUrl = [NSURL URLWithString:[JQKSystemConfigModel sharedModel].isHalfPay ? [JQKSystemConfigModel sharedModel].halfPaymentImage : [JQKSystemConfigModel sharedModel].paymentImage];
     _popView.footerImage = [UIImage imageNamed:@"payment_footer"];
     
     if (([JQKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & JQKIAppPayTypeWeChat)
@@ -148,9 +148,6 @@
 }
 
 - (void)setPayAmount:(NSNumber *)payAmount {
-#ifdef DEBUG
-    payAmount = @(0.01);
-#endif
     _payAmount = payAmount;
     self.popView.showPrice = payAmount;
 }

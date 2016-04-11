@@ -70,6 +70,8 @@
 		BC45A0561CB3E8400019C248 /* JQKVideoListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC45A0551CB3E8400019C248 /* JQKVideoListModel.m */; };
 		BC4C09CB1C328B4F002C4709 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4C09C71C328B4F002C4709 /* libWeChatSDK.a */; };
 		BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4C09CC1C328C1D002C4709 /* CoreTelephony.framework */; };
+		BC5385701CBBFB5700D5BA3D /* JQKLocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC53856F1CBBFB5700D5BA3D /* JQKLocalNotificationManager.m */; };
+		BC5385721CBBFDA700D5BA3D /* payment_header_placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BC5385711CBBFDA700D5BA3D /* payment_header_placeholder.jpg */; };
 		BC579F921CB4E86700AEE5E8 /* JQKPhotoAlbumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC579F911CB4E86700AEE5E8 /* JQKPhotoAlbumModel.m */; };
 		BC579F9B1CB5196000AEE5E8 /* JQKPhotoListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC579F9A1CB5196000AEE5E8 /* JQKPhotoListModel.m */; };
 		BC579F9E1CB5198700AEE5E8 /* JQKPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = BC579F9D1CB5198700AEE5E8 /* JQKPhoto.m */; };
@@ -87,7 +89,6 @@
 		BC76BB031CAD05090067ECDF /* IapppayAlphaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC69A47C1C9988CB0010FA89 /* IapppayAlphaKit.framework */; };
 		BC8A2ABB1C8FF85900DF2AE2 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC8A2ABA1C8FF85900DF2AE2 /* Launch Screen.storyboard */; };
 		BC8A2ABE1C8FF90500DF2AE2 /* launch_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BC8A2ABD1C8FF90500DF2AE2 /* launch_image.jpg */; };
-		BC8A2AC01C900D9100DF2AE2 /* payment_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BC8A2ABF1C900D9100DF2AE2 /* payment_background.jpg */; };
 		BC8A2AC61C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8A2AC51C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m */; };
 		BC8A2AC91C902E6300DF2AE2 /* JQKVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC8A2AC81C902E6300DF2AE2 /* JQKVideoPlayer.m */; };
 		BC9A9F961C9AA03A002510AB /* JQKMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9A9F951C9AA03A002510AB /* JQKMineViewController.m */; };
@@ -252,6 +253,9 @@
 		BC4C09C91C328B4F002C4709 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		BC4C09CA1C328B4F002C4709 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		BC4C09CC1C328C1D002C4709 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		BC53856E1CBBFB5700D5BA3D /* JQKLocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKLocalNotificationManager.h; sourceTree = "<group>"; };
+		BC53856F1CBBFB5700D5BA3D /* JQKLocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKLocalNotificationManager.m; sourceTree = "<group>"; };
+		BC5385711CBBFDA700D5BA3D /* payment_header_placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = payment_header_placeholder.jpg; sourceTree = "<group>"; };
 		BC579F901CB4E86700AEE5E8 /* JQKPhotoAlbumModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPhotoAlbumModel.h; sourceTree = "<group>"; };
 		BC579F911CB4E86700AEE5E8 /* JQKPhotoAlbumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPhotoAlbumModel.m; sourceTree = "<group>"; };
 		BC579F991CB5196000AEE5E8 /* JQKPhotoListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPhotoListModel.h; sourceTree = "<group>"; };
@@ -280,7 +284,6 @@
 		BC6FC3A11CA3ED5800856F0B /* WeChatPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatPayManager.m; sourceTree = "<group>"; };
 		BC8A2ABA1C8FF85900DF2AE2 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		BC8A2ABD1C8FF90500DF2AE2 /* launch_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch_image.jpg; sourceTree = "<group>"; };
-		BC8A2ABF1C900D9100DF2AE2 /* payment_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = payment_background.jpg; sourceTree = "<group>"; };
 		BC8A2AC41C902DFB00DF2AE2 /* JQKVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKVideoPlayerViewController.h; sourceTree = "<group>"; };
 		BC8A2AC51C902DFB00DF2AE2 /* JQKVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKVideoPlayerViewController.m; sourceTree = "<group>"; };
 		BC8A2AC71C902E6300DF2AE2 /* JQKVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKVideoPlayer.h; sourceTree = "<group>"; };
@@ -638,6 +641,8 @@
 				BC3873081C2D38D000CBE88A /* JQKHudManager.m */,
 				BC69A4811C9988D30010FA89 /* JQKPaymentManager.h */,
 				BC69A4821C9988D30010FA89 /* JQKPaymentManager.m */,
+				BC53856E1CBBFB5700D5BA3D /* JQKLocalNotificationManager.h */,
+				BC53856F1CBBFB5700D5BA3D /* JQKLocalNotificationManager.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -785,8 +790,8 @@
 		BC8A2ABC1C8FF8F000DF2AE2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BC5385711CBBFDA700D5BA3D /* payment_header_placeholder.jpg */,
 				BC8A2ABD1C8FF90500DF2AE2 /* launch_image.jpg */,
-				BC8A2ABF1C900D9100DF2AE2 /* payment_background.jpg */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -978,8 +983,8 @@
 			files = (
 				BC8A2ABE1C8FF90500DF2AE2 /* launch_image.jpg in Resources */,
 				BC8A2ABB1C8FF85900DF2AE2 /* Launch Screen.storyboard in Resources */,
-				BC8A2AC01C900D9100DF2AE2 /* payment_background.jpg in Resources */,
 				BC5BCE961C51EE460034F532 /* config.plist in Resources */,
+				BC5385721CBBFDA700D5BA3D /* payment_header_placeholder.jpg in Resources */,
 				BC3872131C2D273100CBE88A /* Assets.xcassets in Resources */,
 				BC69A4801C9988CB0010FA89 /* IapppayAlphaResource.bundle in Resources */,
 			);
@@ -1101,6 +1106,7 @@
 				BC3872B81C2D2E3E00CBE88A /* NSMutableDictionary+SafeCoding.m in Sources */,
 				BC36592B1CB45B8300882E3D /* JQKHomeSectionHeaderView.m in Sources */,
 				BC3872C21C2D2E3E00CBE88A /* UIScrollView+Refresh.m in Sources */,
+				BC5385701CBBFB5700D5BA3D /* JQKLocalNotificationManager.m in Sources */,
 				BC9A9FA51C9AAB99002510AB /* UITextView+Placeholder.m in Sources */,
 				BC9A9F9C1C9AA73C002510AB /* UITableView+Separator.m in Sources */,
 				BC3873091C2D38D000CBE88A /* JQKErrorHandler.m in Sources */,

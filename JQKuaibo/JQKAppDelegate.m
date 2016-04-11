@@ -152,13 +152,22 @@
     
 }
 
+- (void)registerUserNotification {
+    if (NSClassFromString(@"UIUserNotificationSettings")) {
+        UIUserNotificationType notiType = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *notiSettings = [UIUserNotificationSettings settingsForTypes:notiType categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:notiSettings];
+    }
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
+    [JQKUtil accumateLaunchSeq];
     [[JQKPaymentManager sharedManager] setup];
     [[JQKErrorHandler sharedHandler] initialize];
     [self setupMobStatistics];
     [self setupCommonStyles];
+    [self registerUserNotification];
     [self.window makeKeyWindow];
     self.window.hidden = NO;
     
@@ -179,6 +188,14 @@
             return ;
         }
         
+        NSInteger halfPayLaunchSeq = [JQKSystemConfigModel sharedModel].halfPayLaunchSeq;
+        if (halfPayLaunchSeq >= 0 && [JQKUtil launchSeq] == halfPayLaunchSeq) {
+            NSString *halfPayLaunchNotification = [JQKSystemConfigModel sharedModel].halfPayLaunchNotification;
+            NSString *repeatTimeString = [JQKSystemConfigModel sharedModel].halfPayNotiRepeatTimes;
+            NSArray<NSString *> *repeatTimeStrings = [repeatTimeString componentsSeparatedByString:@";"];
+            [[JQKLocalNotificationManager sharedManager] scheduleRepeatNotification:halfPayLaunchNotification withTimes:repeatTimeStrings];
+        }
+        
         if ([JQKSystemConfigModel sharedModel].startupInstall.length == 0
             || [JQKSystemConfigModel sharedModel].startupPrompt.length == 0) {
             return ;
@@ -197,21 +214,47 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    if ([JQKUtil isPaid]) {
+        return ;
+    }
+    
+    UIBackgroundTaskIdentifier bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
+        DLog(@"Application expired background task!");
+        [application endBackgroundTask:bgTask];
+    }];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSInteger halfPayLaunchSeq = [JQKSystemConfigModel sharedModel].halfPayLaunchSeq;
+        if (halfPayLaunchSeq >= 0 && [JQKUtil launchSeq] >= halfPayLaunchSeq) {
+            NSString *halfPayLaunchNotification = [JQKSystemConfigModel sharedModel].halfPayLaunchNotification;
+            NSInteger delay = [JQKSystemConfigModel sharedModel].halfPayLaunchDelay;
+            if (halfPayLaunchNotification.length > 0 && delay >= 0) {
+                [[JQKLocalNotificationManager sharedManager] scheduleLocalNotification:halfPayLaunchNotification withDelay:delay];
+                DLog(@"Schedule local notification %@ with delay %ld", halfPayLaunchNotification, delay);
+            }
+        }
+    });
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     if (![JQKUtil isPaid]) {
         [[JQKPaymentManager sharedManager] checkPayment];
     }
 }
 
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+}
+
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    DLog(@"receive local notification");
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

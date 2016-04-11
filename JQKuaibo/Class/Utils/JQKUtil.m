@@ -18,6 +18,7 @@ NSString *const kPaymentInfoKeyName = @"jqkuaibov_paymentinfo_keyname";
 static NSString *const kRegisterKeyName = @"jqkuaibov_register_keyname";
 static NSString *const kUserAccessUsername = @"jqkuaibov_user_access_username";
 static NSString *const kUserAccessServicename = @"jqkuaibov_user_access_service";
+static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
 
 @implementation JQKUtil
 
@@ -99,4 +100,13 @@ static NSString *const kUserAccessServicename = @"jqkuaibov_user_access_service"
     return [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
 }
 
++ (NSUInteger)launchSeq {
+    NSNumber *launchSeq = [[NSUserDefaults standardUserDefaults] objectForKey:kLaunchSeqKeyName];
+    return launchSeq.unsignedIntegerValue;
+}
+
++ (void)accumateLaunchSeq {
+    NSUInteger launchSeq = [self launchSeq];
+    [[NSUserDefaults standardUserDefaults] setObject:@(launchSeq+1) forKey:kLaunchSeqKeyName];
+}
 @end

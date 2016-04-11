@@ -27,5 +27,6 @@
 #import "JQKErrorHandler.h"
 #import "JQKHudManager.h"
 #import "JQKPaymentManager.h"
+#import "JQKLocalNotificationManager.h"
 
 #endif /* JQKPrefixHeader_pch */

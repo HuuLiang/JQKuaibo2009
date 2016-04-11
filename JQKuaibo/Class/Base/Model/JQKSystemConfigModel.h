@@ -18,6 +18,8 @@ typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 @interface JQKSystemConfigModel : JQKEncryptedURLRequest
 
 @property (nonatomic) double payAmount;
+@property (nonatomic) NSString *paymentImage;
+@property (nonatomic) NSString *halfPaymentImage;
 @property (nonatomic) NSString *channelTopImage;
 @property (nonatomic) NSString *spreadTopImage;
 @property (nonatomic) NSString *spreadURL;
@@ -30,7 +32,13 @@ typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic) NSString *spreadRightImage;
 @property (nonatomic) NSString *spreadRightUrl;
 
+@property (nonatomic) NSInteger halfPayLaunchSeq;
+@property (nonatomic) NSInteger halfPayLaunchDelay;
+@property (nonatomic) NSString *halfPayLaunchNotification;
+@property (nonatomic) NSString *halfPayNotiRepeatTimes;
+
 @property (nonatomic,readonly) BOOL loaded;
+@property (nonatomic,readonly) BOOL isHalfPay;
 
 + (instancetype)sharedModel;
 

@@ -12,7 +12,7 @@ typedef void (^JQKPaymentAction)(id sender);
 
 @interface JQKPaymentPopView : UITableView
 
-@property (nonatomic,retain) UIImage *headerImage;
+@property (nonatomic) NSURL *headerImageUrl;
 @property (nonatomic,retain) UIImage *footerImage;
 //@property (nonatomic,copy) JQKPaymentAction paymentAction;
 @property (nonatomic,copy) JQKPaymentAction closeAction;

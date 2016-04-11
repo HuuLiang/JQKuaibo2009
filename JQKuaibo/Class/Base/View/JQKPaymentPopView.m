@@ -36,6 +36,8 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
         self.delegate = self;
         self.dataSource = self;
         self.scrollEnabled = NO;
+        self.layer.cornerRadius = lround(kScreenWidth*0.08);
+        self.layer.masksToBounds = YES;
     }
     return self;
 }
@@ -111,10 +113,9 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
     [self.cells setObject:cell forKey:indexPath];
 }
 
-- (void)setHeaderImage:(UIImage *)headerImage {
-    _headerImage = headerImage;
-    _headerImageView.image = headerImage;
-    
+- (void)setHeaderImageUrl:(NSURL *)headerImageUrl {
+    _headerImageUrl = headerImageUrl;
+    [_headerImageView sd_setImageWithURL:headerImageUrl placeholderImage:[UIImage imageNamed:@"payment_header_placeholder"] options:SDWebImageDelayPlaceholder];
 }
 
 - (void)setShowPrice:(NSNumber *)showPrice {
@@ -140,7 +141,9 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
             _headerCell = [[UITableViewCell alloc] init];
             _headerCell.selectionStyle = UITableViewCellSelectionStyleNone;
             
-            _headerImageView = [[UIImageView alloc] initWithImage:_headerImage];
+            _headerImageView = [[UIImageView alloc] init];
+            [_headerImageView sd_setImageWithURL:_headerImageUrl
+                                placeholderImage:[UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"payment_header_placeholder" ofType:@"jpg"]]];
             [_headerCell addSubview:_headerImageView];
             {
                 [_headerImageView mas_makeConstraints:^(MASConstraintMaker *make) {

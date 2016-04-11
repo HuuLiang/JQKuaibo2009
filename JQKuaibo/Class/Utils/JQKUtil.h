@@ -30,4 +30,7 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSString *)deviceName;
 + (NSString *)appVersion;
 
++ (NSUInteger)launchSeq;
++ (void)accumateLaunchSeq;
+
 @end
