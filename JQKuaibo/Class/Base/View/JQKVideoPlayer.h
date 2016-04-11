@@ -11,6 +11,7 @@
 @interface JQKVideoPlayer : UIView
 
 @property (nonatomic) NSURL *videoURL;
+@property (nonatomic,copy) JQKAction endPlayAction;
 
 - (instancetype)initWithVideoURL:(NSURL *)videoURL;
 - (void)startToPlay;

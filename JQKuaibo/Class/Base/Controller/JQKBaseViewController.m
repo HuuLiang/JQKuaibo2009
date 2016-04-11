@@ -67,10 +67,14 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
 }
 
 - (void)switchToPlayVideo:(JQKVideo *)video {
-    if (![JQKUtil isPaid]) {
+    if (![JQKUtil isPaid] && video.Vip.boolValue) {
         [self payForPayable:video];
     } else {
-        [self playVideo:video];
+        if ([JQKUtil isPaid]) {
+            [self playVideo:video];
+        } else {
+            [self playVideo:video withTimeControl:NO shouldPopPayment:YES];
+        }
     }
 }
 

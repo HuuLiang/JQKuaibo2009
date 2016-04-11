@@ -49,6 +49,8 @@
         
         self.player = [AVPlayer playerWithURL:videoURL];
         [self.player addObserver:self forKeyPath:@"status" options:0 context:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEndPlay) name:AVPlayerItemDidPlayToEndTimeNotification  object:nil];
     }
     return self;
 }
@@ -63,6 +65,9 @@
 
 - (void)dealloc {
     [self.player removeObserver:self forKeyPath:@"status"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    DLog(@"AVPlayer dealloc!");
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
@@ -76,6 +81,12 @@
                 _loadingLabel.text = @"加载失败";
                 break;
         }
+    }
+}
+
+- (void)didEndPlay {
+    if (self.endPlayAction) {
+        self.endPlayAction(self);
     }
 }
 @end

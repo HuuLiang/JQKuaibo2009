@@ -182,7 +182,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
             JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video];
             [self.navigationController pushViewController:videoVC animated:YES];
         } else {
-            [self playVideo:video withTimeControl:NO shouldPopPayment:YES];
+            [self switchToPlayVideo:video];
         }
         
     }

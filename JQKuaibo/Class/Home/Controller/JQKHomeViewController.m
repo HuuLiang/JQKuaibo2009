@@ -287,7 +287,7 @@ DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
         if (indexPath.item < videoModel.fetchedVideos.Videos.count) {
             JQKVideo *video = videoModel.fetchedVideos.Videos[indexPath.item];
             if (indexPath.section == JQKHomeSectionTrial) {
-                [self playVideo:video withTimeControl:NO shouldPopPayment:YES];
+                [self switchToPlayVideo:video];
             } else {
                 JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video];
                 [self.navigationController pushViewController:videoVC animated:YES];

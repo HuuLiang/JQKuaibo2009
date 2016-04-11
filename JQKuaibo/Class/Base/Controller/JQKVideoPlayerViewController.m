@@ -34,7 +34,12 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blackColor];
     
+    @weakify(self);
     _videoPlayer = [[JQKVideoPlayer alloc] initWithVideoURL:[NSURL URLWithString:self.video.Url]];
+    _videoPlayer.endPlayAction = ^(id sender) {
+        @strongify(self);
+        [self dismissAndPopPayment];
+    };
     [self.view addSubview:_videoPlayer];
     {
         [_videoPlayer mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -52,19 +57,11 @@
         }];
     }
     
-    @weakify(self);
     [_closeButton bk_addEventHandler:^(id sender) {
         @strongify(self);
         [self->_videoPlayer pause];
         
-        if (_shouldPopupPaymentIfNotPaid && ![JQKUtil isPaid]) {
-            [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view forPayable:self.video withCompletionHandler:^{
-                @strongify(self);
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }];
-        } else {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
+        [self dismissAndPopPayment];
     } forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -73,6 +70,12 @@
     [_videoPlayer startToPlay];
 }
 
+- (void)dismissAndPopPayment {
+    if (_shouldPopupPaymentIfNotPaid && ![JQKUtil isPaid]) {
+        [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view.window forPayable:self.video withCompletionHandler:nil];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 //- (BOOL)shouldAutorotate {
 //    return YES;
 //}
