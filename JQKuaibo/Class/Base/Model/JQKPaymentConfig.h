@@ -20,7 +20,7 @@ typedef NS_ENUM(NSUInteger, JQKIAppPayType) {
 @property (nonatomic) NSString *signKey;
 @property (nonatomic) NSString *notifyUrl;
 
-+ (instancetype)defaultConfig;
+//+ (instancetype)defaultConfig;
 @end
 
 @interface JQKAlipayConfig : NSObject
@@ -34,12 +34,11 @@ typedef NS_ENUM(NSUInteger, JQKIAppPayType) {
 @interface JQKIAppPayConfig : NSObject
 @property (nonatomic) NSString *appid;
 @property (nonatomic) NSString *privateKey;
-@property (nonatomic) NSString *publicKey;
 @property (nonatomic) NSString *notifyUrl;
 @property (nonatomic) NSNumber *waresid;
 @property (nonatomic) NSNumber *supportPayTypes;
 
-+ (instancetype)defaultConfig;
+//+ (instancetype)defaultConfig;
 @end
 
 @interface JQKPaymentConfig : JQKURLResponse
