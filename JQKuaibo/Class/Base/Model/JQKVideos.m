@@ -10,7 +10,11 @@
 
 @implementation JQKVideos
 
-- (Class)VideosElementClass {
+- (Class)programListElementClass {
+    return [JQKVideo class];
+}
+
+- (Class)hotProgramListElementClass {
     return [JQKVideo class];
 }
 

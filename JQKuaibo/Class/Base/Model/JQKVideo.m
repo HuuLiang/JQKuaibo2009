@@ -12,12 +12,8 @@
 
 @implementation JQKVideo
 
-- (Class)CommentElementClass {
-    return [JQKComment class];
-}
-
 - (NSNumber *)contentId {
-    return @(self.Id.integerValue);
+    return @(self.programId.integerValue);
 }
 
 - (NSNumber *)contentType {

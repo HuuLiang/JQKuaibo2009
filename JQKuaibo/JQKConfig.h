@@ -11,23 +11,43 @@
 
 #import "JQKConfiguration.h"
 
+//#define JQK_CHANNEL_NO           @"QUBA_IOS_TUIGUANG4_0000001"//[JQKConfiguration sharedConfig].channelNo
+//#define JQK_REST_APP_ID          @"QUBA_2009"
+//#define JQK_REST_PV              @100
+//#define JQK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Beijing Huazhong Hengtai Network Technology Co., Ltd."
+//#define JQK_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JQK_REST_APP_ID, JQK_CHANNEL_NO]
+//
+//#define JQK_BASE_URL             @"http://appcdn.mqu8.com"//@"http://sx.ifanhao.cc:81"//@"http://120.24.252.114:8093" //
+//
+//#define JQK_CHANNEL_LIST_URL            @"/static/kbyy/QueryCategoryReq.json"//@"/v1.php?qt=QueryCategoryReq"
+//#define JQK_CHANNEL_PROGRAM_URL         @"/static/kbyy/QueryVideosReq_%ld_%ld_%ld.json"//@"/v1.php?qt=QueryVideosReq"
+//#define JQK_RECOMMEND_VIDEO_URL         @"/static/kbyy/QueryRecommendReq_%ld_%ld.json"//@"/v1.php?qt=QueryRecommendReq"
+//#define JQK_VIP_VIDEO_URL               @"/static/kbyy/QueryVipReq_%ld_%ld.json"//@"/v1.php?qt=QueryVipReq"
+//#define JQK_HOT_VIDEO_URL               @"/static/kbyy/QueryLivesReq_%ld_%ld.json"//@"/v1.php?qt=QueryLivesReq"
+//#define JQK_PHOTO_ALBUM_URL             @"/static/kbyy/QueryAtlasReq_%ld_%ld.json"//@"/v1.php?qt=QueryAtlasReq"
+//#define JQK_PHOTO_LIST_URL              @"/static/kbyy/QueryPictureReq_%ld_%ld_%ld.json"//@"/v1.php?qt=QueryPictureReq"
+
+
 #define JQK_CHANNEL_NO           [JQKConfiguration sharedConfig].channelNo
 #define JQK_REST_APP_ID          @"QUBA_2009"
-#define JQK_REST_PV              @100
+#define JQK_REST_PV              @115
 #define JQK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Beijing Huazhong Hengtai Network Technology Co., Ltd."
 #define JQK_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JQK_REST_APP_ID, JQK_CHANNEL_NO]
 
-#define JQK_BASE_URL             @"http://appcdn.mqu8.com"//@"http://sx.ifanhao.cc:81"//@"http://120.24.252.114:8093" //
+#define JQK_BASE_URL             @"http://120.24.252.114:8093" ////@"http://appcdn.mqu8.com"//@"http://sx.ifanhao.cc:81"
 
-#define JQK_CHANNEL_LIST_URL            @"/static/kbyy/QueryCategoryReq.json"//@"/v1.php?qt=QueryCategoryReq"
-#define JQK_CHANNEL_PROGRAM_URL         @"/static/kbyy/QueryVideosReq_%ld_%ld_%ld.json"//@"/v1.php?qt=QueryVideosReq"
-#define JQK_RECOMMEND_VIDEO_URL         @"/static/kbyy/QueryRecommendReq_%ld_%ld.json"//@"/v1.php?qt=QueryRecommendReq"
-#define JQK_VIP_VIDEO_URL               @"/static/kbyy/QueryVipReq_%ld_%ld.json"//@"/v1.php?qt=QueryVipReq"
-#define JQK_HOT_VIDEO_URL               @"/static/kbyy/QueryLivesReq_%ld_%ld.json"//@"/v1.php?qt=QueryLivesReq"
-#define JQK_PHOTO_ALBUM_URL             @"/static/kbyy/QueryAtlasReq_%ld_%ld.json"//@"/v1.php?qt=QueryAtlasReq"
-#define JQK_PHOTO_LIST_URL              @"/static/kbyy/QueryPictureReq_%ld_%ld_%ld.json"//@"/v1.php?qt=QueryPictureReq"
+#define JQK_CHANNEL_LIST_URL            @"/iosvideo/channelRanking.htm"
+#define JQK_CHANNEL_PROGRAM_URL         @"/iosvideo/program.htm"
+#define JQK_RECOMMEND_VIDEO_URL         @"/iosvideo/details.htm"
+#define JQK_COMMENT_URL                 @"/iosvideo/comment.htm"
+#define JQK_HOT_VIDEO_URL               @"/iosvideo/hotVideo.htm"
+#define JQK_PHOTO_ALBUM_URL             @"/static/kbyy/QueryAtlasReq_%ld_%ld.json"
+#define JQK_PHOTO_LIST_URL              @"/iosvideo/programUrl.htm"
 
-#define JQK_SYSTEM_BASE_URL             @"http://iv.ihuiyx.com"
+#define JQK_HOME_URL                    @"/iosvideo/homePage.htm"
+
+
+#define JQK_SYSTEM_BASE_URL             @"http://120.24.252.114:8093"//@"http://iv.ihuiyx.com"
 #define JQK_APP_SPREAD_LIST_URL         @"/iosvideo/appSpreadList.htm"
 
 #define JQK_ACTIVATE_URL                @"/iosvideo/activat.htm"

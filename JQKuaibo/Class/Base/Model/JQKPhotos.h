@@ -11,6 +11,6 @@
 
 @interface JQKPhotos : JQKURLResponse
 
-@property (nonatomic,retain) NSArray<JQKPhoto *> *Pictures;
+@property (nonatomic,retain) NSArray<JQKPhoto *> *programUrlList;
 
 @end

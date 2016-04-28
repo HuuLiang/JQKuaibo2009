@@ -66,6 +66,7 @@
             [self parseDataWithDictionary:(NSDictionary *)value inInstance:subinstance];
         } else if ([value isKindOfClass:[NSArray class]]) {
             Class subclass = [instance valueForKey:[propertyName stringByAppendingString:@"ElementClass"]];
+
             if (!subclass) {
                 DLog(@"JSON Parsing Warning: cannot find element class of property: %@ in class: %@\n", propertyName, [[instance class] description])
                 return;
@@ -83,6 +84,23 @@
                     [arr addObject:obj];
                 }
             }
+            //            Class subclass;
+            //
+            //            NSString *methordString = [propertyName stringByAppendingString:@"ElementClass"];
+            //            NSLog(@"%@",methordString);
+            //            unsigned int count = 0;
+            //            Method *memberFuncs = class_copyMethodList([instance class], &count);//所有在.m文件所有实现的方法都会被找到
+            //            for (int i = 0; i < count; i++) {
+            //                SEL selname = method_getName(memberFuncs[i]);
+            //
+            //                NSString *methodName = [NSString stringWithCString:sel_getName(selname) encoding:NSUTF8StringEncoding];
+            //                NSLog(@"member method:%@", methodName);
+            //                if ([methodName isEqualToString:methordString]) {
+            //                    subclass = (Class)[instance performSelector:selname];
+            //                    break;
+            //                }
+            
+
         }
     }];
 #pragma clang diagnostic pop

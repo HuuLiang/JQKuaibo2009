@@ -18,6 +18,7 @@
 #import "JQKPaymentViewController.h"
 #import "JQKChannelViewController.h"
 #import "JQKMineViewController.h"
+#import "JQKGetCommentsInfo.h"
 
 @interface JQKAppDelegate ()
 
@@ -163,6 +164,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [JQKUtil accumateLaunchSeq];
+    [[JQKGetCommentsInfo sharedInstance] getComents];
     [[JQKPaymentManager sharedManager] setup];
     [[JQKErrorHandler sharedHandler] initialize];
     [self setupMobStatistics];

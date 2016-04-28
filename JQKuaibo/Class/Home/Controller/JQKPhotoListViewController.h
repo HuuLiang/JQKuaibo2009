@@ -8,12 +8,13 @@
 
 #import "JQKBaseViewController.h"
 
-@class JQKChannel;
+@class JQKVideo;
 @interface JQKPhotoListViewController : JQKBaseViewController
 
-@property (nonatomic,retain,readonly) JQKChannel *album;
+@property (nonatomic,retain,readonly) JQKVideo *photoVideo;
 
 - (instancetype)init __attribute__((unavailable("Use initWithPhotoAlbum: instead!")));
-- (instancetype)initWithPhotoAlbum:(JQKChannel *)album;
+
+- (instancetype)initWithPhotoAlbum:(JQKVideo *)video;
 
 @end

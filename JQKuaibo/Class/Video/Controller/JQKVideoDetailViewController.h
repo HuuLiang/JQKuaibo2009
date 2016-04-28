@@ -13,6 +13,6 @@
 
 @property (nonatomic,retain,readonly) JQKVideo *video;
 
-- (instancetype)initWithVideo:(JQKVideo *)video;
+- (instancetype)initWithVideo:(JQKVideo *)video columnId:(NSString *)columnId;
 
 @end

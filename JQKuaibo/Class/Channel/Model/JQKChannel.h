@@ -7,11 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JQKVideos.h"
 
 @interface JQKChannel : NSObject
 
-@property (nonatomic) NSString *CoverURL;
-@property (nonatomic) NSString *Id;
-@property (nonatomic) NSString *Name;
+@property (nonatomic) NSString *columnDesc;
+@property (nonatomic) NSString *columnId;
+@property (nonatomic) NSString *columnImg;
+@property (nonatomic) NSString *name;
+@property (nonatomic) NSString * showNumber;
+@property (nonatomic) NSString *spreadUrl;
+@property (nonatomic) NSInteger type;
+@property (nonatomic) NSString *realColumnId;
+
+//@property (nonatomic) JQKVideos *programList;
+@property (nonatomic,retain) NSArray<JQKVideo *> *programList;
 
 @end

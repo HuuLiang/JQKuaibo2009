@@ -14,7 +14,7 @@
     return [JQKPhotos class];
 }
 
-- (BOOL)fetchPhotosWithAlbumId:(NSString *)albumId page:(NSUInteger)page pageSize:(NSUInteger)pageSize completionHandler:(JQKCompletionHandler)handler {
+- (BOOL)fetchPhotosWithAlbumId:(NSString *)albumId CompletionHandler:(JQKCompletionHandler)handler {
     if (albumId == nil) {
         if (handler) {
             handler(NO, nil);
@@ -23,9 +23,15 @@
     }
     
     @weakify(self);
-    NSString *urlPath = [NSString stringWithFormat:JQK_PHOTO_LIST_URL, albumId.integerValue, pageSize, page];
-    BOOL success = [self requestURLPath:urlPath
-                             withParams:nil
+    NSDictionary *params = @{@"appId":JQK_REST_APP_ID,
+                             kEncryptionKeyName:@"f7@j3%#5aiG$4",
+                             @"imsi":@"999999999999999",
+                             @"channelNo":JQK_CHANNEL_NO,
+                             @"pV":JQK_REST_PV,
+                             @"programId":albumId
+                             };
+    BOOL success = [self requestURLPath:JQK_PHOTO_LIST_URL
+                             withParams:params
                         responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
     {
         @strongify(self);

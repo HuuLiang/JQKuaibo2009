@@ -15,47 +15,27 @@
 }
 
 - (BOOL)fetchVideosWithField:(JQKVideoListField)field
-                      pageNo:(NSUInteger)pageNo
-                    pageSize:(NSUInteger)pageSize
+                      pageNo:(NSInteger)pageNo
+                    pageSize:(NSInteger)pageSize
                     columnId:(NSString *)columnId
            completionHandler:(JQKCompletionHandler)handler
 {
     @weakify(self);
-    NSDictionary *params = @{@"Page":@(pageNo), @"PageSize":@(pageSize)};
-    if (field == JQKVideoListFieldChannel ) {
-        if (columnId == nil) {
-            if (handler) {
-                handler(NO, nil);
-            }
-            return NO;
-        }
-        
-        NSMutableDictionary *modifiedParams = params.mutableCopy;
-        [modifiedParams setObject:columnId forKey:@"CategoryId"];
-        params = modifiedParams;
-    }
-    
-    
-    
-    NSString *urlPath;
+
+    NSDictionary * params = nil;
+    NSString * url = nil;
     if (field == JQKVideoListFieldChannel) {
-        if (columnId == nil) {
-            if (handler) {
-                handler(NO, nil);
-            }
-            return NO;
-        }
-        
-        urlPath = [NSString stringWithFormat:JQK_CHANNEL_PROGRAM_URL, columnId.integerValue, pageSize, pageNo];
-    } else {
-        NSDictionary *urlPathMapping = @{@(JQKVideoListFieldVIP):JQK_VIP_VIDEO_URL,
-                                         @(JQKVideoListFieldRecommend):JQK_RECOMMEND_VIDEO_URL,
-                                         @(JQKVideoListFieldHot):JQK_HOT_VIDEO_URL};
-        urlPath = [NSString stringWithFormat:urlPathMapping[@(field)], pageSize, pageNo];
-    }
+        params = @{@"columnId":columnId,
+                   @"page":[NSString stringWithFormat:@"%ld",pageNo]
+                   };
+        url = JQK_CHANNEL_PROGRAM_URL;
+    } else if (field == JQKVideoListFieldHot) {
+        params = @{@"page":[NSString stringWithFormat:@"%ld",pageNo]};
+        url = JQK_HOT_VIDEO_URL;
+    } 
     
-    BOOL success = [self requestURLPath:urlPath
-                             withParams:nil
+    BOOL success = [self requestURLPath:url
+                             withParams:params
                         responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
@@ -72,4 +52,32 @@
                     }];
     return success;
 }
+
+- (BOOL)fetchVideosDetailsPageWithColumnId:(NSString *)columnId
+                                 programId:(NSString *)programId
+                         CompletionHandler:(JQKCompletionHandler)handler {
+    @weakify(self);
+    NSDictionary *params = @{@"columnId":columnId,
+                             @"programId":programId
+                             };
+    BOOL success = [self requestURLPath:JQK_RECOMMEND_VIDEO_URL
+                             withParams:params
+                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+    {
+        @strongify(self);
+        
+        JQKVideos *videos;
+        if (respStatus == JQKURLResponseSuccess) {
+            videos = self.response;
+            self.fetchedVideos = videos;
+        }
+        
+        if (handler) {
+            handler(respStatus == JQKURLResponseSuccess, videos);
+        }
+        
+    }];
+    return success;
+}
+
 @end

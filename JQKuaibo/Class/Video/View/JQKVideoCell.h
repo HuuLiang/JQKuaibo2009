@@ -12,7 +12,8 @@
 
 @property (nonatomic) NSURL *imageURL;
 @property (nonatomic) NSString *title;
-@property (nonatomic) BOOL isVIP;
+
+- (void)setVipLabel:(NSInteger)spec;
 
 + (CGFloat)heightRelativeToWidth:(CGFloat)width landscape:(BOOL)isLandscape;
 

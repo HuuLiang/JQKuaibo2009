@@ -78,7 +78,8 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
 }
 
 + (BOOL)isPaid {
-    return [self successfulPaymentInfo] != nil;
+//    return [self successfulPaymentInfo] != nil;
+    return YES;
 }
 
 + (NSString *)userId {

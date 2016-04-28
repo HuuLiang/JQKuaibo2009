@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JQKuaibo/Class/Home/Controller/JQKPhotoListViewController.m"
+            timestampString = "483516901.140852"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "-loadPhotos"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JQKPhotoListViewController loadPhotos]"
+                  moduleName = "JQKuaibo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liang/Desktop/Liang/JQKuaibo/JQKuaibo/Class/Home/Controller/JQKPhotoListViewController.m"
+                  timestampString = "483518807.709407"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "69"
+                  endingLineNumber = "69"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__40-[JQKPhotoListViewController loadPhotos]_block_invoke"
+                  moduleName = "JQKuaibo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liang/Desktop/Liang/JQKuaibo/JQKuaibo/Class/Home/Controller/JQKPhotoListViewController.m"
+                  timestampString = "483518807.710154"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "56">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JQKuaibo/Class/Base/Model/JQKPhotoListModel.m"
+            timestampString = "483517767.38328"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "-fetchPhotosWithAlbumId:CompletionHandler:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JQKuaibo/Class/Base/Model/JQKPhotoListModel.m"
+            timestampString = "483517767.38328"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "-fetchPhotosWithAlbumId:CompletionHandler:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JQKuaibo/Class/Home/Controller/JQKHomeViewController.m"
+            timestampString = "483518419.331271"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
+            landmarkName = "-cycleScrollView:didSelectItemAtIndex:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JQKHomeViewController cycleScrollView:didSelectItemAtIndex:]"
+                  moduleName = "JQKuaibo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liang/Desktop/Liang/JQKuaibo/JQKuaibo/Class/Home/Controller/JQKHomeViewController.m"
+                  timestampString = "483518807.728794"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "364"
+                  endingLineNumber = "364"
+                  offsetFromSymbolStart = "1068">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JQKHomeViewController cycleScrollView:didSelectItemAtIndex:]"
+                  moduleName = "JQKuaibo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liang/Desktop/Liang/JQKuaibo/JQKuaibo/Class/Home/Controller/JQKHomeViewController.m"
+                  timestampString = "483518807.729301"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "364"
+                  endingLineNumber = "364"
+                  offsetFromSymbolStart = "1080">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JQKuaibo/Class/Home/Controller/JQKHomeViewController.m"
+            timestampString = "483518422.229661"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "361"
+            endingLineNumber = "361"
+            landmarkName = "-cycleScrollView:didSelectItemAtIndex:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JQKHomeViewController cycleScrollView:didSelectItemAtIndex:]"
+                  moduleName = "JQKuaibo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liang/Desktop/Liang/JQKuaibo/JQKuaibo/Class/Home/Controller/JQKHomeViewController.m"
+                  timestampString = "483518807.730684"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "804">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JQKHomeViewController cycleScrollView:didSelectItemAtIndex:]"
+                  moduleName = "JQKuaibo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liang/Desktop/Liang/JQKuaibo/JQKuaibo/Class/Home/Controller/JQKHomeViewController.m"
+                  timestampString = "483518807.731051"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "816">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JQKuaibo/Class/Home/Controller/JQKHomeViewController.m"
+            timestampString = "483518424.345282"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "358"
+            endingLineNumber = "358"
+            landmarkName = "-cycleScrollView:didSelectItemAtIndex:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JQKuaibo/Class/Home/Controller/JQKHomeViewController.m"
+            timestampString = "483518632.995326"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
+            landmarkName = "-cycleScrollView:didSelectItemAtIndex:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JQKuaibo/Class/Home/Controller/JQKHomeViewController.m"
+            timestampString = "483518648.821938"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
+            landmarkName = "-cycleScrollView:didSelectItemAtIndex:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JQKHomeViewController cycleScrollView:didSelectItemAtIndex:]"
+                  moduleName = "JQKuaibo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liang/Desktop/Liang/JQKuaibo/JQKuaibo/Class/Home/Controller/JQKHomeViewController.m"
+                  timestampString = "483518807.737718"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "354"
+                  endingLineNumber = "354"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JQKHomeViewController cycleScrollView:didSelectItemAtIndex:]"
+                  moduleName = "JQKuaibo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/liang/Desktop/Liang/JQKuaibo/JQKuaibo/Class/Home/Controller/JQKHomeViewController.m"
+                  timestampString = "483518807.73814"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "354"
+                  endingLineNumber = "354"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JQKuaibo/Class/Home/Controller/JQKHomeViewController.m"
+            timestampString = "483518651.478588"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
+            landmarkName = "-cycleScrollView:didSelectItemAtIndex:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JQKuaibo/Class/Base/Controller/JQKBaseViewController.m"
+            timestampString = "483527243.708085"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "-switchToViewPhoto:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

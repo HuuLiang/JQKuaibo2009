@@ -9,5 +9,7 @@
 #import "JQKChannel.h"
 
 @implementation JQKChannel
-
+- (Class)programListElementClass {
+    return [JQKVideo class];
+}
 @end

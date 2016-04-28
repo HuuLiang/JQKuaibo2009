@@ -56,6 +56,22 @@
                 make.centerY.equalTo(_footerView);
             }];
         }
+        
+        _vipLabel = [[UILabel alloc] init];
+        _vipLabel.backgroundColor = [UIColor redColor];
+        _vipLabel.textColor = [UIColor whiteColor];
+        _vipLabel.font = [UIFont boldSystemFontOfSize:15];
+        _vipLabel.text = @"";
+//        _vipLabel.font = [UIFont systemFontOfSize:16.];
+        _vipLabel.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:_vipLabel];
+        {
+            [_vipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.equalTo(self).offset(-5);
+                make.top.equalTo(self).offset(5);
+                make.size.mas_equalTo(CGSizeMake(35, 20));
+            }];
+        }
     }
     return self;
 }
@@ -77,27 +93,20 @@
     _titleLabel.text = title;
 }
 
-- (void)setIsVIP:(BOOL)isVIP {
-    _isVIP = isVIP;
-    
-    if (isVIP && !_vipLabel) {
-        _vipLabel = [[UILabel alloc] init];
-        _vipLabel.backgroundColor = [UIColor redColor];
+- (void)setVipLabel:(NSInteger)spec {
+    if (spec == 1) {
+        _vipLabel.text = @"热门";
+    } else if (spec == 2) {
+        _vipLabel.text = @"最新";
+    } else if (spec == 3) {
+        _vipLabel.text = @"高清";
+    } else if (spec == 4) {
+        _vipLabel.text = @"免费";
+    } else if (spec == 5) {
         _vipLabel.text = @"VIP";
-        _vipLabel.textColor = [UIColor whiteColor];
-        _vipLabel.font = [UIFont systemFontOfSize:16.];
-        _vipLabel.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:_vipLabel];
-        {
-            [_vipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.right.equalTo(self).offset(-5);
-                make.top.equalTo(self).offset(5);
-                make.size.mas_equalTo(CGSizeMake(30, 20));
-            }];
-        }
+    } else {
+        _vipLabel.hidden = YES;
     }
-    
-    _vipLabel.hidden = !isVIP;
 }
 
 + (CGFloat)heightRelativeToWidth:(CGFloat)width landscape:(BOOL)isLandscape {

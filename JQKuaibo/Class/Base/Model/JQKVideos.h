@@ -11,6 +11,8 @@
 
 @interface JQKVideos : JQKURLResponse
 
-@property (nonatomic,retain) NSArray<JQKVideo *> *Videos;
+@property (nonatomic,retain) NSArray<JQKVideo *> *programList;
+
+@property (nonatomic,retain) NSArray<JQKVideo *> *hotProgramList;
 
 @end

@@ -10,11 +10,14 @@
 
 @implementation JQKComment
 
+- (Class)commentListElementClass {
+    return [JQKComment class];
+}
+
 - (NSUInteger)popularity {
     if (_popularity > 0) {
         return _popularity;
     }
-    
     _popularity = arc4random_uniform(1000);
     return _popularity;
 }

@@ -10,12 +10,12 @@
 
 @interface JQKComment : NSObject
 
-@property (nonatomic) NSString *id;
+@property (nonatomic) NSString *icon;
 @property (nonatomic) NSString *userName;
-@property (nonatomic) NSString *Icon;
 @property (nonatomic) NSString *content;
-@property (nonatomic) NSString *create_at;
+@property (nonatomic) NSString *createAt;
 
 @property (nonatomic) NSUInteger popularity;
+
 
 @end

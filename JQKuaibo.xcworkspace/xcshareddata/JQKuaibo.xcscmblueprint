@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "03B7B344A6DB87228FF7314743D580C21283A0E4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "037B248F9488341ACBA0362FFA92D5366CE8AB42" : 0,
+    "03B7B344A6DB87228FF7314743D580C21283A0E4" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B589296A-7CC4-45D4-9F44-57C6CC5A7104",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "037B248F9488341ACBA0362FFA92D5366CE8AB42" : "",
+    "03B7B344A6DB87228FF7314743D580C21283A0E4" : "JQKuaibo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "JQKuaibo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "JQKuaibo.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/git.coding.net\/seanyue\/YuePaoBa.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "037B248F9488341ACBA0362FFA92D5366CE8AB42"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/git.coding.net\/seanyue\/JQKuaibo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "03B7B344A6DB87228FF7314743D580C21283A0E4"
+    }
+  ]
+}

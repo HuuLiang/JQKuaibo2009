@@ -98,6 +98,9 @@
 		BC9A9FA51C9AAB99002510AB /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9A9FA41C9AAB99002510AB /* UITextView+Placeholder.m */; };
 		BC9A9FA91C9AAE2C002510AB /* JQKAppSpreadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9A9FA81C9AAE2C002510AB /* JQKAppSpreadModel.m */; };
 		BC9A9FAD1C9AC5BA002510AB /* JQKMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9A9FAC1C9AC5BA002510AB /* JQKMoreCell.m */; };
+		ECEB99311CD0B8B300F97DEB /* JQKCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEB99301CD0B8B300F97DEB /* JQKCommentModel.m */; };
+		ECEB99341CD0BA1C00F97DEB /* JQKComments.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEB99331CD0BA1C00F97DEB /* JQKComments.m */; };
+		ECEB99371CD0BCDE00F97DEB /* JQKGetCommentsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = ECEB99361CD0BCDE00F97DEB /* JQKGetCommentsInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -304,6 +307,12 @@
 		BC9A9FA81C9AAE2C002510AB /* JQKAppSpreadModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKAppSpreadModel.m; sourceTree = "<group>"; };
 		BC9A9FAB1C9AC5BA002510AB /* JQKMoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKMoreCell.h; sourceTree = "<group>"; };
 		BC9A9FAC1C9AC5BA002510AB /* JQKMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKMoreCell.m; sourceTree = "<group>"; };
+		ECEB992F1CD0B8B300F97DEB /* JQKCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKCommentModel.h; sourceTree = "<group>"; };
+		ECEB99301CD0B8B300F97DEB /* JQKCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKCommentModel.m; sourceTree = "<group>"; };
+		ECEB99321CD0BA1C00F97DEB /* JQKComments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKComments.h; sourceTree = "<group>"; };
+		ECEB99331CD0BA1C00F97DEB /* JQKComments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKComments.m; sourceTree = "<group>"; };
+		ECEB99351CD0BCDE00F97DEB /* JQKGetCommentsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKGetCommentsInfo.h; sourceTree = "<group>"; };
+		ECEB99361CD0BCDE00F97DEB /* JQKGetCommentsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKGetCommentsInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -534,19 +543,25 @@
 				BC3873221C2D402B00CBE88A /* JQKEncryptedURLRequest.m */,
 				BC3873311C2D402B00CBE88A /* JQKURLResponse.h */,
 				BC3873321C2D402B00CBE88A /* JQKURLResponse.m */,
+				ECEB99351CD0BCDE00F97DEB /* JQKGetCommentsInfo.h */,
+				ECEB99361CD0BCDE00F97DEB /* JQKGetCommentsInfo.m */,
 				BC45A03F1CB3E0460019C248 /* JQKComment.h */,
 				BC45A0401CB3E0460019C248 /* JQKComment.m */,
+				ECEB99321CD0BA1C00F97DEB /* JQKComments.h */,
+				ECEB99331CD0BA1C00F97DEB /* JQKComments.m */,
+				ECEB992F1CD0B8B300F97DEB /* JQKCommentModel.h */,
+				ECEB99301CD0B8B300F97DEB /* JQKCommentModel.m */,
 				BC2DD71C1CB552E900A0F881 /* JQKPayable.h */,
 				BC3873351C2D402B00CBE88A /* JQKVideo.h */,
 				BC3873361C2D402B00CBE88A /* JQKVideo.m */,
 				BC45A0451CB3E2E00019C248 /* JQKVideos.h */,
 				BC45A0461CB3E2E00019C248 /* JQKVideos.m */,
+				BC45A0541CB3E8400019C248 /* JQKVideoListModel.h */,
+				BC45A0551CB3E8400019C248 /* JQKVideoListModel.m */,
 				BC579F9C1CB5198700AEE5E8 /* JQKPhoto.h */,
 				BC579F9D1CB5198700AEE5E8 /* JQKPhoto.m */,
 				BC579FA21CB5225800AEE5E8 /* JQKPhotos.h */,
 				BC579FA31CB5225800AEE5E8 /* JQKPhotos.m */,
-				BC45A0541CB3E8400019C248 /* JQKVideoListModel.h */,
-				BC45A0551CB3E8400019C248 /* JQKVideoListModel.m */,
 				BC579F991CB5196000AEE5E8 /* JQKPhotoListModel.h */,
 				BC579F9A1CB5196000AEE5E8 /* JQKPhotoListModel.m */,
 				BC3873231C2D402B00CBE88A /* JQKPaymentInfo.h */,
@@ -945,6 +960,7 @@
 				TargetAttributes = {
 					BC3872021C2D273100CBE88A = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 65FU5R57RG;
 					};
 					BC38721B1C2D273100CBE88A = {
 						CreatedOnToolsVersion = 7.2;
@@ -1082,6 +1098,7 @@
 				BC3873171C2D3E5300CBE88A /* JQKPaymentViewController.m in Sources */,
 				BC36591E1CB44ECA00882E3D /* JQKVideoListViewController.m in Sources */,
 				BC579F9E1CB5198700AEE5E8 /* JQKPhoto.m in Sources */,
+				ECEB99371CD0BCDE00F97DEB /* JQKGetCommentsInfo.m in Sources */,
 				BC3872BE1C2D2E3E00CBE88A /* NSString+meltutils.m in Sources */,
 				BC2C027E1C2E744700D10677 /* JQKPaymentPopView.m in Sources */,
 				BC3872BA1C2D2E3E00CBE88A /* NSString+crypt.m in Sources */,
@@ -1117,6 +1134,7 @@
 				BC3659241CB456AB00882E3D /* JQKChannel.m in Sources */,
 				BC45A0471CB3E2E00019C248 /* JQKVideos.m in Sources */,
 				BC38723C1C2D27D600CBE88A /* JQKAppDelegate.m in Sources */,
+				ECEB99311CD0B8B300F97DEB /* JQKCommentModel.m in Sources */,
 				BC45A03B1CB3C6CD0019C248 /* JQKChannelViewController.m in Sources */,
 				BC3872D21C2D307400CBE88A /* JQKUtil.m in Sources */,
 				BC3659031CB4293500882E3D /* JQKVideoDetailViewController.m in Sources */,
@@ -1127,6 +1145,7 @@
 				BC3872C01C2D2E3E00CBE88A /* UIImage+crop.m in Sources */,
 				BC6FC39C1CA3EBEE00856F0B /* JQKPaymentConfigModel.m in Sources */,
 				BC579F9B1CB5196000AEE5E8 /* JQKPhotoListModel.m in Sources */,
+				ECEB99341CD0BA1C00F97DEB /* JQKComments.m in Sources */,
 				BC579FA41CB5225800AEE5E8 /* JQKPhotos.m in Sources */,
 				BC3872921C2D2CD500CBE88A /* JQKMoreViewController.m in Sources */,
 				BC3873401C2D402B00CBE88A /* JQKSystemConfigModel.m in Sources */,
@@ -1264,7 +1283,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/iAppPay/DependenceSDK",
@@ -1277,9 +1297,9 @@
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/Umeng",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibo4v20160413.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibo2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c1d7e5e9-613e-4d59-88bd-3b7f869b913f";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1290,7 +1310,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/iAppPay/DependenceSDK",
@@ -1303,9 +1324,9 @@
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/Umeng",
 					"$(PROJECT_DIR)/JQKuaibo/Class/Vendor/WeChatSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibo4v20160413.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibo2016.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c1d7e5e9-613e-4d59-88bd-3b7f869b913f";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

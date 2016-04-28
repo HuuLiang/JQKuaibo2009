@@ -14,9 +14,9 @@
     return [NSString class];
 }
 
-- (NSNumber *)contentId {
-    return @(self.Id.integerValue);
-}
+//- (NSNumber *)contentId {
+//    return @(self.Id.integerValue);
+//}
 
 - (NSNumber *)contentType {
     return @(JQKContentTypePhoto);

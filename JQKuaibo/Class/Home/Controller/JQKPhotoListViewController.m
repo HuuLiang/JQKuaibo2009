@@ -26,10 +26,10 @@ static NSString *const kPhotoCellReusableIdentifier = @"PhotoCellReusableIdentif
 DefineLazyPropertyInitialization(JQKPhotoListModel, photoModel)
 DefineLazyPropertyInitialization(NSArray, photos)
 
-- (instancetype)initWithPhotoAlbum:(JQKChannel *)album {
+- (instancetype)initWithPhotoAlbum:(JQKVideo *)video {
     self = [super init];
     if (self) {
-        _album = album;
+        _photoVideo = video;
     }
     return self;
 }
@@ -37,7 +37,7 @@ DefineLazyPropertyInitialization(NSArray, photos)
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = _album.Name;
+    self.title = _photoVideo.title;
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 3;
@@ -66,9 +66,7 @@ DefineLazyPropertyInitialization(NSArray, photos)
 
 - (void)loadPhotos {
     @weakify(self);
-    [self.photoModel fetchPhotosWithAlbumId:_album.Id page:0//isRefresh?1:self.photoModel.fetchedPhotos.Pinfo.Page.unsignedIntegerValue+1
-                                   pageSize:50
-                          completionHandler:^(BOOL success, id obj) {
+    [self.photoModel fetchPhotosWithAlbumId:_photoVideo.programId CompletionHandler:^(BOOL success, id obj) {
         @strongify(self);
         if (!self) {
             return ;
@@ -78,7 +76,7 @@ DefineLazyPropertyInitialization(NSArray, photos)
         
         if (success) {
             JQKPhotos *photos = obj;
-            self.photos = photos.Pictures;
+            self.photos = photos.programUrlList;
             [self->_layoutCollectionView reloadData];
         }
     }];
@@ -96,8 +94,9 @@ DefineLazyPropertyInitialization(NSArray, photos)
     
     if (indexPath.row < self.photos.count) {
         JQKPhoto *photo = self.photos[indexPath.item];
-        cell.title = photo.Name;
-        cell.imageURL = [NSURL URLWithString:photo.coverUrl];
+        cell.title = photo.title;
+        cell.imageURL = [NSURL URLWithString:photo.url];
+        [cell setVipLabel:6];
     }
     return cell;
 }

@@ -67,7 +67,7 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
 }
 
 - (void)switchToPlayVideo:(JQKVideo *)video {
-    if (![JQKUtil isPaid] && video.Vip.boolValue) {
+    if (![JQKUtil isPaid] && (video.spec != 4)) {
         [self payForPayable:video];
     } else {
         if ([JQKUtil isPaid]) {
@@ -96,20 +96,31 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
 }
 
 - (void)switchToViewPhoto:(JQKPhoto *)photo {
-    if (![JQKUtil isPaid]) {
-        [self payForPayable:photo];
-    } else {
-        NSMutableArray<MWPhoto *> *photos = [[NSMutableArray alloc] initWithCapacity:photo.Urls.count];
-        [photo.Urls enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:obj]]];
-        }];
-        
-        MWPhotoBrowser *photoBrowser = [[MWPhotoBrowser alloc] initWithPhotos:photos];
-        photoBrowser.displayActionButton = NO;
-        photoBrowser.delegate = self;
-        objc_setAssociatedObject(photoBrowser, kPhotoNumberAssociatedKey, @(photos.count), OBJC_ASSOCIATION_COPY_NONATOMIC);
-        [self.navigationController pushViewController:photoBrowser animated:YES];
-    }
+    NSMutableArray<MWPhoto *> *photos = [[NSMutableArray alloc] initWithCapacity:photo.Urls.count];
+    [photo.Urls enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:obj]]];
+    }];
+    
+    MWPhotoBrowser *photoBrowser = [[MWPhotoBrowser alloc] initWithPhotos:photos];
+    photoBrowser.displayActionButton = NO;
+    photoBrowser.delegate = self;
+    objc_setAssociatedObject(photoBrowser, kPhotoNumberAssociatedKey, @(photos.count), OBJC_ASSOCIATION_COPY_NONATOMIC);
+    [self.navigationController pushViewController:photoBrowser animated:YES];
+    
+//    if (![JQKUtil isPaid]) {
+//        [self payForPayable:photo];
+//    } else {
+//        NSMutableArray<MWPhoto *> *photos = [[NSMutableArray alloc] initWithCapacity:photo.Urls.count];
+//        [photo.Urls enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:obj]]];
+//        }];
+//        
+//        MWPhotoBrowser *photoBrowser = [[MWPhotoBrowser alloc] initWithPhotos:photos];
+//        photoBrowser.displayActionButton = NO;
+//        photoBrowser.delegate = self;
+//        objc_setAssociatedObject(photoBrowser, kPhotoNumberAssociatedKey, @(photos.count), OBJC_ASSOCIATION_COPY_NONATOMIC);
+//        [self.navigationController pushViewController:photoBrowser animated:YES];
+//    }
 }
 
 - (void)payForPayable:(id<JQKPayable>)payable; {
@@ -132,7 +143,7 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
     UIViewController *retVC;
     if (NSClassFromString(@"AVPlayerViewController")) {
         AVPlayerViewController *playerVC = [[AVPlayerViewController alloc] init];
-        playerVC.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:video.Url]];
+        playerVC.player = [[AVPlayer alloc] initWithURL:[NSURL URLWithString:video.videoUrl]];
         [playerVC aspect_hookSelector:@selector(viewDidAppear:)
                           withOptions:AspectPositionAfter
                            usingBlock:^(id<AspectInfo> aspectInfo){
@@ -142,7 +153,7 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
         
         retVC = playerVC;
     } else {
-        retVC = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:video.Url]];
+        retVC = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:video.videoUrl]];
     }
     
     [retVC aspect_hookSelector:@selector(supportedInterfaceOrientations) withOptions:AspectPositionInstead usingBlock:^(id<AspectInfo> aspectInfo){

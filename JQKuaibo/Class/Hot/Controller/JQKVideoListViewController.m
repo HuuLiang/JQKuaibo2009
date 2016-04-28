@@ -49,7 +49,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (_channel) {
-        self.title = _channel.Name;
+        self.title = _channel.name;
     }
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
@@ -93,7 +93,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     [self.videoModel fetchVideosWithField:_field
                                    pageNo:page
                                  pageSize:kDefaultPageSize
-                                 columnId:_channel.Id
+                                 columnId:[NSString stringWithFormat:@"%@",_channel.columnId]
                         completionHandler:^(BOOL success, id obj)
     {
         @strongify(self);
@@ -112,8 +112,8 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
                 }
                 
                 JQKVideos *videos = obj;
-                if (videos.Videos) {
-                    [self.videos addObjectsFromArray:videos.Videos];
+                if (videos.programList) {
+                    [self.videos addObjectsFromArray:videos.programList];
                     [self->_layoutCollectionView reloadData];
                 }
                 
@@ -123,21 +123,26 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
             };
             
             JQKVideos *videos = obj;
-            if (videos.Videos.count == 0) {
+            if (videos.programList.count == 0) {
                 SuccessBlock();
                 return ;
             }
             
-            NSURL *imageURL = [NSURL URLWithString:videos.Videos.firstObject.coverUrl];
-            [[SDWebImageManager sharedManager] downloadImageWithURL:imageURL options:0 progress:nil
-                                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL)
-             {
-                if (image) {
-                    self.coverImageIsLandscape = image.size.width >= image.size.height;
-                }
-                
-                SuccessBlock();
-            }];
+            SuccessBlock();
+//            UIImageView *imageView = [[UIImageView alloc] init];
+//            imageView sd_setImageWithURL:<#(NSURL *)#> placeholderImage:<#(UIImage *)#> options:SDWebImageAvoidAutoSetImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                
+//            }
+//            NSURL *imageURL = [NSURL URLWithString:videos.programList.firstObject.videoUrl];
+//            [[SDWebImageManager sharedManager] downloadImageWithURL:imageURL options:0 progress:nil
+//                                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL)
+//             {
+//                if (image) {
+//                    self.coverImageIsLandscape = image.size.width >= image.size.height;
+//                }
+//                
+//                SuccessBlock();
+//            }];
             
         } else {
             [self->_layoutCollectionView JQK_endPullToRefresh];
@@ -157,9 +162,9 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     
     if (indexPath.row < self.videos.count) {
         JQKVideo *video = self.videos[indexPath.item];
-        cell.title = video.Name;
-        cell.imageURL = [NSURL URLWithString:video.coverUrl];
-        cell.isVIP = video.Vip.boolValue;
+        cell.title = video.title;
+        cell.imageURL = [NSURL URLWithString:video.coverImg];
+        [cell setVipLabel:video.spec];
     }
     return cell;
 }
@@ -178,8 +183,8 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.videos.count) {
         JQKVideo *video = self.videos[indexPath.item];
-        if (video.Vip.boolValue) {
-            JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video];
+        if (video.spec == 4) {
+            JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video columnId:_channel.columnId];
             [self.navigationController pushViewController:videoVC animated:YES];
         } else {
             [self switchToPlayVideo:video];

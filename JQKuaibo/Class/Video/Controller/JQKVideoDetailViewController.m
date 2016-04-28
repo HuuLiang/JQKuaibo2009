@@ -12,6 +12,7 @@
 #import "JQKVideoCommentCell.h"
 #import "JQKVideoDetailHeaderView.h"
 #import "JQKVideoCommentInputView.h"
+#import "JQKGetCommentsInfo.h"
 
 #import "JQKVideo.h"
 #import "JQKVideoListModel.h"
@@ -36,6 +37,8 @@ typedef NS_ENUM(NSUInteger, JQKVideoSection) {
 }
 @property (nonatomic,retain) JQKVideoListModel *recommendVideoModel;
 @property (nonatomic,readonly) NSUInteger popularity;
+@property (nonatomic) NSString *colunmId;
+@property (nonatomic) NSMutableArray * array;
 @end
 
 @implementation JQKVideoDetailViewController
@@ -43,10 +46,11 @@ typedef NS_ENUM(NSUInteger, JQKVideoSection) {
 
 DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
 
-- (instancetype)initWithVideo:(JQKVideo *)video {
+- (instancetype)initWithVideo:(JQKVideo *)video columnId:(NSString *)columnId{
     self = [self init];
     if (self) {
         _video = video;
+        _colunmId = columnId;
     }
     return self;
 }
@@ -54,7 +58,10 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = self.video.Name;
+    self.title = self.video.title;
+    
+    _array = [[NSMutableArray alloc] init];
+    [self getComment];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumInteritemSpacing = 5;
@@ -83,11 +90,20 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
     [_layoutCV JQK_triggerPullToRefresh];
 }
 
+- (void)getComment {
+    NSMutableArray * numArray = [[NSMutableArray alloc] initWithArray:[JQKGetCommentsInfo sharedInstance].array];
+    for (NSInteger i = 0; i < 4; i++) {
+        NSInteger count = arc4random() % numArray.count;
+        [numArray removeObjectAtIndex:count];
+        [_array addObject:[JQKGetCommentsInfo sharedInstance].array[count]];
+    }
+}
+
 - (void)loadRecommendVideos {
     @weakify(self);
-    [self.recommendVideoModel fetchVideosWithField:JQKVideoListFieldRecommend
-                                            pageNo:0 pageSize:4 columnId:nil
-                                 completionHandler:^(BOOL success, id obj)
+    [self.recommendVideoModel fetchVideosDetailsPageWithColumnId:_colunmId
+                                                       programId:_video.programId
+                                               CompletionHandler:^(BOOL success, id obj)
     {
         @strongify(self);
         if (!self) {
@@ -128,7 +144,7 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
     } else if (section == JQKRecommendVideoSection) {
         return 4;
     } else if (section == JQKCommentSection) {
-        return self.video.Comment.count;
+        return _array.count;
     } else {
         return 0;
     }
@@ -137,24 +153,24 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == JQKVideoPlayerSection) {
         JQKVideoPlayerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kVideoPlayerCellReusableIdentifier forIndexPath:indexPath];
-        cell.imageURL = [NSURL URLWithString:self.video.coverUrl];
+        cell.imageURL = [NSURL URLWithString:self.video.coverImg];
         return cell;
     } else if (indexPath.section == JQKRecommendVideoSection) {
         JQKVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kRecommendVideoCellReusableIdentifier forIndexPath:indexPath];
         
-        if (indexPath.item < self.recommendVideoModel.fetchedVideos.Videos.count) {
-            JQKVideo *video = self.recommendVideoModel.fetchedVideos.Videos[indexPath.item];
-            cell.imageURL = [NSURL URLWithString:video.coverUrl];
-            cell.title = video.Name;
-            cell.isVIP = video.Vip.boolValue;
+        if (indexPath.item < self.recommendVideoModel.fetchedVideos.hotProgramList.count) {
+            JQKVideo *video = self.recommendVideoModel.fetchedVideos.hotProgramList[indexPath.item];
+            cell.imageURL = [NSURL URLWithString:video.coverImg];
+            cell.title = video.title;
+            [cell setVipLabel:video.spec];
         }
         return cell;
     } else if (indexPath.section == JQKCommentSection) {
         JQKVideoCommentCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommentCellReusableIdentifier forIndexPath:indexPath];
         
-        if (indexPath.item < self.video.Comment.count) {
-            JQKComment *comment = self.video.Comment[indexPath.item];
-            cell.avatarImageURL = [NSURL URLWithString:comment.Icon];
+        if (indexPath.item < _array.count) {
+            JQKComment *comment = _array[indexPath.item];
+            cell.avatarImageURL = [NSURL URLWithString:comment.icon];
             cell.nickName = comment.userName;
             cell.content = comment.content;
             cell.popularity = comment.popularity;
@@ -172,7 +188,7 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
         JQKVideoDetailHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kHeaderViewReusableIdentifier forIndexPath:indexPath];
         if (indexPath.section == JQKRecommendVideoSection) {
             headerView.title = @"会员独享";
-            headerView.subtitle = [NSString stringWithFormat:@"播放：%ld万", self.popularity];
+            headerView.subtitle = [NSString stringWithFormat:@"播放：%ld万", (unsigned long)self.popularity];
         } else if (indexPath.section == JQKCommentSection) {
             headerView.title = @"热门评论";
             headerView.subtitle = nil;
@@ -202,9 +218,9 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
     if (indexPath.section == JQKVideoPlayerSection) {
         [self switchToPlayVideo:self.video];
     } else if (indexPath.section == JQKRecommendVideoSection) {
-        if (indexPath.item < self.recommendVideoModel.fetchedVideos.Videos.count) {
-            JQKVideo *video = self.recommendVideoModel.fetchedVideos.Videos[indexPath.item];
-            JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video];
+        if (indexPath.item < self.recommendVideoModel.fetchedVideos.hotProgramList.count) {
+            JQKVideo *video = self.recommendVideoModel.fetchedVideos.hotProgramList[indexPath.item];
+            JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video columnId:_colunmId];
             [self.navigationController pushViewController:videoVC animated:YES];
         }
     }

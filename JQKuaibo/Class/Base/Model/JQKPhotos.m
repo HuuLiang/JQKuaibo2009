@@ -10,7 +10,7 @@
 
 @implementation JQKPhotos
 
-- (Class)PicturesElementClass {
+- (Class)programUrlListElementClass {
     return [JQKPhoto class];
 }
 

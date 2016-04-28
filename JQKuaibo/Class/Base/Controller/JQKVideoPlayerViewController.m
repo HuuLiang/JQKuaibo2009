@@ -35,7 +35,7 @@
     self.view.backgroundColor = [UIColor blackColor];
     
     @weakify(self);
-    _videoPlayer = [[JQKVideoPlayer alloc] initWithVideoURL:[NSURL URLWithString:self.video.Url]];
+    _videoPlayer = [[JQKVideoPlayer alloc] initWithVideoURL:[NSURL URLWithString:self.video.videoUrl]];
     _videoPlayer.endPlayAction = ^(id sender) {
         @strongify(self);
         [self dismissAndPopPayment];

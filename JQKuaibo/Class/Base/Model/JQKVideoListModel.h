@@ -6,17 +6,21 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKURLRequest.h"
+#import "JQKEncryptedURLRequest.h"
 #import "JQKVideos.h"
 
-@interface JQKVideoListModel : JQKURLRequest
+@interface JQKVideoListModel : JQKEncryptedURLRequest
 
 @property (nonatomic,retain) JQKVideos *fetchedVideos;
 
 - (BOOL)fetchVideosWithField:(JQKVideoListField)field
-                      pageNo:(NSUInteger)pageNo
-                    pageSize:(NSUInteger)pageSize
+                      pageNo:(NSInteger)pageNo
+                    pageSize:(NSInteger)pageSize
                     columnId:(NSString *)columnId // Only for channel field, nil otherwise.
            completionHandler:(JQKCompletionHandler)handler;
+
+- (BOOL)fetchVideosDetailsPageWithColumnId:(NSString *)columnId
+                                 programId:(NSString *)programId
+                         CompletionHandler:(JQKCompletionHandler)handler;
 
 @end

@@ -54,7 +54,7 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
 
 - (void)loadChannels {
     @weakify(self);
-    [self.channelModel fetchChannelsWithCompletionHandler:^(BOOL success, NSArray<JQKChannel *> *channels)
+    [self.channelModel fetchChannelsWithCompletionHandler:^(BOOL success, NSArray<JQKChannelModel *> *channels)
     {
         @strongify(self);
         if (!self) {
@@ -81,8 +81,8 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
     
     if (indexPath.item < self.channelModel.fetchedChannels.count) {
         JQKChannel *channel = self.channelModel.fetchedChannels[indexPath.item];
-        cell.imageURL = [NSURL URLWithString:channel.CoverURL];
-        cell.title = channel.Name;
+        cell.imageURL = [NSURL URLWithString:channel.columnImg];
+        cell.title = channel.name;
     }
     return cell;
 }
