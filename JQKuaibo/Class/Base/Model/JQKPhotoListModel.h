@@ -12,6 +12,9 @@
 @interface JQKPhotoListModel : JQKEncryptedURLRequest
 @property (nonatomic,retain,readonly) JQKPhotos *fetchedPhotos;
 
-- (BOOL)fetchPhotosWithAlbumId:(NSString *)albumId CompletionHandler:(JQKCompletionHandler)handler;
+
+- (BOOL)fetchPhotoDetailsPageWithColumnId:(NSString *)columnId
+                                 programId:(NSString *)programId
+                         CompletionHandler:(JQKCompletionHandler)handler;
 
 @end

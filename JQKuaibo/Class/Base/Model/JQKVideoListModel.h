@@ -23,4 +23,8 @@
                                  programId:(NSString *)programId
                          CompletionHandler:(JQKCompletionHandler)handler;
 
+- (BOOL)fetchPhotosWithPageNo:(NSInteger)pageNo
+                     columnId:(NSString *)columnId
+            completionHandler:(JQKCompletionHandler)handler;
+
 @end

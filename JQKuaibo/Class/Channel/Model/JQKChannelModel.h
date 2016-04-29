@@ -18,9 +18,12 @@
 @interface JQKChannelModel : JQKEncryptedURLRequest
 
 @property (nonatomic,retain,readonly) NSArray *fetchedChannels;
+@property (nonatomic,retain,readonly) NSArray *fetchPhotos;
 
 - (BOOL)fetchChannelsWithCompletionHandler:(JQKCompletionHandler)handler;
 
 - (BOOL)fetchHomeChannelsWithCompletionHandler:(JQKCompletionHandler)handler;
+
+- (BOOL)fetchPhotosWithCompletionHandler:(JQKCompletionHandler)handler;
 
 @end

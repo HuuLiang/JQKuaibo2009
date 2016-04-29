@@ -96,31 +96,20 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
 }
 
 - (void)switchToViewPhoto:(JQKPhoto *)photo {
-    NSMutableArray<MWPhoto *> *photos = [[NSMutableArray alloc] initWithCapacity:photo.Urls.count];
-    [photo.Urls enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:obj]]];
-    }];
-    
-    MWPhotoBrowser *photoBrowser = [[MWPhotoBrowser alloc] initWithPhotos:photos];
-    photoBrowser.displayActionButton = NO;
-    photoBrowser.delegate = self;
-    objc_setAssociatedObject(photoBrowser, kPhotoNumberAssociatedKey, @(photos.count), OBJC_ASSOCIATION_COPY_NONATOMIC);
-    [self.navigationController pushViewController:photoBrowser animated:YES];
-    
-//    if (![JQKUtil isPaid]) {
-//        [self payForPayable:photo];
-//    } else {
-//        NSMutableArray<MWPhoto *> *photos = [[NSMutableArray alloc] initWithCapacity:photo.Urls.count];
-//        [photo.Urls enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//            [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:obj]]];
-//        }];
-//        
-//        MWPhotoBrowser *photoBrowser = [[MWPhotoBrowser alloc] initWithPhotos:photos];
-//        photoBrowser.displayActionButton = NO;
-//        photoBrowser.delegate = self;
-//        objc_setAssociatedObject(photoBrowser, kPhotoNumberAssociatedKey, @(photos.count), OBJC_ASSOCIATION_COPY_NONATOMIC);
-//        [self.navigationController pushViewController:photoBrowser animated:YES];
-//    }
+    if (![JQKUtil isPaid]) {
+        [self payForPayable:photo];
+    } else {
+        NSMutableArray<MWPhoto *> *photos = [[NSMutableArray alloc] initWithCapacity:photo.Urls.count];
+        [photo.Urls enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:obj]]];
+        }];
+        
+        MWPhotoBrowser *photoBrowser = [[MWPhotoBrowser alloc] initWithPhotos:photos];
+        photoBrowser.displayActionButton = NO;
+        photoBrowser.delegate = self;
+        objc_setAssociatedObject(photoBrowser, kPhotoNumberAssociatedKey, @(photos.count), OBJC_ASSOCIATION_COPY_NONATOMIC);
+        [self.navigationController pushViewController:photoBrowser animated:YES];
+    }
 }
 
 - (void)payForPayable:(id<JQKPayable>)payable; {

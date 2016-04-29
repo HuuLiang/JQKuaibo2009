@@ -40,22 +40,23 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
 }
 //@property (nonatomic,retain) NSMutableDictionary<NSNumber *, JQKVideoListModel *> *videoModels;
 @property (nonatomic,retain) JQKChannelModel *channels;
-@property (nonatomic,retain) JQKPhotoAlbumModel *albumModel;
+@property (nonatomic) NSMutableArray *dataSource;
+//@property (nonatomic,retain) JQKPhotoAlbumModel *albumModel;
 @property (nonatomic,retain) dispatch_group_t dataDispatchGroup;
 @end
 
 @implementation JQKHomeViewController
 
-DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
+//DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
 
-- (dispatch_group_t)dataDispatchGroup {
-    if (_dataDispatchGroup) {
-        return _dataDispatchGroup;
-    }
-    
-    _dataDispatchGroup = dispatch_group_create();
-    return _dataDispatchGroup;
-}
+//- (dispatch_group_t)dataDispatchGroup {
+//    if (_dataDispatchGroup) {
+//        return _dataDispatchGroup;
+//    }
+//    
+//    _dataDispatchGroup = dispatch_group_create();
+//    return _dataDispatchGroup;
+//}
 
 - (JQKChannelModel *)channels {
     if (_channels) {
@@ -68,6 +69,7 @@ DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _dataSource = [[NSMutableArray alloc] init];
     // Do any additional setup after loading the view.
     _bannerView = [[SDCycleScrollView alloc] init];
     _bannerView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
@@ -104,25 +106,38 @@ DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
 
 - (void)loadChannels {
     @weakify(self);
-    
-
+    [_dataSource removeAllObjects];
     [self.channels fetchHomeChannelsWithCompletionHandler:^(BOOL success, id obj) {
+        [_dataSource addObjectsFromArray:_channels.fetchedChannels];
         if (success) {
             @strongify(self);
-            [_layoutCollectionView JQK_endPullToRefresh];
-            
-            [self refreshBannerView];
-            
-            [_layoutCollectionView reloadData];
+            [self.channels fetchPhotosWithCompletionHandler:^(BOOL success, id obj) {
+                if (success) {
+                    JQKChannel * channel = [[JQKChannel alloc] init];
+                    channel.name = @"美女图集";
+                    channel.type = 2;
+                    channel.programList = _channels.fetchPhotos;
+                    [_dataSource addObject:channel];
+                }
+                [self loadHomeData];
+            }];
+        } else {
+            [self loadHomeData];
         }
     }];
+}
+
+- (void)loadHomeData {
+    [_layoutCollectionView JQK_endPullToRefresh];
+    [self refreshBannerView];
+    [_layoutCollectionView reloadData];
 }
 
 - (void)refreshBannerView {
     NSMutableArray *imageUrlGroup = [NSMutableArray array];
     NSMutableArray *titlesGroup = [NSMutableArray array];
     
-    for (JQKChannel *channel in _channels.fetchedChannels) {
+    for (JQKChannel *channel in _dataSource) {
         if (channel.type == 4) {
             for (JQKVideo *bannerVideo in channel.programList) {
                 [imageUrlGroup addObject:bannerVideo.coverImg];
@@ -144,7 +159,7 @@ DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JQKVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellReusableIdentifier forIndexPath:indexPath];
     
-    JQKChannel *channel = _channels.fetchedChannels[indexPath.section];
+    JQKChannel *channel = _dataSource[indexPath.section];
     if (channel.type == 4) {
         if (!_bannerCell) {
             _bannerCell = [collectionView dequeueReusableCellWithReuseIdentifier:kBannerCellReusableIdentifier forIndexPath:indexPath];
@@ -156,70 +171,32 @@ DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
             }
         }
         return _bannerCell;
-    } else {
+    } else if (channel.type == 1 || channel.type == 3 || channel.type ==5) {
         if (indexPath.item < channel.programList.count) {
             JQKVideo *video = channel.programList[indexPath.item];
             cell.imageURL = [NSURL URLWithString:video.coverImg];
             cell.title = video.title;
             [cell setVipLabel:video.spec];
         }
+    } else if (channel.type == 2) {
+        if (indexPath.item < channel.programList.count) {
+            JQKChannel *photoChannel = channel.programList[indexPath.item];
+            cell.imageURL = [NSURL URLWithString:photoChannel.columnImg];
+            cell.title = photoChannel.name;
+            [cell setVipLabel:6];
+        }
     }
-//    } else if (channel.type == 1) {
-//        if (indexPath.item < channel.programList.count) {
-//            JQKVideo *video = channel.programList[indexPath.item];
-//            cell.imageURL = [NSURL URLWithString:video.coverImg];
-//            cell.title = video.title;
-//            [cell setVIP:video.spec];
-//        }
-//    } else if (channel.type == 2) {
-//        if (indexPath.item < channel.programList.count) {
-//            JQKVideo
-//        }
-//    }
 
-//    return cell;
-    
-//    if (indexPath.section == 0) {
-//        if (!_bannerCell) {
-//            _bannerCell = [collectionView dequeueReusableCellWithReuseIdentifier:kBannerCellReusableIdentifier forIndexPath:indexPath];
-//            [_bannerCell.contentView addSubview:_bannerView];
-//            {
-//                [_bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                    make.edges.equalTo(_bannerCell.contentView);
-//                }];
-//            }
-//        }
-//        return _bannerCell;
-//    }
-//    
-//    JQKVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellReusableIdentifier forIndexPath:indexPath];
-//    
-//    if (indexPath.section == JQKHomeSectionPhotos) {
-//        if (indexPath.item < self.albumModel.fetchedAlbums.count) {
-//            JQKChannel *channel = self.albumModel.fetchedAlbums[indexPath.item];
-//            cell.imageURL = [NSURL URLWithString:channel.columnImg];
-//            cell.title = channel.name;
-//            cell.isVIP = NO;
-//        }
-//    } else {
-//        JQKVideoListModel *videoModel = self.videoModels[@(indexPath.section)];
-//        if (indexPath.item < videoModel.fetchedVideos.programList.count) {
-//            JQKVideo *video = videoModel.fetchedVideos.programList[indexPath.item];
-//            cell.imageURL = [NSURL URLWithString:video.videoUrl];
-//            cell.title = video.title;
-//            cell.isVIP = video.VIP.boolValue;
-//        }
-//    }
 
     return cell;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return _channels.fetchedChannels.count;
+    return _dataSource.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    JQKChannel *channel = _channels.fetchedChannels[section];
+    JQKChannel *channel = _dataSource[section];
     if (channel.type == 4) {
         return 1;
     } else if (channel.type == 1 || channel.type == 2 || channel.type == 3 || channel.type == 5) {
@@ -234,57 +211,18 @@ DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
     
     JQKHomeSectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kHomeSectionHeaderReusableIdentifier forIndexPath:indexPath];
     
-    JQKChannel *channel = _channels.fetchedChannels[indexPath.section];
+    JQKChannel *channel = _dataSource[indexPath.section];
     headerView.title = channel.name;
     
     NSArray *colors = @[@"#55ffff",@"#8ab337",@"#91bc4c",@"#d63b32",@"#e8851c"];
     headerView.titleColor = [UIColor colorWithHexString:colors[indexPath.section % colors.count]];
     
-//    if ([channel.name isEqualToString:@"试看专区"]) {
-//        headerColor = [UIColor colorWithHexString:@"#55ffff"];
-//    } else if ([channel.name isEqualToString:@"VIP贵宾区"]) {
-//        headerColor = [UIColor redColor];
-//    } else if ([channel.name isEqualToString:@"美腿丝袜"]) {
-//        headerColor = [UIColor colorWithHexString:@"#8ab337"];
-//    } else if ([channel.name isEqualToString:@"女优秀场"]) {
-//        headerColor = [UIColor colorWithHexString:@"#91bc4c"];
-//    } else if ([channel.name isEqualToString:@"美女图集"]) {
-//        headerColor = [UIColor colorWithHexString:@"#e8851c"];
-//    } else {
-//        headerView.title = nil;
-//    }
-//    
-    
-//    switch (indexPath.section) {
-//        case JQKHomeSectionTrial:
-//            headerView.title = @"试看专区";
-//            headerView.titleColor = [UIColor colorWithHexString:@"#55ffff"];
-//            break;
-//        case JQKHomeSectionVIP:
-//            headerView.title = @"VIP贵宾区";
-//            headerView.titleColor = [UIColor redColor];
-//            break;
-//        case JQKHomeSectionMeitui:
-//            headerView.title = @"美腿丝袜";
-//            headerView.titleColor = [UIColor colorWithHexString:@"#8ab337"];
-//            break;
-//        case JQKHomeSectionNvyou:
-//            headerView.title = @"女优秀场";
-//            headerView.titleColor = [UIColor colorWithHexString:@"#91bc4c"];
-//            break;
-//        case JQKHomeSectionPhotos:
-//            headerView.title = @"美女图集";
-//            headerView.titleColor = [UIColor colorWithHexString:@"#e8851c"];
-//            break;
-//        default:
-//            headerView.title = nil;
-//            break;
-//    }
+
     return headerView;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    JQKChannel *channel = _channels.fetchedChannels[indexPath.section];
+    JQKChannel *channel = _dataSource[indexPath.section];
     JQKVideo *video = channel.programList[indexPath.item];
     if (channel.type == 4) {
         return;
@@ -297,30 +235,12 @@ DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
         }
     } else if (channel.type == 2) {
         if (indexPath.item < channel.programList.count) {
-            JQKPhotoListViewController *photoVC = [[JQKPhotoListViewController alloc] initWithPhotoAlbum:video];
+            JQKChannel *photoChannel = channel.programList[indexPath.item];
+            JQKPhotoListViewController *photoVC = [[JQKPhotoListViewController alloc] initWithPhotoAlbum:photoChannel];
             [self.navigationController pushViewController:photoVC animated:YES];
         }
     }
-//    if (indexPath.section == JQKHomeSectionBanner) {
-//        return ;
-//    } else if (indexPath.section < JQKHomeSectionPhotos) {
-//        JQKVideoListModel *videoModel = self.videoModels[@(indexPath.section)];
-//        if (indexPath.item < videoModel.fetchedVideos.programList.count) {
-//            JQKVideo *video = videoModel.fetchedVideos.programList[indexPath.item];
-//            if (indexPath.section == JQKHomeSectionTrial) {
-//                [self switchToPlayVideo:video];
-//            } else {
-//                JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video];
-//                [self.navigationController pushViewController:videoVC animated:YES];
-//            }
-//        }
-//    } else if (indexPath.section == JQKHomeSectionPhotos) {
-//        if (indexPath.item < self.albumModel.fetchedAlbums.count) {
-//            JQKChannel *album = self.albumModel.fetchedAlbums[indexPath.item];
-//            JQKPhotoListViewController *photoVC = [[JQKPhotoListViewController alloc] initWithPhotoAlbum:album];
-//            [self.navigationController pushViewController:photoVC animated:YES];
-//        }
-//    }
+
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -367,12 +287,5 @@ DefineLazyPropertyInitialization(JQKPhotoAlbumModel, albumModel)
             }
         }
     }
-    
-//    JQKVideoListModel *videoModel = self.videoModels[@(JQKHomeSectionBanner)];
-//    if (index < videoModel.fetchedVideos.programList.count) {
-//        JQKVideo *bannerVideo = videoModel.fetchedVideos.programList[index];
-//        JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:bannerVideo];
-//        [self.navigationController pushViewController:videoVC animated:YES];
-//    }
 }
 @end

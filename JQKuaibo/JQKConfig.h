@@ -41,7 +41,7 @@
 #define JQK_RECOMMEND_VIDEO_URL         @"/iosvideo/details.htm"
 #define JQK_COMMENT_URL                 @"/iosvideo/comment.htm"
 #define JQK_HOT_VIDEO_URL               @"/iosvideo/hotVideo.htm"
-#define JQK_PHOTO_ALBUM_URL             @"/static/kbyy/QueryAtlasReq_%ld_%ld.json"
+#define JQK_PHOTO_ALBUM_URL             @"/iosvideo/gallery.htm"
 #define JQK_PHOTO_LIST_URL              @"/iosvideo/programUrl.htm"
 
 #define JQK_HOME_URL                    @"/iosvideo/homePage.htm"

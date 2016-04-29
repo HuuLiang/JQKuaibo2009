@@ -20,6 +20,7 @@
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSInteger type;
 @property (nonatomic) NSString *videoUrl;
+@property (nonatomic) NSString *columnImg;
 //@property (nonatomic) NSString *VIP;
 
 @end

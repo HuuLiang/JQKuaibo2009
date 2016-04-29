@@ -96,5 +96,27 @@
     return success;
 }
 
+- (BOOL)fetchPhotosWithCompletionHandler:(JQKCompletionHandler)handler {
+    @weakify(self);
+    BOOL success = [self requestURLPath:JQK_PHOTO_ALBUM_URL
+                             withParams:nil
+                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                    {
+                        @strongify(self);
+                        if (respStatus == JQKURLResponseSuccess) {
+                            JQKChannelResponse *channelResp = (JQKChannelResponse *)self.response;
+                            self->_fetchPhotos = channelResp.columnList;
+                            if (handler) {
+                                handler(YES,self->_fetchPhotos);
+                            }
+                        } else {
+                            if (handler) {
+                                handler(NO,nil);
+                            }
+                        }
+                    }];
+    return success;
+}
+
 
 @end

@@ -80,4 +80,31 @@
     return success;
 }
 
+- (BOOL)fetchPhotosWithPageNo:(NSInteger)pageNo
+                     columnId:(NSString *)columnId
+            completionHandler:(JQKCompletionHandler)handler {
+    @weakify(self);
+    NSDictionary *params = @{@"columnId":columnId};
+    BOOL success = [self requestURLPath:JQK_CHANNEL_PROGRAM_URL
+                             withParams:params
+                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                    {
+                        @strongify(self);
+                        if (!self) {
+                            return ;
+                        }
+                        
+                        JQKVideos *videos;
+                        if (respStatus == JQKURLResponseSuccess) {
+                            videos = self.response;
+                            self.fetchedVideos = videos;
+                        }
+                        
+                        if (handler) {
+                            handler(respStatus == JQKURLResponseSuccess, videos);
+                        }
+                    }];
+    return success;
+}
+
 @end
