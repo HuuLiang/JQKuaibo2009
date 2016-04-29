@@ -106,8 +106,8 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
 
 - (void)loadChannels {
     @weakify(self);
-    [_dataSource removeAllObjects];
     [self.channels fetchHomeChannelsWithCompletionHandler:^(BOOL success, id obj) {
+        [_dataSource removeAllObjects];
         [_dataSource addObjectsFromArray:_channels.fetchedChannels];
         if (success) {
             @strongify(self);
