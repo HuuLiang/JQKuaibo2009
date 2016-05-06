@@ -113,11 +113,13 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
             @strongify(self);
             [self.channels fetchPhotosWithCompletionHandler:^(BOOL success, id obj) {
                 if (success) {
-                    JQKChannel * channel = [[JQKChannel alloc] init];
-                    channel.name = @"美女图集";
-                    channel.type = 2;
-                    channel.programList = _channels.fetchPhotos;
-                    [_dataSource addObject:channel];
+                    if (_channels.fetchPhotos.count > 1 || _channels.fetchPhotos.count == 1) {
+                        JQKChannel * channel = [[JQKChannel alloc] init];
+                        channel.name = @"美女图集";
+                        channel.type = 2;
+                        channel.programList = _channels.fetchPhotos;
+                        [_dataSource addObject:channel];
+                    }
                 }
                 [self loadHomeData];
             }];
