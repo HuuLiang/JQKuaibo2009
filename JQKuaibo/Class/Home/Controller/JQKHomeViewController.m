@@ -107,32 +107,46 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
 - (void)loadChannels {
     @weakify(self);
     [self.channels fetchHomeChannelsWithCompletionHandler:^(BOOL success, id obj) {
-        [_dataSource removeAllObjects];
-        [_dataSource addObjectsFromArray:_channels.fetchedChannels];
+        @strongify(self);
+        if (!self) {
+            return ;
+        }
+        
         if (success) {
-            @strongify(self);
+            
+            
             [self.channels fetchPhotosWithCompletionHandler:^(BOOL success, id obj) {
+                @strongify(self);
+                if (!self) {
+                    return ;
+                }
+                
+                [self->_layoutCollectionView JQK_endPullToRefresh];
+                
                 if (success) {
-                    if (_channels.fetchPhotos.count > 1 || _channels.fetchPhotos.count == 1) {
+                    
+                    [self.dataSource removeAllObjects];
+                    if (self.channels.fetchedChannels) {
+                        [self.dataSource addObjectsFromArray:self.channels.fetchedChannels];
+                    }
+                    
+                    if (self.channels.fetchPhotos.count > 0) {
                         JQKChannel * channel = [[JQKChannel alloc] init];
                         channel.name = @"美女图集";
-                        channel.type = 2;
-                        channel.programList = _channels.fetchPhotos;
-                        [_dataSource addObject:channel];
+                        channel.type = JQKProgramTypePicture;
+                        channel.programList = self.channels.fetchPhotos;
+                        [self.dataSource addObject:channel];
                     }
+                    
+                    [self refreshBannerView];
+                    [self->_layoutCollectionView reloadData];
                 }
-                [self loadHomeData];
+                
             }];
         } else {
-            [self loadHomeData];
+            [self->_layoutCollectionView JQK_endPullToRefresh];
         }
     }];
-}
-
-- (void)loadHomeData {
-    [_layoutCollectionView JQK_endPullToRefresh];
-    [self refreshBannerView];
-    [_layoutCollectionView reloadData];
 }
 
 - (void)refreshBannerView {
@@ -140,7 +154,7 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
     NSMutableArray *titlesGroup = [NSMutableArray array];
     
     for (JQKChannel *channel in _dataSource) {
-        if (channel.type == 4) {
+        if (channel.type == JQKProgramTypeBanner) {
             for (JQKVideo *bannerVideo in channel.programList) {
                 [imageUrlGroup addObject:bannerVideo.coverImg];
                 [titlesGroup addObject:bannerVideo.title];

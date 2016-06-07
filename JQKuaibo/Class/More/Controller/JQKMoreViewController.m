@@ -30,11 +30,11 @@ DefineLazyPropertyInitialization(JQKAppSpreadModel, spreadModel)
     _layoutTableView.backgroundColor = self.view.backgroundColor;
     _layoutTableView.delegate = self;
     _layoutTableView.dataSource = self;
-    _layoutTableView.rowHeight = lround(kScreenHeight * 0.12);
+    _layoutTableView.rowHeight = kScreenWidth * 0.4;
     _layoutTableView.separatorInset = UIEdgeInsetsZero;
     _layoutTableView.hasRowSeparator = YES;
     _layoutTableView.hasSectionBorder = YES;
-    [_layoutTableView registerClass:[JQKMoreCell class]
+    [_layoutTableView registerClass:[UITableViewCell class]
              forCellReuseIdentifier:kMoreCellReusableIdentifier];
     [self.view addSubview:_layoutTableView];
     {
@@ -75,13 +75,20 @@ DefineLazyPropertyInitialization(JQKAppSpreadModel, spreadModel)
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    JQKMoreCell *cell = [tableView dequeueReusableCellWithIdentifier:kMoreCellReusableIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kMoreCellReusableIdentifier forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    if (!cell.backgroundView) {
+        cell.backgroundView = [[UIImageView alloc] init];
+    }
+    
+    UIImageView *imageView = (UIImageView *)cell.backgroundView;
     
     if (indexPath.row < self.spreadModel.fetchedSpreads.count) {
         JQKAppSpread *appSpread = self.spreadModel.fetchedSpreads[indexPath.row];
-        cell.imageURL = [NSURL URLWithString:appSpread.coverImg];
-        cell.title = appSpread.title;
-        cell.subtitle = appSpread.specialDesc;
+        [imageView sd_setImageWithURL:[NSURL URLWithString:appSpread.coverImg]];
+    } else {
+        imageView.image = nil;
     }
     return cell;
 }

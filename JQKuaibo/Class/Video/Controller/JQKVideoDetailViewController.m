@@ -92,6 +92,10 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
 
 - (void)getComment {
     NSMutableArray * numArray = [[NSMutableArray alloc] initWithArray:[JQKGetCommentsInfo sharedInstance].array];
+    if (numArray.count == 0) {
+        return ;
+    }
+    
     for (NSInteger i = 0; i < 4; i++) {
         NSInteger count = arc4random() % numArray.count;
         [numArray removeObjectAtIndex:count];

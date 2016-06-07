@@ -45,7 +45,7 @@ typedef NS_ENUM(NSUInteger, JQKMineCellRow) {
     }
     
     [self.navigationController.navigationBar bk_whenTouches:1 tapped:5 handler:^{
-        NSString *baseURLString = [JQK_SYSTEM_BASE_URL stringByReplacingCharactersInRange:NSMakeRange(0, JQK_SYSTEM_BASE_URL.length-6) withString:@"******"];
+        NSString *baseURLString = [JQK_BASE_URL stringByReplacingCharactersInRange:NSMakeRange(0, JQK_BASE_URL.length-6) withString:@"******"];
         [[JQKHudManager manager] showHudWithText:[NSString stringWithFormat:@"Server:%@\nChannelNo:%@\nPackageCertificate:%@\npV:%@", baseURLString, JQK_CHANNEL_NO, JQK_PACKAGE_CERTIFICATE, JQK_REST_PV]];
     }];
 }
@@ -102,7 +102,7 @@ typedef NS_ENUM(NSUInteger, JQKMineCellRow) {
         };
         [self.navigationController pushViewController:inputVC animated:YES];
     } else if (indexPath.row == JQKMineCellRowAgreement) {
-        NSString *urlString = [JQK_SYSTEM_BASE_URL stringByAppendingString:[JQKUtil isPaid]?JQK_AGREEMENT_PAID_URL:JQK_AGREEMENT_NOTPAID_URL];
+        NSString *urlString = [JQK_BASE_URL stringByAppendingString:[JQKUtil isPaid]?JQK_AGREEMENT_PAID_URL:JQK_AGREEMENT_NOTPAID_URL];
         JQKWebViewController *webVC = [[JQKWebViewController alloc] initWithURL:[NSURL URLWithString:urlString]];
         webVC.title = cell.textLabel.text;
         [self.navigationController pushViewController:webVC animated:YES];

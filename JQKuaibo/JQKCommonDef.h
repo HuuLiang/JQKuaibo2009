@@ -32,6 +32,15 @@ typedef NS_ENUM(NSUInteger, JQKVideoListField) {
     JQKVideoListFieldChannel
 };
 
+typedef NS_ENUM(NSUInteger, JQKProgramType) {
+    JQKProgramTypeNone = 0,
+    JQKProgramTypeVideo = 1,
+    JQKProgramTypePicture = 2,
+    JQKProgramTypeSpread = 3,
+    JQKProgramTypeBanner = 4,
+    JQKProgramTypeTrial = 5
+};
+
 // DLog
 #ifdef  DEBUG
 #define DLog(fmt,...) {NSLog((@"%s [Line:%d]" fmt),__PRETTY_FUNCTION__,__LINE__,##__VA_ARGS__);}

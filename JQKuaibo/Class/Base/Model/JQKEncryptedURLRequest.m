@@ -15,7 +15,7 @@ static NSString *const kEncryptionPasssword = @"f7@j3%#5aiG$4";
 @implementation JQKEncryptedURLRequest
 
 - (NSURL *)baseURL {
-    return [NSURL URLWithString:JQK_SYSTEM_BASE_URL];
+    return [NSURL URLWithString:JQK_BASE_URL];
 }
 
 + (NSString *)signKey {
