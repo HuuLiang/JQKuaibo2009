@@ -159,9 +159,9 @@ DefineLazyPropertyInitialization(NSMutableDictionary, cells)
             [_headerImageView addSubview:_priceLabel];
             {
                 [_priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.centerY.equalTo(_headerImageView).multipliedBy(1.55);
+                    make.centerY.equalTo(_headerImageView).multipliedBy(1.6);
                     make.centerX.equalTo(_headerImageView).multipliedBy(1.57);
-                    make.width.equalTo(_headerImageView).multipliedBy(0.2);
+                    make.width.equalTo(_headerImageView).multipliedBy(0.1);
                 }];
             }
             

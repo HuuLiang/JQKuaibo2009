@@ -18,6 +18,10 @@
 //    return @(self.Id.integerValue);
 //}
 
+- (NSNumber *)contentId {
+    return @0;
+}
+
 - (NSNumber *)contentType {
     return @(JQKContentTypePhoto);
 }

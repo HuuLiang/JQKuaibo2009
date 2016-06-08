@@ -19,6 +19,7 @@
 #import "JQKChannelViewController.h"
 #import "JQKMineViewController.h"
 #import "JQKGetCommentsInfo.h"
+#import "JQKLaunchView.h"
 
 @interface JQKAppDelegate ()
 
@@ -172,6 +173,9 @@
     [self registerUserNotification];
     [self.window makeKeyWindow];
     self.window.hidden = NO;
+    
+    JQKLaunchView *launchView = [[JQKLaunchView alloc] init];
+    [launchView show];
     
     if (![JQKUtil isRegistered]) {
         [[JQKActivateModel sharedModel] activateWithCompletionHandler:^(BOOL success, NSString *userId) {

@@ -31,7 +31,9 @@
 #define JQK_CHANNEL_NO           [JQKConfiguration sharedConfig].channelNo
 #define JQK_REST_APP_ID          @"QUBA_2009"
 #define JQK_REST_PV              @110
-#define JQK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Beijing Huazhong Hengtai Network Technology Co., Ltd."
+#define JQK_PAYMENT_PV           @100
+
+#define JQK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd."
 #define JQK_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JQK_REST_APP_ID, JQK_CHANNEL_NO]
 
 #define JQK_BASE_URL             @"http://iv.ihuiyx.com"//@"http://120.24.252.114:8093" //

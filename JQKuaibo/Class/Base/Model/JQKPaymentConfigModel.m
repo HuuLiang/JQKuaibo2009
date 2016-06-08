@@ -47,7 +47,7 @@ static NSString *const kPaymentEncryptionPassword = @"wdnxs&*@#!*qb)*&qiang";
                                    @"key":kSignKey,
                                    @"imsi":@"999999999999999",
                                    @"channelNo":JQK_CHANNEL_NO,
-                                   @"pV":JQK_REST_PV };
+                                   @"pV":JQK_PAYMENT_PV };
     
     NSString *sign = [signParams signWithDictionary:[self class].commonParams keyOrders:[self class].keyOrdersOfCommonParams];
     NSString *encryptedDataString = [params encryptedStringWithSign:sign password:kPaymentEncryptionPassword excludeKeys:@[@"key"]];
@@ -58,7 +58,7 @@ static NSString *const kPaymentEncryptionPassword = @"wdnxs&*@#!*qb)*&qiang";
     @weakify(self);
     BOOL ret = [self requestURLPath:JQK_PAYMENT_CONFIG_URL
                      standbyURLPath:[NSString stringWithFormat:JQK_STANDBY_PAYMENT_CONFIG_URL, JQK_REST_APP_ID]
-                         withParams:@{@"appId":JQK_REST_APP_ID, @"channelNo":JQK_CHANNEL_NO, @"pV":JQK_REST_PV}
+                         withParams:@{@"appId":JQK_REST_APP_ID, @"channelNo":JQK_CHANNEL_NO, @"pV":JQK_PAYMENT_PV}
                     responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
     {
         @strongify(self);

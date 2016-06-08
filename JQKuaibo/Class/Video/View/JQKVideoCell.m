@@ -105,8 +105,10 @@
     } else if (spec == 5) {
         _vipLabel.text = @"VIP";
     } else {
-        _vipLabel.hidden = YES;
+        _vipLabel.text = nil;
     }
+    
+    _vipLabel.hidden = _vipLabel.text.length == 0;
 }
 
 + (CGFloat)heightRelativeToWidth:(CGFloat)width landscape:(BOOL)isLandscape {

@@ -9,9 +9,9 @@
 #import "JQKURLResponse.h"
 #import <objc/runtime.h>
 
-@implementation JQKURLResponsePageInfo
-
-@end
+//@implementation JQKURLResponsePageInfo
+//
+//@end
 
 @interface JQKURLResponse ()
 @property (nonatomic) NSNumber *success;
@@ -30,9 +30,9 @@
     _Msg = resultCode;
 }
 
-- (Class)PinfoClass {
-    return [JQKURLResponsePageInfo class];
-}
+//- (Class)PinfoClass {
+//    return [JQKURLResponsePageInfo class];
+//}
 
 - (void)parseResponseWithDictionary:(NSDictionary *)dic {
     [self parseDataWithDictionary:dic inInstance:self];

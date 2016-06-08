@@ -32,6 +32,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     self = [super init];
     if (self) {
         _field = field;
+        _coverImageIsLandscape = YES;
     }
     return self;
 }
@@ -41,6 +42,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     if (self) {
         _channel = channel;
         _field = JQKVideoListFieldChannel;
+        _coverImageIsLandscape = YES;
     }
     return self;
 }
@@ -83,7 +85,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
 
 - (void)loadMoviesWithRefreshFlag:(BOOL)isRefresh {
     @weakify(self);
-    NSUInteger page = isRefresh?1:self.videoModel.fetchedVideos.Pinfo.Page.unsignedIntegerValue+1;
+    NSUInteger page = isRefresh?1:self.videoModel.fetchedVideos.page.unsignedIntegerValue+1;
     if (page > 1 && ![JQKUtil isPaid]) {
         [_layoutCollectionView JQK_endPullToRefresh];
         [[JQKHudManager manager] showHudWithText:@"成为VIP后可以查看更多"];
@@ -117,7 +119,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
                     [self->_layoutCollectionView reloadData];
                 }
                 
-                if (videos.Pinfo.Page.unsignedIntegerValue == videos.Pinfo.PageCount.unsignedIntegerValue) {
+                if (videos.page.unsignedIntegerValue * videos.pageSize.unsignedIntegerValue >= videos.items.unsignedIntegerValue) {
                     [self->_layoutCollectionView JQK_pagingRefreshNoMoreData];
                 }
             };
@@ -127,22 +129,25 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
                 SuccessBlock();
                 return ;
             }
-            
-            SuccessBlock();
+//
+           // SuccessBlock();
 //            UIImageView *imageView = [[UIImageView alloc] init];
 //            imageView sd_setImageWithURL:<#(NSURL *)#> placeholderImage:<#(UIImage *)#> options:SDWebImageAvoidAutoSetImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
 //                
 //            }
-//            NSURL *imageURL = [NSURL URLWithString:videos.programList.firstObject.videoUrl];
-//            [[SDWebImageManager sharedManager] downloadImageWithURL:imageURL options:0 progress:nil
-//                                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL)
-//             {
-//                if (image) {
-//                    self.coverImageIsLandscape = image.size.width >= image.size.height;
-//                }
-//                
-//                SuccessBlock();
-//            }];
+            NSURL *imageURL = [NSURL URLWithString:videos.programList.firstObject.coverImg];
+            [[SDWebImageManager sharedManager] downloadImageWithURL:imageURL options:0 progress:nil
+                                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL)
+             {
+                 @strongify(self);
+                if (image) {
+                    self.coverImageIsLandscape = image.size.width >= image.size.height;
+                } else {
+                    self.coverImageIsLandscape = YES;
+                }
+                
+                SuccessBlock();
+            }];
             
         } else {
             [self->_layoutCollectionView JQK_endPullToRefresh];
