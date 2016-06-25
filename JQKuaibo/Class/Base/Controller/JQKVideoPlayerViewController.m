@@ -72,7 +72,9 @@
 
 - (void)dismissAndPopPayment {
     if (_shouldPopupPaymentIfNotPaid && ![JQKUtil isPaid]) {
-        [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view.window forPayable:self.video withCompletionHandler:nil];
+//        [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view.window forPayable:self.video withCompletionHandler:nil];
+        [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view.window forPayable:_video forProgram:_video programLocation:_videoLocation inChannel:_channel withCompletionHandler:nil];
+        
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }

@@ -7,18 +7,20 @@
 //
 
 #import "JQKEncryptedURLRequest.h"
-#import "JQKChannel.h"
+//#import "JQKChannel.h"
 #import "JQKVideo.h"
 
 @interface JQKChannelResponse : JQKURLResponse
-@property (nonatomic,retain) NSMutableArray<JQKChannel *> *columnList;
+@property (nonatomic,retain) NSMutableArray<JQKVideos *> *columnList;
 
 @end
 
 @interface JQKChannelModel : JQKEncryptedURLRequest
 
-@property (nonatomic,retain,readonly) NSArray *fetchedChannels;
-@property (nonatomic,retain,readonly) NSArray *fetchPhotos;
+@property (nonatomic,retain,readonly) NSArray <JQKVideos*>*fetchedChannels;
+@property (nonatomic,retain,readonly) NSArray <JQKVideos *>*fetchPhotos;
+
+@property (nonatomic,retain,readonly) NSArray <NSNumber *>*columIds;
 
 - (BOOL)fetchChannelsWithCompletionHandler:(JQKCompletionHandler)handler;
 

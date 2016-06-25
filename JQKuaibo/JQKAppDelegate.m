@@ -21,7 +21,7 @@
 #import "JQKGetCommentsInfo.h"
 #import "JQKLaunchView.h"
 
-@interface JQKAppDelegate ()
+@interface JQKAppDelegate ()<UITabBarControllerDelegate>
 
 @end
 
@@ -77,6 +77,7 @@
 
     UITabBarController *tabBarController    = [[UITabBarController alloc] init];
     tabBarController.viewControllers        = @[homeNav,liveShowNav,channelNav,moreNav,mineNav];
+    tabBarController.delegate = self;
     _window.rootViewController              = tabBarController;
     return _window;
 }
@@ -170,7 +171,8 @@
     [[JQKErrorHandler sharedHandler] initialize];
     [self setupMobStatistics];
     [self setupCommonStyles];
-    [self registerUserNotification];
+//    [self registerUserNotification];
+    [[JQKNetworkInfo sharedInfo] startMonitoring];
     [self.window makeKeyWindow];
     self.window.hidden = NO;
     
@@ -190,6 +192,19 @@
     
     [[JQKPaymentModel sharedModel] startRetryingToCommitUnprocessedOrders];
     [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
+        
+        
+        NSUInteger statsTimeInterval = 180;
+        if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
+            statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;
+        }
+                statsTimeInterval = 20;
+        [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
+        
+        if ([JQKSystemConfigModel sharedModel].notificationLaunchSeq >0) {
+            [self registerUserNotification];
+        }
+        
         if (!success) {
             return ;
         }
@@ -270,6 +285,18 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
     [[JQKPaymentManager sharedManager] handleOpenURL:url];
+    return YES;
+}
+
+
+#pragma mark - UITabBarControllerDelegate
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    [[JQKStatsManager sharedManager] statsTabIndex:tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex] forClickCount:1];
+}
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    [[JQKStatsManager sharedManager] statsStopDurationAtTabIndex:tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
     return YES;
 }
 @end

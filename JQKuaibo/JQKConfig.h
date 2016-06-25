@@ -68,6 +68,11 @@
 #define JQK_SYSTEM_CONFIG_SPREAD_TOP_IMAGE      @"SPREAD_TOP_IMG"
 #define JQK_SYSTEM_CONFIG_SPREAD_URL            @"SPREAD_URL"
 
+#define JQK_STATS_BASE_URL              @"http://stats.iqu8.cn"//@"http://120.24.252.114"//
+#define JQK_STATS_CPC_URL               @"/stats/cpcs.service"
+#define JQK_STATS_TAB_URL               @"/stats/tabStat.service"
+#define JQK_STATS_PAY_URL               @"/stats/payRes.service"
+
 #define JQK_SYSTEM_CONFIG_SPREAD_LEFT_IMAGE     @"SPREAD_LEFT_IMG"
 #define JQK_SYSTEM_CONFIG_SPREAD_LEFT_URL       @"SPREAD_LEFT_URL"
 #define JQK_SYSTEM_CONFIG_SPREAD_RIGHT_IMAGE    @"SPREAD_RIGHT_IMG"

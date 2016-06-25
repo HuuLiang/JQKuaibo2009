@@ -21,6 +21,10 @@
 @property (nonatomic) NSInteger type;
 @property (nonatomic) NSString *videoUrl;
 @property (nonatomic) NSString *columnImg;
+
+@property (nonatomic) NSNumber *columnId;
+@property (nonatomic) NSNumber *realColumnId;
+@property (nonatomic) NSString *name;
 //@property (nonatomic) NSString *VIP;
 
 @end

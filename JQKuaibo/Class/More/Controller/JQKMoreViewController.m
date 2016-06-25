@@ -67,6 +67,11 @@ DefineLazyPropertyInitialization(JQKAppSpreadModel, spreadModel)
     }];
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex] forSlideCount:1];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -105,6 +110,7 @@ DefineLazyPropertyInitialization(JQKAppSpreadModel, spreadModel)
         if (appSpread.videoUrl.length > 0) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appSpread.videoUrl]];
         }
-    }
+        [[JQKStatsManager sharedManager] statsCPCWithProgram:appSpread programLocation:indexPath.item inChannel:_spreadModel.fetchChannels andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
+   }
 }
 @end

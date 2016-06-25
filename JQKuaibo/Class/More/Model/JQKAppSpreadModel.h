@@ -8,19 +8,19 @@
 
 #import "JQKEncryptedURLRequest.h"
 
-@interface JQKAppSpread : NSObject
-@property (nonatomic) NSString *title;
-@property (nonatomic) NSString *specialDesc;
-@property (nonatomic) NSString *videoUrl;
-@property (nonatomic) NSString *coverImg;
+@interface JQKAppSpread : JQKVideo
+//@property (nonatomic) NSString *title;
+//@property (nonatomic) NSString *specialDesc;
+//@property (nonatomic) NSString *videoUrl;
+//@property (nonatomic) NSString *coverImg;
 @end
 
-@interface JQKAppSpreadResponse : JQKURLResponse
+@interface JQKAppSpreadResponse : JQKVideos
 @property (nonatomic,retain) NSArray<JQKAppSpread *> *programList;
 @end
 
 @interface JQKAppSpreadModel : JQKEncryptedURLRequest
-
+@property (nonatomic,retain,readonly)JQKVideos *fetchChannels;
 @property (nonatomic,retain,readonly) NSArray<JQKAppSpread *> *fetchedSpreads;
 
 - (BOOL)fetchAppSpreadWithCompletionHandler:(JQKCompletionHandler)handler;

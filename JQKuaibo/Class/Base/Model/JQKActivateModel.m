@@ -46,7 +46,9 @@ static NSString *const kSuccessResponse = @"SUCCESS";
                              @"cpuV":@"",
                              @"appV":[JQKUtil appVersion],
                              @"appVN":@"",
-                             @"ccn":JQK_PACKAGE_CERTIFICATE};
+                             @"ccn":JQK_PACKAGE_CERTIFICATE,
+                             @"operator":[JQKNetworkInfo sharedInfo].carriarName ?: @""
+                             };
     
     BOOL success = [self requestURLPath:JQK_ACTIVATE_URL withParams:params responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage) {
         NSString *userId;

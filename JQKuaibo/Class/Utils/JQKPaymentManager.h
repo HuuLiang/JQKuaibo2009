@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "JQKPayable.h"
+@class JQKVideos;
 
 typedef void (^JQKPaymentCompletionHandler)(PAYRESULT payResult, JQKPaymentInfo *paymentInfo);
 
@@ -16,11 +17,13 @@ typedef void (^JQKPaymentCompletionHandler)(PAYRESULT payResult, JQKPaymentInfo 
 + (instancetype)sharedManager;
 
 - (void)setup;
-- (BOOL)startPaymentWithType:(JQKPaymentType)type
-                     subType:(JQKPaymentType)subType
-                       price:(NSUInteger)price
-                  forPayable:(id<JQKPayable>)payable
-           completionHandler:(JQKPaymentCompletionHandler)handler;
+- (JQKPaymentInfo *)startPaymentWithType:(JQKPaymentType)type
+                                 subType:(JQKPaymentType)subType
+                                   price:(NSUInteger)price
+                              forPayable:(id<JQKPayable>)payable
+                         programLocation:(NSUInteger)programLocation
+                               inChannel:(JQKVideos *)channel
+                       completionHandler:(JQKPaymentCompletionHandler)handler;
 
 
 - (void)handleOpenURL:(NSURL *)url;

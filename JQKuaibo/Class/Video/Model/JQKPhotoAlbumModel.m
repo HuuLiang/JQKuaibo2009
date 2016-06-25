@@ -11,7 +11,7 @@
 @implementation JQKPhotoAlbumResponse
 
 - (Class)AtlasElementClass {
-    return [JQKChannel class];
+    return [JQKVideos class];
 }
 
 @end

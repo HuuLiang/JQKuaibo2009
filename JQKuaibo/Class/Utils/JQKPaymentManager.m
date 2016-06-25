@@ -49,28 +49,35 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 
 - (void)handleOpenURL:(NSURL *)url {
     [[IapppayAlphaKit sharedInstance] handleOpenUrl:url];
-//    [WXApi handleOpenURL:url delegate:self];
+    //    [WXApi handleOpenURL:url delegate:self];
 }
 
-- (BOOL)startPaymentWithType:(JQKPaymentType)type
-                     subType:(JQKPaymentType)subType
-                       price:(NSUInteger)price
-                  forPayable:(id<JQKPayable>)payable
-           completionHandler:(JQKPaymentCompletionHandler)handler
+- (JQKPaymentInfo *)startPaymentWithType:(JQKPaymentType)type
+                                 subType:(JQKPaymentType)subType
+                                   price:(NSUInteger)price
+                              forPayable:(id<JQKPayable>)payable
+                         programLocation:(NSUInteger)programLocation
+                               inChannel:(JQKVideos *)channel
+                       completionHandler:(JQKPaymentCompletionHandler)handler
 {
     if (type == JQKPaymentTypeNone || (type == JQKPaymentTypeIAppPay && subType == JQKPaymentTypeNone)) {
         if (self.completionHandler) {
             self.completionHandler(PAYRESULT_FAIL, nil);
         }
-        return NO;
+        return nil;
     }
-    
+    price = 1;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
     NSString *orderNo = [NSString stringWithFormat:@"%@_%@", channelNo, uuid];
     
     JQKPaymentInfo *paymentInfo = [[JQKPaymentInfo alloc] init];
+    
+    paymentInfo.contentLocation = @(programLocation+1);
+    paymentInfo.columnId = channel.realColumnId;
+    paymentInfo.columnType = channel.type;
+    
     paymentInfo.orderId = orderNo;
     paymentInfo.orderPrice = @(price);
     paymentInfo.contentId = payable.contentId ?: @0;
@@ -104,7 +111,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                                              @(JQKPaymentTypeWeChatPay):@(IapppayAlphaKitWeChatPayType)};
         NSNumber *payType = paymentTypeMapping[@(subType)];
         if (!payType) {
-            return NO;
+            return nil;
         }
         
         IapppayAlphaOrderUtils *order = [[IapppayAlphaOrderUtils alloc] init];
@@ -132,7 +139,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         }
     }
     
-    return success;
+    return success ? paymentInfo : nil;
 }
 
 - (void)checkPayment {

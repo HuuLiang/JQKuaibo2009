@@ -11,10 +11,10 @@
 @class JQKChannel;
 @interface JQKPhotoListViewController : JQKBaseViewController
 
-@property (nonatomic,retain,readonly) JQKChannel *photoChannel;
+@property (nonatomic,retain,readonly) JQKVideo *photoChannel;
 
 - (instancetype)init __attribute__((unavailable("Use initWithPhotoAlbum: instead!")));
 
-- (instancetype)initWithPhotoAlbum:(JQKChannel *)photoChannel;
+- (instancetype)initWithPhotoAlbum:(JQKVideo *)photoChannel;
 
 @end

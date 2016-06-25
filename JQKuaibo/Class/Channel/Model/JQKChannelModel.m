@@ -11,7 +11,7 @@
 @implementation JQKChannelResponse
 
 - (Class)columnListElementClass {
-    return [JQKChannel class];
+    return [JQKVideos class];
 }
 
 
@@ -48,21 +48,21 @@
     BOOL success = [self requestURLPath:JQK_CHANNEL_LIST_URL
                              withParams:prarms
                         responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
-    {
-        @strongify(self);
-        if (respStatus == JQKURLResponseSuccess) {
-            JQKChannelResponse *channelResp = (JQKChannelResponse *)self.response;
-            self->_fetchedChannels = channelResp.columnList;
-            
-            if (handler) {
-                handler(YES, self->_fetchedChannels);
-            }
-        } else {
-            if (handler) {
-                handler(NO, nil);
-            }
-        }
-    }];
+                    {
+                        @strongify(self);
+                        if (respStatus == JQKURLResponseSuccess) {
+                            JQKChannelResponse *channelResp = (JQKChannelResponse *)self.response;
+                            self->_fetchedChannels = channelResp.columnList;
+                            
+                            if (handler) {
+                                handler(YES, self->_fetchedChannels);
+                            }
+                        } else {
+                            if (handler) {
+                                handler(NO, nil);
+                            }
+                        }
+                    }];
     return success;
 }
 
@@ -106,6 +106,12 @@
                         if (respStatus == JQKURLResponseSuccess) {
                             JQKChannelResponse *channelResp = (JQKChannelResponse *)self.response;
                             self->_fetchPhotos = channelResp.columnList;
+                            
+                            NSMutableArray *clumArr;
+                            [channelResp.columnList enumerateObjectsUsingBlock:^(JQKVideos * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                [clumArr addObject:obj.columnId];
+                            } ];
+                            _columIds = clumArr;
                             if (handler) {
                                 handler(YES,self->_fetchPhotos);
                             }

@@ -29,4 +29,10 @@
 #import "JQKPaymentManager.h"
 #import "JQKLocalNotificationManager.h"
 
+#import "JQKVideo.h"
+#import "JQKVideos.h"
+#import "DBHandler.h"
+#import "JQKStatsManager.h"
+#import "JQKNetworkInfo.h"
+
 #endif /* JQKPrefixHeader_pch */

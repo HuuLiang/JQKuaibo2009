@@ -9,7 +9,7 @@
 #import "JQKVideoListViewController.h"
 #import "JQKVideoCell.h"
 #import "JQKVideoDetailViewController.h"
-#import "JQKChannel.h"
+//#import "JQKChannel.h"
 #import "JQKVideoListModel.h"
 
 static NSString *const kMovieCellReusableIdentifier = @"MovieCellReusableIdentifier";
@@ -37,7 +37,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     return self;
 }
 
-- (instancetype)initWithChannel:(JQKChannel *)channel {
+- (instancetype)initWithChannel:(JQKVideos *)channel {
     self = [super init];
     if (self) {
         _channel = channel;
@@ -155,6 +155,11 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     }];
 }
 
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex] forSlideCount:1];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -189,12 +194,15 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     if (indexPath.item < self.videos.count) {
         JQKVideo *video = self.videos[indexPath.item];
         if (video.spec == 4) {
-            JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video columnId:_channel.columnId];
+            JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video columnId:_channel.columnId.stringValue];
+            videoVC.channel = _videoModel.fetchedVideos;
             [self.navigationController pushViewController:videoVC animated:YES];
         } else {
-            [self switchToPlayVideo:video];
+//            [self switchToPlayVideo:video];
+            [self switchToPlayVideo:video programLocation:indexPath.item inChannel:_videoModel.fetchedVideos];
         }
         
+        [[JQKStatsManager sharedManager] statsCPCWithProgram:video programLocation:indexPath.item inChannel:self.videoModel.fetchedVideos andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
     }
 }
 @end

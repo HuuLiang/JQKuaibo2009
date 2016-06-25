@@ -31,6 +31,10 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
 
 @implementation JQKBaseViewController
 
+- (NSUInteger)currentIndex {
+    return NSNotFound;
+}
+
 - (BOOL)hidesBottomBarWhenPushed {
     return self.navigationController.viewControllers.firstObject != self;
 }
@@ -51,7 +55,7 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
             @strongify(self);
             UIButton *thisButton = sender;
             if (!thisButton.selected) {
-                [self payForPayable:nil];
+                [self payForPayable:nil programLocation:0 program:nil inChannel:nil];
             }
         } forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightNavButton];
@@ -66,23 +70,29 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
     DLog(@"%@ dealloc", [self class]);
 }
 
-- (void)switchToPlayVideo:(JQKVideo *)video {
+- (void)switchToPlayVideo:(JQKVideo *)video
+          programLocation:(NSUInteger)programLocation
+                inChannel:(JQKVideos *)channel{
     if (![JQKUtil isPaid] && (video.spec != 4)) {
-        [self payForPayable:video];
+//        [self payForPayable:video ];
+        [self payForPayable:video programLocation:programLocation program:video inChannel:channel];
     } else {
         if ([JQKUtil isPaid]) {
             [self playVideo:video];
         } else {
-            [self playVideo:video withTimeControl:NO shouldPopPayment:YES];
+            //免费试播
+//            [self playVideo:video withTimeControl:NO shouldPopPayment:YES];
+            [self playVideo:video withTimeControl:NO shouldPopPayment:YES withProgramLocation:programLocation inChannel:channel];
         }
     }
 }
 
-- (void)playVideo:(JQKVideo *)video {
-    [self playVideo:video withTimeControl:YES shouldPopPayment:NO];
+- (void)playVideo:(JQKVideo *)video{
+//    [self playVideo:video withTimeControl:YES shouldPopPayment:NO];
+    [self playVideo:video withTimeControl:YES shouldPopPayment:NO withProgramLocation:0 inChannel:nil];
 }
 
-- (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment {
+- (void)playVideo:(JQKVideo *)video withTimeControl:(BOOL)hasTimeControl shouldPopPayment:(BOOL)shouldPopPayment withProgramLocation:(NSInteger)programLocation inChannel:(JQKVideos *)channel{
     if (hasTimeControl) {
         UIViewController *videoPlayVC = [self playerVCWithVideo:video];
         videoPlayVC.hidesBottomBarWhenPushed = YES;
@@ -91,13 +101,18 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
         JQKVideoPlayerViewController *playerVC = [[JQKVideoPlayerViewController alloc] initWithVideo:video];
         playerVC.hidesBottomBarWhenPushed = YES;
         playerVC.shouldPopupPaymentIfNotPaid = shouldPopPayment;
+        playerVC.videoLocation = programLocation;
+        playerVC.channel = channel;
         [self presentViewController:playerVC animated:YES completion:nil];
     }
 }
 
-- (void)switchToViewPhoto:(JQKPhoto *)photo {
+- (void)switchToViewPhoto:(JQKPhoto *)photo programLocation:(NSUInteger)programLocation
+                  program:(JQKVideo *)program
+                inChannel:(JQKVideos *)channel{
     if (![JQKUtil isPaid]) {
-        [self payForPayable:photo];
+//        [self payForPayable:photo];
+        [self payForPayable:photo programLocation:programLocation program:program inChannel:channel];
     } else {
         NSMutableArray<MWPhoto *> *photos = [[NSMutableArray alloc] initWithCapacity:photo.Urls.count];
         [photo.Urls enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -112,8 +127,11 @@ static const void* kPhotoNumberAssociatedKey = &kPhotoNumberAssociatedKey;
     }
 }
 
-- (void)payForPayable:(id<JQKPayable>)payable; {
-    [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view.window forPayable:payable withCompletionHandler:nil];
+- (void)payForPayable:(id<JQKPayable>)payable programLocation:(NSUInteger)programLocation
+              program:(JQKVideo *)program
+            inChannel:(JQKVideos *)channel {
+    //    [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view.window forPayable:payable withCompletionHandler:nil];
+    [[JQKPaymentViewController sharedPaymentVC] popupPaymentInView:self.view.window forPayable:payable forProgram:program programLocation:programLocation inChannel:channel withCompletionHandler:nil];
 }
 
 - (void)onPaidNotification:(NSNotification *)notification {

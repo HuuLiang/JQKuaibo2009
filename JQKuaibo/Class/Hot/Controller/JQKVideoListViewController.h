@@ -13,10 +13,10 @@
 @interface JQKVideoListViewController : JQKBaseViewController
 
 @property (nonatomic,readonly) JQKVideoListField field;
-@property (nonatomic,retain,readonly) JQKChannel *channel;
+@property (nonatomic,retain,readonly) JQKVideos *channel;
 
 - (instancetype)init __attribute__((unavailable("Use initWithField: or initWithChannel: instead!")));
 - (instancetype)initWithField:(JQKVideoListField)field;
-- (instancetype)initWithChannel:(JQKChannel *)channel; // for channel field
+- (instancetype)initWithChannel:(JQKVideos *)channel; // for channel field
 
 @end

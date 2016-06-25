@@ -131,6 +131,11 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
     return _popularity;
 }
 
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex] forSlideCount:1];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -220,12 +225,15 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == JQKVideoPlayerSection) {
-        [self switchToPlayVideo:self.video];
+//        [self switchToPlayVideo:self.video];
+        [self switchToPlayVideo:self.video programLocation:indexPath.item inChannel:_channel];
     } else if (indexPath.section == JQKRecommendVideoSection) {
         if (indexPath.item < self.recommendVideoModel.fetchedVideos.hotProgramList.count) {
-            JQKVideo *video = self.recommendVideoModel.fetchedVideos.hotProgramList[indexPath.item];
-            JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video columnId:_colunmId];
+            JQKVideos *videos = self.recommendVideoModel.fetchedVideos;
+            JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:videos.hotProgramList[indexPath.item] columnId:_colunmId];
+            videoVC.channel = videos;
             [self.navigationController pushViewController:videoVC animated:YES];
+            [[JQKStatsManager sharedManager] statsCPCWithProgram:videos.hotProgramList[indexPath.item] programLocation:indexPath.item inChannel:videos andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
         }
     }
 }
@@ -281,4 +289,6 @@ DefineLazyPropertyInitialization(JQKVideoListModel, recommendVideoModel)
     }
     return 5;
 }
+
+
 @end

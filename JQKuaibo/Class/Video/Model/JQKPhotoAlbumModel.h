@@ -7,15 +7,15 @@
 //
 
 #import "JQKURLRequest.h"
-#import "JQKChannel.h"
+//#import "JQKChannel.h"
 
 @interface JQKPhotoAlbumResponse : JQKURLResponse
-@property (nonatomic,retain) NSArray<JQKChannel *> *Atlas;
+@property (nonatomic,retain) NSArray<JQKVideos *> *Atlas;
 @end
 
 @interface JQKPhotoAlbumModel : JQKURLRequest
 
-@property (nonatomic,retain,readonly) NSArray<JQKChannel *> *fetchedAlbums;
+@property (nonatomic,retain,readonly) NSArray<JQKVideos *> *fetchedAlbums;
 
 - (BOOL)fetchAlbumsWithPage:(NSUInteger)page pageSize:(NSUInteger)pageSize completionHandler:(JQKCompletionHandler)handler;
 

@@ -18,6 +18,10 @@
 
 @property (nonatomic) NSNumber *Result;
 @property (nonatomic) NSString *Msg;
+
+@property (nonatomic) NSNumber *success;
+@property (nonatomic) NSString *resultCode;
+
 //@property (nonatomic,retain) JQKURLResponsePageInfo *Pinfo;
 
 - (void)parseResponseWithDictionary:(NSDictionary *)dic;

@@ -43,6 +43,8 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
 @property (nonatomic) NSMutableArray *dataSource;
 //@property (nonatomic,retain) JQKPhotoAlbumModel *albumModel;
 @property (nonatomic,retain) dispatch_group_t dataDispatchGroup;
+
+@property(nonatomic,retain)JQKVideos *bannerChannel;
 @end
 
 @implementation JQKHomeViewController
@@ -77,6 +79,12 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
     _bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentRight;
     _bannerView.delegate = self;
     _bannerView.backgroundColor = [UIColor whiteColor];
+    @weakify(self);
+    [_bannerView aspect_hookSelector:@selector(scrollViewDidEndDragging:willDecelerate:) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> aspectInfo, UIScrollView *scrollView, BOOL decelerate){
+        @strongify(self);
+        [[JQKStatsManager sharedManager] statsTabIndex:[JQKUtil currentTabPageIndex] subTabIndex:[JQKUtil currentSubTabPageIndex] forBanner:(NSNumber*)self.bannerChannel.columnId withSlideCount:1];
+        
+    } error:nil];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.minimumLineSpacing = 5;
@@ -96,7 +104,7 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
         }];
     }
     
-    @weakify(self);
+//    @weakify(self);
     [_layoutCollectionView JQK_addPullToRefreshWithHandler:^{
         @strongify(self);
         [self loadChannels];
@@ -131,10 +139,11 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
                     }
                     
                     if (self.channels.fetchPhotos.count > 0) {
-                        JQKChannel * channel = [[JQKChannel alloc] init];
+                        JQKVideos * channel = [[JQKVideos alloc] init];
                         channel.name = @"美女图集";
-                        channel.type = JQKProgramTypePicture;
+                        channel.type = (NSNumber*)[NSString stringWithFormat:@"%ld",JQKProgramTypePicture];
                         channel.programList = self.channels.fetchPhotos;
+                            
                         [self.dataSource addObject:channel];
                     }
                     
@@ -153,8 +162,9 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
     NSMutableArray *imageUrlGroup = [NSMutableArray array];
     NSMutableArray *titlesGroup = [NSMutableArray array];
     
-    for (JQKChannel *channel in _dataSource) {
-        if (channel.type == JQKProgramTypeBanner) {
+    for (JQKVideos *channel in _dataSource) {
+        if (channel.type.integerValue == JQKProgramTypeBanner) {
+            _bannerChannel = channel;
             for (JQKVideo *bannerVideo in channel.programList) {
                 [imageUrlGroup addObject:bannerVideo.coverImg];
                 [titlesGroup addObject:bannerVideo.title];
@@ -163,6 +173,12 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
             _bannerView.titlesGroup = titlesGroup;
         }
     }
+}
+
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex] forSlideCount:1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -175,8 +191,8 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JQKVideoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kHomeCellReusableIdentifier forIndexPath:indexPath];
     
-    JQKChannel *channel = _dataSource[indexPath.section];
-    if (channel.type == 4) {
+    JQKVideos *channel = _dataSource[indexPath.section];
+    if (channel.type.integerValue == 4) {
         if (!_bannerCell) {
             _bannerCell = [collectionView dequeueReusableCellWithReuseIdentifier:kBannerCellReusableIdentifier forIndexPath:indexPath];
             [_bannerCell.contentView addSubview:_bannerView];
@@ -187,23 +203,23 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
             }
         }
         return _bannerCell;
-    } else if (channel.type == 1 || channel.type == 3 || channel.type ==5) {
+    } else if (channel.type.integerValue == 1 || channel.type.integerValue == 3 || channel.type.integerValue ==5) {
         if (indexPath.item < channel.programList.count) {
             JQKVideo *video = channel.programList[indexPath.item];
             cell.imageURL = [NSURL URLWithString:video.coverImg];
             cell.title = video.title;
             [cell setVipLabel:video.spec];
         }
-    } else if (channel.type == 2) {
+    } else if (channel.type.integerValue == 2) {
         if (indexPath.item < channel.programList.count) {
-            JQKChannel *photoChannel = channel.programList[indexPath.item];
+            JQKVideo *photoChannel = channel.programList[indexPath.item];
             cell.imageURL = [NSURL URLWithString:photoChannel.columnImg];
             cell.title = photoChannel.name;
             [cell setVipLabel:6];
         }
     }
-
-
+    
+    
     return cell;
 }
 
@@ -212,10 +228,10 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    JQKChannel *channel = _dataSource[section];
-    if (channel.type == 4) {
+    JQKVideos *channel = _dataSource[section];
+    if (channel.type.integerValue == 4) {
         return 1;
-    } else if (channel.type == 1 || channel.type == 2 || channel.type == 3 || channel.type == 5) {
+    } else if (channel.type.integerValue == 1 || channel.type.integerValue == 2 || channel.type.integerValue == 3 || channel.type.integerValue == 5) {
         return channel.programList.count;
     } else {
         return 0;
@@ -227,36 +243,44 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
     
     JQKHomeSectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kHomeSectionHeaderReusableIdentifier forIndexPath:indexPath];
     
-    JQKChannel *channel = _dataSource[indexPath.section];
+    JQKVideos *channel = _dataSource[indexPath.section];
     headerView.title = channel.name;
     
     NSArray *colors = @[@"#55ffff",@"#8ab337",@"#91bc4c",@"#d63b32",@"#e8851c"];
     headerView.titleColor = [UIColor colorWithHexString:colors[indexPath.section % colors.count]];
     
-
+    
     return headerView;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    JQKChannel *channel = _dataSource[indexPath.section];
+    JQKVideos *channel = _dataSource[indexPath.section];
     JQKVideo *video = channel.programList[indexPath.item];
-    if (channel.type == 4) {
+    if (channel.type.integerValue == 4) {
         return;
-    } else if (channel.type == 5) {
-        [self switchToPlayVideo:channel.programList[indexPath.item]];
-    } else if (channel.type == 1 || channel.type == 3) {
+    } else if (channel.type.integerValue == 5) {
+//        [self switchToPlayVideo:channel.programList[indexPath.item]];
+        [self switchToPlayVideo:video programLocation:indexPath.item inChannel:channel];
+        
+    } else if (channel.type.integerValue == 1 || channel.type.integerValue == 3) {
         if (indexPath.item < channel.programList.count) {
-            JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video columnId:channel.columnId];
+            JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:video columnId:(NSString *)channel.columnId];
+            videoVC.channel = channel;
             [self.navigationController pushViewController:videoVC animated:YES];
         }
-    } else if (channel.type == 2) {
+    } else if (channel.type.integerValue == 2) {
+        
         if (indexPath.item < channel.programList.count) {
-            JQKChannel *photoChannel = channel.programList[indexPath.item];
+            JQKVideo *photoChannel = channel.programList[indexPath.item];
             JQKPhotoListViewController *photoVC = [[JQKPhotoListViewController alloc] initWithPhotoAlbum:photoChannel];
             [self.navigationController pushViewController:photoVC animated:YES];
+            
+            [[JQKStatsManager sharedManager] statsCPCWithChannel:_channels.fetchPhotos[indexPath.item] inTabIndex:self.tabBarController.selectedIndex];
+            return;
         }
     }
-
+    [[JQKStatsManager sharedManager] statsCPCWithProgram:video programLocation:indexPath.item inChannel:channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
+    
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -287,15 +311,21 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
-    for (JQKChannel *channel in _channels.fetchedChannels) {
-        if (channel.type == 4) {
+    for (JQKVideos *channel in _channels.fetchedChannels) {
+        if (channel.type.integerValue == 4) {
             if (index < channel.programList.count) {
                 JQKVideo *bannerVideo = channel.programList[index];
+                if (bannerVideo.type == 5|| bannerVideo.type == 1||bannerVideo.type ==3) {
+                    
+                    [[JQKStatsManager sharedManager] statsCPCWithProgram:bannerVideo programLocation:index inChannel:channel andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
+                }
                 if (bannerVideo.type == 5) {
-                    JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:bannerVideo columnId:channel.columnId];
+                    JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:bannerVideo columnId:(NSString *)channel.columnId];
+                    videoVC.channel = channel;
                     [self.navigationController pushViewController:videoVC animated:YES];
                 } else if (bannerVideo.type == 1) {
-                    JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:bannerVideo columnId:channel.columnId];
+                    JQKVideoDetailViewController *videoVC = [[JQKVideoDetailViewController alloc] initWithVideo:bannerVideo columnId:(NSString *)channel.columnId];
+                    videoVC.channel = channel;
                     [self.navigationController pushViewController:videoVC animated:YES];
                 } else if (bannerVideo.type == 3) {
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:bannerVideo.videoUrl]];
@@ -303,5 +333,6 @@ typedef NS_ENUM(NSUInteger, JQKHomeSection) {
             }
         }
     }
+    
 }
 @end

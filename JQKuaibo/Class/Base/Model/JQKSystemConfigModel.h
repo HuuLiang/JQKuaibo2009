@@ -40,6 +40,10 @@ typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic,readonly) BOOL loaded;
 @property (nonatomic,readonly) BOOL isHalfPay;
 
+@property (nonatomic) NSUInteger statsTimeInterval;
+@property (nonatomic) NSInteger notificationLaunchSeq;
+
+
 + (instancetype)sharedModel;
 
 - (BOOL)fetchSystemConfigWithCompletionHandler:(JQKFetchSystemConfigCompletionHandler)handler;

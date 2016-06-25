@@ -12,6 +12,8 @@
 
 @property (nonatomic,retain,readonly) JQKVideo *video;
 @property (nonatomic) BOOL shouldPopupPaymentIfNotPaid;
+@property (nonatomic,retain) JQKVideos *channel;
+@property (nonatomic) NSUInteger videoLocation;
 
 - (instancetype)initWithVideo:(JQKVideo *)video;
 

@@ -7,7 +7,7 @@
 //
 
 #import "JQKPhotoListViewController.h"
-#import "JQKChannel.h"
+//#import "JQKChannel.h"
 #import "JQKVideoCell.h"
 #import "JQKPhotoListModel.h"
 #import "JQKVideoListModel.h"
@@ -35,7 +35,7 @@ DefineLazyPropertyInitialization(NSArray, photos)
 DefineLazyPropertyInitialization(NSMutableArray, photosArray)
 
 
-- (instancetype)initWithPhotoAlbum:(JQKChannel *)photoChannel {
+- (instancetype)initWithPhotoAlbum:(JQKVideo *)photoChannel {
     self = [super init];
     if (self) {
         _photoChannel = photoChannel;
@@ -82,31 +82,33 @@ DefineLazyPropertyInitialization(NSMutableArray, photosArray)
     @weakify(self);
     
     NSUInteger page = isRefresh?1:_page++;
-
+    
     [self.videoModel fetchPhotosWithPageNo:page
-                                  columnId:_photoChannel.columnId
+                                  columnId:_photoChannel.columnId.stringValue
                          completionHandler:^(BOOL success, id obj)
-    {
-        @strongify(self);
-        if (!self) {
-            return ;
-        }
-        
-        [self->_layoutCollectionView JQK_endPullToRefresh];
-        
-        if (success) {
-            JQKVideos *videos = obj;
-            self.videos = videos.programList;
-            [self->_layoutCollectionView reloadData];
-        }
-    }];
+     {
+         @strongify(self);
+         if (!self) {
+             return ;
+         }
+         
+         [self->_layoutCollectionView JQK_endPullToRefresh];
+         
+         if (success) {
+             JQKVideos *videos = obj;
+             self.videos = videos.programList;
+             [self->_layoutCollectionView reloadData];
+         }
+     }];
 }
 
-- (void)loadPhotosWithProgramId:(NSString *)programId{
+- (void)loadPhotosWithProgramId:(NSString *)programId programLocation:(NSUInteger)programLocation
+                        program:(JQKVideo *)program
+                      inChannel:(JQKVideos *)channel{
     @weakify(self);
     
     
-    [self.photoModel fetchPhotoDetailsPageWithColumnId:_photoChannel.columnId
+    [self.photoModel fetchPhotoDetailsPageWithColumnId:_photoChannel.columnId.stringValue
                                              programId:programId
                                      CompletionHandler:^(BOOL success, id obj)
      {
@@ -123,7 +125,8 @@ DefineLazyPropertyInitialization(NSMutableArray, photosArray)
              }
              JQKPhoto *aphoto = [[JQKPhoto alloc] init];
              aphoto.Urls = self.photosArray;
-             [self switchToViewPhoto:aphoto];
+             //             [self switchToViewPhoto:aphoto];
+             [self switchToViewPhoto:aphoto programLocation:programLocation program:program inChannel:channel];
          }
      }];
 }
@@ -161,8 +164,17 @@ DefineLazyPropertyInitialization(NSMutableArray, photosArray)
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.item < self.videos.count) {
         JQKVideo *video = self.videos[indexPath.item];
-        [self loadPhotosWithProgramId:video.programId];
+//        [self loadPhotosWithProgramId:video.programId];
+        [self loadPhotosWithProgramId:video.programId programLocation:indexPath.item program:video inChannel:self.videoModel.fetchedVideos];
+        
+        [[JQKStatsManager sharedManager] statsCPCWithProgram:video programLocation:indexPath.item inChannel:self.videoModel.fetchedVideos andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
+        
     }
 }
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex] forSlideCount:1];
+}
+
 
 @end

@@ -24,6 +24,11 @@
 
 @property (nonatomic,readonly,retain) NSDictionary *paymentTypeMap;
 @property (nonatomic,copy) dispatch_block_t completionHandler;
+
+@property (nonatomic,retain) JQKVideo *programToPayFor;
+@property (nonatomic,retain) JQKVideos *channelToPayFor;
+@property (nonatomic) NSUInteger programLocationToPayFor;
+
 @end
 
 @implementation JQKPaymentViewController
@@ -79,19 +84,28 @@
             Pay(useBuildInAlipay?JQKPaymentTypeAlipay:JQKPaymentTypeIAppPay, useBuildInAlipay?JQKPaymentTypeNone:JQKPaymentTypeAlipay);
         }];
     }
-//    [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信支付" available:YES action:^(id sender) {
-//        Pay(JQKPaymentTypeWeChatPay);
-//    }];
-//    
-//    if ([JQKPaymentConfig sharedConfig].iappPayInfo) {
-//        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-//            Pay(JQKPaymentTypeAlipay);
-//        }];
-//    }
-//    
+    //    [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信支付" available:YES action:^(id sender) {
+    //        Pay(JQKPaymentTypeWeChatPay);
+    //    }];
+    //    
+    //    if ([JQKPaymentConfig sharedConfig].iappPayInfo) {
+    //        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
+    //            Pay(JQKPaymentTypeAlipay);
+    //        }];
+    //    }
+    //    
     _popView.closeAction = ^(id sender){
         @strongify(self);
         [self hidePayment];
+        
+        [[JQKStatsManager sharedManager] statsPayWithOrderNo:nil
+                                                   payAction:JQKStatsPayActionClose
+                                                   payResult:PAYRESULT_UNKNOWN
+                                                  forProgram:self.programToPayFor
+                                             programLocation:self.programLocationToPayFor
+                                                   inChannel:self.channelToPayFor
+                                                 andTabIndex:[JQKUtil currentTabPageIndex]
+                                                 subTabIndex:[JQKUtil currentSubTabPageIndex]];
     };
     return _popView;
 }
@@ -111,12 +125,21 @@
     }
 }
 
-- (void)popupPaymentInView:(UIView *)view forPayable:(id<JQKPayable>)payable withCompletionHandler:(void (^)(void))completionHandler {
+- (void)popupPaymentInView:(UIView *)view
+                forPayable:(id<JQKPayable>)payable
+                forProgram:(JQKVideo *)program
+           programLocation:(NSUInteger)programLocation
+                 inChannel:(JQKVideos *)channel
+     withCompletionHandler:(void (^)(void))completionHandler {
     self.completionHandler = completionHandler;
     
     if (self.view.superview) {
         [self.view removeFromSuperview];
     }
+    
+    self.programToPayFor = program;
+    _channelToPayFor = channel;
+    _programLocationToPayFor = programLocation;
     
     self.payAmount = nil;
     self.payableToPayFor = payable;
@@ -162,6 +185,9 @@
             self.completionHandler = nil;
         }
         self.payableToPayFor = nil;
+        self.programToPayFor = nil;
+        self.programLocationToPayFor = 0;
+        self.channelToPayFor = nil;
     }];
 }
 
@@ -171,14 +197,23 @@
        paymentSubType:(JQKPaymentType)paymentSubType
 {
     @weakify(self);
-    [[JQKPaymentManager sharedManager] startPaymentWithType:paymentType
+   JQKPaymentInfo *paymentInfo = [[JQKPaymentManager sharedManager] startPaymentWithType:paymentType
                                                     subType:paymentSubType
                                                       price:price*100
                                                  forPayable:payable
+                                            programLocation:_programLocationToPayFor
+                                                  inChannel:_channelToPayFor
                                           completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
                                               @strongify(self);
                                               [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
                                           }];
+    if (paymentInfo) {
+        [[JQKStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo
+                                                    forPayAction:JQKStatsPayActionGoToPay
+                                                     andTabIndex:[JQKUtil currentTabPageIndex]
+                                                     subTabIndex:[JQKUtil currentSubTabPageIndex]];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -210,5 +245,10 @@
     }
     
     [[JQKPaymentModel sharedModel] commitPaymentInfo:paymentInfo];
+    
+    [[JQKStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo
+                                                forPayAction:JQKStatsPayActionPayBack
+                                                 andTabIndex:[JQKUtil currentTabPageIndex]
+                                                 subTabIndex:[JQKUtil currentSubTabPageIndex]];
 }
 @end

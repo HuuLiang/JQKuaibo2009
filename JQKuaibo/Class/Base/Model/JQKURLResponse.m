@@ -14,8 +14,8 @@
 //@end
 
 @interface JQKURLResponse ()
-@property (nonatomic) NSNumber *success;
-@property (nonatomic) NSString *resultCode;
+//@property (nonatomic) NSNumber *success;
+//@property (nonatomic) NSString *resultCode;
 @end
 
 @implementation JQKURLResponse

@@ -69,6 +69,11 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
     }];
 }
 
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [[JQKStatsManager sharedManager] statsTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex] forSlideCount:1];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -80,7 +85,7 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
     JQKChannelCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kChannelCellReusableIdentifier forIndexPath:indexPath];
     
     if (indexPath.item < self.channelModel.fetchedChannels.count) {
-        JQKChannel *channel = self.channelModel.fetchedChannels[indexPath.item];
+        JQKVideos *channel = self.channelModel.fetchedChannels[indexPath.item];
         cell.imageURL = [NSURL URLWithString:channel.columnImg];
         cell.title = channel.name;
     }
@@ -99,8 +104,9 @@ DefineLazyPropertyInitialization(JQKChannelModel, channelModel)
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    JQKChannel *channel = self.channelModel.fetchedChannels[indexPath.item];
+    JQKVideos *channel = self.channelModel.fetchedChannels[indexPath.item];
     JQKVideoListViewController *movieVC = [[JQKVideoListViewController alloc] initWithChannel:channel];
     [self.navigationController pushViewController:movieVC animated:YES];
+    [[JQKStatsManager sharedManager] statsCPCWithChannel:channel inTabIndex:self.tabBarController.selectedIndex];
 }
 @end

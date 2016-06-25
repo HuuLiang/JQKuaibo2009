@@ -12,6 +12,7 @@
 @interface JQKVideoDetailViewController : JQKBaseViewController
 
 @property (nonatomic,retain,readonly) JQKVideo *video;
+@property (nonatomic,retain)JQKVideos *channel;
 
 - (instancetype)initWithVideo:(JQKVideo *)video columnId:(NSString *)columnId;
 
