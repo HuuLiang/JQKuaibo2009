@@ -78,7 +78,8 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     }];
     [_layoutCollectionView JQK_addPagingRefreshWithHandler:^{
         @strongify(self);
-        [self loadMoviesWithRefreshFlag:NO];
+            [self loadMoviesWithRefreshFlag:NO];
+      
     }];
     [_layoutCollectionView JQK_triggerPullToRefresh];
 }
@@ -88,7 +89,8 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
     NSUInteger page = isRefresh?1:self.videoModel.fetchedVideos.page.unsignedIntegerValue+1;
     if (page > 1 && ![JQKUtil isPaid]) {
         [_layoutCollectionView JQK_endPullToRefresh];
-        [[JQKHudManager manager] showHudWithText:@"成为VIP后可以查看更多"];
+//        [[JQKHudManager manager] showHudWithText:@"成为VIP后可以查看更多"];
+         [self switchToPlayVideo:nil programLocation:0 inChannel:nil];
         return;
     }
     

@@ -41,13 +41,13 @@
         {
             [_footerView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.right.bottom.equalTo(self);
-                make.height.mas_equalTo(30);
+                make.height.mas_equalTo(18);
             }];
         }
         
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.textColor = [UIColor whiteColor];
-        _titleLabel.font = [UIFont systemFontOfSize:16.];
+        _titleLabel.font = [UIFont systemFontOfSize:13.];
         [_footerView addSubview:_titleLabel];
         {
             [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -101,7 +101,7 @@
     } else if (spec == 3) {
         _vipLabel.text = @"高清";
     } else if (spec == 4) {
-        _vipLabel.text = @"免费";
+        _vipLabel.text = @"试看";
     } else if (spec == 5) {
         _vipLabel.text = @"VIP";
     } else {

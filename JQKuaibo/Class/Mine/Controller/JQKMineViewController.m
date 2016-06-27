@@ -9,10 +9,13 @@
 #import "JQKMineViewController.h"
 #import "JQKInputTextViewController.h"
 #import "JQKWebViewController.h"
+#import "JQKVipCell.h"
 
 static NSString *const kMineCellReusableIdentifier = @"MineCellReusableIdentifier";
+static NSString *const kVipCellIdentifier = @"kvipcellidentifer";
 
 typedef NS_ENUM(NSUInteger, JQKMineCellRow) {
+//    JQKMineCellVip,
     JQKMineCellRowFeedback,
     JQKMineCellRowAgreement,
     JQKMineCellRowCount
@@ -29,14 +32,16 @@ typedef NS_ENUM(NSUInteger, JQKMineCellRow) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _layoutTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    _layoutTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     _layoutTableView.backgroundColor = self.view.backgroundColor;
     _layoutTableView.delegate = self;
     _layoutTableView.dataSource = self;
-    _layoutTableView.rowHeight = MAX(44, lround(kScreenHeight * 0.08));
+//    _layoutTableView.rowHeight = MAX(44, lround(kScreenHeight * 0.08));
+    _layoutTableView.separatorColor = [UIColor lightGrayColor];
     _layoutTableView.hasRowSeparator = YES;
     _layoutTableView.hasSectionBorder = YES;
     [_layoutTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kMineCellReusableIdentifier];
+    [_layoutTableView registerClass:[JQKVipCell class] forCellReuseIdentifier:kVipCellIdentifier];
     [self.view addSubview:_layoutTableView];
     {
         [_layoutTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -48,6 +53,14 @@ typedef NS_ENUM(NSUInteger, JQKMineCellRow) {
         NSString *baseURLString = [JQK_BASE_URL stringByReplacingCharactersInRange:NSMakeRange(0, JQK_BASE_URL.length-6) withString:@"******"];
         [[JQKHudManager manager] showHudWithText:[NSString stringWithFormat:@"Server:%@\nChannelNo:%@\nPackageCertificate:%@\npV:%@", baseURLString, JQK_CHANNEL_NO, JQK_PACKAGE_CERTIFICATE, JQK_REST_PV]];
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onPaidNotification) name:kPaidNotificationName object:nil];
+    
+}
+
+- (void)onPaidNotification {
+    [_layoutTableView reloadData];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,25 +71,73 @@ typedef NS_ENUM(NSUInteger, JQKMineCellRow) {
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kMineCellReusableIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    if (indexPath.row == JQKMineCellRowFeedback) {
-        cell.imageView.image = [UIImage imageNamed:@"feedback"];
-        cell.textLabel.text = @"意见投诉";
-    } else if (indexPath.row == JQKMineCellRowAgreement) {
-        cell.imageView.image = [UIImage imageNamed:@"agreement"];
-        cell.textLabel.text = @"用户协议";
+    if (indexPath.section == 1) {
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kMineCellReusableIdentifier forIndexPath:indexPath];
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        
+        if (indexPath.row == JQKMineCellRowFeedback) {
+            cell.imageView.image = [UIImage imageNamed:@"feedback"];
+            cell.textLabel.text = @"意见投诉";
+        } else if (indexPath.row == JQKMineCellRowAgreement) {
+            cell.imageView.image = [UIImage imageNamed:@"agreement"];
+            cell.textLabel.text = @"用户协议";
+        }
+        return cell;
     }
-    return cell;
+    
+    if ( indexPath.section == 0){
+        if (indexPath.row == 0) {
+            
+            JQKVipCell *vipCell = [tableView dequeueReusableCellWithIdentifier:kVipCellIdentifier forIndexPath:indexPath];
+            vipCell.memberTitle = [JQKUtil isPaid] ? @"VIP会员" :@"成为VIP会员";
+            @weakify(self);
+            if (!vipCell.memberAction) {
+                vipCell.memberAction = ^(id sender){
+                    @strongify(self);
+                    if ([JQKUtil isPaid]) {
+                        [[JQKHudManager manager] showHudWithText:@"您已经是会员，感谢您的观看！"];
+                    }else {
+                        
+                        [self switchToPlayVideo:nil programLocation:0 inChannel:nil];
+                    }
+                };
+                
+            }
+            return vipCell;
+        }
+        
+    }
+    return nil;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 20;
+    if (section == 1) {
+        
+        return 20;
+    }
+    return 0;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        if (indexPath.item == 0) {
+            return 200./667.*kScreenHeight;
+        }
+    }
+    return MAX(44, lround(kScreenHeight * 0.08));
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 1;
+    }
     return JQKMineCellRowCount;
 }
 

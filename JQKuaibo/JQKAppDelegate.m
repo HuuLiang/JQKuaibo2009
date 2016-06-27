@@ -36,7 +36,7 @@
     _window.backgroundColor              = [UIColor whiteColor];
     
     JQKHomeViewController *homeVC        = [[JQKHomeViewController alloc] init];
-    homeVC.title                         = @"乐播";
+    homeVC.title                         = @"快播";
     
     UINavigationController *homeNav      = [[UINavigationController alloc] initWithRootViewController:homeVC];
     homeNav.tabBarItem                   = [[UITabBarItem alloc] initWithTitle:homeVC.title
@@ -76,7 +76,7 @@
                                                                  selectedImage:[UIImage imageNamed:@"mine_selected"]];
 
     UITabBarController *tabBarController    = [[UITabBarController alloc] init];
-    tabBarController.viewControllers        = @[homeNav,liveShowNav,channelNav,moreNav,mineNav];
+    tabBarController.viewControllers        = @[homeNav,channelNav,liveShowNav,moreNav,mineNav];
     tabBarController.delegate = self;
     _window.rootViewController              = tabBarController;
     return _window;
