@@ -28,13 +28,22 @@
     [self.footer resetNoMoreData];
 }
 
-- (void)JQK_addPagingRefreshWithHandler:(void (^)(void))handler {
+//- (void)JQK_addPagingRefreshWithHandler:(void (^)(void))handler {
+//    if (!self.footer) {
+//        MJRefreshAutoNormalFooter *refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:handler];
+//        self.footer = refreshFooter;
+//    }
+//}
+- (void)JQK_addPagingRefreshWithIsChangeFooter:(BOOL)changeFooter withHandler:(void (^)(void))handler{
     if (!self.footer) {
         MJRefreshAutoNormalFooter *refreshFooter = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:handler];
+        if (changeFooter && ![JQKUtil isPaid]) {
+            [refreshFooter setTitle:@"⬆️成为VIP，上拉或者点击加载更多" forState:MJRefreshStateIdle];
+        }
+        
         self.footer = refreshFooter;
     }
 }
-
 - (void)JQK_pagingRefreshNoMoreData {
     [self.footer endRefreshingWithNoMoreData];
 }

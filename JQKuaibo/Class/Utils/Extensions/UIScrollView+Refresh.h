@@ -14,7 +14,8 @@
 - (void)JQK_triggerPullToRefresh;
 - (void)JQK_endPullToRefresh;
 
-- (void)JQK_addPagingRefreshWithHandler:(void (^)(void))handler;
+//- (void)JQK_addPagingRefreshWithHandler:(void (^)(void))handler;
+- (void)JQK_addPagingRefreshWithIsChangeFooter:(BOOL)changeFooter withHandler:(void (^)(void))handler;
 - (void)JQK_pagingRefreshNoMoreData;
 
 @end

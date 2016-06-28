@@ -71,9 +71,15 @@ DefineLazyPropertyInitialization(NSMutableArray, photosArray)
         @strongify(self);
         [self loadPhotosWithRefreshFlag:YES];
     }];
-    [_layoutCollectionView JQK_addPagingRefreshWithHandler:^{
+    [_layoutCollectionView JQK_addPagingRefreshWithIsChangeFooter:YES withHandler:^{
         @strongify(self);
-        [self loadPhotosWithRefreshFlag:NO];
+        if ([JQKUtil isPaid]) {
+            
+            [self loadPhotosWithRefreshFlag:NO];
+        }else {
+            [_layoutCollectionView JQK_endPullToRefresh];
+         [self switchToPlayVideo:nil programLocation:0 inChannel:nil];
+        }
     }];
     [_layoutCollectionView JQK_triggerPullToRefresh];
 }

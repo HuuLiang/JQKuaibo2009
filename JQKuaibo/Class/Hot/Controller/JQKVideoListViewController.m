@@ -76,7 +76,7 @@ DefineLazyPropertyInitialization(NSMutableArray, videos)
         @strongify(self);
         [self loadMoviesWithRefreshFlag:YES];
     }];
-    [_layoutCollectionView JQK_addPagingRefreshWithHandler:^{
+    [_layoutCollectionView JQK_addPagingRefreshWithIsChangeFooter:YES withHandler:^{
         @strongify(self);
             [self loadMoviesWithRefreshFlag:NO];
       
