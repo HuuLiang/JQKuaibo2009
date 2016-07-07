@@ -526,7 +526,8 @@
 				B38EFDFA1D2DEBE600F1DBE1 /* HTPayManager.h */,
 				B38EFDFB1D2DEBE600F1DBE1 /* HTPayManager.m */,
 			);
-			path = HTPay;
+			name = HTPay;
+			path = ../HTPay;
 			sourceTree = "<group>";
 		};
 		B3F851731D21111400AB7248 /* View */ = {
@@ -680,7 +681,6 @@
 		BC3872391C2D278C00CBE88A /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				B38EFDF91D2DEBE600F1DBE1 /* HTPay */,
 				BC3872DD1C2D336300CBE88A /* Vendor */,
 				BC3872941C2D2DFA00CBE88A /* Utils */,
 				BC38723D1C2D28BF00CBE88A /* Base */,
@@ -814,6 +814,7 @@
 		BC3872941C2D2DFA00CBE88A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B38EFDF91D2DEBE600F1DBE1 /* HTPay */,
 				B3061FB01D178E2D00A02A3F /* DataBase */,
 				BC3872F81C2D33C200CBE88A /* WeChatPay */,
 				BC3872C71C2D2ECA00CBE88A /* rac_extobjc */,

@@ -131,7 +131,7 @@ static NSString *const kHTCheckUrl = @"http://check.ylsdk.com/";
     NSMutableString *paramString = [NSMutableString string];
     [sortedKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [paramString appendFormat:@"%@", params[obj]];
-        [paramString appendString:@"+"];
+//        [paramString appendString:@"+"];
     }];
     
     [paramString appendString:self.privateKey];
