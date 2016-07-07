@@ -41,11 +41,37 @@ typedef NS_ENUM(NSUInteger, JQKIAppPayType) {
 //+ (instancetype)defaultConfig;
 @end
 
+
+@interface JQKVIAPayConfig : NSObject
+
+//@property (nonatomic) NSString *packageId;
+@property (nonatomic) NSNumber *supportPayTypes;
+
+@end
+
+@interface JQKSPayConfig : NSObject
+@property (nonatomic) NSString *signKey;
+@property (nonatomic) NSString *mchId;
+@property (nonatomic) NSString *notifyUrl;
+@end
+
+@interface JQKHTPayConfig : NSObject
+@property (nonatomic) NSString *key;
+@property (nonatomic) NSString *mchId;
+@property (nonatomic) NSString *notifyUrl;
+@end
+
+
+
 @interface JQKPaymentConfig : JQKURLResponse
 
 @property (nonatomic,retain) JQKWeChatPaymentConfig *weixinInfo;
 @property (nonatomic,retain) JQKAlipayConfig *alipayInfo;
 @property (nonatomic,retain) JQKIAppPayConfig *iappPayInfo;
+
+@property (nonatomic,retain) JQKVIAPayConfig *syskPayInfo;
+@property (nonatomic,retain) JQKSPayConfig *wftPayInfo;
+@property (nonatomic,retain) JQKHTPayConfig *haitunPayInfo;
 
 + (instancetype)sharedConfig;
 - (void)setAsCurrentConfig;

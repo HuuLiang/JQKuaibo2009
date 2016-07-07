@@ -94,6 +94,96 @@ static NSString *const kPaymentConfigKeyName = @"jqkuaibo_payment_config_key_nam
 }
 @end
 
+
+
+
+@implementation JQKVIAPayConfig
+
+//+ (instancetype)defaultConfig {
+//    JQKVIAPayConfig *config = [[self alloc] init];
+//    //config.packageId = @"5361";
+//    config.supportPayTypes = @(JQKSubPayTypeAlipay);
+//    return config;
+//}
+
+- (NSDictionary *)dictionaryRepresentation {
+    NSMutableDictionary *dicRep = [NSMutableDictionary dictionary];
+    //    [dicRep safelySetObject:self.packageId forKey:@"packageId"];
+    [dicRep safelySetObject:self.supportPayTypes forKey:@"supportPayTypes"];
+    return dicRep;
+}
+
++ (instancetype)configFromDictionary:(NSDictionary *)dic {
+    JQKVIAPayConfig *config = [[self alloc] init];
+    [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if (obj) {
+            [config setValue:obj forKey:key];
+        }
+    }];
+    return config;
+}
+@end
+
+@implementation JQKSPayConfig
+
+//+ (instancetype)defaultConfig {
+//    JQKSPayConfig *config = [[self alloc] init];
+//    config.mchId = @"5712000010";
+//    config.notifyUrl = @"http://phas.ihuiyx.com/pd-has/notifyWft.json";
+//    config.signKey = @"5afe11de0df374f5f78839db1904ff0d";
+//    return config;
+//}
+
+- (NSDictionary *)dictionaryRepresentation {
+    NSMutableDictionary *dicRep = [NSMutableDictionary dictionary];
+    [dicRep safelySetObject:self.mchId forKey:@"mchId"];
+    [dicRep safelySetObject:self.signKey forKey:@"signKey"];
+    [dicRep safelySetObject:self.notifyUrl forKey:@"notifyUrl"];
+    return dicRep;
+}
+
++ (instancetype)configFromDictionary:(NSDictionary *)dic {
+    JQKSPayConfig *config = [[self alloc] init];
+    [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if (obj) {
+            [config setValue:obj forKey:key];
+        }
+    }];
+    return config;
+}
+@end
+
+@implementation JQKHTPayConfig
+
++ (instancetype)defaultConfig {
+    JQKHTPayConfig *config = [[self alloc] init];
+    config.mchId = @"10605";
+    config.key = @"e7c549c833cb9108e6524d075942119d";
+    config.notifyUrl = @"http://phas.ihuiyx.com/pd-has/notifyHtPay.json";
+    return config;
+}
+
+- (NSDictionary *)dictionaryRepresentation {
+    NSMutableDictionary *dicRep = [NSMutableDictionary dictionary];
+    [dicRep safelySetObject:self.mchId forKey:@"mchId"];
+    [dicRep safelySetObject:self.key forKey:@"key"];
+    [dicRep safelySetObject:self.notifyUrl forKey:@"notifyUrl"];
+    return dicRep;
+}
+
++ (instancetype)configFromDictionary:(NSDictionary *)dic {
+    JQKHTPayConfig *config = [[self alloc] init];
+    [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if (obj) {
+            [config setValue:obj forKey:key];
+        }
+    }];
+    return config;
+}
+
+@end
+
+
 @interface JQKPaymentConfigRespCode : NSObject
 @property (nonatomic) NSNumber *value;
 @property (nonatomic) NSString *name;
@@ -145,6 +235,19 @@ static JQKPaymentConfig *_shardConfig;
     return [JQKIAppPayConfig class];
 }
 
+
+- (Class)syskPayInfoClass {
+    return [JQKVIAPayConfig class];
+}
+
+- (Class)wftPayInfoClass {
+    return [JQKSPayConfig class];
+}
+
+- (Class)haitunPayInfoClass {
+    return [JQKHTPayConfig class];
+}
+
 - (void)loadCachedConfig {
     NSDictionary *configDic = [[NSUserDefaults standardUserDefaults] objectForKey:kPaymentConfigKeyName];
     NSDictionary *weixinInfo = configDic[@"weixinInfo"];
@@ -159,6 +262,21 @@ static JQKPaymentConfig *_shardConfig;
     if (iappPayInfo) {
         self.iappPayInfo = [JQKIAppPayConfig configFromDictionary:iappPayInfo];
     }
+    
+    NSDictionary *syskPayInfo = configDic[@"syskPayInfo"];
+    if (iappPayInfo) {
+        self.syskPayInfo = [JQKVIAPayConfig configFromDictionary:syskPayInfo];
+    }
+    NSDictionary *wftPayInfo = configDic[@"wftPayInfo"];
+    if (wftPayInfo) {
+        self.wftPayInfo = [JQKSPayConfig configFromDictionary:wftPayInfo];
+    }
+    
+    NSDictionary *haitunPayInfo = configDic[@"haitunPayInfo"];
+    if (wftPayInfo) {
+        self.haitunPayInfo = [JQKHTPayConfig configFromDictionary:haitunPayInfo];
+    }
+    
 }
 
 - (NSDictionary *)dictionaryRepresentation {
@@ -166,6 +284,11 @@ static JQKPaymentConfig *_shardConfig;
     [dicRep safelySetObject:[self.weixinInfo dictionaryRepresentation] forKey:@"weixinInfo"];
     [dicRep safelySetObject:[self.alipayInfo dictionaryRepresentation] forKey:@"alipayInfo"];
     [dicRep safelySetObject:[self.iappPayInfo dictionaryRepresentation] forKey:@"iappPayInfo"];
+    
+    [dicRep safelySetObject:[self.syskPayInfo dictionaryRepresentation] forKey:@"syskPayInfo"];
+    [dicRep safelySetObject:[self.wftPayInfo dictionaryRepresentation] forKey:@"wftPayInfo"];
+    [dicRep safelySetObject:[self.haitunPayInfo dictionaryRepresentation] forKey:@"haitunPayInfo"];
+    
     return dicRep;
 }
 
@@ -174,6 +297,10 @@ static JQKPaymentConfig *_shardConfig;
     currentConfig.weixinInfo = self.weixinInfo;
     currentConfig.iappPayInfo = self.iappPayInfo;
     currentConfig.alipayInfo = self.alipayInfo;
+    
+    currentConfig.syskPayInfo = self.syskPayInfo;
+    currentConfig.wftPayInfo = self.wftPayInfo;
+    currentConfig.haitunPayInfo = self.haitunPayInfo;
     
     [[NSUserDefaults standardUserDefaults] setObject:[self dictionaryRepresentation] forKey:kPaymentConfigKeyName];
     [[NSUserDefaults standardUserDefaults] synchronize];

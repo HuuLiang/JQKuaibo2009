@@ -198,7 +198,7 @@
         if ([JQKSystemConfigModel sharedModel].loaded && [JQKSystemConfigModel sharedModel].statsTimeInterval > 0) {
             statsTimeInterval = [JQKSystemConfigModel sharedModel].statsTimeInterval;
         }
-                statsTimeInterval = 20;
+//                statsTimeInterval = 20;
         [[JQKStatsManager sharedManager] scheduleStatsUploadWithTimeInterval:statsTimeInterval];
         
         if ([JQKSystemConfigModel sharedModel].notificationLaunchSeq >0) {

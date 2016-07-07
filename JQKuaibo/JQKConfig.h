@@ -31,7 +31,7 @@
 #define JQK_CHANNEL_NO           [JQKConfiguration sharedConfig].channelNo
 #define JQK_REST_APP_ID          @"QUBA_2009"
 #define JQK_REST_PV              @110
-#define JQK_PAYMENT_PV           @100
+#define JQK_PAYMENT_PV           @101
 
 #define JQK_PACKAGE_CERTIFICATE  @"iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd."
 #define JQK_PAYMENT_RESERVE_DATA [NSString stringWithFormat:@"%@$%@", JQK_REST_APP_ID, JQK_CHANNEL_NO]
@@ -56,8 +56,8 @@
 #define JQK_AGREEMENT_NOTPAID_URL       @"/iosvideo/agreement.html"
 #define JQK_AGREEMENT_PAID_URL          @"/iosvideo/agreement-paid.html"
 
-#define JQK_PAYMENT_COMMIT_URL          @"http://pay.iqu8.net/paycenter/qubaPr.json"
-#define JQK_PAYMENT_CONFIG_URL          @"http://pay.iqu8.net/paycenter/payConfig.json"
+#define JQK_PAYMENT_COMMIT_URL          @"http://pay.iqu8.net/paycenter/qubaPr.json"//@"http://120.24.252.114:8084/paycenter/qubaPr.json"//
+#define JQK_PAYMENT_CONFIG_URL          @"http://pay.iqu8.net/paycenter/payConfig.json"//@"http://120.24.252.114:8084/paycenter/payConfig.json"//
 #define JQK_STANDBY_PAYMENT_CONFIG_URL  @"http://appcdn.mqu8.com/static/iosvideo/payConfig_%@.json"
 
 #define JQK_SYSTEM_CONFIG_PAY_AMOUNT            @"PAY_AMOUNT"
