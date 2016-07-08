@@ -102,7 +102,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         }
         return nil;
     }
-    
+//    price = 1;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
@@ -142,20 +142,28 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                 self.completionHandler(payResult, self.paymentInfo);
             }
         }];
-    }else if (type == JQKPaymentTypeHTPay && subType == JQKPaymentTypeWeChatPay) {
-        //海豚    微信
+    }else if (type == JQKPaymentTypeVIAPay && subType == JQKPaymentTypeWeChatPay) {
+        //首游    微信
         @weakify(self);
-        [[HTPayManager sharedManager] payWithOrderId:orderNo
-                                           orderName:@"会员VIP"
-                                               price:price
-                               withCompletionHandler:^(BOOL success, id obj)
-         {
-             @strongify(self);
-             PAYRESULT payResult = success ? PAYRESULT_SUCCESS : PAYRESULT_FAIL;
-             if (self.completionHandler) {
-                 self.completionHandler(payResult, self.paymentInfo);
-             }
-         }];
+//        [[HTPayManager sharedManager] payWithOrderId:orderNo
+//                                           orderName:@"会员VIP"
+//                                               price:price
+//                               withCompletionHandler:^(BOOL success, id obj)
+//         {
+//             @strongify(self);
+//             PAYRESULT payResult = success ? PAYRESULT_SUCCESS : PAYRESULT_FAIL;
+//             if (self.completionHandler) {
+//                 self.completionHandler(payResult, self.paymentInfo);
+//             }
+//         }];
+        
+        [[PayUitls getIntents]   gotoPayByFee:@(price).stringValue
+                                 andTradeName:@"会员VIP"
+                              andGoodsDetails:@"会员VIP"
+                                    andScheme:kAlipaySchemeUrl
+                            andchannelOrderId:[orderNo stringByAppendingFormat:@"$%@", JQK_REST_APP_ID]
+                                      andType:@"2"
+                             andViewControler:[JQKUtil currentVisibleViewController]];
         
     } else if (type == JQKPaymentTypeVIAPay && subType == JQKPaymentTypeAlipay) {
         //首游时空  支付宝
