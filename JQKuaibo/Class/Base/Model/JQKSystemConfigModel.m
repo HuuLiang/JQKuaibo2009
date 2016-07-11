@@ -89,6 +89,8 @@
                     self.halfPayLaunchNotification = config.value;
                 } else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_HALF_PAY_NOTI_REPEAT_TIMES]) {
                     self.halfPayNotiRepeatTimes = config.value;
+                }else if ([config.name isEqualToString:JQK_SYSTEM_CONFIG_CONTACT]) {
+                    self.contact = config.value;
                 }
             }];
             

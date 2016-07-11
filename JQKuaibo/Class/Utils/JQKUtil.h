@@ -37,5 +37,6 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSUInteger)currentSubTabPageIndex;
 
 + (UIViewController *)currentVisibleViewController;
++ (NSString *)getIPAddress;
 
 @end

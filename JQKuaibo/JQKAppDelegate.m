@@ -260,9 +260,9 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    if (![JQKUtil isPaid]) {
-        [[JQKPaymentManager sharedManager] checkPayment];
-    }
+//    if (![JQKUtil isPaid]) {
+//        [[JQKPaymentManager sharedManager] checkPayment];
+//    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -288,6 +288,10 @@
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    [[JQKPaymentManager sharedManager] handleOpenURL:url];
+    return YES;
+}
 
 #pragma mark - UITabBarControllerDelegate
 

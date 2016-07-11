@@ -55,6 +55,7 @@ PODS:
   - SDWebImage/Core (3.7.3)
   - SFHFKeychainUtils (0.0.1)
   - TPKeyboardAvoiding (1.2.11)
+  - XMLReader-Arc (1.1)
   - ZYCornerRadius (0.6.1)
 
 DEPENDENCIES:
@@ -71,6 +72,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.7.3)
   - SFHFKeychainUtils (~> 0.0.1)
   - TPKeyboardAvoiding (~> 1.2.11)
+  - XMLReader-Arc (~> 1.1)
   - ZYCornerRadius (~> 0.6.1)
 
 SPEC CHECKSUMS:
@@ -88,6 +90,9 @@ SPEC CHECKSUMS:
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SFHFKeychainUtils: 9576b411a79a058f4d5381ace6f3242b9a62e664
   TPKeyboardAvoiding: e5ce146b313de063957bfa75a13f1e9b0ff18ab7
+  XMLReader-Arc: 7832c527346fc26511fd6c05ebcee18008c34d6d
   ZYCornerRadius: 86f76224de123e39e48c33cecdada2424dccb0a0
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 6777a337cd9f975b30abe67f25ed01b6746ca8ac
+
+COCOAPODS: 1.0.1
