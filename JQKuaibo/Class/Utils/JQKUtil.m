@@ -123,6 +123,8 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
         return JQKDeviceType_iPhone6SP;
     } else if ([deviceName rangeOfString:@"iPhone8,4"].location == 0) {
         return JQKDeviceType_iPhoneSE;
+    }else if ([deviceName rangeOfString:@"iPad"].location == 0){
+        return JQKDeviceType_iPad;
     } else {
         return JQKDeviceTypeUnknown;
     }
