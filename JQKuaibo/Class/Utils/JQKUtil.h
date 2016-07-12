@@ -29,6 +29,8 @@ extern NSString *const kPaymentInfoKeyName;
 + (NSString *)userId;
 + (NSString *)deviceName;
 + (NSString *)appVersion;
++ (JQKDeviceType)deviceType;
+
 
 + (NSUInteger)launchSeq;
 + (void)accumateLaunchSeq;

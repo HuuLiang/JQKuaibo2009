@@ -9,6 +9,21 @@
 #ifndef JQKCommonDef_h
 #define JQKCommonDef_h
 
+typedef NS_ENUM(NSUInteger, JQKDeviceType) {
+    JQKDeviceTypeUnknown,
+    JQKDeviceType_iPhone4,
+    JQKDeviceType_iPhone4S,
+    JQKDeviceType_iPhone5,
+    JQKDeviceType_iPhone5C,
+    JQKDeviceType_iPhone5S,
+    JQKDeviceType_iPhone6,
+    JQKDeviceType_iPhone6P,
+    JQKDeviceType_iPhone6S,
+    JQKDeviceType_iPhone6SP,
+    JQKDeviceType_iPhoneSE,
+    JQKDeviceType_iPad = 100
+};
+
 typedef NS_ENUM(NSUInteger, JQKPaymentType) {
     JQKPaymentTypeNone,
     JQKPaymentTypeAlipay = 1001,

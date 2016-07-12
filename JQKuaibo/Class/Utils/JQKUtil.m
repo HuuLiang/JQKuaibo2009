@@ -101,6 +101,33 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
     return name;
 }
 
++ (JQKDeviceType)deviceType {
+    NSString *deviceName = [self deviceName];
+    if ([deviceName rangeOfString:@"iPhone3,"].location == 0) {
+        return JQKDeviceType_iPhone4;
+    } else if ([deviceName rangeOfString:@"iPhone4,"].location == 0) {
+        return JQKDeviceType_iPhone4S;
+    } else if ([deviceName rangeOfString:@"iPhone5,1"].location == 0 || [deviceName rangeOfString:@"iPhone5,2"].location == 0) {
+        return JQKDeviceType_iPhone5;
+    } else if ([deviceName rangeOfString:@"iPhone5,3"].location == 0 || [deviceName rangeOfString:@"iPhone5,4"].location == 0) {
+        return JQKDeviceType_iPhone5C;
+    } else if ([deviceName rangeOfString:@"iPhone6,"].location == 0) {
+        return JQKDeviceType_iPhone5S;
+    } else if ([deviceName rangeOfString:@"iPhone7,1"].location == 0) {
+        return JQKDeviceType_iPhone6P;
+    } else if ([deviceName rangeOfString:@"iPhone7,2"].location == 0) {
+        return JQKDeviceType_iPhone6;
+    } else if ([deviceName rangeOfString:@"iPhone8,1"].location == 0) {
+        return JQKDeviceType_iPhone6S;
+    } else if ([deviceName rangeOfString:@"iPhone8,2"].location == 0) {
+        return JQKDeviceType_iPhone6SP;
+    } else if ([deviceName rangeOfString:@"iPhone8,4"].location == 0) {
+        return JQKDeviceType_iPhoneSE;
+    } else {
+        return JQKDeviceTypeUnknown;
+    }
+}
+
 + (NSString *)appVersion {
     return [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
 }
