@@ -13,5 +13,6 @@
 @property (nonatomic) NSURL *imageURL;
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *subtitle;
+@property (nonatomic) BOOL isInstalled;
 
 @end

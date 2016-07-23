@@ -34,7 +34,7 @@ DefineLazyPropertyInitialization(JQKAppSpreadModel, spreadModel)
     _layoutTableView.separatorInset = UIEdgeInsetsZero;
     _layoutTableView.hasRowSeparator = YES;
     _layoutTableView.hasSectionBorder = YES;
-    [_layoutTableView registerClass:[UITableViewCell class]
+    [_layoutTableView registerClass:[JQKMoreCell class]
              forCellReuseIdentifier:kMoreCellReusableIdentifier];
     [self.view addSubview:_layoutTableView];
     {
@@ -80,20 +80,26 @@ DefineLazyPropertyInitialization(JQKAppSpreadModel, spreadModel)
 #pragma mark - UITableViewDataSource,UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kMoreCellReusableIdentifier forIndexPath:indexPath];
+    JQKMoreCell *cell = [tableView dequeueReusableCellWithIdentifier:kMoreCellReusableIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if (!cell.backgroundView) {
-        cell.backgroundView = [[UIImageView alloc] init];
-    }
+    //    if (!cell.backgroundView) {
+    //        cell. = [[UIImageView alloc] init];
+    //    }
     
-    UIImageView *imageView = (UIImageView *)cell.backgroundView;
+    //    UIImageView *imageView = (UIImageView *)cell.backgroundView;
     
     if (indexPath.row < self.spreadModel.fetchedSpreads.count) {
         JQKAppSpread *appSpread = self.spreadModel.fetchedSpreads[indexPath.row];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:appSpread.coverImg]];
+        cell.imageURL = [NSURL URLWithString:appSpread.coverImg];
+        [JQKUtil checkAppInstalledWithBundleId:appSpread.specialDesc completionHandler:^(BOOL installed) {
+            if (installed) {
+                cell.isInstalled = YES;
+            }
+        }];
+        
     } else {
-        imageView.image = nil;
+        cell.imageURL = nil;
     }
     return cell;
 }
@@ -111,6 +117,6 @@ DefineLazyPropertyInitialization(JQKAppSpreadModel, spreadModel)
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appSpread.videoUrl]];
         }
         [[JQKStatsManager sharedManager] statsCPCWithProgram:appSpread programLocation:indexPath.item inChannel:_spreadModel.fetchChannels andTabIndex:self.tabBarController.selectedIndex subTabIndex:[JQKUtil currentSubTabPageIndex]];
-   }
+    }
 }
 @end

@@ -69,6 +69,14 @@
     _popView.headerImageUrl = [NSURL URLWithString:[JQKSystemConfigModel sharedModel].isHalfPay ? [JQKSystemConfigModel sharedModel].halfPaymentImage : [JQKSystemConfigModel sharedModel].paymentImage];
     _popView.footerImage = [UIImage imageNamed:@"payment_footer"];
     
+    JQKPaymentType cardType = [[JQKPaymentManager sharedManager] cardPayPaymentType];
+    if (cardType != JQKPaymentTypeNone) {
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon.imageset"] title:@"购卡支付" available:YES action:^(id sender) {
+            Pay(cardType,JQKPaymentTypeNone);
+        }];
+    }
+    
+    
     JQKPaymentType wechatPayType = [[JQKPaymentManager sharedManager] wechatPaymentType];
     
     if (wechatPayType != JQKPaymentTypeNone) {

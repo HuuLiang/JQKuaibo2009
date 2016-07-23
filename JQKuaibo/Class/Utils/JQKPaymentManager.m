@@ -109,6 +109,13 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     return JQKPaymentTypeNone;
 }
 
+- (JQKPaymentType)cardPayPaymentType {
+    if ([JQKPaymentConfig sharedConfig].iappPayInfo) {
+        return JQKPaymentTypeIAppPay;
+    }
+    return JQKPaymentTypeNone;
+}
+
 - (void)applicationWillEnterForeground {
     [[SPayUtil sharedInstance] applicationWillEnterForeground];
 }
@@ -127,12 +134,15 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                                inChannel:(JQKVideos *)channel
                        completionHandler:(JQKPaymentCompletionHandler)handler
 {
-    if (type == JQKPaymentTypeNone || (type == JQKPaymentTypeIAppPay && subType == JQKPaymentTypeNone)) {
+    if (type == JQKPaymentTypeNone ) {
         if (self.completionHandler) {
             self.completionHandler(PAYRESULT_FAIL, nil);
         }
         return nil;
     }
+#if DEBUG
+    price = 1;
+#endif
 //    price = 1;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
@@ -220,6 +230,25 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                  self.completionHandler(payResult, self.paymentInfo);
              }
          }];
+    }else if (type == JQKPaymentTypeIAppPay){
+        @weakify(self);
+        IappPayMananger *iAppMgr = [IappPayMananger sharedMananger];
+        iAppMgr.appId = [JQKPaymentConfig sharedConfig].iappPayInfo.appid;
+        iAppMgr.privateKey = [JQKPaymentConfig sharedConfig].iappPayInfo.privateKey;
+        iAppMgr.waresid = [JQKPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
+        iAppMgr.appUserId = [JQKUtil userId].md5 ?: @"UnregisterUser";
+        iAppMgr.privateInfo = JQK_PAYMENT_RESERVE_DATA;
+        iAppMgr.notifyUrl = [JQKPaymentConfig sharedConfig].iappPayInfo.notifyUrl;
+        iAppMgr.publicKey = [JQKPaymentConfig sharedConfig].iappPayInfo.publicKey;
+        
+        [iAppMgr payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
+            @strongify(self);
+            if (self.completionHandler) {
+                self.completionHandler(payResult, self.paymentInfo);
+            }
+        }];
+
+    
     } else {
         success = NO;
         

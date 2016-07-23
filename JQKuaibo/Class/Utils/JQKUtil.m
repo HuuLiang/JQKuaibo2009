@@ -13,6 +13,7 @@
 #import "JQKPaymentInfo.h"
 #import "JQKVideo.h"
 #import "JQKBaseViewController.h"
+#import "JQKApplicationManager.h"
 
 #include <ifaddrs.h>
 #include <arpa/inet.h>
@@ -207,6 +208,19 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
     freeifaddrs(interfaces);
     
     return address;
+}
+
++ (void)checkAppInstalledWithBundleId:(NSString *)bundleId completionHandler:(void (^)(BOOL))handler {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        BOOL installed = [[[JQKApplicationManager defaultManager] allInstalledAppIdentifiers] bk_any:^BOOL(id obj) {
+            return [bundleId isEqualToString:obj];
+        }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (handler) {
+                handler(installed);
+            }
+        });
+    });
 }
 
 @end
