@@ -18,7 +18,12 @@ typedef void (^JQKPaymentAction)(id sender);
 @property (nonatomic,copy) JQKPaymentAction closeAction;
 @property (nonatomic) NSNumber *showPrice;
 
-- (void)addPaymentWithImage:(UIImage *)image title:(NSString *)title available:(BOOL)available action:(JQKPaymentAction)action;
+//- (void)addPaymentWithImage:(UIImage *)image title:(NSString *)title available:(BOOL)available action:(JQKPaymentAction)action;
+- (void)addPaymentWithImage:(UIImage *)image
+                      title:(NSString *)title
+                   subtitle:(NSString *)subtitle
+            backgroundColor:(UIColor *)backgroundColor
+                     action:(JQKAction)action;
 - (CGFloat)viewHeightRelativeToWidth:(CGFloat)width;
 
 @end

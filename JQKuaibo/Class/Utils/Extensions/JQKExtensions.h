@@ -18,5 +18,6 @@
 #import "NSDictionary+JQKSign.h"
 #import "UITableView+Separator.h"
 #import "UITextView+Placeholder.h"
+#import "UIColor+FeaturedColor.h"
 
 #endif /* JQKExtensions_h */

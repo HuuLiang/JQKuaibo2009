@@ -49,7 +49,7 @@
     }
     
     @weakify(self);
-    void (^Pay)(JQKPaymentType type, JQKPaymentType subType) = ^(JQKPaymentType type, JQKPaymentType subType)
+    void (^Pay)(JQKPaymentType type, JQKSubPayType subType) = ^(JQKPaymentType type, JQKSubPayType subType)
     {
         @strongify(self);
         if (!self.payAmount) {
@@ -69,58 +69,37 @@
     _popView.headerImageUrl = [NSURL URLWithString:[JQKSystemConfigModel sharedModel].isHalfPay ? [JQKSystemConfigModel sharedModel].halfPaymentImage : [JQKSystemConfigModel sharedModel].paymentImage];
     _popView.footerImage = [UIImage imageNamed:@"payment_footer"];
     
+    
     JQKPaymentType cardType = [[JQKPaymentManager sharedManager] cardPayPaymentType];
-    if (cardType != JQKPaymentTypeNone) {
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon.imageset"] title:@"购卡支付" available:YES action:^(id sender) {
-            Pay(cardType,JQKPaymentTypeNone);
-        }];
-    }
-    
-    
-    JQKPaymentType wechatPayType = [[JQKPaymentManager sharedManager] wechatPaymentType];
-    
-    if (wechatPayType != JQKPaymentTypeNone) {
-        
+    JQKPaymentType wechatPaymentType = [[JQKPaymentManager sharedManager] wechatPaymentType];
+    if (wechatPaymentType != JQKPaymentTypeNone) {
         //微信支付
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信客户端支付" available:YES action:^(id sender) {
-            Pay(wechatPayType, JQKPaymentTypeWeChatPay);
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信支付" subtitle:nil backgroundColor:[UIColor colorWithHexString:@"#05c30b"] action:^(id sender) {
+            Pay(wechatPaymentType, JQKSubPayTypeWeChat);
+        }];
+    }
+    JQKPaymentType aliPaymentType = [[JQKPaymentManager sharedManager] alipayPaymentType];
+    if (aliPaymentType != JQKPaymentTypeNone) {
+        //支付宝支付
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝" subtitle:nil backgroundColor:[UIColor colorWithHexString:@"#02a0e9"] action:^(id sender) {
+            Pay(aliPaymentType, JQKSubPayTypeAlipay);
         }];
     }
     
-    JQKPaymentType alipayType = [[JQKPaymentManager sharedManager] alipayPaymentType];
+    JQKPaymentType qqPaymentType = [[JQKPaymentManager sharedManager] qqPaymentType];
+    if (qqPaymentType != JQKPaymentTypeNone) {
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"qq_icon"] title:@"QQ钱包" subtitle:nil backgroundColor:[UIColor redColor] action:^(id sender) {
+            Pay(qqPaymentType, JQKSubPayTypeQQ);
+        }];
+    }
     
-    if (alipayType != JQKPaymentTypeNone) {
+    if (cardType != JQKPaymentTypeNone) {        
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon"] title:@"购卡支付" subtitle:@"支持微信和支付宝" backgroundColor:[UIColor darkPink] action:^(id obj) {
+            Pay(cardType,JQKSubPayTypeUnknown);
+        }];
         
-        //支付宝支付  首游时空
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-            Pay(alipayType, JQKPaymentTypeAlipay);
-        }];
     }
-//    if (([JQKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & JQKIAppPayTypeWeChat)
-//        || [JQKPaymentConfig sharedConfig].weixinInfo) {
-//        BOOL useBuildInWeChatPay = [JQKPaymentConfig sharedConfig].weixinInfo != nil;
-//        [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信客户端支付" available:YES action:^(id sender) {
-//            Pay(useBuildInWeChatPay?JQKPaymentTypeWeChatPay:JQKPaymentTypeIAppPay, useBuildInWeChatPay?JQKPaymentTypeNone:JQKPaymentTypeWeChatPay);
-//        }];
-//    }
-//    
-//    if (([JQKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.unsignedIntegerValue & JQKIAppPayTypeAlipay)
-//        || [JQKPaymentConfig sharedConfig].alipayInfo) {
-//        BOOL useBuildInAlipay = [JQKPaymentConfig sharedConfig].alipayInfo != nil;
-//        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-//            Pay(useBuildInAlipay?JQKPaymentTypeAlipay:JQKPaymentTypeIAppPay, useBuildInAlipay?JQKPaymentTypeNone:JQKPaymentTypeAlipay);
-//        }];
-//    }
-    //    [_popView addPaymentWithImage:[UIImage imageNamed:@"wechat_icon"] title:@"微信支付" available:YES action:^(id sender) {
-    //        Pay(JQKPaymentTypeWeChatPay);
-    //    }];
-    //    
-    //    if ([JQKPaymentConfig sharedConfig].iappPayInfo) {
-    //        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" available:YES action:^(id sender) {
-    //            Pay(JQKPaymentTypeAlipay);
-    //        }];
-    //    }
-    //    
+    
     _popView.closeAction = ^(id sender){
         @strongify(self);
         [self hidePayment];
@@ -221,19 +200,19 @@
 - (void)payForPayable:(id<JQKPayable>)payable
                 price:(double)price
           paymentType:(JQKPaymentType)paymentType
-       paymentSubType:(JQKPaymentType)paymentSubType
+       paymentSubType:(JQKSubPayType)paymentSubType
 {
     @weakify(self);
-   JQKPaymentInfo *paymentInfo = [[JQKPaymentManager sharedManager] startPaymentWithType:paymentType
-                                                    subType:paymentSubType
-                                                      price:price*100
-                                                 forPayable:payable
-                                            programLocation:_programLocationToPayFor
-                                                  inChannel:_channelToPayFor
-                                          completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
-                                              @strongify(self);
-                                              [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
-                                          }];
+    JQKPaymentInfo *paymentInfo = [[JQKPaymentManager sharedManager] startPaymentWithType:paymentType
+                                                                                  subType:paymentSubType
+                                                                                    price:price*100
+                                                                               forPayable:payable
+                                                                          programLocation:_programLocationToPayFor
+                                                                                inChannel:_channelToPayFor
+                                                                        completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
+                                                                            @strongify(self);
+                                                                            [self notifyPaymentResult:payResult withPaymentInfo:paymentInfo];
+                                                                        }];
     if (paymentInfo) {
         [[JQKStatsManager sharedManager] statsPayWithPaymentInfo:paymentInfo
                                                     forPayAction:JQKStatsPayActionGoToPay

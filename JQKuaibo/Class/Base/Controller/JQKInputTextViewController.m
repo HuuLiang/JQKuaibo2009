@@ -45,10 +45,10 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:self.completeButtonTitle ?: @"保存"
                                                                                  style:UIBarButtonItemStylePlain
                                                                                handler:^(id sender)
-    {
-        @strongify(self);
-        [self doSave];
-    }];
+                                              {
+                                                  @strongify(self);
+                                                  [self doSave];
+                                              }];
     [self.navigationItem.rightBarButtonItem setTitlePositionAdjustment:UIOffsetMake(-5, 0) forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.rightBarButtonItem.enabled = self.text.length > 0;
 }

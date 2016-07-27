@@ -43,6 +43,9 @@
 		B35F636E1D47193F00E03202 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B35F63561D47193F00E03202 /* RSADataVerifier.m */; };
 		B35F636F1D47193F00E03202 /* VIASDKVERSION.txt in Resources */ = {isa = PBXBuildFile; fileRef = B35F63571D47193F00E03202 /* VIASDKVERSION.txt */; };
 		B367A8341D33841400ECF4FF /* IappPayMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = B367A8331D33841400ECF4FF /* IappPayMananger.m */; };
+		B36B98751D48934900FB7D31 /* JQKPaymentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B36B98721D48934900FB7D31 /* JQKPaymentButton.m */; };
+		B36B98761D48934900FB7D31 /* JQKPaymentTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B36B98741D48934900FB7D31 /* JQKPaymentTypeCell.m */; };
+		B36B98791D4896C600FB7D31 /* UIColor+FeaturedColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B36B98781D4896C600FB7D31 /* UIColor+FeaturedColor.m */; };
 		B38BD9341D43662700AA34EA /* IapppayResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B38BD9331D43662700AA34EA /* IapppayResource.bundle */; };
 		B38BD9361D43663300AA34EA /* IapppayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38BD9351D43663300AA34EA /* IapppayKit.framework */; };
 		B38BD94C1D437B1F00AA34EA /* JQKApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = B38BD9491D437B1F00AA34EA /* JQKApplication.m */; };
@@ -225,6 +228,12 @@
 		B35F63571D47193F00E03202 /* VIASDKVERSION.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VIASDKVERSION.txt; sourceTree = "<group>"; };
 		B367A8321D33841400ECF4FF /* IappPayMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IappPayMananger.h; sourceTree = "<group>"; };
 		B367A8331D33841400ECF4FF /* IappPayMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IappPayMananger.m; sourceTree = "<group>"; };
+		B36B98711D48934900FB7D31 /* JQKPaymentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPaymentButton.h; sourceTree = "<group>"; };
+		B36B98721D48934900FB7D31 /* JQKPaymentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentButton.m; sourceTree = "<group>"; };
+		B36B98731D48934900FB7D31 /* JQKPaymentTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPaymentTypeCell.h; sourceTree = "<group>"; };
+		B36B98741D48934900FB7D31 /* JQKPaymentTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentTypeCell.m; sourceTree = "<group>"; };
+		B36B98771D4896C600FB7D31 /* UIColor+FeaturedColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FeaturedColor.h"; sourceTree = "<group>"; };
+		B36B98781D4896C600FB7D31 /* UIColor+FeaturedColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FeaturedColor.m"; sourceTree = "<group>"; };
 		B38BD9331D43662700AA34EA /* IapppayResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayResource.bundle; sourceTree = "<group>"; };
 		B38BD9351D43663300AA34EA /* IapppayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayKit.framework; sourceTree = "<group>"; };
 		B38BD9481D437B1F00AA34EA /* JQKApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKApplication.h; sourceTree = "<group>"; };
@@ -948,6 +957,8 @@
 				BC3872A71C2D2E3E00CBE88A /* NSString+meltutils.m */,
 				BC3872A81C2D2E3E00CBE88A /* UIColor+hexColor.h */,
 				BC3872A91C2D2E3E00CBE88A /* UIColor+hexColor.m */,
+				B36B98771D4896C600FB7D31 /* UIColor+FeaturedColor.h */,
+				B36B98781D4896C600FB7D31 /* UIColor+FeaturedColor.m */,
 				BC3872AA1C2D2E3E00CBE88A /* UIImage+crop.h */,
 				BC3872AB1C2D2E3E00CBE88A /* UIImage+crop.m */,
 				BC38734A1C2D4A6C00CBE88A /* UIImage+color.h */,
@@ -1024,6 +1035,10 @@
 				BC73D1961D07FAA30001E980 /* JQKLaunchView.m */,
 				BC2C027C1C2E744700D10677 /* JQKPaymentPopView.h */,
 				BC2C027D1C2E744700D10677 /* JQKPaymentPopView.m */,
+				B36B98711D48934900FB7D31 /* JQKPaymentButton.h */,
+				B36B98721D48934900FB7D31 /* JQKPaymentButton.m */,
+				B36B98731D48934900FB7D31 /* JQKPaymentTypeCell.h */,
+				B36B98741D48934900FB7D31 /* JQKPaymentTypeCell.m */,
 				BC8A2AC71C902E6300DF2AE2 /* JQKVideoPlayer.h */,
 				BC8A2AC81C902E6300DF2AE2 /* JQKVideoPlayer.m */,
 			);
@@ -1344,6 +1359,7 @@
 				BC3873021C2D33C200CBE88A /* payRequsestHandler.mm in Sources */,
 				B35F636C1D47193F00E03202 /* openssl_wrapper.m in Sources */,
 				BC3873481C2D411700CBE88A /* NSDictionary+JQKSign.m in Sources */,
+				B36B98791D4896C600FB7D31 /* UIColor+FeaturedColor.m in Sources */,
 				BC9A9FA91C9AAE2C002510AB /* JQKAppSpreadModel.m in Sources */,
 				BC3872C11C2D2E3E00CBE88A /* UIImageView+YPBAnimation.m in Sources */,
 				BC6FC39B1CA3EBEE00856F0B /* JQKPaymentConfig.m in Sources */,
@@ -1371,6 +1387,7 @@
 				BC3872BC1C2D2E3E00CBE88A /* NSString+length.m in Sources */,
 				BC579F921CB4E86700AEE5E8 /* JQKPhotoAlbumModel.m in Sources */,
 				BC38733A1C2D402B00CBE88A /* JQKEncryptedURLRequest.m in Sources */,
+				B36B98751D48934900FB7D31 /* JQKPaymentButton.m in Sources */,
 				BC36590C1CB4361300882E3D /* JQKVideoDetailHeaderView.m in Sources */,
 				B3061FB81D178E2D00A02A3F /* DBHandler.m in Sources */,
 				B38EFDFF1D2DEC1B00F1DBE1 /* UIView+Loading.m in Sources */,
@@ -1400,6 +1417,7 @@
 				BC69A4831C9988D30010FA89 /* JQKPaymentManager.m in Sources */,
 				BC9A9FA21C9AAAE5002510AB /* JQKWebViewController.m in Sources */,
 				BC38733B1C2D402B00CBE88A /* JQKPaymentInfo.m in Sources */,
+				B36B98761D48934900FB7D31 /* JQKPaymentTypeCell.m in Sources */,
 				B3061FA21D17882600A02A3F /* NSObject+PropertyAccessInspecting.m in Sources */,
 				B35F636B1D47193F00E03202 /* NSDataEx.m in Sources */,
 				BC45A0471CB3E2E00019C248 /* JQKVideos.m in Sources */,

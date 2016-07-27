@@ -32,7 +32,14 @@ typedef NS_ENUM(NSUInteger, JQKPaymentType) {
     JQKPaymentTypeVIAPay = 1010, //首游时空
     JQKPaymentTypeSPay = 1012, //威富通
     JQKPaymentTypeHTPay = 1015 //海豚支付
+};
 
+typedef NS_ENUM(NSUInteger, JQKSubPayType) {
+    JQKSubPayTypeUnknown = 0,
+    JQKSubPayTypeWeChat = 1 << 0,
+    JQKSubPayTypeAlipay = 1 << 1,
+    JQKSubPayUPPay = 1 << 2,
+    JQKSubPayTypeQQ = 1 << 3
 };
 
 typedef NS_ENUM(NSInteger, PAYRESULT)
@@ -85,6 +92,9 @@ if (block) block(__VA_ARGS__);
 #define kPaidNotificationName @"jqkuaibo_paid_notification"
 #define kDefaultDateFormat    @"yyyyMMddHHmmss"
 #define kDefaultPageSize      (16)
+
+#define kBoldMediumFont [UIFont boldSystemFontOfSize:MIN(16, kScreenWidth*0.045)]
+#define kExExSmallFont [UIFont systemFontOfSize:MIN(10, kScreenWidth*0.03)]
 
 typedef void (^JQKAction)(id obj);
 typedef void (^JQKCompletionHandler)(BOOL success, id obj);

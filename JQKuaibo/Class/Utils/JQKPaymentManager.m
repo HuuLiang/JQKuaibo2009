@@ -19,10 +19,16 @@
 #import "JQKSystemConfigModel.h"
 #import <PayUtil/PayUtil.h>
 
-//#import <IapppayAlphaKit/IapppayAlphaOrderUtils.h>
-//#import <IapppayAlphaKit/IapppayAlphaKit.h>
+typedef NS_ENUM(NSUInteger, JQKVIAPayType) {
+    JQKVIAPayTypeNone,
+    JQKVIAPayTypeWeChat = 2,
+    JQKVIAPayTypeQQ = 3,
+    JQKVIAPayTypeUPPay = 4,
+    JQKVIAPayTypeShenZhou = 5
+};
 
 static NSString *const kAlipaySchemeUrl = @"comdaoguokbingyuan2016appalipayurlscheme";
+static NSString *const kIappPaySchemeUrl =@"comdaoguokbingyuan2016appiaapayurlscheme";
 
 @interface JQKPaymentManager () <WXApiDelegate,stringDelegate>
 @property (nonatomic,retain) JQKPaymentInfo *paymentInfo;
@@ -47,12 +53,12 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     
     [[PayUitls getIntents] initSdk];
     [paySender getIntents].delegate = self;
-    
+    [IappPayMananger sharedMananger].alipayURLScheme = kIappPaySchemeUrl;
     [[JQKPaymentConfigModel sharedModel] fetchConfigWithCompletionHandler:^(BOOL success, id obj) {
         
     }];
     
-    Class class = NSClassFromString(@"SZFViewController");
+    Class class = NSClassFromString(@"VIASZFViewController");
     if (class) {
         [class aspect_hookSelector:NSSelectorFromString(@"viewWillAppear:")
                        withOptions:AspectPositionAfter
@@ -78,13 +84,14 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 - (JQKPaymentType)wechatPaymentType {
     if ([JQKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JQKSubPayTypeWeChat) {
         return JQKPaymentTypeVIAPay;
-    } else if ([JQKPaymentConfig sharedConfig].wftPayInfo) {
-        return JQKPaymentTypeSPay;
-    } else if ([JQKPaymentConfig sharedConfig].iappPayInfo) {
-        return JQKPaymentTypeIAppPay;
-    } else if ([JQKPaymentConfig sharedConfig].haitunPayInfo) {
-        return JQKPaymentTypeHTPay;
     }
+    //    else if ([JQKPaymentConfig sharedConfig].wftPayInfo) {
+    //        return JQKPaymentTypeSPay;
+    //    } else if ([JQKPaymentConfig sharedConfig].iappPayInfo) {
+    //        return JQKPaymentTypeIAppPay;
+    //    } else if ([JQKPaymentConfig sharedConfig].haitunPayInfo) {
+    //        return JQKPaymentTypeHTPay;
+    //    }
     return JQKPaymentTypeNone;
 }
 
@@ -106,6 +113,12 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     
 }
 
+- (JQKPaymentType)qqPaymentType {
+    if ([JQKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.unsignedIntegerValue & JQKVIAPayTypeQQ) {
+        return JQKPaymentTypeVIAPay;
+    }
+    return JQKPaymentTypeNone;
+}
 - (void)handleOpenURL:(NSURL *)url {
     //    [[IapppayAlphaKit sharedInstance] handleOpenUrl:url];
     //    [WXApi handleOpenURL:url delegate:self];
@@ -113,7 +126,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 }
 
 - (JQKPaymentInfo *)startPaymentWithType:(JQKPaymentType)type
-                                 subType:(JQKPaymentType)subType
+                                 subType:(JQKSubPayType)subType
                                    price:(NSUInteger)price
                               forPayable:(id<JQKPayable>)payable
                          programLocation:(NSUInteger)programLocation
@@ -127,9 +140,9 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         return nil;
     }
 #if DEBUG
-    price = 1;
+    price = 200;
 #endif
-//    price = 1;
+    //    price = 1;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
@@ -161,14 +174,17 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     self.completionHandler = handler;
     
     BOOL success = YES;
-    if (type == JQKPaymentTypeVIAPay && (subType == JQKPaymentTypeAlipay || subType == JQKPaymentTypeWeChatPay)) {
+    if (type == JQKPaymentTypeVIAPay && (subType == JQKSubPayTypeWeChat || subType == JQKSubPayTypeAlipay || subType == JQKSubPayTypeQQ)) {
+        NSDictionary *viaPayTypeMapping = @{@(JQKSubPayTypeAlipay):@(JQKVIAPayTypeShenZhou),
+                                            @(JQKSubPayTypeWeChat):@(JQKVIAPayTypeWeChat),
+                                            @(JQKSubPayTypeQQ):@(JQKVIAPayTypeQQ)};
         NSString *tradeName = @"VIP会员";
         [[PayUitls getIntents]   gotoPayByFee:@(price).stringValue
                                  andTradeName:tradeName
                               andGoodsDetails:tradeName
                                     andScheme:kAlipaySchemeUrl
                             andchannelOrderId:[orderNo stringByAppendingFormat:@"$%@", JQK_REST_APP_ID]
-                                      andType:subType == JQKPaymentTypeAlipay ? @"5" : @"2"
+                                      andType:[viaPayTypeMapping[@(subType)] stringValue]
                              andViewControler:[JQKUtil currentVisibleViewController]];
         
     } else if (type == JQKPaymentTypeIAppPay){
@@ -188,7 +204,6 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
                 self.completionHandler(payResult, self.paymentInfo);
             }
         }];
-        
         
     } else {
         success = NO;
