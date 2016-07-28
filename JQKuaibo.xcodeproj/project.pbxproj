@@ -1602,7 +1602,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov4.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "90cb1d46-7b0e-449f-ac4c-e2c557cd80fd";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1633,7 +1633,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov4.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "90cb1d46-7b0e-449f-ac4c-e2c557cd80fd";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
