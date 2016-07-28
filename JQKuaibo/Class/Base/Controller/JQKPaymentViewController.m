@@ -81,7 +81,7 @@
     JQKPaymentType aliPaymentType = [[JQKPaymentManager sharedManager] alipayPaymentType];
     if (aliPaymentType != JQKPaymentTypeNone) {
         //支付宝支付
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝" subtitle:nil backgroundColor:[UIColor colorWithHexString:@"#02a0e9"] action:^(id sender) {
+        [_popView addPaymentWithImage:[UIImage imageNamed:@"alipay_icon"] title:@"支付宝支付" subtitle:nil backgroundColor:[UIColor colorWithHexString:@"#02a0e9"] action:^(id sender) {
             Pay(aliPaymentType, JQKSubPayTypeAlipay);
         }];
     }

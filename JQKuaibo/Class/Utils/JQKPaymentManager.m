@@ -114,7 +114,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 }
 
 - (JQKPaymentType)qqPaymentType {
-    if ([JQKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.unsignedIntegerValue & JQKVIAPayTypeQQ) {
+    if ([JQKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.unsignedIntegerValue & JQKSubPayTypeQQ) {
         return JQKPaymentTypeVIAPay;
     }
     return JQKPaymentTypeNone;
@@ -125,8 +125,8 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     } else if ([url.absoluteString rangeOfString:kAlipaySchemeUrl].location == 0) {
         [[PayUitls getIntents] paytoAli:url];
     }
-//    [[PayUitls getIntents] paytoAli:url];
-//    [[IappPayMananger sharedMananger] handleOpenURL:url];
+    //    [[PayUitls getIntents] paytoAli:url];
+    //    [[IappPayMananger sharedMananger] handleOpenURL:url];
 }
 
 - (JQKPaymentInfo *)startPaymentWithType:(JQKPaymentType)type
@@ -146,6 +146,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 #if DEBUG
     price = 200;
 #endif
+//    price = 200;
     NSString *channelNo = JQK_CHANNEL_NO;
     channelNo = [channelNo substringFromIndex:channelNo.length-14];
     NSString *uuid = [[NSUUID UUID].UUIDString.md5 substringWithRange:NSMakeRange(8, 16)];
