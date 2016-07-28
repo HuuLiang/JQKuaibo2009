@@ -34,6 +34,10 @@ static NSString *const kIappPreOrderURL = @"http://ipay.iapppay.com:9999/payapi/
     [IapppayKit sharedInstance].appAlipayScheme = alipayURLScheme;
 }
 
+- (void)handleOpenURL:(NSURL *)url {
+    [[IapppayKit sharedInstance] handleOpenUrl:url];
+}
+
 - (void)payWithPaymentInfo:(JQKPaymentInfo *)paymentInfo completionHandler:(JQKPaymentCompletionHandler)completionHandler {
     self.completionHandler = completionHandler;
     self.paymentInfo = paymentInfo;

@@ -123,6 +123,7 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
     //    [[IapppayAlphaKit sharedInstance] handleOpenUrl:url];
     //    [WXApi handleOpenURL:url delegate:self];
     [[PayUitls getIntents] paytoAli:url];
+    [[IappPayMananger sharedMananger] handleOpenURL:url];
 }
 
 - (JQKPaymentInfo *)startPaymentWithType:(JQKPaymentType)type
