@@ -84,6 +84,8 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 - (JQKPaymentType)wechatPaymentType {
     if ([JQKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JQKSubPayTypeWeChat) {
         return JQKPaymentTypeVIAPay;
+    }else if ([JQKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & JQKSubPayTypeWeChat){
+        return JQKPaymentTypeIAppPay;
     }
     //    else if ([JQKPaymentConfig sharedConfig].wftPayInfo) {
     //        return JQKPaymentTypeSPay;
@@ -98,6 +100,8 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
 - (JQKPaymentType)alipayPaymentType {
     if ([JQKPaymentConfig sharedConfig].syskPayInfo.supportPayTypes.integerValue & JQKSubPayTypeAlipay) {
         return JQKPaymentTypeVIAPay;
+    }else if ([JQKPaymentConfig sharedConfig].iappPayInfo.supportPayTypes.integerValue & JQKSubPayTypeAlipay){
+        return JQKPaymentTypeIAppPay;
     }
     return JQKPaymentTypeNone;
 }
@@ -197,13 +201,14 @@ DefineLazyPropertyInitialization(WeChatPayQueryOrderRequest, wechatPayOrderQuery
         iAppMgr.appId = [JQKPaymentConfig sharedConfig].iappPayInfo.appid;
         iAppMgr.privateKey = [JQKPaymentConfig sharedConfig].iappPayInfo.privateKey;
         iAppMgr.waresid = [JQKPaymentConfig sharedConfig].iappPayInfo.waresid.stringValue;
-        iAppMgr.appUserId = [JQKUtil userId].md5 ?: @"UnregisterUser";
+        iAppMgr.appUserId = [JQKUtil userId] ?: @"UnregisterUser";
         iAppMgr.privateInfo = JQK_PAYMENT_RESERVE_DATA;
         iAppMgr.notifyUrl = [JQKPaymentConfig sharedConfig].iappPayInfo.notifyUrl;
         iAppMgr.publicKey = [JQKPaymentConfig sharedConfig].iappPayInfo.publicKey;
         
-        [iAppMgr payWithPaymentInfo:paymentInfo completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
+        [iAppMgr payWithPaymentInfo:paymentInfo payType:subType completionHandler:^(PAYRESULT payResult, JQKPaymentInfo *paymentInfo) {
             @strongify(self);
+            
             if (self.completionHandler) {
                 self.completionHandler(payResult, self.paymentInfo);
             }

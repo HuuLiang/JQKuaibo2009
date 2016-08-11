@@ -14,6 +14,8 @@
 		B3061FBA1D178E2D00A02A3F /* DBTableVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B3061FB71D178E2D00A02A3F /* DBTableVersion.m */; };
 		B3061FBF1D178E6900A02A3F /* JQKNetworkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B3061FBC1D178E6900A02A3F /* JQKNetworkInfo.m */; };
 		B3061FC01D178E6900A02A3F /* JQKStatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3061FBE1D178E6900A02A3F /* JQKStatsManager.m */; };
+		B32BB73B1D5B28F100E76494 /* IapppayAlphaResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B32BB73A1D5B28F100E76494 /* IapppayAlphaResource.bundle */; };
+		B32BB73D1D5B28FC00E76494 /* IapppayAlphaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32BB73C1D5B28FC00E76494 /* IapppayAlphaKit.framework */; };
 		B35BB6601D1BAE5E003CF5B6 /* JQKCPCStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB6591D1BAE5E003CF5B6 /* JQKCPCStatsModel.m */; };
 		B35BB6611D1BAE5E003CF5B6 /* JQKPayStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB65B1D1BAE5E003CF5B6 /* JQKPayStatsModel.m */; };
 		B35BB6621D1BAE5E003CF5B6 /* JQKStatsBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB65D1D1BAE5E003CF5B6 /* JQKStatsBaseModel.m */; };
@@ -46,8 +48,6 @@
 		B36B98751D48934900FB7D31 /* JQKPaymentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B36B98721D48934900FB7D31 /* JQKPaymentButton.m */; };
 		B36B98761D48934900FB7D31 /* JQKPaymentTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B36B98741D48934900FB7D31 /* JQKPaymentTypeCell.m */; };
 		B36B98791D4896C600FB7D31 /* UIColor+FeaturedColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B36B98781D4896C600FB7D31 /* UIColor+FeaturedColor.m */; };
-		B38BD9341D43662700AA34EA /* IapppayResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B38BD9331D43662700AA34EA /* IapppayResource.bundle */; };
-		B38BD9361D43663300AA34EA /* IapppayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38BD9351D43663300AA34EA /* IapppayKit.framework */; };
 		B38BD94C1D437B1F00AA34EA /* JQKApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = B38BD9491D437B1F00AA34EA /* JQKApplication.m */; };
 		B38BD94D1D437B1F00AA34EA /* JQKApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B38BD94B1D437B1F00AA34EA /* JQKApplicationManager.m */; };
 		B38EFDF31D2DE90200F1DBE1 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B38EFDF11D2DE90200F1DBE1 /* AlipaySDK.bundle */; };
@@ -185,6 +185,8 @@
 		B3061FBC1D178E6900A02A3F /* JQKNetworkInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKNetworkInfo.m; sourceTree = "<group>"; };
 		B3061FBD1D178E6900A02A3F /* JQKStatsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKStatsManager.h; sourceTree = "<group>"; };
 		B3061FBE1D178E6900A02A3F /* JQKStatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKStatsManager.m; sourceTree = "<group>"; };
+		B32BB73A1D5B28F100E76494 /* IapppayAlphaResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayAlphaResource.bundle; sourceTree = "<group>"; };
+		B32BB73C1D5B28FC00E76494 /* IapppayAlphaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayAlphaKit.framework; sourceTree = "<group>"; };
 		B35BB6581D1BAE5E003CF5B6 /* JQKCPCStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKCPCStatsModel.h; sourceTree = "<group>"; };
 		B35BB6591D1BAE5E003CF5B6 /* JQKCPCStatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKCPCStatsModel.m; sourceTree = "<group>"; };
 		B35BB65A1D1BAE5E003CF5B6 /* JQKPayStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPayStatsModel.h; sourceTree = "<group>"; };
@@ -234,8 +236,6 @@
 		B36B98741D48934900FB7D31 /* JQKPaymentTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentTypeCell.m; sourceTree = "<group>"; };
 		B36B98771D4896C600FB7D31 /* UIColor+FeaturedColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FeaturedColor.h"; sourceTree = "<group>"; };
 		B36B98781D4896C600FB7D31 /* UIColor+FeaturedColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FeaturedColor.m"; sourceTree = "<group>"; };
-		B38BD9331D43662700AA34EA /* IapppayResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayResource.bundle; sourceTree = "<group>"; };
-		B38BD9351D43663300AA34EA /* IapppayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayKit.framework; sourceTree = "<group>"; };
 		B38BD9481D437B1F00AA34EA /* JQKApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKApplication.h; sourceTree = "<group>"; };
 		B38BD9491D437B1F00AA34EA /* JQKApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKApplication.m; sourceTree = "<group>"; };
 		B38BD94A1D437B1F00AA34EA /* JQKApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKApplicationManager.h; sourceTree = "<group>"; };
@@ -443,11 +443,11 @@
 			files = (
 				B38EFDF81D2DEBA100F1DBE1 /* CoreMotion.framework in Frameworks */,
 				B38EFDF61D2DEB8D00F1DBE1 /* SystemConfiguration.framework in Frameworks */,
+				B32BB73D1D5B28FC00E76494 /* IapppayAlphaKit.framework in Frameworks */,
 				BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */,
 				BC38730E1C2D3B7100CBE88A /* libz.tbd in Frameworks */,
 				BC38730C1C2D3B4F00CBE88A /* libsqlite3.tbd in Frameworks */,
 				BC3872F71C2D33B200CBE88A /* libMobClickLibrary.a in Frameworks */,
-				B38BD9361D43663300AA34EA /* IapppayKit.framework in Frameworks */,
 				BC4C09CB1C328B4F002C4709 /* libWeChatSDK.a in Frameworks */,
 				B35F63641D47193F00E03202 /* PayUtil.framework in Frameworks */,
 				B38EFDF41D2DE90200F1DBE1 /* AlipaySDK.framework in Frameworks */,
@@ -582,8 +582,8 @@
 		B367A8141D33839000ECF4FF /* iAppPay */ = {
 			isa = PBXGroup;
 			children = (
-				B38BD9351D43663300AA34EA /* IapppayKit.framework */,
-				B38BD9331D43662700AA34EA /* IapppayResource.bundle */,
+				B32BB73C1D5B28FC00E76494 /* IapppayAlphaKit.framework */,
+				B32BB73A1D5B28F100E76494 /* IapppayAlphaResource.bundle */,
 			);
 			path = iAppPay;
 			sourceTree = "<group>";
@@ -1256,6 +1256,7 @@
 				B35F63661D47193F00E03202 /* public_key.der in Resources */,
 				BC8A2ABE1C8FF90500DF2AE2 /* launch_image.jpg in Resources */,
 				B35F635D1D47193F00E03202 /* btn6.png in Resources */,
+				B32BB73B1D5B28F100E76494 /* IapppayAlphaResource.bundle in Resources */,
 				B38EFDF31D2DE90200F1DBE1 /* AlipaySDK.bundle in Resources */,
 				B35F63621D47193F00E03202 /* unicom_back.png in Resources */,
 				B35F635B1D47193F00E03202 /* btn3.png in Resources */,
@@ -1264,7 +1265,6 @@
 				BC8A2ABB1C8FF85900DF2AE2 /* Launch Screen.storyboard in Resources */,
 				B35F635F1D47193F00E03202 /* btn8.png in Resources */,
 				BC5BCE961C51EE460034F532 /* config.plist in Resources */,
-				B38BD9341D43662700AA34EA /* IapppayResource.bundle in Resources */,
 				B35F63651D47193F00E03202 /* private_key.p12 in Resources */,
 				B35F63591D47193F00E03202 /* btn10.png in Resources */,
 				BC5385721CBBFDA700D5BA3D /* payment_header_placeholder.jpg in Resources */,
@@ -1582,8 +1582,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1602,7 +1602,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov4.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "90cb1d46-7b0e-449f-ac4c-e2c557cd80fd";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1613,8 +1613,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Neijiang Fenghuang Enterprise (Group) Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1633,7 +1633,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov4.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "90cb1d46-7b0e-449f-ac4c-e2c557cd80fd";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

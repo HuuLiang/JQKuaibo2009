@@ -70,7 +70,7 @@
     _popView.footerImage = [UIImage imageNamed:@"payment_footer"];
     
     
-    JQKPaymentType cardType = [[JQKPaymentManager sharedManager] cardPayPaymentType];
+    //    JQKPaymentType cardType = [[JQKPaymentManager sharedManager] cardPayPaymentType];
     JQKPaymentType wechatPaymentType = [[JQKPaymentManager sharedManager] wechatPaymentType];
     if (wechatPaymentType != JQKPaymentTypeNone) {
         //微信支付
@@ -93,12 +93,12 @@
         }];
     }
     
-    if (cardType != JQKPaymentTypeNone) {        
-        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon"] title:@"购卡支付" subtitle:@"支持微信和支付宝" backgroundColor:[UIColor darkPink] action:^(id obj) {
-            Pay(cardType,JQKSubPayTypeUnknown);
-        }];
-        
-    }
+    //    if (cardType != JQKPaymentTypeNone) {        
+    //        [_popView addPaymentWithImage:[UIImage imageNamed:@"card_pay_icon"] title:@"购卡支付" subtitle:@"支持微信和支付宝" backgroundColor:[UIColor darkPink] action:^(id obj) {
+    //            Pay(cardType,JQKSubPayTypeUnknown);
+    //        }];
+    //        
+    //    }
     
     _popView.closeAction = ^(id sender){
         @strongify(self);
