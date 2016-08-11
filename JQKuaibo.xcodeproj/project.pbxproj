@@ -14,8 +14,6 @@
 		B3061FBA1D178E2D00A02A3F /* DBTableVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = B3061FB71D178E2D00A02A3F /* DBTableVersion.m */; };
 		B3061FBF1D178E6900A02A3F /* JQKNetworkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B3061FBC1D178E6900A02A3F /* JQKNetworkInfo.m */; };
 		B3061FC01D178E6900A02A3F /* JQKStatsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B3061FBE1D178E6900A02A3F /* JQKStatsManager.m */; };
-		B32BB73B1D5B28F100E76494 /* IapppayAlphaResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B32BB73A1D5B28F100E76494 /* IapppayAlphaResource.bundle */; };
-		B32BB73D1D5B28FC00E76494 /* IapppayAlphaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B32BB73C1D5B28FC00E76494 /* IapppayAlphaKit.framework */; };
 		B35BB6601D1BAE5E003CF5B6 /* JQKCPCStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB6591D1BAE5E003CF5B6 /* JQKCPCStatsModel.m */; };
 		B35BB6611D1BAE5E003CF5B6 /* JQKPayStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB65B1D1BAE5E003CF5B6 /* JQKPayStatsModel.m */; };
 		B35BB6621D1BAE5E003CF5B6 /* JQKStatsBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB65D1D1BAE5E003CF5B6 /* JQKStatsBaseModel.m */; };
@@ -185,8 +183,6 @@
 		B3061FBC1D178E6900A02A3F /* JQKNetworkInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKNetworkInfo.m; sourceTree = "<group>"; };
 		B3061FBD1D178E6900A02A3F /* JQKStatsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKStatsManager.h; sourceTree = "<group>"; };
 		B3061FBE1D178E6900A02A3F /* JQKStatsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKStatsManager.m; sourceTree = "<group>"; };
-		B32BB73A1D5B28F100E76494 /* IapppayAlphaResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayAlphaResource.bundle; sourceTree = "<group>"; };
-		B32BB73C1D5B28FC00E76494 /* IapppayAlphaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayAlphaKit.framework; sourceTree = "<group>"; };
 		B35BB6581D1BAE5E003CF5B6 /* JQKCPCStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKCPCStatsModel.h; sourceTree = "<group>"; };
 		B35BB6591D1BAE5E003CF5B6 /* JQKCPCStatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKCPCStatsModel.m; sourceTree = "<group>"; };
 		B35BB65A1D1BAE5E003CF5B6 /* JQKPayStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPayStatsModel.h; sourceTree = "<group>"; };
@@ -443,7 +439,6 @@
 			files = (
 				B38EFDF81D2DEBA100F1DBE1 /* CoreMotion.framework in Frameworks */,
 				B38EFDF61D2DEB8D00F1DBE1 /* SystemConfiguration.framework in Frameworks */,
-				B32BB73D1D5B28FC00E76494 /* IapppayAlphaKit.framework in Frameworks */,
 				BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */,
 				BC38730E1C2D3B7100CBE88A /* libz.tbd in Frameworks */,
 				BC38730C1C2D3B4F00CBE88A /* libsqlite3.tbd in Frameworks */,
@@ -582,8 +577,6 @@
 		B367A8141D33839000ECF4FF /* iAppPay */ = {
 			isa = PBXGroup;
 			children = (
-				B32BB73C1D5B28FC00E76494 /* IapppayAlphaKit.framework */,
-				B32BB73A1D5B28F100E76494 /* IapppayAlphaResource.bundle */,
 			);
 			path = iAppPay;
 			sourceTree = "<group>";
@@ -1256,7 +1249,6 @@
 				B35F63661D47193F00E03202 /* public_key.der in Resources */,
 				BC8A2ABE1C8FF90500DF2AE2 /* launch_image.jpg in Resources */,
 				B35F635D1D47193F00E03202 /* btn6.png in Resources */,
-				B32BB73B1D5B28F100E76494 /* IapppayAlphaResource.bundle in Resources */,
 				B38EFDF31D2DE90200F1DBE1 /* AlipaySDK.bundle in Resources */,
 				B35F63621D47193F00E03202 /* unicom_back.png in Resources */,
 				B35F635B1D47193F00E03202 /* btn3.png in Resources */,
