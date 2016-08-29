@@ -46,6 +46,8 @@
 		B36B98751D48934900FB7D31 /* JQKPaymentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B36B98721D48934900FB7D31 /* JQKPaymentButton.m */; };
 		B36B98761D48934900FB7D31 /* JQKPaymentTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B36B98741D48934900FB7D31 /* JQKPaymentTypeCell.m */; };
 		B36B98791D4896C600FB7D31 /* UIColor+FeaturedColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B36B98781D4896C600FB7D31 /* UIColor+FeaturedColor.m */; };
+		B37876EA1D743EF9007AFABC /* IapppayAlphaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B37876E81D743EF9007AFABC /* IapppayAlphaKit.framework */; };
+		B37876EB1D743EF9007AFABC /* IapppayAlphaResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B37876E91D743EF9007AFABC /* IapppayAlphaResource.bundle */; };
 		B38BD94C1D437B1F00AA34EA /* JQKApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = B38BD9491D437B1F00AA34EA /* JQKApplication.m */; };
 		B38BD94D1D437B1F00AA34EA /* JQKApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B38BD94B1D437B1F00AA34EA /* JQKApplicationManager.m */; };
 		B38EFDF31D2DE90200F1DBE1 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B38EFDF11D2DE90200F1DBE1 /* AlipaySDK.bundle */; };
@@ -232,6 +234,8 @@
 		B36B98741D48934900FB7D31 /* JQKPaymentTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentTypeCell.m; sourceTree = "<group>"; };
 		B36B98771D4896C600FB7D31 /* UIColor+FeaturedColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FeaturedColor.h"; sourceTree = "<group>"; };
 		B36B98781D4896C600FB7D31 /* UIColor+FeaturedColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FeaturedColor.m"; sourceTree = "<group>"; };
+		B37876E81D743EF9007AFABC /* IapppayAlphaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayAlphaKit.framework; sourceTree = "<group>"; };
+		B37876E91D743EF9007AFABC /* IapppayAlphaResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayAlphaResource.bundle; sourceTree = "<group>"; };
 		B38BD9481D437B1F00AA34EA /* JQKApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKApplication.h; sourceTree = "<group>"; };
 		B38BD9491D437B1F00AA34EA /* JQKApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKApplication.m; sourceTree = "<group>"; };
 		B38BD94A1D437B1F00AA34EA /* JQKApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKApplicationManager.h; sourceTree = "<group>"; };
@@ -439,6 +443,7 @@
 			files = (
 				B38EFDF81D2DEBA100F1DBE1 /* CoreMotion.framework in Frameworks */,
 				B38EFDF61D2DEB8D00F1DBE1 /* SystemConfiguration.framework in Frameworks */,
+				B37876EA1D743EF9007AFABC /* IapppayAlphaKit.framework in Frameworks */,
 				BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */,
 				BC38730E1C2D3B7100CBE88A /* libz.tbd in Frameworks */,
 				BC38730C1C2D3B4F00CBE88A /* libsqlite3.tbd in Frameworks */,
@@ -577,6 +582,8 @@
 		B367A8141D33839000ECF4FF /* iAppPay */ = {
 			isa = PBXGroup;
 			children = (
+				B37876E81D743EF9007AFABC /* IapppayAlphaKit.framework */,
+				B37876E91D743EF9007AFABC /* IapppayAlphaResource.bundle */,
 			);
 			path = iAppPay;
 			sourceTree = "<group>";
@@ -1249,6 +1256,7 @@
 				B35F63661D47193F00E03202 /* public_key.der in Resources */,
 				BC8A2ABE1C8FF90500DF2AE2 /* launch_image.jpg in Resources */,
 				B35F635D1D47193F00E03202 /* btn6.png in Resources */,
+				B37876EB1D743EF9007AFABC /* IapppayAlphaResource.bundle in Resources */,
 				B38EFDF31D2DE90200F1DBE1 /* AlipaySDK.bundle in Resources */,
 				B35F63621D47193F00E03202 /* unicom_back.png in Resources */,
 				B35F635B1D47193F00E03202 /* btn3.png in Resources */,
@@ -1594,7 +1602,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov4.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "90cb1d46-7b0e-449f-ac4c-e2c557cd80fd";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1625,7 +1633,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jqkuaibov4.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "90cb1d46-7b0e-449f-ac4c-e2c557cd80fd";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

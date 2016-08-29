@@ -44,6 +44,8 @@ typedef void (^JQKFetchSystemConfigCompletionHandler)(BOOL success);
 @property (nonatomic) NSInteger notificationLaunchSeq;
 
 @property (nonatomic) NSString *contact;
+@property (nonatomic) NSString  *contactScheme;
+@property (nonatomic) NSString  *contactName;
 
 
 + (instancetype)sharedModel;

@@ -10,6 +10,7 @@
 #import "JQKInputTextViewController.h"
 #import "JQKWebViewController.h"
 #import "JQKVipCell.h"
+#import "JQKSystemConfigModel.h"
 
 static NSString *const kMineCellReusableIdentifier = @"MineCellReusableIdentifier";
 static NSString *const kVipCellIdentifier = @"kvipcellidentifer";
@@ -80,7 +81,7 @@ typedef NS_ENUM(NSUInteger, JQKMineCellRow) {
         
         if (indexPath.row == JQKMineCellRowFeedback) {
             cell.imageView.image = [UIImage imageNamed:@"feedback"];
-            cell.textLabel.text = @"意见投诉";
+            cell.textLabel.text = @"联系客服";
         } else if (indexPath.row == JQKMineCellRowAgreement) {
             cell.imageView.image = [UIImage imageNamed:@"agreement"];
             cell.textLabel.text = @"用户协议";
@@ -146,22 +147,23 @@ typedef NS_ENUM(NSUInteger, JQKMineCellRow) {
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (indexPath.row == JQKMineCellRowFeedback) {
-        JQKInputTextViewController *inputVC = [[JQKInputTextViewController alloc] init];
-        inputVC.completeButtonTitle = @"提交";
-        inputVC.title = cell.textLabel.text;
-        inputVC.limitedTextLength = 140;
-        inputVC.completionHandler = ^BOOL(id sender, NSString *text) {
-            [[JQKHudManager manager] showProgressInDuration:1];
-            
-            UIViewController *thisVC = sender;
-            [thisVC bk_performBlock:^(id obj) {
-                [[obj navigationController] popViewControllerAnimated:YES];
-                [[JQKHudManager manager] showHudWithText:@"感谢您的意见~~~"];
-            } afterDelay:1];
-            
-            return NO;
-        };
-        [self.navigationController pushViewController:inputVC animated:YES];
+        [self contactCustomerService];
+//        JQKInputTextViewController *inputVC = [[JQKInputTextViewController alloc] init];
+//        inputVC.completeButtonTitle = @"提交";
+//        inputVC.title = cell.textLabel.text;
+//        inputVC.limitedTextLength = 140;
+//        inputVC.completionHandler = ^BOOL(id sender, NSString *text) {
+//            [[JQKHudManager manager] showProgressInDuration:1];
+//            
+//            UIViewController *thisVC = sender;
+//            [thisVC bk_performBlock:^(id obj) {
+//                [[obj navigationController] popViewControllerAnimated:YES];
+//                [[JQKHudManager manager] showHudWithText:@"感谢您的意见~~~"];
+//            } afterDelay:1];
+//            
+//            return NO;
+//        };
+//        [self.navigationController pushViewController:inputVC animated:YES];
     } else if (indexPath.row == JQKMineCellRowAgreement) {
         NSString *urlString = [JQK_BASE_URL stringByAppendingString:[JQKUtil isPaid]?JQK_AGREEMENT_PAID_URL:JQK_AGREEMENT_NOTPAID_URL];
         JQKWebViewController *webVC = [[JQKWebViewController alloc] initWithURL:[NSURL URLWithString:urlString]];
@@ -169,4 +171,25 @@ typedef NS_ENUM(NSUInteger, JQKMineCellRow) {
         [self.navigationController pushViewController:webVC animated:YES];
     }
 }
+
+- (void)contactCustomerService {
+    NSString *contactScheme = [JQKSystemConfigModel sharedModel].contactScheme;
+    NSString *contactName = [JQKSystemConfigModel sharedModel].contactName;
+    
+    if (contactScheme.length == 0) {
+        return ;
+    }
+    
+    [UIAlertView bk_showAlertViewWithTitle:nil
+                                   message:[NSString stringWithFormat:@"是否联系客服%@？", contactName ?: @""]
+                         cancelButtonTitle:@"取消"
+                         otherButtonTitles:@[@"确认"]
+                                   handler:^(UIAlertView *alertView, NSInteger buttonIndex)
+     {
+         if (buttonIndex == 1) {
+             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:contactScheme]];
+         }
+     }];
+}
+
 @end
