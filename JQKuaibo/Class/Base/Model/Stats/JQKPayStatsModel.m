@@ -19,9 +19,9 @@
     
     BOOL ret = [self requestURLPath:JQK_STATS_PAY_URL
                          withParams:params
-                    responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                    responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
     {
-        SafelyCallBlock(completionHandler, respStatus==JQKURLResponseSuccess, errorMessage);
+        SafelyCallBlock(completionHandler, respStatus==QBURLResponseSuccess, errorMessage);
     }];
     return ret;
 }

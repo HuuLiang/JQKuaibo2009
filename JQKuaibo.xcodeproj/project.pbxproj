@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B3061FA11D17882600A02A3F /* NSObject+DictionaryRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = B3061F9E1D17882600A02A3F /* NSObject+DictionaryRepresentation.m */; };
 		B3061FA21D17882600A02A3F /* NSObject+PropertyAccessInspecting.m in Sources */ = {isa = PBXBuildFile; fileRef = B3061FA01D17882600A02A3F /* NSObject+PropertyAccessInspecting.m */; };
 		B3061FB81D178E2D00A02A3F /* DBHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B3061FB21D178E2D00A02A3F /* DBHandler.m */; };
 		B3061FB91D178E2D00A02A3F /* DBPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = B3061FB51D178E2D00A02A3F /* DBPersistence.m */; };
@@ -18,40 +17,11 @@
 		B35BB6611D1BAE5E003CF5B6 /* JQKPayStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB65B1D1BAE5E003CF5B6 /* JQKPayStatsModel.m */; };
 		B35BB6621D1BAE5E003CF5B6 /* JQKStatsBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB65D1D1BAE5E003CF5B6 /* JQKStatsBaseModel.m */; };
 		B35BB6631D1BAE5E003CF5B6 /* JQKTabStatsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B35BB65F1D1BAE5E003CF5B6 /* JQKTabStatsModel.m */; };
-		B35F63581D47193F00E03202 /* btn1.png in Resources */ = {isa = PBXBuildFile; fileRef = B35F63361D47193F00E03202 /* btn1.png */; };
-		B35F63591D47193F00E03202 /* btn10.png in Resources */ = {isa = PBXBuildFile; fileRef = B35F63371D47193F00E03202 /* btn10.png */; };
-		B35F635A1D47193F00E03202 /* btn2.png in Resources */ = {isa = PBXBuildFile; fileRef = B35F63381D47193F00E03202 /* btn2.png */; };
-		B35F635B1D47193F00E03202 /* btn3.png in Resources */ = {isa = PBXBuildFile; fileRef = B35F63391D47193F00E03202 /* btn3.png */; };
-		B35F635C1D47193F00E03202 /* btn5.png in Resources */ = {isa = PBXBuildFile; fileRef = B35F633A1D47193F00E03202 /* btn5.png */; };
-		B35F635D1D47193F00E03202 /* btn6.png in Resources */ = {isa = PBXBuildFile; fileRef = B35F633B1D47193F00E03202 /* btn6.png */; };
-		B35F635E1D47193F00E03202 /* btn7.png in Resources */ = {isa = PBXBuildFile; fileRef = B35F633C1D47193F00E03202 /* btn7.png */; };
-		B35F635F1D47193F00E03202 /* btn8.png in Resources */ = {isa = PBXBuildFile; fileRef = B35F633D1D47193F00E03202 /* btn8.png */; };
-		B35F63601D47193F00E03202 /* btn9.png in Resources */ = {isa = PBXBuildFile; fileRef = B35F633E1D47193F00E03202 /* btn9.png */; };
-		B35F63611D47193F00E03202 /* seperator.png in Resources */ = {isa = PBXBuildFile; fileRef = B35F633F1D47193F00E03202 /* seperator.png */; };
-		B35F63621D47193F00E03202 /* unicom_back.png in Resources */ = {isa = PBXBuildFile; fileRef = B35F63401D47193F00E03202 /* unicom_back.png */; };
-		B35F63631D47193F00E03202 /* Config.txt in Resources */ = {isa = PBXBuildFile; fileRef = B35F63411D47193F00E03202 /* Config.txt */; };
-		B35F63641D47193F00E03202 /* PayUtil.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35F63421D47193F00E03202 /* PayUtil.framework */; };
-		B35F63651D47193F00E03202 /* private_key.p12 in Resources */ = {isa = PBXBuildFile; fileRef = B35F63431D47193F00E03202 /* private_key.p12 */; };
-		B35F63661D47193F00E03202 /* public_key.der in Resources */ = {isa = PBXBuildFile; fileRef = B35F63441D47193F00E03202 /* public_key.der */; };
-		B35F63671D47193F00E03202 /* base64.m in Sources */ = {isa = PBXBuildFile; fileRef = B35F63471D47193F00E03202 /* base64.m */; };
-		B35F63681D47193F00E03202 /* DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = B35F634A1D47193F00E03202 /* DataSigner.m */; };
-		B35F63691D47193F00E03202 /* DataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B35F634C1D47193F00E03202 /* DataVerifier.m */; };
-		B35F636A1D47193F00E03202 /* MD5DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = B35F634E1D47193F00E03202 /* MD5DataSigner.m */; };
-		B35F636B1D47193F00E03202 /* NSDataEx.m in Sources */ = {isa = PBXBuildFile; fileRef = B35F63501D47193F00E03202 /* NSDataEx.m */; };
-		B35F636C1D47193F00E03202 /* openssl_wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B35F63521D47193F00E03202 /* openssl_wrapper.m */; };
-		B35F636D1D47193F00E03202 /* RSADataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = B35F63541D47193F00E03202 /* RSADataSigner.m */; };
-		B35F636E1D47193F00E03202 /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B35F63561D47193F00E03202 /* RSADataVerifier.m */; };
-		B35F636F1D47193F00E03202 /* VIASDKVERSION.txt in Resources */ = {isa = PBXBuildFile; fileRef = B35F63571D47193F00E03202 /* VIASDKVERSION.txt */; };
-		B367A8341D33841400ECF4FF /* IappPayMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = B367A8331D33841400ECF4FF /* IappPayMananger.m */; };
 		B36B98751D48934900FB7D31 /* JQKPaymentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B36B98721D48934900FB7D31 /* JQKPaymentButton.m */; };
 		B36B98761D48934900FB7D31 /* JQKPaymentTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B36B98741D48934900FB7D31 /* JQKPaymentTypeCell.m */; };
 		B36B98791D4896C600FB7D31 /* UIColor+FeaturedColor.m in Sources */ = {isa = PBXBuildFile; fileRef = B36B98781D4896C600FB7D31 /* UIColor+FeaturedColor.m */; };
-		B37876EA1D743EF9007AFABC /* IapppayAlphaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B37876E81D743EF9007AFABC /* IapppayAlphaKit.framework */; };
-		B37876EB1D743EF9007AFABC /* IapppayAlphaResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B37876E91D743EF9007AFABC /* IapppayAlphaResource.bundle */; };
 		B38BD94C1D437B1F00AA34EA /* JQKApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = B38BD9491D437B1F00AA34EA /* JQKApplication.m */; };
 		B38BD94D1D437B1F00AA34EA /* JQKApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B38BD94B1D437B1F00AA34EA /* JQKApplicationManager.m */; };
-		B38EFDF31D2DE90200F1DBE1 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B38EFDF11D2DE90200F1DBE1 /* AlipaySDK.bundle */; };
-		B38EFDF41D2DE90200F1DBE1 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38EFDF21D2DE90200F1DBE1 /* AlipaySDK.framework */; };
 		B38EFDF61D2DEB8D00F1DBE1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38EFDF51D2DEB8D00F1DBE1 /* SystemConfiguration.framework */; };
 		B38EFDF81D2DEBA100F1DBE1 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38EFDF71D2DEBA100F1DBE1 /* CoreMotion.framework */; };
 		B38EFDFF1D2DEC1B00F1DBE1 /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = B38EFDFE1D2DEC1B00F1DBE1 /* UIView+Loading.m */; };
@@ -90,32 +60,22 @@
 		BC3872CD1C2D2ECA00CBE88A /* RACEXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872CA1C2D2ECA00CBE88A /* RACEXTRuntimeExtensions.m */; };
 		BC3872D21C2D307400CBE88A /* JQKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3872D11C2D307400CBE88A /* JQKUtil.m */; };
 		BC3872F71C2D33B200CBE88A /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC3872F41C2D33B200CBE88A /* libMobClickLibrary.a */; };
-		BC3873011C2D33C200CBE88A /* ApiXml.mm in Sources */ = {isa = PBXBuildFile; fileRef = BC3872FA1C2D33C200CBE88A /* ApiXml.mm */; };
-		BC3873021C2D33C200CBE88A /* payRequsestHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = BC3872FC1C2D33C200CBE88A /* payRequsestHandler.mm */; };
-		BC3873041C2D33C200CBE88A /* WXUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = BC3873001C2D33C200CBE88A /* WXUtil.mm */; };
 		BC3873091C2D38D000CBE88A /* JQKErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873061C2D38D000CBE88A /* JQKErrorHandler.m */; };
 		BC38730A1C2D38D000CBE88A /* JQKHudManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873081C2D38D000CBE88A /* JQKHudManager.m */; };
 		BC38730C1C2D3B4F00CBE88A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC38730B1C2D3B4F00CBE88A /* libsqlite3.tbd */; };
 		BC38730E1C2D3B7100CBE88A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = BC38730D1C2D3B7100CBE88A /* libz.tbd */; };
 		BC3873171C2D3E5300CBE88A /* JQKPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873161C2D3E5300CBE88A /* JQKPaymentViewController.m */; };
 		BC3873391C2D402B00CBE88A /* JQKActivateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873201C2D402B00CBE88A /* JQKActivateModel.m */; };
-		BC38733A1C2D402B00CBE88A /* JQKEncryptedURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873221C2D402B00CBE88A /* JQKEncryptedURLRequest.m */; };
-		BC38733B1C2D402B00CBE88A /* JQKPaymentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873241C2D402B00CBE88A /* JQKPaymentInfo.m */; };
-		BC38733C1C2D402B00CBE88A /* JQKPaymentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873261C2D402B00CBE88A /* JQKPaymentModel.m */; };
 		BC38733F1C2D402B00CBE88A /* JQKSystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = BC38732C1C2D402B00CBE88A /* JQKSystemConfig.m */; };
 		BC3873401C2D402B00CBE88A /* JQKSystemConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC38732E1C2D402B00CBE88A /* JQKSystemConfigModel.m */; };
-		BC3873411C2D402B00CBE88A /* JQKURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873301C2D402B00CBE88A /* JQKURLRequest.m */; };
-		BC3873421C2D402B00CBE88A /* JQKURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873321C2D402B00CBE88A /* JQKURLResponse.m */; };
 		BC3873431C2D402B00CBE88A /* JQKUserAccessModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873341C2D402B00CBE88A /* JQKUserAccessModel.m */; };
 		BC3873441C2D402B00CBE88A /* JQKVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873361C2D402B00CBE88A /* JQKVideo.m */; };
-		BC3873481C2D411700CBE88A /* NSDictionary+JQKSign.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3873471C2D411700CBE88A /* NSDictionary+JQKSign.m */; };
 		BC38734C1C2D4A6C00CBE88A /* UIImage+color.m in Sources */ = {isa = PBXBuildFile; fileRef = BC38734B1C2D4A6C00CBE88A /* UIImage+color.m */; };
 		BC45A03B1CB3C6CD0019C248 /* JQKChannelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9A9F8E1C9A9DFF002510AB /* JQKChannelViewController.m */; };
 		BC45A03E1CB3D4770019C248 /* JQKChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BC45A03D1CB3D4770019C248 /* JQKChannelCell.m */; };
 		BC45A0411CB3E0460019C248 /* JQKComment.m in Sources */ = {isa = PBXBuildFile; fileRef = BC45A0401CB3E0460019C248 /* JQKComment.m */; };
 		BC45A0471CB3E2E00019C248 /* JQKVideos.m in Sources */ = {isa = PBXBuildFile; fileRef = BC45A0461CB3E2E00019C248 /* JQKVideos.m */; };
 		BC45A0561CB3E8400019C248 /* JQKVideoListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC45A0551CB3E8400019C248 /* JQKVideoListModel.m */; };
-		BC4C09CB1C328B4F002C4709 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4C09C71C328B4F002C4709 /* libWeChatSDK.a */; };
 		BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC4C09CC1C328C1D002C4709 /* CoreTelephony.framework */; };
 		BC5385701CBBFB5700D5BA3D /* JQKLocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC53856F1CBBFB5700D5BA3D /* JQKLocalNotificationManager.m */; };
 		BC5385721CBBFDA700D5BA3D /* payment_header_placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BC5385711CBBFDA700D5BA3D /* payment_header_placeholder.jpg */; };
@@ -126,11 +86,6 @@
 		BC579FA71CB5234800AEE5E8 /* JQKPhotoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC579FA61CB5234800AEE5E8 /* JQKPhotoListViewController.m */; };
 		BC5BCE961C51EE460034F532 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC5BCE951C51EE460034F532 /* config.plist */; };
 		BC5BCE991C51EF8C0034F532 /* JQKConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = BC5BCE981C51EF8C0034F532 /* JQKConfiguration.m */; };
-		BC69A4831C9988D30010FA89 /* JQKPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC69A4821C9988D30010FA89 /* JQKPaymentManager.m */; };
-		BC6FC39B1CA3EBEE00856F0B /* JQKPaymentConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6FC3981CA3EBEE00856F0B /* JQKPaymentConfig.m */; };
-		BC6FC39C1CA3EBEE00856F0B /* JQKPaymentConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6FC39A1CA3EBEE00856F0B /* JQKPaymentConfigModel.m */; };
-		BC6FC39F1CA3EC2500856F0B /* WeChatPayQueryOrderRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6FC39E1CA3EC2500856F0B /* WeChatPayQueryOrderRequest.m */; };
-		BC6FC3A21CA3ED5800856F0B /* WeChatPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BC6FC3A11CA3ED5800856F0B /* WeChatPayManager.m */; };
 		BC73D1971D07FAA30001E980 /* JQKLaunchView.m in Sources */ = {isa = PBXBuildFile; fileRef = BC73D1961D07FAA30001E980 /* JQKLaunchView.m */; };
 		BC8A2ABB1C8FF85900DF2AE2 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC8A2ABA1C8FF85900DF2AE2 /* Launch Screen.storyboard */; };
 		BC8A2ABE1C8FF90500DF2AE2 /* launch_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BC8A2ABD1C8FF90500DF2AE2 /* launch_image.jpg */; };
@@ -170,8 +125,6 @@
 		37B8DAAEFB7B1049B3974A9F /* Pods-JQKuaibo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JQKuaibo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JQKuaibo/Pods-JQKuaibo.debug.xcconfig"; sourceTree = "<group>"; };
 		7DFB171354E238E3E71E216A /* Pods-JQKuaibo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JQKuaibo.release.xcconfig"; path = "Pods/Target Support Files/Pods-JQKuaibo/Pods-JQKuaibo.release.xcconfig"; sourceTree = "<group>"; };
 		9669137FA301D1EF797A2AD8 /* libPods-JQKuaibo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JQKuaibo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3061F9D1D17882600A02A3F /* NSObject+DictionaryRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DictionaryRepresentation.h"; sourceTree = "<group>"; };
-		B3061F9E1D17882600A02A3F /* NSObject+DictionaryRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DictionaryRepresentation.m"; sourceTree = "<group>"; };
 		B3061F9F1D17882600A02A3F /* NSObject+PropertyAccessInspecting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PropertyAccessInspecting.h"; sourceTree = "<group>"; };
 		B3061FA01D17882600A02A3F /* NSObject+PropertyAccessInspecting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PropertyAccessInspecting.m"; sourceTree = "<group>"; };
 		B3061FB11D178E2D00A02A3F /* DBHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHandler.h; sourceTree = "<group>"; };
@@ -193,55 +146,16 @@
 		B35BB65D1D1BAE5E003CF5B6 /* JQKStatsBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKStatsBaseModel.m; sourceTree = "<group>"; };
 		B35BB65E1D1BAE5E003CF5B6 /* JQKTabStatsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKTabStatsModel.h; sourceTree = "<group>"; };
 		B35BB65F1D1BAE5E003CF5B6 /* JQKTabStatsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKTabStatsModel.m; sourceTree = "<group>"; };
-		B35F63361D47193F00E03202 /* btn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn1.png; sourceTree = "<group>"; };
-		B35F63371D47193F00E03202 /* btn10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn10.png; sourceTree = "<group>"; };
-		B35F63381D47193F00E03202 /* btn2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn2.png; sourceTree = "<group>"; };
-		B35F63391D47193F00E03202 /* btn3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn3.png; sourceTree = "<group>"; };
-		B35F633A1D47193F00E03202 /* btn5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn5.png; sourceTree = "<group>"; };
-		B35F633B1D47193F00E03202 /* btn6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn6.png; sourceTree = "<group>"; };
-		B35F633C1D47193F00E03202 /* btn7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn7.png; sourceTree = "<group>"; };
-		B35F633D1D47193F00E03202 /* btn8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn8.png; sourceTree = "<group>"; };
-		B35F633E1D47193F00E03202 /* btn9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn9.png; sourceTree = "<group>"; };
-		B35F633F1D47193F00E03202 /* seperator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seperator.png; sourceTree = "<group>"; };
-		B35F63401D47193F00E03202 /* unicom_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unicom_back.png; sourceTree = "<group>"; };
-		B35F63411D47193F00E03202 /* Config.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Config.txt; sourceTree = "<group>"; };
-		B35F63421D47193F00E03202 /* PayUtil.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PayUtil.framework; sourceTree = "<group>"; };
-		B35F63431D47193F00E03202 /* private_key.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = private_key.p12; sourceTree = "<group>"; };
-		B35F63441D47193F00E03202 /* public_key.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = public_key.der; sourceTree = "<group>"; };
-		B35F63461D47193F00E03202 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
-		B35F63471D47193F00E03202 /* base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = base64.m; sourceTree = "<group>"; };
-		B35F63481D47193F00E03202 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		B35F63491D47193F00E03202 /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
-		B35F634A1D47193F00E03202 /* DataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSigner.m; sourceTree = "<group>"; };
-		B35F634B1D47193F00E03202 /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
-		B35F634C1D47193F00E03202 /* DataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataVerifier.m; sourceTree = "<group>"; };
-		B35F634D1D47193F00E03202 /* MD5DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5DataSigner.h; sourceTree = "<group>"; };
-		B35F634E1D47193F00E03202 /* MD5DataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5DataSigner.m; sourceTree = "<group>"; };
-		B35F634F1D47193F00E03202 /* NSDataEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataEx.h; sourceTree = "<group>"; };
-		B35F63501D47193F00E03202 /* NSDataEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataEx.m; sourceTree = "<group>"; };
-		B35F63511D47193F00E03202 /* openssl_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = openssl_wrapper.h; sourceTree = "<group>"; };
-		B35F63521D47193F00E03202 /* openssl_wrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = openssl_wrapper.m; sourceTree = "<group>"; };
-		B35F63531D47193F00E03202 /* RSADataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataSigner.h; sourceTree = "<group>"; };
-		B35F63541D47193F00E03202 /* RSADataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataSigner.m; sourceTree = "<group>"; };
-		B35F63551D47193F00E03202 /* RSADataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataVerifier.h; sourceTree = "<group>"; };
-		B35F63561D47193F00E03202 /* RSADataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataVerifier.m; sourceTree = "<group>"; };
-		B35F63571D47193F00E03202 /* VIASDKVERSION.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VIASDKVERSION.txt; sourceTree = "<group>"; };
-		B367A8321D33841400ECF4FF /* IappPayMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IappPayMananger.h; sourceTree = "<group>"; };
-		B367A8331D33841400ECF4FF /* IappPayMananger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IappPayMananger.m; sourceTree = "<group>"; };
 		B36B98711D48934900FB7D31 /* JQKPaymentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPaymentButton.h; sourceTree = "<group>"; };
 		B36B98721D48934900FB7D31 /* JQKPaymentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentButton.m; sourceTree = "<group>"; };
 		B36B98731D48934900FB7D31 /* JQKPaymentTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPaymentTypeCell.h; sourceTree = "<group>"; };
 		B36B98741D48934900FB7D31 /* JQKPaymentTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentTypeCell.m; sourceTree = "<group>"; };
 		B36B98771D4896C600FB7D31 /* UIColor+FeaturedColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FeaturedColor.h"; sourceTree = "<group>"; };
 		B36B98781D4896C600FB7D31 /* UIColor+FeaturedColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FeaturedColor.m"; sourceTree = "<group>"; };
-		B37876E81D743EF9007AFABC /* IapppayAlphaKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IapppayAlphaKit.framework; sourceTree = "<group>"; };
-		B37876E91D743EF9007AFABC /* IapppayAlphaResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IapppayAlphaResource.bundle; sourceTree = "<group>"; };
 		B38BD9481D437B1F00AA34EA /* JQKApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKApplication.h; sourceTree = "<group>"; };
 		B38BD9491D437B1F00AA34EA /* JQKApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKApplication.m; sourceTree = "<group>"; };
 		B38BD94A1D437B1F00AA34EA /* JQKApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKApplicationManager.h; sourceTree = "<group>"; };
 		B38BD94B1D437B1F00AA34EA /* JQKApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKApplicationManager.m; sourceTree = "<group>"; };
-		B38EFDF11D2DE90200F1DBE1 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		B38EFDF21D2DE90200F1DBE1 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		B38EFDF51D2DEB8D00F1DBE1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B38EFDF71D2DEBA100F1DBE1 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		B38EFDFD1D2DEC1B00F1DBE1 /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Loading.h"; sourceTree = "<group>"; };
@@ -327,12 +241,6 @@
 		BC3872F41C2D33B200CBE88A /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		BC3872F51C2D33B200CBE88A /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		BC3872F61C2D33B200CBE88A /* MobClickSocialAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClickSocialAnalytics.h; sourceTree = "<group>"; };
-		BC3872F91C2D33C200CBE88A /* ApiXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiXml.h; sourceTree = "<group>"; };
-		BC3872FA1C2D33C200CBE88A /* ApiXml.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ApiXml.mm; sourceTree = "<group>"; };
-		BC3872FB1C2D33C200CBE88A /* payRequsestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = payRequsestHandler.h; sourceTree = "<group>"; };
-		BC3872FC1C2D33C200CBE88A /* payRequsestHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = payRequsestHandler.mm; sourceTree = "<group>"; };
-		BC3872FF1C2D33C200CBE88A /* WXUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXUtil.h; sourceTree = "<group>"; };
-		BC3873001C2D33C200CBE88A /* WXUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WXUtil.mm; sourceTree = "<group>"; };
 		BC3873051C2D38D000CBE88A /* JQKErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKErrorHandler.h; sourceTree = "<group>"; };
 		BC3873061C2D38D000CBE88A /* JQKErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKErrorHandler.m; sourceTree = "<group>"; };
 		BC3873071C2D38D000CBE88A /* JQKHudManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKHudManager.h; sourceTree = "<group>"; };
@@ -343,26 +251,14 @@
 		BC3873161C2D3E5300CBE88A /* JQKPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentViewController.m; sourceTree = "<group>"; };
 		BC38731F1C2D402B00CBE88A /* JQKActivateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKActivateModel.h; sourceTree = "<group>"; };
 		BC3873201C2D402B00CBE88A /* JQKActivateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKActivateModel.m; sourceTree = "<group>"; };
-		BC3873211C2D402B00CBE88A /* JQKEncryptedURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKEncryptedURLRequest.h; sourceTree = "<group>"; };
-		BC3873221C2D402B00CBE88A /* JQKEncryptedURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKEncryptedURLRequest.m; sourceTree = "<group>"; };
-		BC3873231C2D402B00CBE88A /* JQKPaymentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPaymentInfo.h; sourceTree = "<group>"; };
-		BC3873241C2D402B00CBE88A /* JQKPaymentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentInfo.m; sourceTree = "<group>"; };
-		BC3873251C2D402B00CBE88A /* JQKPaymentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPaymentModel.h; sourceTree = "<group>"; };
-		BC3873261C2D402B00CBE88A /* JQKPaymentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentModel.m; sourceTree = "<group>"; };
 		BC38732B1C2D402B00CBE88A /* JQKSystemConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKSystemConfig.h; sourceTree = "<group>"; };
 		BC38732C1C2D402B00CBE88A /* JQKSystemConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKSystemConfig.m; sourceTree = "<group>"; };
 		BC38732D1C2D402B00CBE88A /* JQKSystemConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKSystemConfigModel.h; sourceTree = "<group>"; };
 		BC38732E1C2D402B00CBE88A /* JQKSystemConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKSystemConfigModel.m; sourceTree = "<group>"; };
-		BC38732F1C2D402B00CBE88A /* JQKURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKURLRequest.h; sourceTree = "<group>"; };
-		BC3873301C2D402B00CBE88A /* JQKURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKURLRequest.m; sourceTree = "<group>"; };
-		BC3873311C2D402B00CBE88A /* JQKURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKURLResponse.h; sourceTree = "<group>"; };
-		BC3873321C2D402B00CBE88A /* JQKURLResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKURLResponse.m; sourceTree = "<group>"; };
 		BC3873331C2D402B00CBE88A /* JQKUserAccessModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKUserAccessModel.h; sourceTree = "<group>"; };
 		BC3873341C2D402B00CBE88A /* JQKUserAccessModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKUserAccessModel.m; sourceTree = "<group>"; };
 		BC3873351C2D402B00CBE88A /* JQKVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKVideo.h; sourceTree = "<group>"; };
 		BC3873361C2D402B00CBE88A /* JQKVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKVideo.m; sourceTree = "<group>"; };
-		BC3873461C2D411700CBE88A /* NSDictionary+JQKSign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JQKSign.h"; sourceTree = "<group>"; };
-		BC3873471C2D411700CBE88A /* NSDictionary+JQKSign.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JQKSign.m"; sourceTree = "<group>"; };
 		BC38734A1C2D4A6C00CBE88A /* UIImage+color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+color.h"; sourceTree = "<group>"; };
 		BC38734B1C2D4A6C00CBE88A /* UIImage+color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+color.m"; sourceTree = "<group>"; };
 		BC45A03C1CB3D4770019C248 /* JQKChannelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKChannelCell.h; sourceTree = "<group>"; };
@@ -373,10 +269,6 @@
 		BC45A0461CB3E2E00019C248 /* JQKVideos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKVideos.m; sourceTree = "<group>"; };
 		BC45A0541CB3E8400019C248 /* JQKVideoListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKVideoListModel.h; sourceTree = "<group>"; };
 		BC45A0551CB3E8400019C248 /* JQKVideoListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKVideoListModel.m; sourceTree = "<group>"; };
-		BC4C09C71C328B4F002C4709 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		BC4C09C81C328B4F002C4709 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		BC4C09C91C328B4F002C4709 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		BC4C09CA1C328B4F002C4709 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		BC4C09CC1C328C1D002C4709 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		BC53856E1CBBFB5700D5BA3D /* JQKLocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKLocalNotificationManager.h; sourceTree = "<group>"; };
 		BC53856F1CBBFB5700D5BA3D /* JQKLocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKLocalNotificationManager.m; sourceTree = "<group>"; };
@@ -394,16 +286,6 @@
 		BC5BCE951C51EE460034F532 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		BC5BCE971C51EF8C0034F532 /* JQKConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKConfiguration.h; sourceTree = "<group>"; };
 		BC5BCE981C51EF8C0034F532 /* JQKConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKConfiguration.m; sourceTree = "<group>"; };
-		BC69A4811C9988D30010FA89 /* JQKPaymentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPaymentManager.h; sourceTree = "<group>"; };
-		BC69A4821C9988D30010FA89 /* JQKPaymentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentManager.m; sourceTree = "<group>"; };
-		BC6FC3971CA3EBEE00856F0B /* JQKPaymentConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPaymentConfig.h; sourceTree = "<group>"; };
-		BC6FC3981CA3EBEE00856F0B /* JQKPaymentConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentConfig.m; sourceTree = "<group>"; };
-		BC6FC3991CA3EBEE00856F0B /* JQKPaymentConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKPaymentConfigModel.h; sourceTree = "<group>"; };
-		BC6FC39A1CA3EBEE00856F0B /* JQKPaymentConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKPaymentConfigModel.m; sourceTree = "<group>"; };
-		BC6FC39D1CA3EC2500856F0B /* WeChatPayQueryOrderRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatPayQueryOrderRequest.h; sourceTree = "<group>"; };
-		BC6FC39E1CA3EC2500856F0B /* WeChatPayQueryOrderRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatPayQueryOrderRequest.m; sourceTree = "<group>"; };
-		BC6FC3A01CA3ED5800856F0B /* WeChatPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChatPayManager.h; sourceTree = "<group>"; };
-		BC6FC3A11CA3ED5800856F0B /* WeChatPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChatPayManager.m; sourceTree = "<group>"; };
 		BC73D1951D07FAA30001E980 /* JQKLaunchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JQKLaunchView.h; sourceTree = "<group>"; };
 		BC73D1961D07FAA30001E980 /* JQKLaunchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JQKLaunchView.m; sourceTree = "<group>"; };
 		BC8A2ABA1C8FF85900DF2AE2 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -443,14 +325,10 @@
 			files = (
 				B38EFDF81D2DEBA100F1DBE1 /* CoreMotion.framework in Frameworks */,
 				B38EFDF61D2DEB8D00F1DBE1 /* SystemConfiguration.framework in Frameworks */,
-				B37876EA1D743EF9007AFABC /* IapppayAlphaKit.framework in Frameworks */,
 				BC4C09CD1C328C1D002C4709 /* CoreTelephony.framework in Frameworks */,
 				BC38730E1C2D3B7100CBE88A /* libz.tbd in Frameworks */,
 				BC38730C1C2D3B4F00CBE88A /* libsqlite3.tbd in Frameworks */,
 				BC3872F71C2D33B200CBE88A /* libMobClickLibrary.a in Frameworks */,
-				BC4C09CB1C328B4F002C4709 /* libWeChatSDK.a in Frameworks */,
-				B35F63641D47193F00E03202 /* PayUtil.framework in Frameworks */,
-				B38EFDF41D2DE90200F1DBE1 /* AlipaySDK.framework in Frameworks */,
 				DFE00B2CCB05CF16C7E8FFFC /* libPods-JQKuaibo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,80 +401,6 @@
 			path = Stats;
 			sourceTree = "<group>";
 		};
-		B35F63341D47193F00E03202 /* VIAPay */ = {
-			isa = PBXGroup;
-			children = (
-				B35F63351D47193F00E03202 /* assert */,
-				B35F63411D47193F00E03202 /* Config.txt */,
-				B35F63421D47193F00E03202 /* PayUtil.framework */,
-				B35F63431D47193F00E03202 /* private_key.p12 */,
-				B35F63441D47193F00E03202 /* public_key.der */,
-				B35F63451D47193F00E03202 /* Util */,
-				B35F63571D47193F00E03202 /* VIASDKVERSION.txt */,
-			);
-			path = VIAPay;
-			sourceTree = "<group>";
-		};
-		B35F63351D47193F00E03202 /* assert */ = {
-			isa = PBXGroup;
-			children = (
-				B35F63361D47193F00E03202 /* btn1.png */,
-				B35F63371D47193F00E03202 /* btn10.png */,
-				B35F63381D47193F00E03202 /* btn2.png */,
-				B35F63391D47193F00E03202 /* btn3.png */,
-				B35F633A1D47193F00E03202 /* btn5.png */,
-				B35F633B1D47193F00E03202 /* btn6.png */,
-				B35F633C1D47193F00E03202 /* btn7.png */,
-				B35F633D1D47193F00E03202 /* btn8.png */,
-				B35F633E1D47193F00E03202 /* btn9.png */,
-				B35F633F1D47193F00E03202 /* seperator.png */,
-				B35F63401D47193F00E03202 /* unicom_back.png */,
-			);
-			path = assert;
-			sourceTree = "<group>";
-		};
-		B35F63451D47193F00E03202 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				B35F63461D47193F00E03202 /* base64.h */,
-				B35F63471D47193F00E03202 /* base64.m */,
-				B35F63481D47193F00E03202 /* config.h */,
-				B35F63491D47193F00E03202 /* DataSigner.h */,
-				B35F634A1D47193F00E03202 /* DataSigner.m */,
-				B35F634B1D47193F00E03202 /* DataVerifier.h */,
-				B35F634C1D47193F00E03202 /* DataVerifier.m */,
-				B35F634D1D47193F00E03202 /* MD5DataSigner.h */,
-				B35F634E1D47193F00E03202 /* MD5DataSigner.m */,
-				B35F634F1D47193F00E03202 /* NSDataEx.h */,
-				B35F63501D47193F00E03202 /* NSDataEx.m */,
-				B35F63511D47193F00E03202 /* openssl_wrapper.h */,
-				B35F63521D47193F00E03202 /* openssl_wrapper.m */,
-				B35F63531D47193F00E03202 /* RSADataSigner.h */,
-				B35F63541D47193F00E03202 /* RSADataSigner.m */,
-				B35F63551D47193F00E03202 /* RSADataVerifier.h */,
-				B35F63561D47193F00E03202 /* RSADataVerifier.m */,
-			);
-			path = Util;
-			sourceTree = "<group>";
-		};
-		B367A8141D33839000ECF4FF /* iAppPay */ = {
-			isa = PBXGroup;
-			children = (
-				B37876E81D743EF9007AFABC /* IapppayAlphaKit.framework */,
-				B37876E91D743EF9007AFABC /* IapppayAlphaResource.bundle */,
-			);
-			path = iAppPay;
-			sourceTree = "<group>";
-		};
-		B367A8311D33841400ECF4FF /* iAppPayUtil */ = {
-			isa = PBXGroup;
-			children = (
-				B367A8321D33841400ECF4FF /* IappPayMananger.h */,
-				B367A8331D33841400ECF4FF /* IappPayMananger.m */,
-			);
-			path = iAppPayUtil;
-			sourceTree = "<group>";
-		};
 		B38BD9471D437AFF00AA34EA /* Aplication */ = {
 			isa = PBXGroup;
 			children = (
@@ -607,15 +411,6 @@
 			);
 			name = Aplication;
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		B38EFDF01D2DE90200F1DBE1 /* AlipaySDK */ = {
-			isa = PBXGroup;
-			children = (
-				B38EFDF11D2DE90200F1DBE1 /* AlipaySDK.bundle */,
-				B38EFDF21D2DE90200F1DBE1 /* AlipaySDK.framework */,
-			);
-			path = AlipaySDK;
 			sourceTree = "<group>";
 		};
 		B3F851731D21111400AB7248 /* View */ = {
@@ -795,12 +590,6 @@
 			isa = PBXGroup;
 			children = (
 				B35BB6571D1BAE5E003CF5B6 /* Stats */,
-				BC38732F1C2D402B00CBE88A /* JQKURLRequest.h */,
-				BC3873301C2D402B00CBE88A /* JQKURLRequest.m */,
-				BC3873211C2D402B00CBE88A /* JQKEncryptedURLRequest.h */,
-				BC3873221C2D402B00CBE88A /* JQKEncryptedURLRequest.m */,
-				BC3873311C2D402B00CBE88A /* JQKURLResponse.h */,
-				BC3873321C2D402B00CBE88A /* JQKURLResponse.m */,
 				ECEB99351CD0BCDE00F97DEB /* JQKGetCommentsInfo.h */,
 				ECEB99361CD0BCDE00F97DEB /* JQKGetCommentsInfo.m */,
 				BC45A03F1CB3E0460019C248 /* JQKComment.h */,
@@ -822,14 +611,6 @@
 				BC579FA31CB5225800AEE5E8 /* JQKPhotos.m */,
 				BC579F991CB5196000AEE5E8 /* JQKPhotoListModel.h */,
 				BC579F9A1CB5196000AEE5E8 /* JQKPhotoListModel.m */,
-				BC3873231C2D402B00CBE88A /* JQKPaymentInfo.h */,
-				BC3873241C2D402B00CBE88A /* JQKPaymentInfo.m */,
-				BC3873251C2D402B00CBE88A /* JQKPaymentModel.h */,
-				BC3873261C2D402B00CBE88A /* JQKPaymentModel.m */,
-				BC6FC3971CA3EBEE00856F0B /* JQKPaymentConfig.h */,
-				BC6FC3981CA3EBEE00856F0B /* JQKPaymentConfig.m */,
-				BC6FC3991CA3EBEE00856F0B /* JQKPaymentConfigModel.h */,
-				BC6FC39A1CA3EBEE00856F0B /* JQKPaymentConfigModel.m */,
 				BC38731F1C2D402B00CBE88A /* JQKActivateModel.h */,
 				BC3873201C2D402B00CBE88A /* JQKActivateModel.m */,
 				BC38732B1C2D402B00CBE88A /* JQKSystemConfig.h */,
@@ -901,9 +682,7 @@
 		BC3872941C2D2DFA00CBE88A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				B367A8311D33841400ECF4FF /* iAppPayUtil */,
 				B3061FB01D178E2D00A02A3F /* DataBase */,
-				BC3872F81C2D33C200CBE88A /* WeChatPay */,
 				BC3872C71C2D2ECA00CBE88A /* rac_extobjc */,
 				B38BD9471D437AFF00AA34EA /* Aplication */,
 				BC3872951C2D2E0C00CBE88A /* Extensions */,
@@ -915,8 +694,6 @@
 				BC3873061C2D38D000CBE88A /* JQKErrorHandler.m */,
 				BC3873071C2D38D000CBE88A /* JQKHudManager.h */,
 				BC3873081C2D38D000CBE88A /* JQKHudManager.m */,
-				BC69A4811C9988D30010FA89 /* JQKPaymentManager.h */,
-				BC69A4821C9988D30010FA89 /* JQKPaymentManager.m */,
 				BC53856E1CBBFB5700D5BA3D /* JQKLocalNotificationManager.h */,
 				BC53856F1CBBFB5700D5BA3D /* JQKLocalNotificationManager.m */,
 				B3061FBB1D178E6900A02A3F /* JQKNetworkInfo.h */,
@@ -935,14 +712,10 @@
 				BC3872C61C2D2E5F00CBE88A /* JQKExtensions.h */,
 				BC3872961C2D2E3E00CBE88A /* NSDate+Utilities.h */,
 				BC3872971C2D2E3E00CBE88A /* NSDate+Utilities.m */,
-				BC3873461C2D411700CBE88A /* NSDictionary+JQKSign.h */,
-				BC3873471C2D411700CBE88A /* NSDictionary+JQKSign.m */,
 				BC38729A1C2D2E3E00CBE88A /* NSMutableDictionary+SafeCoding.h */,
 				BC38729B1C2D2E3E00CBE88A /* NSMutableDictionary+SafeCoding.m */,
 				BC38729C1C2D2E3E00CBE88A /* NSObject+Properties.h */,
 				BC38729D1C2D2E3E00CBE88A /* NSObject+Properties.m */,
-				B3061F9D1D17882600A02A3F /* NSObject+DictionaryRepresentation.h */,
-				B3061F9E1D17882600A02A3F /* NSObject+DictionaryRepresentation.m */,
 				B3061F9F1D17882600A02A3F /* NSObject+PropertyAccessInspecting.h */,
 				B3061FA01D17882600A02A3F /* NSObject+PropertyAccessInspecting.m */,
 				BC38729E1C2D2E3E00CBE88A /* NSString+crypt.h */,
@@ -992,10 +765,6 @@
 		BC3872DD1C2D336300CBE88A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				B35F63341D47193F00E03202 /* VIAPay */,
-				B367A8141D33839000ECF4FF /* iAppPay */,
-				B38EFDF01D2DE90200F1DBE1 /* AlipaySDK */,
-				BC4C09C61C328B4F002C4709 /* WeChatSDK */,
 				BC3872F31C2D33B200CBE88A /* Umeng */,
 			);
 			path = Vendor;
@@ -1009,23 +778,6 @@
 				BC3872F61C2D33B200CBE88A /* MobClickSocialAnalytics.h */,
 			);
 			path = Umeng;
-			sourceTree = "<group>";
-		};
-		BC3872F81C2D33C200CBE88A /* WeChatPay */ = {
-			isa = PBXGroup;
-			children = (
-				BC6FC3A01CA3ED5800856F0B /* WeChatPayManager.h */,
-				BC6FC3A11CA3ED5800856F0B /* WeChatPayManager.m */,
-				BC3872F91C2D33C200CBE88A /* ApiXml.h */,
-				BC3872FA1C2D33C200CBE88A /* ApiXml.mm */,
-				BC3872FB1C2D33C200CBE88A /* payRequsestHandler.h */,
-				BC3872FC1C2D33C200CBE88A /* payRequsestHandler.mm */,
-				BC3872FF1C2D33C200CBE88A /* WXUtil.h */,
-				BC3873001C2D33C200CBE88A /* WXUtil.mm */,
-				BC6FC39D1CA3EC2500856F0B /* WeChatPayQueryOrderRequest.h */,
-				BC6FC39E1CA3EC2500856F0B /* WeChatPayQueryOrderRequest.m */,
-			);
-			path = WeChatPay;
 			sourceTree = "<group>";
 		};
 		BC3873181C2D3F0B00CBE88A /* View */ = {
@@ -1052,17 +804,6 @@
 				BC36592A1CB45B8300882E3D /* JQKHomeSectionHeaderView.m */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		BC4C09C61C328B4F002C4709 /* WeChatSDK */ = {
-			isa = PBXGroup;
-			children = (
-				BC4C09C71C328B4F002C4709 /* libWeChatSDK.a */,
-				BC4C09C81C328B4F002C4709 /* WechatAuthSDK.h */,
-				BC4C09C91C328B4F002C4709 /* WXApi.h */,
-				BC4C09CA1C328B4F002C4709 /* WXApiObject.h */,
-			);
-			path = WeChatSDK;
 			sourceTree = "<group>";
 		};
 		BC8A2ABC1C8FF8F000DF2AE2 /* Resources */ = {
@@ -1253,27 +994,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B35F63661D47193F00E03202 /* public_key.der in Resources */,
 				BC8A2ABE1C8FF90500DF2AE2 /* launch_image.jpg in Resources */,
-				B35F635D1D47193F00E03202 /* btn6.png in Resources */,
-				B37876EB1D743EF9007AFABC /* IapppayAlphaResource.bundle in Resources */,
-				B38EFDF31D2DE90200F1DBE1 /* AlipaySDK.bundle in Resources */,
-				B35F63621D47193F00E03202 /* unicom_back.png in Resources */,
-				B35F635B1D47193F00E03202 /* btn3.png in Resources */,
-				B35F636F1D47193F00E03202 /* VIASDKVERSION.txt in Resources */,
-				B35F63581D47193F00E03202 /* btn1.png in Resources */,
 				BC8A2ABB1C8FF85900DF2AE2 /* Launch Screen.storyboard in Resources */,
-				B35F635F1D47193F00E03202 /* btn8.png in Resources */,
 				BC5BCE961C51EE460034F532 /* config.plist in Resources */,
-				B35F63651D47193F00E03202 /* private_key.p12 in Resources */,
-				B35F63591D47193F00E03202 /* btn10.png in Resources */,
 				BC5385721CBBFDA700D5BA3D /* payment_header_placeholder.jpg in Resources */,
-				B35F635E1D47193F00E03202 /* btn7.png in Resources */,
-				B35F63611D47193F00E03202 /* seperator.png in Resources */,
-				B35F635C1D47193F00E03202 /* btn5.png in Resources */,
-				B35F63601D47193F00E03202 /* btn9.png in Resources */,
-				B35F635A1D47193F00E03202 /* btn2.png in Resources */,
-				B35F63631D47193F00E03202 /* Config.txt in Resources */,
 				BC3872131C2D273100CBE88A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1307,7 +1031,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9BE9B93BFCB1A492C77A8FA1 /* [CP] Embed Pods Frameworks */ = {
@@ -1353,16 +1077,10 @@
 				BC9A9FA11C9AAAE5002510AB /* JQKInputTextViewController.m in Sources */,
 				BC5BCE991C51EF8C0034F532 /* JQKConfiguration.m in Sources */,
 				B3F851761D21111D00AB7248 /* JQKVipCell.m in Sources */,
-				BC3873411C2D402B00CBE88A /* JQKURLRequest.m in Sources */,
 				BC38727E1C2D299D00CBE88A /* JQKBaseViewController.m in Sources */,
-				B35F63691D47193F00E03202 /* DataVerifier.m in Sources */,
-				BC3873021C2D33C200CBE88A /* payRequsestHandler.mm in Sources */,
-				B35F636C1D47193F00E03202 /* openssl_wrapper.m in Sources */,
-				BC3873481C2D411700CBE88A /* NSDictionary+JQKSign.m in Sources */,
 				B36B98791D4896C600FB7D31 /* UIColor+FeaturedColor.m in Sources */,
 				BC9A9FA91C9AAE2C002510AB /* JQKAppSpreadModel.m in Sources */,
 				BC3872C11C2D2E3E00CBE88A /* UIImageView+YPBAnimation.m in Sources */,
-				BC6FC39B1CA3EBEE00856F0B /* JQKPaymentConfig.m in Sources */,
 				BC3872BF1C2D2E3E00CBE88A /* UIColor+hexColor.m in Sources */,
 				B38BD94C1D437B1F00AA34EA /* JQKApplication.m in Sources */,
 				BC3873431C2D402B00CBE88A /* JQKUserAccessModel.m in Sources */,
@@ -1373,7 +1091,6 @@
 				B3061FC01D178E6900A02A3F /* JQKStatsManager.m in Sources */,
 				B35BB6611D1BAE5E003CF5B6 /* JQKPayStatsModel.m in Sources */,
 				BC3872C51C2D2E3E00CBE88A /* UIViewExt.m in Sources */,
-				B367A8341D33841400ECF4FF /* IappPayMananger.m in Sources */,
 				BC3659121CB43E7100882E3D /* JQKVideoCommentCell.m in Sources */,
 				B35BB6621D1BAE5E003CF5B6 /* JQKStatsBaseModel.m in Sources */,
 				BC3873171C2D3E5300CBE88A /* JQKPaymentViewController.m in Sources */,
@@ -1386,7 +1103,6 @@
 				BC9A9F961C9AA03A002510AB /* JQKMineViewController.m in Sources */,
 				BC3872BC1C2D2E3E00CBE88A /* NSString+length.m in Sources */,
 				BC579F921CB4E86700AEE5E8 /* JQKPhotoAlbumModel.m in Sources */,
-				BC38733A1C2D402B00CBE88A /* JQKEncryptedURLRequest.m in Sources */,
 				B36B98751D48934900FB7D31 /* JQKPaymentButton.m in Sources */,
 				BC36590C1CB4361300882E3D /* JQKVideoDetailHeaderView.m in Sources */,
 				B3061FB81D178E2D00A02A3F /* DBHandler.m in Sources */,
@@ -1394,12 +1110,8 @@
 				BC3872081C2D273100CBE88A /* main.m in Sources */,
 				BC38733F1C2D402B00CBE88A /* JQKSystemConfig.m in Sources */,
 				B35BB6631D1BAE5E003CF5B6 /* JQKTabStatsModel.m in Sources */,
-				BC3873011C2D33C200CBE88A /* ApiXml.mm in Sources */,
 				B3061FB91D178E2D00A02A3F /* DBPersistence.m in Sources */,
-				BC38733C1C2D402B00CBE88A /* JQKPaymentModel.m in Sources */,
 				BC8A2AC91C902E6300DF2AE2 /* JQKVideoPlayer.m in Sources */,
-				BC3873421C2D402B00CBE88A /* JQKURLResponse.m in Sources */,
-				BC3873041C2D33C200CBE88A /* WXUtil.mm in Sources */,
 				BC9A9FAD1C9AC5BA002510AB /* JQKMoreCell.m in Sources */,
 				BC3659251CB456AB00882E3D /* JQKChannelModel.m in Sources */,
 				BC3873441C2D402B00CBE88A /* JQKVideo.m in Sources */,
@@ -1414,16 +1126,11 @@
 				BC9A9F9C1C9AA73C002510AB /* UITableView+Separator.m in Sources */,
 				BC3873091C2D38D000CBE88A /* JQKErrorHandler.m in Sources */,
 				BC3873391C2D402B00CBE88A /* JQKActivateModel.m in Sources */,
-				BC69A4831C9988D30010FA89 /* JQKPaymentManager.m in Sources */,
 				BC9A9FA21C9AAAE5002510AB /* JQKWebViewController.m in Sources */,
-				BC38733B1C2D402B00CBE88A /* JQKPaymentInfo.m in Sources */,
 				B36B98761D48934900FB7D31 /* JQKPaymentTypeCell.m in Sources */,
 				B3061FA21D17882600A02A3F /* NSObject+PropertyAccessInspecting.m in Sources */,
-				B35F636B1D47193F00E03202 /* NSDataEx.m in Sources */,
 				BC45A0471CB3E2E00019C248 /* JQKVideos.m in Sources */,
-				B3061FA11D17882600A02A3F /* NSObject+DictionaryRepresentation.m in Sources */,
 				BC38723C1C2D27D600CBE88A /* JQKAppDelegate.m in Sources */,
-				B35F636D1D47193F00E03202 /* RSADataSigner.m in Sources */,
 				ECEB99311CD0B8B300F97DEB /* JQKCommentModel.m in Sources */,
 				BC45A03B1CB3C6CD0019C248 /* JQKChannelViewController.m in Sources */,
 				B38BD94D1D437B1F00AA34EA /* JQKApplicationManager.m in Sources */,
@@ -1431,24 +1138,17 @@
 				BC3659031CB4293500882E3D /* JQKVideoDetailViewController.m in Sources */,
 				BC3872B61C2D2E3E00CBE88A /* NSDate+Utilities.m in Sources */,
 				BC38734C1C2D4A6C00CBE88A /* UIImage+color.m in Sources */,
-				B35F63671D47193F00E03202 /* base64.m in Sources */,
-				BC6FC3A21CA3ED5800856F0B /* WeChatPayManager.m in Sources */,
 				BC36590F1CB43CD400882E3D /* JQKVideoCell.m in Sources */,
 				BC73D1971D07FAA30001E980 /* JQKLaunchView.m in Sources */,
 				BC3872C01C2D2E3E00CBE88A /* UIImage+crop.m in Sources */,
-				BC6FC39C1CA3EBEE00856F0B /* JQKPaymentConfigModel.m in Sources */,
-				B35F636E1D47193F00E03202 /* RSADataVerifier.m in Sources */,
 				B35BB6601D1BAE5E003CF5B6 /* JQKCPCStatsModel.m in Sources */,
 				BC579F9B1CB5196000AEE5E8 /* JQKPhotoListModel.m in Sources */,
 				B3061FBA1D178E2D00A02A3F /* DBTableVersion.m in Sources */,
 				ECEB99341CD0BA1C00F97DEB /* JQKComments.m in Sources */,
 				BC579FA41CB5225800AEE5E8 /* JQKPhotos.m in Sources */,
-				B35F63681D47193F00E03202 /* DataSigner.m in Sources */,
 				BC3872921C2D2CD500CBE88A /* JQKMoreViewController.m in Sources */,
 				BC3873401C2D402B00CBE88A /* JQKSystemConfigModel.m in Sources */,
 				BC3872CD1C2D2ECA00CBE88A /* RACEXTRuntimeExtensions.m in Sources */,
-				BC6FC39F1CA3EC2500856F0B /* WeChatPayQueryOrderRequest.m in Sources */,
-				B35F636A1D47193F00E03202 /* MD5DataSigner.m in Sources */,
 				BC3872B91C2D2E3E00CBE88A /* NSObject+Properties.m in Sources */,
 				BC3872BB1C2D2E3E00CBE88A /* NSString+FilterHTML.m in Sources */,
 				B3061FBF1D178E6900A02A3F /* JQKNetworkInfo.m in Sources */,

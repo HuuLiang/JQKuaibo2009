@@ -36,12 +36,12 @@
     @weakify(self);
     BOOL ret = [super requestURLPath:JQK_USER_ACCESS_URL
                           withParams:@{@"userId":userId,@"accessId":[JQKUtil accessId]}
-                    responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                    responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
     {
         @strongify(self);
         
         BOOL success = NO;
-        if (respStatus == JQKURLResponseSuccess) {
+        if (respStatus == QBURLResponseSuccess) {
             NSString *resp = self.response;
             success = [resp isEqualToString:@"SUCCESS"];
             if (success) {

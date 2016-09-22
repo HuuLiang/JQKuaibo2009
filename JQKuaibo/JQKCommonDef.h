@@ -24,31 +24,31 @@ typedef NS_ENUM(NSUInteger, JQKDeviceType) {
     JQKDeviceType_iPad = 100
 };
 
-typedef NS_ENUM(NSUInteger, JQKPaymentType) {
-    JQKPaymentTypeNone,
-    JQKPaymentTypeAlipay = 1001,
-    JQKPaymentTypeWeChatPay = 1008,
-    JQKPaymentTypeIAppPay = 1009,//爱贝
-    JQKPaymentTypeVIAPay = 1010, //首游时空
-    JQKPaymentTypeSPay = 1012, //威富通
-    JQKPaymentTypeHTPay = 1015 //海豚支付
-};
+//typedef NS_ENUM(NSUInteger, JQKPaymentType) {
+//    JQKPaymentTypeNone,
+//    JQKPaymentTypeAlipay = 1001,
+//    JQKPaymentTypeWeChatPay = 1008,
+//    JQKPaymentTypeIAppPay = 1009,//爱贝
+//    JQKPaymentTypeVIAPay = 1010, //首游时空
+//    JQKPaymentTypeSPay = 1012, //威富通
+//    JQKPaymentTypeHTPay = 1015 //海豚支付
+//};
+//
+//typedef NS_ENUM(NSUInteger, JQKSubPayType) {
+//    JQKSubPayTypeUnknown = 0,
+//    JQKSubPayTypeWeChat = 1 << 0,
+//    JQKSubPayTypeAlipay = 1 << 1,
+//    JQKSubPayUPPay = 1 << 2,
+//    JQKSubPayTypeQQ = 1 << 3
+//};
 
-typedef NS_ENUM(NSUInteger, JQKSubPayType) {
-    JQKSubPayTypeUnknown = 0,
-    JQKSubPayTypeWeChat = 1 << 0,
-    JQKSubPayTypeAlipay = 1 << 1,
-    JQKSubPayUPPay = 1 << 2,
-    JQKSubPayTypeQQ = 1 << 3
-};
-
-typedef NS_ENUM(NSInteger, PAYRESULT)
-{
-    PAYRESULT_SUCCESS   = 0,
-    PAYRESULT_FAIL      = 1,
-    PAYRESULT_ABANDON   = 2,
-    PAYRESULT_UNKNOWN   = 3
-};
+//typedef NS_ENUM(NSInteger, PAYRESULT)
+//{
+//    PAYRESULT_SUCCESS   = 0,
+//    PAYRESULT_FAIL      = 1,
+//    PAYRESULT_ABANDON   = 2,
+//    PAYRESULT_UNKNOWN   = 3
+//};
 
 typedef NS_ENUM(NSUInteger, JQKVideoListField) {
     JQKVideoListFieldUnknown,
@@ -98,4 +98,5 @@ if (block) block(__VA_ARGS__);
 
 typedef void (^JQKAction)(id obj);
 typedef void (^JQKCompletionHandler)(BOOL success, id obj);
+typedef QBPaymentInfo JQKPaymentInfo;
 #endif /* JQKCommonDef_h */

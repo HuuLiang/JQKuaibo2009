@@ -18,18 +18,18 @@
     @weakify(self);
     BOOL success = [self requestURLPath:JQK_COMMENT_URL
                              withParams:nil
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         
                         JQKComments *comments;
-                        if (respStatus == JQKURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             comments = self.response;
                             self.fetchedComments = comments;
                         }
                         
                         if (handler) {
-                            handler(respStatus==JQKURLResponseSuccess, comments);
+                            handler(respStatus==QBURLResponseSuccess, comments);
                         }
                     }];
     return success;

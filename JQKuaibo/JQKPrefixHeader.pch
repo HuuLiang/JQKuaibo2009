@@ -19,6 +19,8 @@
 #import <Masonry.h>
 #import <UIImageView+WebCache.h>
 #import <UIImageView+CornerRadius.h>
+#import <QBPaymentInfo.h>
+#import <QBPaymentManager.h>
 #import "JQKCommonDef.h"
 #import "JQKConfig.h"
 #import "RACEXTScope.h"
@@ -26,7 +28,6 @@
 #import "JQKUtil.h"
 #import "JQKErrorHandler.h"
 #import "JQKHudManager.h"
-#import "JQKPaymentManager.h"
 #import "JQKLocalNotificationManager.h"
 
 #import "JQKVideo.h"

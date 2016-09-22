@@ -1,7 +1,9 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://git.coding.net/seanyue/QBPodRepo.git'
 platform :ios, '7.0'
 
 target 'JQKuaibo' do
-    pod 'AFNetworking','~> 2.6.0'
+    pod 'AFNetworking','~> 3.1.0'
     pod 'Masonry', '~> 0.6.2'
     pod 'SDWebImage', '~> 3.7.3'
     pod 'MBProgressHUD', '~> 0.9.1'
@@ -17,5 +19,5 @@ target 'JQKuaibo' do
     pod 'TPKeyboardAvoiding', '~> 1.2.11'
     pod 'FMDB', '~> 2.6.2'
     pod 'XMLReader-Arc', '~> 1.1'
-    
+    pod 'QBPayment', '~> 0.0.13',:subspecs => ['VIAPay','IappPay','WFTPay','DXTXPay']
 end

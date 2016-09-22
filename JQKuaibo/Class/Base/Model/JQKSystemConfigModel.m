@@ -48,11 +48,11 @@
     @weakify(self);
     BOOL success = [self requestURLPath:JQK_SYSTEM_CONFIG_URL
                              withParams:@{@"type" : @([JQKUtil deviceType])}
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         
-                        if (respStatus == JQKURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             JQKSystemConfigResponse *resp = self.response;
                             
                             [resp.confis enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -102,7 +102,7 @@
                         }
                         
                         if (handler) {
-                            handler(respStatus==JQKURLResponseSuccess);
+                            handler(respStatus==QBURLResponseSuccess);
                         }
                     }];
     return success;

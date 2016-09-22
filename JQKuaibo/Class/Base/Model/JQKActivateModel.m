@@ -50,9 +50,9 @@ static NSString *const kSuccessResponse = @"SUCCESS";
                              @"operator":[JQKNetworkInfo sharedInfo].carriarName ?: @""
                              };
     
-    BOOL success = [self requestURLPath:JQK_ACTIVATE_URL withParams:params responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage) {
+    BOOL success = [self requestURLPath:JQK_ACTIVATE_URL withParams:params responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage) {
         NSString *userId;
-        if (respStatus == JQKURLResponseSuccess) {
+        if (respStatus == QBURLResponseSuccess) {
             NSString *resp = self.response;
             NSArray *resps = [resp componentsSeparatedByString:@";"];
             
@@ -63,7 +63,7 @@ static NSString *const kSuccessResponse = @"SUCCESS";
         }
         
         if (handler) {
-            handler(respStatus == JQKURLResponseSuccess && userId, userId);
+            handler(respStatus == QBURLResponseSuccess && userId, userId);
         }
     }];
     return success;

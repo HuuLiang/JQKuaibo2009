@@ -6,10 +6,10 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKEncryptedURLRequest.h"
+#import "QBEncryptedURLRequest.h"
 #import "JQKPhotos.h"
 
-@interface JQKPhotoListModel : JQKEncryptedURLRequest
+@interface JQKPhotoListModel : QBEncryptedURLRequest
 @property (nonatomic,retain,readonly) JQKPhotos *fetchedPhotos;
 
 

@@ -29,11 +29,11 @@
     @weakify(self);
     BOOL ret = [self requestURLPath:JQK_APP_SPREAD_LIST_URL
                          withParams:nil
-                    responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                    responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                 {
                     @strongify(self);
                     NSArray *fetchedSpreads;
-                    if (respStatus == JQKURLResponseSuccess) {
+                    if (respStatus == QBURLResponseSuccess) {
                         JQKAppSpreadResponse *resp = self.response;
                         _fetchChannels = resp;
                         _fetchedSpreads = resp.programList;
@@ -42,7 +42,7 @@
                     }
                     
                     if (handler) {
-                        handler(respStatus==JQKURLResponseSuccess, fetchedSpreads);
+                        handler(respStatus==QBURLResponseSuccess, fetchedSpreads);
                     }
                 }];
     return ret;

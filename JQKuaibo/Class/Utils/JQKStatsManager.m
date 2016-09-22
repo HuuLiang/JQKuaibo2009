@@ -10,7 +10,7 @@
 #import "JQKCPCStatsModel.h"
 #import "JQKTabStatsModel.h"
 #import "JQKPayStatsModel.h"
-#import "JQKPaymentInfo.h"
+#import <QBPaymentInfo.h>
 #import "MobClick.h"
 
 static NSString *const kUmengCPCChannelEvent = @"CPC_CHANNEL";
@@ -267,7 +267,7 @@ DefineLazyPropertyInitialization(JQKPayStatsModel, payStats)
 
 - (void)statsPayWithOrderNo:(NSString *)orderNo
                   payAction:(JQKStatsPayAction)payAction
-                  payResult:(PAYRESULT)payResult
+                  payResult:(QBPayResult)payResult
                  forProgram:(JQKVideo *)program
             programLocation:(NSUInteger)programLocation
                   inChannel:(JQKVideos *)channel
@@ -292,7 +292,7 @@ DefineLazyPropertyInitialization(JQKPayStatsModel, payStats)
         } else if (payAction == JQKStatsPayActionGoToPay) {
             statsInfo.isPayConfirm = @(1);
         } else if (payAction == JQKStatsPayActionPayBack) {
-            NSDictionary *payStautsMapping = @{@(PAYRESULT_SUCCESS):@(1), @(PAYRESULT_FAIL):@(2), @(PAYRESULT_ABANDON):@(3)};
+            NSDictionary *payStautsMapping = @{@(QBPayResultSuccess):@(1), @(QBPayResultFailure):@(2), @(QBPayResultUnknown):@(3)};
             NSNumber *payStatus = payStautsMapping[@(payResult)];
             statsInfo.payStatus = payStatus;
         } else {
@@ -331,8 +331,9 @@ DefineLazyPropertyInitialization(JQKPayStatsModel, payStats)
         } else if (payAction == JQKStatsPayActionGoToPay) {
             statsInfo.isPayConfirm = @(1);
         } else if (payAction == JQKStatsPayActionPayBack) {
-            NSDictionary *payStautsMapping = @{@(PAYRESULT_SUCCESS):@(1), @(PAYRESULT_FAIL):@(2), @(PAYRESULT_ABANDON):@(3)};
-            NSNumber *payStatus = payStautsMapping[paymentInfo.paymentResult];
+            NSDictionary *payStautsMapping = @{@(QBPayResultSuccess):@(1), @(QBPayResultFailure):@(2), @(QBPayResultUnknown):@(3)};
+
+            NSNumber *payStatus = payStautsMapping[@(paymentInfo.paymentResult)];
             statsInfo.payStatus = payStatus;
         } else {
             return ;

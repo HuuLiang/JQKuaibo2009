@@ -6,14 +6,14 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKURLRequest.h"
+#import "QBURLRequest.h"
 //#import "JQKChannel.h"
 
-@interface JQKPhotoAlbumResponse : JQKURLResponse
+@interface JQKPhotoAlbumResponse : QBURLResponse
 @property (nonatomic,retain) NSArray<JQKVideos *> *Atlas;
 @end
 
-@interface JQKPhotoAlbumModel : JQKURLRequest
+@interface JQKPhotoAlbumModel : QBURLRequest
 
 @property (nonatomic,retain,readonly) NSArray<JQKVideos *> *fetchedAlbums;
 

@@ -6,10 +6,10 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKURLResponse.h"
+#import "QBURLResponse.h"
 #import "JQKPhoto.h"
 
-@interface JQKPhotos : JQKURLResponse
+@interface JQKPhotos : QBURLResponse
 
 @property (nonatomic,retain) NSArray<JQKPhoto *> *programUrlList;
 

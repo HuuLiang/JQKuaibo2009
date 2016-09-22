@@ -7,6 +7,7 @@
 //
 
 #import "JQKChannelModel.h"
+#import "NSDictionary+QBSign.h"
 
 @implementation JQKChannelResponse
 
@@ -47,10 +48,10 @@
                              };
     BOOL success = [self requestURLPath:JQK_CHANNEL_LIST_URL
                              withParams:prarms
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
-                        if (respStatus == JQKURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             JQKChannelResponse *channelResp = (JQKChannelResponse *)self.response;
                             self->_fetchedChannels = channelResp.columnList;
                             
@@ -77,10 +78,10 @@
                              };
     BOOL success = [self requestURLPath:JQK_HOME_URL
                              withParams:params
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
-                        if (respStatus == JQKURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             JQKChannelResponse *channelResp = (JQKChannelResponse *)self.response;
                             self->_fetchedChannels = channelResp.columnList;
                             
@@ -100,10 +101,10 @@
     @weakify(self);
     BOOL success = [self requestURLPath:JQK_PHOTO_ALBUM_URL
                              withParams:nil
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
-                        if (respStatus == JQKURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             JQKChannelResponse *channelResp = (JQKChannelResponse *)self.response;
                             self->_fetchPhotos = channelResp.columnList;
                             

@@ -13,13 +13,14 @@
 #import "MobClick.h"
 #import "JQKActivateModel.h"
 #import "JQKUserAccessModel.h"
-#import "JQKPaymentModel.h"
 #import "JQKSystemConfigModel.h"
 #import "JQKPaymentViewController.h"
 #import "JQKChannelViewController.h"
 #import "JQKMineViewController.h"
 #import "JQKGetCommentsInfo.h"
 #import "JQKLaunchView.h"
+#import <QBNetworkingConfiguration.h>
+
 
 @interface JQKAppDelegate ()<UITabBarControllerDelegate>
 
@@ -165,9 +166,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    // Override point for customization after application launch.
+    [QBNetworkingConfiguration defaultConfiguration].baseURL = JQK_BASE_URL;
+    [QBNetworkingConfiguration defaultConfiguration].channelNo = JQK_CHANNEL_NO;
+    [QBNetworkingConfiguration defaultConfiguration].RESTpV = JQK_REST_PV;
+    [QBNetworkingConfiguration defaultConfiguration].RESTAppId = JQK_REST_APP_ID;
+#ifdef DEBUG
+    [QBNetworkingConfiguration defaultConfiguration].logEnabled = YES;
+    [[QBPaymentManager sharedManager] usePaymentConfigInTestServer:YES];
+#endif
+    [[QBPaymentManager sharedManager] registerPaymentWithAppId:JQK_REST_APP_ID
+                                                     paymentPv:JQK_PAYMENT_PV
+                                                     channelNo:JQK_CHANNEL_NO
+                                                     urlScheme:@"comdaoguokbingyuan2016appalipayurlscheme"];
+    
     [JQKUtil accumateLaunchSeq];
     [[JQKGetCommentsInfo sharedInstance] getComents];
-    [[JQKPaymentManager sharedManager] setup];
     [[JQKErrorHandler sharedHandler] initialize];
     [self setupMobStatistics];
     [self setupCommonStyles];
@@ -190,7 +204,6 @@
         [[JQKUserAccessModel sharedModel] requestUserAccess];
     }
     
-    [[JQKPaymentModel sharedModel] startRetryingToCommitUnprocessedOrders];
     [[JQKSystemConfigModel sharedModel] fetchSystemConfigWithCompletionHandler:^(BOOL success) {
         
         
@@ -260,9 +273,10 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-//    if (![JQKUtil isPaid]) {
-//        [[JQKPaymentManager sharedManager] checkPayment];
-//    }
+    [[QBPaymentManager sharedManager] applicationWillEnterForeground:application];
+    //    if (![YYKUtil isAllVIPs]) {
+    //        [[YYKPaymentManager sharedManager] checkPayment];
+    //    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -279,17 +293,17 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    [[JQKPaymentManager sharedManager] handleOpenURL:url];
+    [[QBPaymentManager sharedManager] handleOpenUrl:url];
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
-    [[JQKPaymentManager sharedManager] handleOpenURL:url];
+    [[QBPaymentManager sharedManager] handleOpenUrl:url];
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    [[JQKPaymentManager sharedManager] handleOpenURL:url];
+    [[QBPaymentManager sharedManager] handleOpenUrl:url];
     return YES;
 }
 

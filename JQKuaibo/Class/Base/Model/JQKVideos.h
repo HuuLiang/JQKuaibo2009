@@ -6,10 +6,10 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKURLResponse.h"
+#import "QBURLResponse.h"
 #import "JQKVideo.h"
 
-@interface JQKVideos : JQKURLResponse
+@interface JQKVideos : QBURLResponse
 
 @property (nonatomic) NSNumber *columnId;
 @property (nonatomic) NSNumber *realColumnId;

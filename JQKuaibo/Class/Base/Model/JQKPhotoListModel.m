@@ -23,7 +23,7 @@
                              };
     BOOL success = [self requestURLPath:JQK_PHOTO_LIST_URL
                              withParams:params
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         if (!self) {
@@ -31,13 +31,13 @@
                         }
                         
                         JQKPhotos *photos;
-                        if (respStatus == JQKURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             photos = self.response;
                             self->_fetchedPhotos = photos;
                         }
                         
                         if (handler) {
-                            handler(respStatus == JQKURLResponseSuccess, photos);
+                            handler(respStatus == QBURLResponseSuccess, photos);
                         }
                         
                     }];

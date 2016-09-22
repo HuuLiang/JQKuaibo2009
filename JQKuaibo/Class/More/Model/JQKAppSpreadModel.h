@@ -6,7 +6,7 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKEncryptedURLRequest.h"
+#import "QBEncryptedURLRequest.h"
 
 @interface JQKAppSpread : JQKVideo
 //@property (nonatomic) NSString *title;
@@ -19,7 +19,7 @@
 @property (nonatomic,retain) NSArray<JQKAppSpread *> *programList;
 @end
 
-@interface JQKAppSpreadModel : JQKEncryptedURLRequest
+@interface JQKAppSpreadModel : QBEncryptedURLRequest
 @property (nonatomic,retain,readonly)JQKVideos *fetchChannels;
 @property (nonatomic,retain,readonly) NSArray<JQKAppSpread *> *fetchedSpreads;
 

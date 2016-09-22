@@ -36,18 +36,18 @@
     
     BOOL success = [self requestURLPath:url
                              withParams:params
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         
                         JQKVideos *videos;
-                        if (respStatus == JQKURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             videos = self.response;
                             self.fetchedVideos = videos;
                         }
                         
                         if (handler) {
-                            handler(respStatus==JQKURLResponseSuccess, videos);
+                            handler(respStatus==QBURLResponseSuccess, videos);
                         }
                     }];
     return success;
@@ -62,18 +62,18 @@
                              };
     BOOL success = [self requestURLPath:JQK_RECOMMEND_VIDEO_URL
                              withParams:params
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
     {
         @strongify(self);
         
         JQKVideos *videos;
-        if (respStatus == JQKURLResponseSuccess) {
+        if (respStatus == QBURLResponseSuccess) {
             videos = self.response;
             self.fetchedVideos = videos;
         }
         
         if (handler) {
-            handler(respStatus == JQKURLResponseSuccess, videos);
+            handler(respStatus == QBURLResponseSuccess, videos);
         }
         
     }];
@@ -87,7 +87,7 @@
     NSDictionary *params = @{@"columnId":columnId};
     BOOL success = [self requestURLPath:JQK_CHANNEL_PROGRAM_URL
                              withParams:params
-                        responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                        responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
                     {
                         @strongify(self);
                         if (!self) {
@@ -95,13 +95,13 @@
                         }
                         
                         JQKVideos *videos;
-                        if (respStatus == JQKURLResponseSuccess) {
+                        if (respStatus == QBURLResponseSuccess) {
                             videos = self.response;
                             self.fetchedVideos = videos;
                         }
                         
                         if (handler) {
-                            handler(respStatus == JQKURLResponseSuccess, videos);
+                            handler(respStatus == QBURLResponseSuccess, videos);
                         }
                     }];
     return success;

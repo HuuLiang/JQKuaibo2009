@@ -6,11 +6,11 @@
 //  Copyright (c) 2015年 kuaibov. All rights reserved.
 //
 
-#import "JQKEncryptedURLRequest.h"
+#import "QBEncryptedURLRequest.h"
 
 typedef void (^JQKActivateHandler)(BOOL success, NSString *userId);
 
-@interface JQKActivateModel : JQKEncryptedURLRequest
+@interface JQKActivateModel : QBEncryptedURLRequest
 
 + (instancetype)sharedModel;
 

@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger, JQKStatsPayAction) {
 
 - (void)statsPayWithOrderNo:(NSString *)orderNo
                   payAction:(JQKStatsPayAction)payAction
-                  payResult:(PAYRESULT)payResult
+                  payResult:(QBPayResult)payResult
                  forProgram:(JQKVideo *)program
             programLocation:(NSUInteger)programLocation
                   inChannel:(JQKVideos *)channel

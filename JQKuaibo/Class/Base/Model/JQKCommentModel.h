@@ -6,10 +6,10 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKEncryptedURLRequest.h"
+#import "QBEncryptedURLRequest.h"
 #import "JQKComments.h"
 
-@interface JQKCommentModel : JQKEncryptedURLRequest
+@interface JQKCommentModel : QBEncryptedURLRequest
 
 @property (nonatomic,retain) JQKComments *fetchedComments;
 

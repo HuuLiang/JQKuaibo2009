@@ -10,7 +10,7 @@
 #import <SFHFKeychainUtils.h>
 #import <sys/sysctl.h>
 #import "NSDate+Utilities.h"
-#import "JQKPaymentInfo.h"
+//#import "JQKPaymentInfo.h"
 #import "JQKVideo.h"
 #import "JQKBaseViewController.h"
 #import "JQKApplicationManager.h"
@@ -48,38 +48,31 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
 }
 
 + (NSArray<JQKPaymentInfo *> *)allPaymentInfos {
-    NSArray<NSDictionary *> *paymentInfoArr = [[NSUserDefaults standardUserDefaults] objectForKey:kPaymentInfoKeyName];
-    
-    NSMutableArray *paymentInfos = [NSMutableArray array];
-    [paymentInfoArr enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        JQKPaymentInfo *paymentInfo = [JQKPaymentInfo paymentInfoFromDictionary:obj];
-        [paymentInfos addObject:paymentInfo];
-    }];
-    return paymentInfos;
+      return [QBPaymentInfo allPaymentInfos];
 }
 
 + (NSArray<JQKPaymentInfo *> *)payingPaymentInfos {
     return [self.allPaymentInfos bk_select:^BOOL(id obj) {
         JQKPaymentInfo *paymentInfo = obj;
-        return paymentInfo.paymentStatus.unsignedIntegerValue == JQKPaymentStatusPaying;
+        return paymentInfo.paymentStatus == QBPayStatusPaying;
     }];
 }
 
 + (NSArray<JQKPaymentInfo *> *)paidNotProcessedPaymentInfos {
     return [self.allPaymentInfos bk_select:^BOOL(id obj) {
         JQKPaymentInfo *paymentInfo = obj;
-        return paymentInfo.paymentStatus.unsignedIntegerValue == JQKPaymentStatusNotProcessed;
+        return paymentInfo.paymentStatus == QBPayStatusNotProcessed;
     }];
 }
 
 + (JQKPaymentInfo *)successfulPaymentInfo {
     return [self.allPaymentInfos bk_match:^BOOL(id obj) {
-        JQKPaymentInfo *paymentInfo = obj;
-        if (paymentInfo.paymentResult.unsignedIntegerValue == PAYRESULT_SUCCESS) {
-            return YES;
-        }
-        return NO;
-    }];
+                JQKPaymentInfo *paymentInfo = obj;
+                if (paymentInfo.paymentResult == QBPayResultSuccess) {
+                    return YES;
+                }
+                return NO;
+            }];
 }
 
 + (BOOL)isPaid {
@@ -221,6 +214,12 @@ static NSString *const kLaunchSeqKeyName = @"jqkuaibov_launchseq_keyname";
             }
         });
     });
+}
+
++ (NSString *)currentTimeString {
+    NSDateFormatter *fomatter =[[NSDateFormatter alloc] init];
+    [fomatter setDateFormat:kDefaultDateFormat];
+    return [fomatter stringFromDate:[NSDate date]];
 }
 
 @end

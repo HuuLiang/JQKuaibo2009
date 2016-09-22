@@ -6,11 +6,11 @@
 //  Copyright © 2015年 kuaibov. All rights reserved.
 //
 
-#import "JQKEncryptedURLRequest.h"
+#import "QBEncryptedURLRequest.h"
 
 typedef void (^JQKUserAccessCompletionHandler)(BOOL success);
 
-@interface JQKUserAccessModel : JQKEncryptedURLRequest
+@interface JQKUserAccessModel : QBEncryptedURLRequest
 
 + (instancetype)sharedModel;
 

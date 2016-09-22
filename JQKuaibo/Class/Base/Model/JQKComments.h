@@ -6,10 +6,10 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKURLResponse.h"
+#import "QBURLResponse.h"
 #import "JQKComment.h"
 
-@interface JQKComments : JQKURLResponse
+@interface JQKComments : QBURLResponse
 
 @property (nonatomic,retain) NSArray<JQKComment *> *commentList;
 

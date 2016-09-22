@@ -27,7 +27,7 @@
     NSString *urlPath = [NSString stringWithFormat:JQK_PHOTO_ALBUM_URL, pageSize, page];
     BOOL ret = [self requestURLPath:urlPath
                          withParams:nil
-                    responseHandler:^(JQKURLResponseStatus respStatus, NSString *errorMessage)
+                    responseHandler:^(QBURLResponseStatus respStatus, NSString *errorMessage)
     {
         @strongify(self);
         if (!self) {
@@ -35,14 +35,14 @@
         }
         
         NSArray *albums;
-        if (respStatus == JQKURLResponseSuccess) {
+        if (respStatus == QBURLResponseSuccess) {
             JQKPhotoAlbumResponse *resp = self.response;
             albums = resp.Atlas;
             self->_fetchedAlbums = albums;
         }
         
         if (handler) {
-            handler(respStatus==JQKURLResponseSuccess, albums);
+            handler(respStatus==QBURLResponseSuccess, albums);
         }
     }];
     return ret;

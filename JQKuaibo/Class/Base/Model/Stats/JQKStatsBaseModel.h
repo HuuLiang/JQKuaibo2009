@@ -6,7 +6,7 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKEncryptedURLRequest.h"
+#import "QBEncryptedURLRequest.h"
 
 typedef NS_ENUM(NSUInteger, JQKStatsType) {
     JQKStatsTypeUnknown,
@@ -75,11 +75,11 @@ typedef NS_ENUM(NSInteger, JQKStatsNetwork) {
 
 @end
 
-@interface JQKStatsResponse : JQKURLResponse
+@interface JQKStatsResponse : QBURLResponse
 @property (nonatomic) NSNumber *errCode;
 @end
 
-@interface JQKStatsBaseModel : JQKEncryptedURLRequest
+@interface JQKStatsBaseModel : QBEncryptedURLRequest
 
 - (NSArray<NSDictionary *> *)validateParamsWithStatsInfos:(NSArray<JQKStatsInfo *> *)statsInfos;
 - (NSArray<NSDictionary *> *)validateParamsWithStatsInfos:(NSArray<JQKStatsInfo *> *)statsInfos shouldIncludeStatsType:(BOOL)includeStatsType;

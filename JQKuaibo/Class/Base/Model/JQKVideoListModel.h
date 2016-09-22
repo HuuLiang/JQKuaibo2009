@@ -6,10 +6,10 @@
 //  Copyright © 2016年 iqu8. All rights reserved.
 //
 
-#import "JQKEncryptedURLRequest.h"
+#import "QBEncryptedURLRequest.h"
 #import "JQKVideos.h"
 
-@interface JQKVideoListModel : JQKEncryptedURLRequest
+@interface JQKVideoListModel : QBEncryptedURLRequest
 
 @property (nonatomic,retain) JQKVideos *fetchedVideos;
 
